@@ -9,8 +9,8 @@
 namespace gpio {
 
 // FWD
-class Gpio;
-using GpioPtr = std::shared_ptr<Gpio>;
+class IGpio;
+using IGpioPtr = std::shared_ptr<IGpio>;
 
 // Implementation
 class GpioManager {
@@ -24,7 +24,7 @@ public:
 private:
   bool initGpios();
 
-  std::array<GpioPtr, Function::Size> m_outputs;
+  std::array<IGpioPtr, Function::Size> m_outputs;
 };
 
 } // gpio

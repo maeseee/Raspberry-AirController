@@ -9,11 +9,17 @@ namespace gpio {
 
 static const std::string GPIO_PATH = "/sys/class/gpio/";
 
-Gpio::Gpio() : m_gpioNumber{0}, m_dir{Direction::UNSET} {}
-
-Gpio::Gpio(const size_t gnum) {
-  m_gpioNumber = gnum; // Instatiate GPIOClass object for GPIO pin number "gnum"
+bool isRealBoard() {
+  std::ifstream stream(GPIO_PATH + "export");
+  return stream.good();
 }
+
+Gpio::Gpio() : m_gpioNumber{0} {}
+
+Gpio::Gpio(const size_t gnum)
+    : m_gpioNumber(
+          gnum) // Instatiate GPIOClass object for GPIO pin number "gnum"
+{}
 
 bool Gpio::exportGpio() {
   std::string export_str = GPIO_PATH + "export";
@@ -30,6 +36,7 @@ bool Gpio::exportGpio() {
 
   exportgpio << m_gpioNumber; // write GPIO number to export
   exportgpio.close();         // close export file
+
   return true;
 }
 
@@ -44,11 +51,11 @@ bool Gpio::unexportGpio() {
 
   unexportgpio << m_gpioNumber; // write GPIO number to unexport
   unexportgpio.close();         // close unexport file
+
   return true;
 }
 
 bool Gpio::setDirection(const Direction dir) {
-
   std::string setdir_str =
       GPIO_PATH + "gpio" + std::to_string(m_gpioNumber) + "/direction";
   std::ofstream setdirgpio(setdir_str.c_str()); // open direction file for gpio
@@ -63,13 +70,35 @@ bool Gpio::setDirection(const Direction dir) {
                      : "out"); // write direction to direction file
   setdirgpio.close();          // close direction file
 
-  m_dir = dir;
   return true;
+}
+
+Direction Gpio::getDirection() const {
+  std::string setdir_str =
+      GPIO_PATH + "gpio" + std::to_string(m_gpioNumber) + "/direction";
+  std::ifstream getdirgpio(setdir_str.c_str()); // open direction file for gpio
+  if (!getdirgpio) {
+    std::cout << " OPERATION FAILED: Unable to set direction of GPIO"
+              << m_gpioNumber << " ." << std::endl;
+    return Direction::UNSET;
+  }
+
+  std::string dir;
+  getdirgpio >> dir;  // read gpio value
+  getdirgpio.close(); // close the value file
+
+  if ("in" == dir) {
+    return Direction::IN;
+  } else if ("out" == dir) {
+    return Direction::OUT;
+  } else {
+    return Direction::UNSET;
+  }
 }
 
 bool Gpio::setValue(const Value val) {
   // only set value if it is an output
-  if (Direction::OUT != m_dir) {
+  if (Direction::OUT != getDirection()) {
     return false;
   }
 

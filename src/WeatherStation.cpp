@@ -28,7 +28,7 @@ WeatherStation::~WeatherStation() {
 }
 
 void WeatherStation::recall() {
-  std::cout << "---recall" << std::endl;
+  std::cout << "Get weather data" << std::endl;
   CURL *curl;
   CURLcode res;
 
@@ -91,7 +91,6 @@ float WeatherStation::relHumidityToAbs(float temperature, float humidity) {
 }
 
 void WeatherStation::updateData() {
-  std::cout << "---updateData" << std::endl;
   std::cout << receivedData << std::endl;
   std::stringstream ss;
   // send your JSON above to the parser below, but populate ss first

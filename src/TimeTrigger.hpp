@@ -5,7 +5,6 @@
 
 #include <ctime>
 #include <thread>
-#include <functional>
 
 namespace time_trigger {
 
