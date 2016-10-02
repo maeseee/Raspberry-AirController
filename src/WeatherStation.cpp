@@ -5,8 +5,6 @@
 #include <curl/curl.h>
 
 #include <unistd.h>
-#include <functional>
-#include <limits>
 #include <math.h>
 
 namespace weather_station {
@@ -124,8 +122,8 @@ void WeatherStation::threadFn() {
       recall();
     }
     ++timeCounter;
-    timeCounter %= 600;
-    sleep(CALL_INTERVALL);
+    timeCounter %= CALL_INTERVALL;
+    sleep(1);
   }
 }
 }

@@ -3,7 +3,6 @@
 
 #include <GpioConstants.hpp>
 
-#include <ctime>
 #include <thread>
 
 namespace time_trigger {
@@ -23,9 +22,10 @@ public:
   TimeTrigger(const size_t on, const size_t off, gpio::GpioSetter function);
   ~TimeTrigger();
 
-  void threadFn();
-
 private:
+  void threadFn();
+  void recall();
+
   std::thread m_thread;
   bool m_stopThread{false};
 

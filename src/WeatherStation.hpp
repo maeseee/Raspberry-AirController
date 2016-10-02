@@ -17,13 +17,13 @@ public:
   WeatherStation();
   ~WeatherStation();
 
-  void recall();
-
   WeatherData getData() const;
 
 private:
   float relHumidityToAbs(float temperature, float humidity);
   void updateData();
+
+  void recall();
   void threadFn();
 
   float m_temperature; // [°C]
