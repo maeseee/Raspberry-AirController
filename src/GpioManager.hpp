@@ -17,9 +17,7 @@ class GpioManager {
 public:
   GpioManager();
 
-  Value getValue(const Function function) const;
-
-  bool setValue(const Function function, const Value value);
+  IGpioPtr getGpio(Function function) const;
 
 private:
   bool initGpios();

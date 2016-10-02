@@ -8,8 +8,8 @@ namespace time_trigger {
 static const size_t CALL_INTERVALL = 30; // call upcate intervall for thread
 
 TimeTrigger::TimeTrigger(const size_t on, const size_t off,
-                         gpio::GpioSetter function)
-    : m_period(OnPeriod{on, off}), fn_gpioSetter(function) {
+                         const gpio::IGpioPtr &gpio)
+    : m_period(OnPeriod{on, off}), m_gpio(gpio) {
   m_thread = std::thread(&TimeTrigger::threadFn, this);
 }
 
@@ -38,15 +38,15 @@ void TimeTrigger::recall() {
 
   if (m_period.offTime < m_period.onTime) {
     if (daytime < m_period.onTime && daytime > m_period.offTime) {
-      fn_gpioSetter(gpio::Value::OFF);
+      m_gpio->setValue(gpio::Value::OFF);
     } else {
-      fn_gpioSetter(gpio::Value::ON);
+      m_gpio->setValue(gpio::Value::ON);
     }
   } else {
     if (daytime < m_period.offTime && daytime > m_period.onTime) {
-      fn_gpioSetter(gpio::Value::ON);
+      m_gpio->setValue(gpio::Value::ON);
     } else {
-      fn_gpioSetter(gpio::Value::OFF);
+      m_gpio->setValue(gpio::Value::OFF);
     }
   }
 }

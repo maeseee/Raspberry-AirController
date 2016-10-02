@@ -4,10 +4,10 @@
 #include <boost/property_tree/ptree.hpp>
 #include <curl/curl.h>
 
-#include <unistd.h>
 #include <math.h>
+#include <unistd.h>
 
-namespace weather_station {
+namespace sensor {
 
 static constexpr float KELVIN = 273.15;
 static const char *WEATHER_URL = "api.openweathermap.org/data/2.5/"
@@ -26,7 +26,6 @@ WeatherStation::~WeatherStation() {
 }
 
 void WeatherStation::recall() {
-  std::cout << "Get weather data" << std::endl;
   CURL *curl;
   CURLcode res;
 
@@ -64,32 +63,11 @@ size_t writeCallback(char *buf, size_t size, size_t nmemb,
   return size * nmemb; // tell curl how many bytes we handled
 }
 
-WeatherData WeatherStation::getData() const {
-  return WeatherData{m_temperature, m_humidity};
-}
-
-float WeatherStation::relHumidityToAbs(float temperature, float humidity) {
-  // function calculated for
-  // Temperatur [°C]  water for 100 % [g/m3]
-  // -20              0.9
-  // -15	          1.4
-  // -10	          2.1
-  // -5	              3.3
-  // 0	              4.8
-  // 5	              6.8
-  // 10	              9.4
-  // 15	              12.8
-  // 20	              17.3
-  // 25	              23
-  // 30	              30.3
-  // 35	              39.6
-  // 40	              51.1
-
-    float absHumidity = pow(4.2431796244, 0.0666427639  * temperature) * humidity / 100;
+SensorData WeatherStation::getData() const {
+  return SensorData{m_temperature, m_humidity};
 }
 
 void WeatherStation::updateData() {
-  std::cout << receivedData << std::endl;
   std::stringstream ss;
   // send your JSON above to the parser below, but populate ss first
   ss << receivedData;
@@ -113,6 +91,10 @@ void WeatherStation::updateData() {
   } else {
     m_humidity = std::numeric_limits<float>::min();
   }
+
+  SensorData data = getData();
+  std::cout << "Temperature: " << data.temperature
+            << "\t Humidity: " << data.humidity << std::endl;
 }
 
 void WeatherStation::threadFn() {

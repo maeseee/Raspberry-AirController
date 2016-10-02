@@ -1,26 +1,22 @@
 #ifndef WEATHER_STATION_H
 #define WEATHER_STATION_H
 
+#include <ISensor.hpp>
+
 #include <memory>
 #include <string>
 #include <thread>
 
-namespace weather_station {
+namespace sensor {
 
-struct WeatherData {
-  float temperature; // [°C] temperature
-  float humidity;    // [%] humadity
-};
-
-class WeatherStation {
+class WeatherStation : public sensor::ISensor {
 public:
   WeatherStation();
   ~WeatherStation();
 
-  WeatherData getData() const;
+  SensorData getData() const override;
 
 private:
-  float relHumidityToAbs(float temperature, float humidity);
   void updateData();
 
   void recall();
@@ -37,5 +33,5 @@ static std::string receivedData; // will hold the url's contents
 
 static size_t writeCallback(char *buf, size_t size, size_t nmemb, void *up);
 
-} // weather_station
+} // sensor
 #endif

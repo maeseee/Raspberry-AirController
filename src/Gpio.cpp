@@ -97,6 +97,10 @@ Direction Gpio::getDirection() const {
 }
 
 bool Gpio::setValue(const Value val) {
+  if (val == getValue()) {
+    return true;
+  }
+
   // only set value if it is an output
   if (Direction::OUT != getDirection()) {
     return false;

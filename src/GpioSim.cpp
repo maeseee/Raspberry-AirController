@@ -1,8 +1,10 @@
 #include "GpioSim.hpp"
 
+#include <iostream>
+
 namespace gpio {
 
-GpioSim::GpioSim() {}
+GpioSim::GpioSim(const std::string &name) : m_name(name) {}
 
 bool GpioSim::exportGpio() {}
 
@@ -21,6 +23,8 @@ bool GpioSim::setValue(const Value val) {
     return false;
   }
 
+  std::cout << "Set value " << static_cast<int>(val) << " on " << m_name
+            << std::endl;
   m_val = val;
   return true;
 }

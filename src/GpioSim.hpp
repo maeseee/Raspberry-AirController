@@ -3,7 +3,7 @@
 
 #include <IGpio.hpp>
 
-#include <memory>
+#include <string>
 
 namespace gpio {
 
@@ -12,7 +12,7 @@ namespace gpio {
  */
 class GpioSim : public IGpio {
 public:
-  GpioSim();
+  explicit GpioSim(const std::string &name);
 
   bool exportGpio() override;
   bool unexportGpio() override;
@@ -26,6 +26,8 @@ public:
 private:
   Direction m_dir{Direction::UNSET};
   Value m_val{Value::INVALID};
+
+  std::string m_name;
 };
 } // gpio
 #endif
