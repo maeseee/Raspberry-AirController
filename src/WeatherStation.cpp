@@ -1,10 +1,10 @@
 #include "WeatherStation.hpp"
 
-#include <boost/program_options.hpp>
 #include <boost/property_tree/json_parser.hpp>
 #include <boost/property_tree/ptree.hpp>
 #include <curl/curl.h>
 
+#include <unistd.h>
 #include <functional>
 #include <limits>
 #include <math.h>
@@ -126,7 +126,7 @@ void WeatherStation::threadFn() {
     }
     ++timeCounter;
     timeCounter %= 600;
-    sleep(1);
+    sleep(CALL_INTERVALL);
   }
 }
 }

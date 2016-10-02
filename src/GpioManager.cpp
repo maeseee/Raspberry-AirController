@@ -28,7 +28,12 @@ Value GpioManager::getValue(const Function function) const {
 bool GpioManager::setValue(const Function function, const Value value) {
   assert(function < Function::Size);
 
-  return m_outputs[function]->setValue(value);
+  // only setValue if it is not already set
+  if (value == getValue(function)) {
+    return true;
+  } else {
+    return m_outputs[function]->setValue(value);
+  }
 }
 
 bool GpioManager::initGpios() {

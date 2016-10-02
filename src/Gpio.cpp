@@ -68,6 +68,7 @@ bool Gpio::setDirection(const Direction dir) {
 }
 
 bool Gpio::setValue(const Value val) {
+  // only set value if it is an output
   if (Direction::OUT != m_dir) {
     return false;
   }
@@ -76,8 +77,9 @@ bool Gpio::setValue(const Value val) {
       GPIO_PATH + "gpio" + std::to_string(m_gpioNumber) + "/value";
   std::ofstream setvalgpio(setval_str.c_str()); // open value file for gpio
   if (!setvalgpio) {
-    std::cout << " OPERATION FAILED: Unable to set the value of GPIO"
-              << m_gpioNumber << " ." << std::endl;
+    std::cout << " OPERATION FAILED: Unable to set the value "
+              << static_cast<size_t>(val) << " of GPIO" << m_gpioNumber << " ."
+              << std::endl;
     return false;
   }
 
