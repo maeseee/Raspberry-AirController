@@ -87,9 +87,9 @@ void HumidityController::recall() {
       relHumidityToAbs(outdoor.temperature, outdoor.humidity);
 
   if (m_rotiEnabler.shouldBeEnabled(absHumIndoor, absHumOutdoor)) {
-    m_gpio->setValue(gpio::Value::ON);
+    m_gpio->setValue(gpio::Value::HIGH);
   } else {
-    m_gpio->setValue(gpio::Value::OFF);
+    m_gpio->setValue(gpio::Value::LOW);
   }
 }
 }

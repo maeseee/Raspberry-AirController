@@ -116,7 +116,7 @@ bool Gpio::setValue(const Value val) {
     return false;
   }
 
-  setvalgpio << ((val == Value::ON ? "1" : "0")); // write value to value file
+  setvalgpio << ((val == Value::HIGH ? "1" : "0")); // write value to value file
   setvalgpio.close();                             // close value file
   return true;
 }
@@ -137,9 +137,9 @@ Value Gpio::getValue() const {
   getvalgpio.close(); // close the value file
 
   if (val != "0") {
-    return Value::ON;
+    return Value::HIGH;
   } else {
-    return Value::OFF;
+    return Value::LOW;
   }
 }
 

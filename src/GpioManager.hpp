@@ -22,7 +22,7 @@ public:
 private:
   bool initGpios();
 
-  std::array<IGpioPtr, Function::Size> m_outputs;
+  std::array<IGpioPtr, Function::Size> m_gpios;
 };
 
 } // gpio

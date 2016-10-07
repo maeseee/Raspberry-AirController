@@ -7,22 +7,28 @@
 
 namespace gpio {
 
+// outputs
 static constexpr size_t GPIO_MAIN = 3;
 static constexpr size_t GPIO_ROTI = 5;
 static constexpr size_t GPIO_RES = 7;
 static constexpr size_t GPIO_TIME = 8;
 
+// inputs
+static constexpr size_t GPIO_AM2302 = 9;
+
 GpioManager::GpioManager() {
   if (isRealBoard()) {
-    m_outputs[Function::Main] = std::make_shared<Gpio>(GPIO_MAIN);
-    m_outputs[Function::Roti] = std::make_shared<Gpio>(GPIO_ROTI);
-    m_outputs[Function::Reserve] = std::make_shared<Gpio>(GPIO_RES);
-    m_outputs[Function::Time] = std::make_shared<Gpio>(GPIO_TIME);
+    m_gpios[Function::Main] = std::make_shared<Gpio>(GPIO_MAIN);
+    m_gpios[Function::Roti] = std::make_shared<Gpio>(GPIO_ROTI);
+    m_gpios[Function::Time] = std::make_shared<Gpio>(GPIO_TIME);
+    m_gpios[Function::Reserve] = std::make_shared<Gpio>(GPIO_RES);
+    m_gpios[Function::Am2302] = std::make_shared<Gpio>(GPIO_AM2302);
   } else {
-    m_outputs[Function::Main] = std::make_shared<GpioSim>("MainSystem");
-    m_outputs[Function::Roti] = std::make_shared<GpioSim>("Roti");
-    m_outputs[Function::Reserve] = std::make_shared<GpioSim>("Reserve");
-    m_outputs[Function::Time] = std::make_shared<GpioSim>("Timer");
+    m_gpios[Function::Main] = std::make_shared<GpioSim>("MainSystem");
+    m_gpios[Function::Roti] = std::make_shared<GpioSim>("Roti");
+    m_gpios[Function::Reserve] = std::make_shared<GpioSim>("Reserve");
+    m_gpios[Function::Time] = std::make_shared<GpioSim>("Timer");
+    m_gpios[Function::Am2302] = std::make_shared<GpioSim>("Am2302");
   }
 
   initGpios();
@@ -31,21 +37,22 @@ GpioManager::GpioManager() {
 IGpioPtr GpioManager::getGpio(Function function) const {
   assert(function < Function::Size);
 
-  return m_outputs[function];
+  return m_gpios[function];
 }
 
 bool GpioManager::initGpios() {
   bool result = true;
 
-  for (const IGpioPtr &output : m_outputs) {
+  for (const IGpioPtr &output : m_gpios) {
     // export gpio's
     result = result && output->exportGpio();
 
     // set direction
+    // careful with the output (input would be more safe)
     result = result && output->setDirection(Direction::OUT);
 
     // set output off
-    result = result && output->setValue(Value::OFF);
+    result = result && output->setValue(Value::LOW);
   }
 
   return result;

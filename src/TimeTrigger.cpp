@@ -38,15 +38,15 @@ void TimeTrigger::recall() {
 
   if (m_period.offTime < m_period.onTime) {
     if (daytime < m_period.onTime && daytime > m_period.offTime) {
-      m_gpio->setValue(gpio::Value::OFF);
+      m_gpio->setValue(gpio::Value::LOW);
     } else {
-      m_gpio->setValue(gpio::Value::ON);
+      m_gpio->setValue(gpio::Value::HIGH);
     }
   } else {
     if (daytime < m_period.offTime && daytime > m_period.onTime) {
-      m_gpio->setValue(gpio::Value::ON);
+      m_gpio->setValue(gpio::Value::HIGH);
     } else {
-      m_gpio->setValue(gpio::Value::OFF);
+      m_gpio->setValue(gpio::Value::LOW);
     }
   }
 }

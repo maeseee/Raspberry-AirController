@@ -1,6 +1,7 @@
 #include <iostream>
 #include <unistd.h>
 
+#include <Am2302Sensor.hpp>
 #include <Enabler.hpp>
 #include <GpioManager.hpp>
 #include <Humidity.hpp>
@@ -14,15 +15,17 @@ static constexpr size_t END_NIGHT_CONDITION = 7 * 60 * 60;
 static constexpr size_t SAFETY_CONDITION = 30 * 60;
 
 int main() {
+  // initialize actors
+  gpio::GpioManager gpioManager;
+
   // initialize sensors
   sensor::ISensorPtr weatherStation =
       std::make_shared<sensor::WeatherStation>();
-  sensor::ISensorPtr measuredValues = std::make_shared<sensor::SensorSim>();
+
+  sensor::ISensorPtr measuredValues = std::make_shared<sensor::Am2302Sensor>(
+      gpioManager.getGpio(gpio::Function::Am2302));
 
   sleep(2); // wait until sensors have results
-
-  // initialize actors
-  gpio::GpioManager gpioManager;
 
   // setup timer
   time_trigger::TimeTrigger timeTrigger(
