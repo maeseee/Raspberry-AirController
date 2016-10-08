@@ -47,8 +47,8 @@ int Am2302Sensor::readBit(size_t timeout_us) const {
 
   size_t counter = 0;
   while (gpio::Value::HIGH == m_sensor->getValue()) {
-    ++stopCounter;
-    if (stopCounter < 100) {
+    ++counter;
+    if (counter < 100) {
       // sensor will 80 us pulls high
       std::cout << "sensor will not pull up" << std::endl;
       return -1;
@@ -67,7 +67,18 @@ int Am2302Sensor::readBit(size_t timeout_us) const {
 
 int Am2302Sensor::readByte(size_t timeout_us) const
 {
+    int byte = 0;
+    for(size_t i = 0; i < 8; ++i){
+        int bit = readBit(100);
+        if(bit < 0) {
+            return -1;
+        }
+        byte <<= 1;
+        byte |= bit;
+    }
 
+    byte &= 0xFF; // delete unused bits
+    return byte;
 }
 
 void Am2302Sensor::recall() {
@@ -92,6 +103,25 @@ void Am2302Sensor::recall() {
       std::cout << "Am2302 start sequence missing" << std::endl;
       return;
   }
+
+  uint8_t sum = 0;
+  for(size_t byte = 0; byte < 4; ++byte){
+      m_buffer[byte] = readByte(100);
+      sum += readByte(100);
+      if(m_buffer[byte] < 0) {
+          return;
+      }
+  }
+
+  uint8_t checksum = readByte(100);
+  if (checksum != sum){
+      std::cout << "Wrong checksum" << std::endl;
+      return;
+  }
+
+  uint16_t humidity = (m_buffer[0] << 8) | m_buffer[1];
+  uint16_t temperature = (m_buffer[3] << 8) | m_buffer[4];
+
 
   // detect change and read data
   uint8_t counter = 0;
