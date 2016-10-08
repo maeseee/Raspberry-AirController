@@ -34,6 +34,42 @@ bool Am2302Sensor::isChecksumValid() const {
   return 0 == sum;
 }
 
+int Am2302Sensor::readBit(size_t timeout_us) const {
+  for (size_t stopCounter = 0; gpio::Value::LOW == m_sensor->getValue();
+       ++stopCounter) {
+    if (stopCounter < timeout_us) {
+      // sensor will 80 us pulls low
+      std::cout << "sensor will not pull up" << std::endl;
+      return -1;
+    }
+    usleep(1);
+  }
+
+  size_t counter = 0;
+  while (gpio::Value::HIGH == m_sensor->getValue()) {
+    ++stopCounter;
+    if (stopCounter < 100) {
+      // sensor will 80 us pulls high
+      std::cout << "sensor will not pull up" << std::endl;
+      return -1;
+    }
+    usleep(1);
+  }
+
+  if (counter < 50) {
+    // 0 for 27 us
+    return 0;
+  } else {
+    // 1 for 70 us
+    return 1;
+  }
+}
+
+int Am2302Sensor::readByte(size_t timeout_us) const
+{
+
+}
+
 void Am2302Sensor::recall() {
   std::cout << "--read am2302 sensor" << std::endl;
   gpio::Value laststate = gpio::Value::HIGH;
@@ -41,17 +77,21 @@ void Am2302Sensor::recall() {
   std::fill(m_buffer.begin(), m_buffer.end(), 0);
   // m_inputData = 0;
 
-  // pull pin down for 18 milliseconds
   m_sensor->setDirection(gpio::Direction::OUT);
   m_sensor->setValue(gpio::Value::HIGH);
-  usleep(10);
+  usleep(10000); // just wait a little
   m_sensor->setValue(gpio::Value::LOW);
-  usleep(18);
-  // then pull it up for 40 microseconds
+  usleep(1500); // min low 1000 us
   m_sensor->setValue(gpio::Value::HIGH);
-  usleep(40);
+  usleep(25); // high for 20 - 40 us
+
   // prepare to read the pin
   m_sensor->setDirection(gpio::Direction::IN);
+  if(readBit(100) == -1) {
+      // sensor will change after 80 us
+      std::cout << "Am2302 start sequence missing" << std::endl;
+      return;
+  }
 
   // detect change and read data
   uint8_t counter = 0;
@@ -59,7 +99,7 @@ void Am2302Sensor::recall() {
   for (int i = 0; i < MAX_TIMINGS; i++) {
     counter = 0;
     while (m_sensor->getValue() == laststate) {
-      counter++;
+      ++counter;
       usleep(1);
       if (counter == 255) {
         break;
