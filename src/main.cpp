@@ -3,7 +3,7 @@
 
 #include <Am2302Sensor.hpp>
 #include <Enabler.hpp>
-#include <GpioManager.hpp>
+#include <Gpio.hpp>
 #include <Humidity.hpp>
 #include <SensorSim.hpp>
 #include <TimeTrigger.hpp>
@@ -15,28 +15,35 @@ static constexpr size_t END_NIGHT_CONDITION = 7 * 60 * 60;
 static constexpr size_t SAFETY_CONDITION = 30 * 60;
 
 int main() {
+
   // initialize actors
-  gpio::GpioManager gpioManager;
+  gpio::IGpioPtr gpioTester =
+      std::make_shared<gpio::Gpio>(gpio::Function::Main, gpio::Direction::OUT, gpio::Value::LOW);
+  sleep(1);
+  gpioTester->setValue(gpio::Value::HIGH);
+  sleep(1);
+  gpioTester->setValue(gpio::Value::LOW);
+  sleep(1);
 
   // initialize sensors
-  sensor::ISensorPtr weatherStation =
-      std::make_shared<sensor::WeatherStation>();
+  sensor::ISensorPtr weatherStation = std::make_shared<sensor::SensorSim>();
 
-  sensor::ISensorPtr measuredValues = std::make_shared<sensor::Am2302Sensor>(
-      gpioManager.getGpio(gpio::Function::Am2302));
+  gpio::IGpioPtr am2302 = std::make_shared<gpio::Gpio>(gpio::Function::Am2302);
+  sensor::ISensorPtr measuredValues =
+      std::make_shared<sensor::Am2302Sensor>(am2302);
 
   sleep(2); // wait until sensors have results
 
   // setup timer
+  gpio::IGpioPtr timer = std::make_shared<gpio::Gpio>(gpio::Function::Time, gpio::Direction::OUT, gpio::Value::LOW);
   time_trigger::TimeTrigger timeTrigger(
       START_NIGHT_CONDITION + SAFETY_CONDITION,
-      END_NIGHT_CONDITION - SAFETY_CONDITION,
-      gpioManager.getGpio(gpio::Function::Roti));
+      END_NIGHT_CONDITION - SAFETY_CONDITION, timer);
 
   // setup roti
-  humidity::HumidityController humidityController(
-      measuredValues, weatherStation,
-      gpioManager.getGpio(gpio::Function::Roti));
+  gpio::IGpioPtr roti = std::make_shared<gpio::Gpio>(gpio::Function::Roti, gpio::Direction::OUT, gpio::Value::LOW);
+  humidity::HumidityController humidityController(measuredValues,
+                                                  weatherStation, timer);
 
   sleep(10);
 

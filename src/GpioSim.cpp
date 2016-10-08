@@ -4,11 +4,9 @@
 
 namespace gpio {
 
-GpioSim::GpioSim(const std::string &name) : m_name(name) {}
-
-bool GpioSim::exportGpio() {}
-
-bool GpioSim::unexportGpio() {}
+GpioSim::GpioSim(const std::string &name) : m_name(name) {
+  std::cout << "GPIO " << name << " is simuluted!" << std::endl;
+}
 
 bool GpioSim::setDirection(const Direction dir) {
   m_dir = dir;

@@ -4,6 +4,7 @@
 #include <GpioConstants.hpp>
 
 #include <memory>
+#include <array>
 
 namespace gpio {
 
@@ -13,18 +14,6 @@ namespace gpio {
 class IGpio {
 public:
   virtual ~IGpio() {}
-
-  /**
-   * @brief export_gpio Export the GPIO
-   * @return true for successful
-   */
-  virtual bool exportGpio() = 0;
-
-  /**
-   * @brief unexport_gpio Unexport the GPIO
-   * @return true for succesful
-   */
-  virtual bool unexportGpio() = 0;
 
   /**
    * @brief setdir_gpio Set the direction to the GPIO

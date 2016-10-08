@@ -14,12 +14,18 @@ bool isRealBoard() {
   return stream.good();
 }
 
-Gpio::Gpio() : m_gpioNumber{0} {}
+Gpio::Gpio(const Function gnum) : m_gpioNumber(static_cast<size_t>(gnum)) {
+  exportGpio();
+}
 
-Gpio::Gpio(const size_t gnum)
-    : m_gpioNumber(
-          gnum) // Instatiate GPIOClass object for GPIO pin number "gnum"
-{}
+Gpio::Gpio(const Function gnum, const Direction dir, const Value val)
+    : m_gpioNumber(static_cast<size_t>(gnum)) {
+  exportGpio();
+  setDirection(dir);
+  setValue(val);
+}
+
+Gpio::~Gpio() { unexportGpio(); }
 
 bool Gpio::exportGpio() {
   std::string export_str = GPIO_PATH + "export";
@@ -117,7 +123,7 @@ bool Gpio::setValue(const Value val) {
   }
 
   setvalgpio << ((val == Value::HIGH ? "1" : "0")); // write value to value file
-  setvalgpio.close();                             // close value file
+  setvalgpio.close();                               // close value file
   return true;
 }
 

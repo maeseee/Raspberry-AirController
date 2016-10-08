@@ -14,9 +14,6 @@ class GpioSim : public IGpio {
 public:
   explicit GpioSim(const std::string &name);
 
-  bool exportGpio() override;
-  bool unexportGpio() override;
-
   bool setDirection(const Direction dir) override;
   Direction getDirection() const override;
 

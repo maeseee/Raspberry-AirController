@@ -2,8 +2,8 @@
 #include <GpioConstants.hpp>
 
 #include <algorithm> // std::fill
-#include <unistd.h>  // sleep
 #include <iostream>
+#include <unistd.h> // sleep
 
 namespace sensor {
 
@@ -12,7 +12,9 @@ static constexpr size_t BYTE_SIZE = 8;
 
 static const size_t CALL_INTERVALL = 60; // call upcate intervall for thread
 
-Am2302Sensor::Am2302Sensor(const gpio::IGpioPtr &sensor) : m_sensor(sensor) {}
+Am2302Sensor::Am2302Sensor(const gpio::IGpioPtr &sensor) : m_sensor(sensor) {
+  m_thread = std::thread(&Am2302Sensor::threadFn, this);
+}
 
 Am2302Sensor::~Am2302Sensor() {
   m_stopThread = true;
@@ -28,6 +30,7 @@ bool Am2302Sensor::isChecksumValid() const {
   for (size_t index = 0; index < BUFFER_SIZE - 1; ++index) {
     sum -= m_buffer[index];
   }
+  std::cout << "isChecksumValid = " << (0 == sum) << std::endl;
   return 0 == sum;
 }
 
@@ -51,7 +54,7 @@ void Am2302Sensor::recall() {
   m_sensor->setDirection(gpio::Direction::IN);
 
   // detect change and read data
-  size_t counter = 0;
+  uint8_t counter = 0;
   size_t bitNumber = 0;
   for (int i = 0; i < MAX_TIMINGS; i++) {
     counter = 0;
@@ -96,6 +99,7 @@ void Am2302Sensor::recall() {
     // return 1;
   } else {
     printf("Data not good, skip\n");
+    std::cout << bitNumber << std::endl;
     // return 0;
   }
 }
