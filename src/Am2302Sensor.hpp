@@ -18,8 +18,8 @@ public:
 
 private:
   bool isChecksumValid() const;
-  int readBit(size_t timeout_us) const;
-  int readByte(size_t timeout_us) const;
+  int readBit() const;
+  int readByte() const;
 
   void recall();
   void threadFn();

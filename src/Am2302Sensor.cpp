@@ -9,11 +9,13 @@ namespace sensor {
 
 static constexpr size_t MAX_TIMINGS = 85;
 static constexpr size_t BYTE_SIZE = 8;
+static constexpr size_t ONE_WIRE_COM_TIMEOUT_US = 150; // In real signals last for 80us
 
 static const size_t CALL_INTERVALL = 60; // call upcate intervall for thread
 
 Am2302Sensor::Am2302Sensor(const gpio::IGpioPtr &sensor) : m_sensor(sensor) {
   m_thread = std::thread(&Am2302Sensor::threadFn, this);
+  m_sensor->setDirection(gpio::Direction::IN);
 }
 
 Am2302Sensor::~Am2302Sensor() {
@@ -34,10 +36,10 @@ bool Am2302Sensor::isChecksumValid() const {
   return 0 == sum;
 }
 
-int Am2302Sensor::readBit(size_t timeout_us) const {
+int Am2302Sensor::readBit() const {
   for (size_t stopCounter = 0; gpio::Value::LOW == m_sensor->getValue();
        ++stopCounter) {
-    if (stopCounter < timeout_us) {
+    if (stopCounter < ONE_WIRE_COM_TIMEOUT_US) {
       // sensor will 80 us pulls low
       std::cout << "sensor will not pull up" << std::endl;
       return -1;
@@ -65,11 +67,11 @@ int Am2302Sensor::readBit(size_t timeout_us) const {
   }
 }
 
-int Am2302Sensor::readByte(size_t timeout_us) const
+int Am2302Sensor::readByte() const
 {
     int byte = 0;
     for(size_t i = 0; i < 8; ++i){
-        int bit = readBit(100);
+        int bit = readBit();
         if(bit < 0) {
             return -1;
         }
@@ -86,11 +88,10 @@ void Am2302Sensor::recall() {
   gpio::Value laststate = gpio::Value::HIGH;
 
   std::fill(m_buffer.begin(), m_buffer.end(), 0);
-  // m_inputData = 0;
 
   m_sensor->setDirection(gpio::Direction::OUT);
   m_sensor->setValue(gpio::Value::HIGH);
-  usleep(10000); // just wait a little
+  usleep(10000); // just wait a little (the normal position is high trough a pull up resistor)
   m_sensor->setValue(gpio::Value::LOW);
   usleep(1500); // min low 1000 us
   m_sensor->setValue(gpio::Value::HIGH);
@@ -98,7 +99,7 @@ void Am2302Sensor::recall() {
 
   // prepare to read the pin
   m_sensor->setDirection(gpio::Direction::IN);
-  if(readBit(100) == -1) {
+  if(readBit() == -1) {
       // sensor will change after 80 us
       std::cout << "Am2302 start sequence missing" << std::endl;
       return;
@@ -106,72 +107,29 @@ void Am2302Sensor::recall() {
 
   uint8_t sum = 0;
   for(size_t byte = 0; byte < 4; ++byte){
-      m_buffer[byte] = readByte(100);
-      sum += readByte(100);
-      if(m_buffer[byte] < 0) {
+      int newByte = readByte();
+      m_buffer[byte] = newByte;
+      sum += newByte;
+      if(newByte < 0) {
+          std::cout << "Invalid byte received" << std::endl;
           return;
       }
   }
 
-  uint8_t checksum = readByte(100);
-  if (checksum != sum){
+  int checksum = readByte();
+  if(checksum < 0){
+      std::cout << "Invalid checksum received" << std::endl;
+      return;
+  }
+  if (static_cast<uint8_t>(checksum) != sum){
       std::cout << "Wrong checksum" << std::endl;
       return;
   }
 
   uint16_t humidity = (m_buffer[0] << 8) | m_buffer[1];
   uint16_t temperature = (m_buffer[3] << 8) | m_buffer[4];
-
-
-  // detect change and read data
-  uint8_t counter = 0;
-  size_t bitNumber = 0;
-  for (int i = 0; i < MAX_TIMINGS; i++) {
-    counter = 0;
-    while (m_sensor->getValue() == laststate) {
-      ++counter;
-      usleep(1);
-      if (counter == 255) {
-        break;
-      }
-    }
-    laststate = m_sensor->getValue();
-
-    if (counter == 255) {
-      break;
-    }
-
-    // ignore first 3 transitions
-    if ((i >= 4) && (i % 2 == 0)) {
-      // shove each bit into the storage bytes
-      m_buffer[bitNumber / BYTE_SIZE] <<= 1;
-      if (counter > 16) {
-        // Set bit
-        m_buffer[bitNumber / BYTE_SIZE] |= 1;
-      }
-      bitNumber++;
-    }
-    std::cout << "--read am2302 sensor end" << std::endl;
-  }
-
-  // check we read 40 bits (8bit x 5 ) + verify checksum in the last byte
-  // print it out if data is good
-  if ((bitNumber >= (BUFFER_SIZE * BYTE_SIZE)) && isChecksumValid()) {
-    float t, h;
-    h = (float)m_buffer[0] * 256 + (float)m_buffer[1];
-    h /= 10.0;
-    t = (float)(m_buffer[2] & 0x7F) * 256 + (float)m_buffer[3];
-    t /= 10.0;
-    if ((m_buffer[2] & 0x80) != 0)
-      t *= -1;
-
-    printf("Humidity = %.2f %% Temperature = %.2f *C \n", h, t);
-    // return 1;
-  } else {
-    printf("Data not good, skip\n");
-    std::cout << bitNumber << std::endl;
-    // return 0;
-  }
+  m_humidity = humidity / 10;
+  m_temperature = temperature / 10;
 }
 
 void Am2302Sensor::threadFn() {
