@@ -5,8 +5,8 @@
 
 namespace gpio {
 
-enum class Direction { OUT, IN, UNSET };
-enum class Value { LOW, HIGH, INVALID };
+enum class Direction : size_t { OUT, IN, UNSET };
+enum class Value : size_t { LOW, HIGH, INVALID };
 enum class Function : size_t {
   Main = 3,
   Roti = 5,

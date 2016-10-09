@@ -17,7 +17,7 @@ public:
   SensorData getData() const override;
 
 private:
-  bool isChecksumValid() const;
+  int waitForBit(const gpio::Value val) const;
   int readBit() const;
   int readByte() const;
 

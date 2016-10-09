@@ -2,6 +2,7 @@
 #include <GpioConstants.hpp>
 
 #include <algorithm> // std::fill
+#include <cassert>
 #include <iostream>
 #include <unistd.h> // sleep
 
@@ -28,38 +29,35 @@ SensorData Am2302Sensor::getData() const {
   return SensorData{m_temperature, m_humidity};
 }
 
-bool Am2302Sensor::isChecksumValid() const {
-  uint8_t sum = m_buffer[BUFFER_SIZE - 1];
-  for (size_t index = 0; index < BUFFER_SIZE - 1; ++index) {
-    sum -= m_buffer[index];
+int Am2302Sensor::waitForBit(const gpio::Value val) const {
+  int counter = 0;
+  while (val != m_sensor->getValue()) {
+    ++counter;
+    if (counter > ONE_WIRE_COM_TIMEOUT_US) {
+      std::cout << "sensor changes not to " << static_cast<size_t>(val)
+                << std::endl;
+      return -1;
+    }
+    usleep(1);
   }
-  std::cout << "isChecksumValid = " << (0 == sum) << std::endl;
-  return 0 == sum;
+  return counter;
 }
 
 int Am2302Sensor::readBit() const {
-  for (size_t stopCounter = 0; gpio::Value::LOW == m_sensor->getValue();
-       ++stopCounter) {
-    if (stopCounter < ONE_WIRE_COM_TIMEOUT_US) {
-      // sensor will 80 us pulls low
-      std::cout << "sensor will not pull up" << std::endl;
-      return -1;
-    }
-    usleep(1);
+  assert(m_sensor->getValue() == gpio::Value::LOW);
+
+  if (waitForBit(gpio::Value::HIGH)) {
+    std::cout << "not changing to high" << std::endl;
+    return -1;
   }
 
-  size_t counter = 0;
-  while (gpio::Value::HIGH == m_sensor->getValue()) {
-    ++counter;
-    if (counter < 100) {
-      // sensor will 80 us pulls high
-      std::cout << "sensor will not pull up" << std::endl;
-      return -1;
-    }
-    usleep(1);
-  }
+  int counter = waitForBit(gpio::Value::LOW);
 
-  if (counter < 50) {
+  if (counter < 0) {
+    // invalid Bit
+    std::cout << "invalid bit read" << std::endl;
+    return -1;
+  } else if (counter < 50) {
     // 0 for 27 us
     return 0;
   } else {
@@ -94,13 +92,14 @@ void Am2302Sensor::recall() {
   usleep(10000); // just wait a little (the normal position is high trough a
                  // pull up resistor)
   m_sensor->setValue(gpio::Value::LOW);
-  usleep(1500); // min low 1000 us
+  usleep(2000); // min low 1000 us
   m_sensor->setValue(gpio::Value::HIGH);
-  usleep(25); // high for 20 - 40 us
+  usleep(1); // high for 20 - 40 us
 
   // prepare to read the pin
   m_sensor->setDirection(gpio::Direction::IN);
-  if (readBit() == -1) {
+
+  if (waitForBit(gpio::Value::LOW) == -1) {
     // sensor will change after 80 us
     std::cout << "Am2302 start sequence missing" << std::endl;
     return;
@@ -134,6 +133,7 @@ void Am2302Sensor::recall() {
 }
 
 void Am2302Sensor::threadFn() {
+  sleep(1);
   while (!m_stopThread) {
     static int timeCounter = 0;
     if (0 == timeCounter) {
