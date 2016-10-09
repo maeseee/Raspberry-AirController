@@ -9,7 +9,8 @@ namespace sensor {
 
 static constexpr size_t MAX_TIMINGS = 85;
 static constexpr size_t BYTE_SIZE = 8;
-static constexpr size_t ONE_WIRE_COM_TIMEOUT_US = 150; // In real signals last for 80us
+static constexpr size_t ONE_WIRE_COM_TIMEOUT_US =
+    150; // In real signals last for 80us
 
 static const size_t CALL_INTERVALL = 60; // call upcate intervall for thread
 
@@ -67,20 +68,19 @@ int Am2302Sensor::readBit() const {
   }
 }
 
-int Am2302Sensor::readByte() const
-{
-    int byte = 0;
-    for(size_t i = 0; i < 8; ++i){
-        int bit = readBit();
-        if(bit < 0) {
-            return -1;
-        }
-        byte <<= 1;
-        byte |= bit;
+int Am2302Sensor::readByte() const {
+  int byte = 0;
+  for (size_t i = 0; i < 8; ++i) {
+    int bit = readBit();
+    if (bit < 0) {
+      return -1;
     }
+    byte <<= 1;
+    byte |= bit;
+  }
 
-    byte &= 0xFF; // delete unused bits
-    return byte;
+  byte &= 0xFF; // delete unused bits
+  return byte;
 }
 
 void Am2302Sensor::recall() {
@@ -91,7 +91,8 @@ void Am2302Sensor::recall() {
 
   m_sensor->setDirection(gpio::Direction::OUT);
   m_sensor->setValue(gpio::Value::HIGH);
-  usleep(10000); // just wait a little (the normal position is high trough a pull up resistor)
+  usleep(10000); // just wait a little (the normal position is high trough a
+                 // pull up resistor)
   m_sensor->setValue(gpio::Value::LOW);
   usleep(1500); // min low 1000 us
   m_sensor->setValue(gpio::Value::HIGH);
@@ -99,31 +100,31 @@ void Am2302Sensor::recall() {
 
   // prepare to read the pin
   m_sensor->setDirection(gpio::Direction::IN);
-  if(readBit() == -1) {
-      // sensor will change after 80 us
-      std::cout << "Am2302 start sequence missing" << std::endl;
-      return;
+  if (readBit() == -1) {
+    // sensor will change after 80 us
+    std::cout << "Am2302 start sequence missing" << std::endl;
+    return;
   }
 
   uint8_t sum = 0;
-  for(size_t byte = 0; byte < 4; ++byte){
-      int newByte = readByte();
-      m_buffer[byte] = newByte;
-      sum += newByte;
-      if(newByte < 0) {
-          std::cout << "Invalid byte received" << std::endl;
-          return;
-      }
+  for (size_t byte = 0; byte < 4; ++byte) {
+    int newByte = readByte();
+    m_buffer[byte] = newByte;
+    sum += newByte;
+    if (newByte < 0) {
+      std::cout << "Invalid byte received" << std::endl;
+      return;
+    }
   }
 
   int checksum = readByte();
-  if(checksum < 0){
-      std::cout << "Invalid checksum received" << std::endl;
-      return;
+  if (checksum < 0) {
+    std::cout << "Invalid checksum received" << std::endl;
+    return;
   }
-  if (static_cast<uint8_t>(checksum) != sum){
-      std::cout << "Wrong checksum" << std::endl;
-      return;
+  if (static_cast<uint8_t>(checksum) != sum) {
+    std::cout << "Wrong checksum" << std::endl;
+    return;
   }
 
   uint16_t humidity = (m_buffer[0] << 8) | m_buffer[1];

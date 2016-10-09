@@ -1,17 +1,17 @@
 #ifndef SENSOR_AM2302_H
 #define SENSOR_AM2302_H
 
-#include <ISensor.hpp>
 #include <IGpio.hpp>
+#include <ISensor.hpp>
 
-#include <thread>
 #include <array>
+#include <thread>
 
 namespace sensor {
 
 class Am2302Sensor : public sensor::ISensor {
 public:
-  Am2302Sensor(const gpio::IGpioPtr& sensor);
+  Am2302Sensor(const gpio::IGpioPtr &sensor);
   ~Am2302Sensor();
 
   SensorData getData() const override;
