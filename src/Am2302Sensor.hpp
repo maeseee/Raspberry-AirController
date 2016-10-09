@@ -31,9 +31,6 @@ private:
 
   std::thread m_thread;
   bool m_stopThread{false};
-
-  static constexpr size_t BUFFER_SIZE = 5;
-  std::array<uint8_t, BUFFER_SIZE> m_buffer;
 };
 }
 #endif

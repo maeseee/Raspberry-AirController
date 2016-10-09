@@ -12,7 +12,7 @@ enum class Function : size_t {
   Roti = 5,
   Time = 8,
   Reserve = 7,
-  Am2302 = 9
+  Am2302 = 4
 };
 
 } // gpio

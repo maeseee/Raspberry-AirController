@@ -14,6 +14,7 @@ static constexpr size_t ONE_WIRE_COM_TIMEOUT_US =
     150; // In real signals last for 80us
 
 static const size_t CALL_INTERVALL = 60; // call upcate intervall for thread
+static constexpr size_t BUFFER_SIZE = 4;
 
 Am2302Sensor::Am2302Sensor(const gpio::IGpioPtr &sensor) : m_sensor(sensor) {
   m_thread = std::thread(&Am2302Sensor::threadFn, this);
@@ -44,7 +45,7 @@ int Am2302Sensor::waitForBit(const gpio::Value val) const {
 }
 
 int Am2302Sensor::readBit() const {
-  assert(m_sensor->getValue() == gpio::Value::LOW);
+  assert(gpio::Value::LOW == m_sensor->getValue());
 
   if (waitForBit(gpio::Value::HIGH)) {
     std::cout << "not changing to high" << std::endl;
@@ -67,6 +68,8 @@ int Am2302Sensor::readBit() const {
 }
 
 int Am2302Sensor::readByte() const {
+  assert(gpio::Value::LOW == m_sensor->getValue());
+
   int byte = 0;
   for (size_t i = 0; i < 8; ++i) {
     int bit = readBit();
@@ -83,9 +86,8 @@ int Am2302Sensor::readByte() const {
 
 void Am2302Sensor::recall() {
   std::cout << "--read am2302 sensor" << std::endl;
-  gpio::Value laststate = gpio::Value::HIGH;
 
-  std::fill(m_buffer.begin(), m_buffer.end(), 0);
+  uint8_t buffer[BUFFER_SIZE] = {0, 0, 0, 0};
 
   m_sensor->setDirection(gpio::Direction::OUT);
   m_sensor->setValue(gpio::Value::HIGH);
@@ -105,10 +107,11 @@ void Am2302Sensor::recall() {
     return;
   }
 
+  std::cout << "Sensor put the signal to low" << std::endl;
   uint8_t sum = 0;
-  for (size_t byte = 0; byte < 4; ++byte) {
+  for (size_t byte = 0; byte < BUFFER_SIZE; ++byte) {
     int newByte = readByte();
-    m_buffer[byte] = newByte;
+    buffer[byte] = newByte;
     sum += newByte;
     if (newByte < 0) {
       std::cout << "Invalid byte received" << std::endl;
@@ -126,8 +129,8 @@ void Am2302Sensor::recall() {
     return;
   }
 
-  uint16_t humidity = (m_buffer[0] << 8) | m_buffer[1];
-  uint16_t temperature = (m_buffer[3] << 8) | m_buffer[4];
+  uint16_t humidity = (buffer[0] << BYTE_SIZE) | buffer[1];
+  uint16_t temperature = (buffer[3] << BYTE_SIZE) | buffer[4];
   m_humidity = humidity / 10;
   m_temperature = temperature / 10;
 }
