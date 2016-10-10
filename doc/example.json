@@ -1,0 +1,13 @@
+{
+	"coord":{"lon":8.31,"lat":47.13},
+	"weather":[{"id":803,"main":"Clouds","description":"broken clouds","icon":"04d"}],
+	"base":"cmc stations",
+	"main":{"temp":296.87,"pressure":1020,"humidity":65,"temp_min":292.59,"temp_max":300.15},
+	"wind":{"speed":1.5,"deg":180},
+	"clouds":{"all":75},
+	"dt":1472665983,
+	"sys":{"type":1,"id":6008,"message":0.0113,"country":"CH","sunrise":1472618759,"sunset":1472666792},
+	"id":7285765,
+	"name":"Eschenbach (LU)",
+	"cod":200
+}
