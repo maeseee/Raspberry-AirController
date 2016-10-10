@@ -20,6 +20,8 @@ public:
   bool setValue(const Value val) override;
   Value getValue() const override;
 
+  size_t getPinNumber() const override;
+
 private:
   Direction m_dir{Direction::UNSET};
   Value m_val{Value::INVALID};

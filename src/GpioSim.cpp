@@ -29,4 +29,6 @@ bool GpioSim::setValue(const Value val) {
 
 Value GpioSim::getValue() const { return m_val; }
 
+size_t gpio::GpioSim::getPinNumber() const { return 0; }
+
 } // gpio

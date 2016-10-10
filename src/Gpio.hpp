@@ -15,16 +15,17 @@ class Gpio : public IGpio {
 public:
   explicit Gpio(const Function gnum);
 
-    explicit Gpio(const Function gnum, const Direction dir, const Value val);
+  explicit Gpio(const Function gnum, const Direction dir, const Value val);
 
   ~Gpio();
-
 
   bool setDirection(const Direction dir) override;
   Direction getDirection() const override;
 
   bool setValue(const Value val) override;
   Value getValue() const override;
+
+  size_t getPinNumber() const override;
 
 private:
   /**

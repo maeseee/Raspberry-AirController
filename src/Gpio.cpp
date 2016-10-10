@@ -149,4 +149,6 @@ Value Gpio::getValue() const {
   }
 }
 
+size_t Gpio::getPinNumber() const { return m_gpioNumber; }
+
 } // gpio

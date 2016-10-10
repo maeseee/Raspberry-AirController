@@ -39,6 +39,11 @@ public:
    * @return Value (Value::INVALID for error)
    */
   virtual Value getValue() const = 0;
+
+  /**
+   * @brief getFunction returns the function of the pin
+   */
+  virtual size_t getPinNumber() const = 0;
 };
 using IGpioPtr = std::shared_ptr<IGpio>;
 
