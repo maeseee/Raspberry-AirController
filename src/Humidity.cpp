@@ -31,7 +31,7 @@ HumidityController::~HumidityController() {
 }
 
 float HumidityController::relHumidityToAbs(const float tempC,
-                                           const float humidityRel) {
+                                           const float humidityRel) const {
   // function calculated for
   // Temperatur [°C]  water for 100 % [g/m3]
   // -20              0.9
@@ -52,7 +52,7 @@ float HumidityController::relHumidityToAbs(const float tempC,
 }
 
 float HumidityController::absHumidityToRel(const float tempC,
-                                           const float humidityAbs) {
+                                           const float humidityAbs) const {
   float absHumidity100 = relHumidityToAbs(tempC, 100);
   return humidityAbs / absHumidity100 * 100;
 }

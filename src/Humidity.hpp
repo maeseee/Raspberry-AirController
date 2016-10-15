@@ -26,8 +26,8 @@ public:
   ~HumidityController();
 
 private:
-  static float relHumidityToAbs(const float tempC, const float humidityRel);
-  static float absHumidityToRel(const float tempC, const float humidityAbs);
+  float relHumidityToAbs(const float tempC, const float humidityRel) const;
+  float absHumidityToRel(const float tempC, const float humidityAbs) const;
 
   void threadFn();
   void recall();
