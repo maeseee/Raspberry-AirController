@@ -30,8 +30,6 @@ HumidityController::~HumidityController() {
   m_thread.join();
 }
 
-void HumidityController::setEnabled(bool enable) { m_isEnabled = enable; }
-
 float HumidityController::relHumidityToAbs(const float tempC,
                                            const float humidityRel) {
   // function calculated for

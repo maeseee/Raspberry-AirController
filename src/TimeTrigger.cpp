@@ -18,6 +18,28 @@ TimeTrigger::~TimeTrigger() {
   m_thread.join();
 }
 
+gpio::Value TimeTrigger::getValue() const {
+  time_t t = time(0); // get time now
+  struct tm *now = localtime(&t);
+  size_t daytime = (now->tm_hour * 60 * 60) + (now->tm_min * 60) + now->tm_sec;
+
+  gpio::Value result;
+  if (m_period.offTime < m_period.onTime) {
+    if (daytime < m_period.onTime && daytime > m_period.offTime) {
+      result = gpio::Value::LOW;
+    } else {
+      result = gpio::Value::HIGH;
+    }
+  } else {
+    if (daytime < m_period.offTime && daytime > m_period.onTime) {
+      result = gpio::Value::HIGH;
+    } else {
+      result = gpio::Value::LOW;
+    }
+  }
+  return result;
+}
+
 void TimeTrigger::threadFn() {
   while (!m_stopThread) {
     static int timeCounter = 0;
@@ -30,24 +52,5 @@ void TimeTrigger::threadFn() {
   }
 }
 
-void TimeTrigger::recall() {
-  time_t t = time(0); // get time now
-  struct tm *now = localtime(&t);
-
-  size_t daytime = (now->tm_hour * 60 * 60) + (now->tm_min * 60) + now->tm_sec;
-
-  if (m_period.offTime < m_period.onTime) {
-    if (daytime < m_period.onTime && daytime > m_period.offTime) {
-      m_gpio->setValue(gpio::Value::LOW);
-    } else {
-      m_gpio->setValue(gpio::Value::HIGH);
-    }
-  } else {
-    if (daytime < m_period.offTime && daytime > m_period.onTime) {
-      m_gpio->setValue(gpio::Value::HIGH);
-    } else {
-      m_gpio->setValue(gpio::Value::LOW);
-    }
-  }
-}
+void TimeTrigger::recall() { m_gpio->setValue(getValue()); }
 }

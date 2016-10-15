@@ -22,6 +22,8 @@ public:
   TimeTrigger(const size_t on, const size_t off, const gpio::IGpioPtr &gpio);
   ~TimeTrigger();
 
+  gpio::Value getValue() const;
+
 private:
   void threadFn();
   void recall();
@@ -32,6 +34,8 @@ private:
   OnPeriod m_period;
   gpio::IGpioPtr m_gpio;
 };
+
+using TimeTriggerPtr = std::shared_ptr<TimeTrigger>;
 
 } // time_trigger
 

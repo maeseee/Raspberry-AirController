@@ -4,11 +4,12 @@
 #include <Am2302Sensor.hpp>
 #include <Enabler.hpp>
 #include <Gpio.hpp>
+#include <GpioCollector.hpp>
 #include <Humidity.hpp>
+#include <NightAir.hpp>
 #include <SensorSim.hpp>
 #include <TimeTrigger.hpp>
 #include <WeatherStation.hpp>
-#include <GpioCollector.hpp>
 
 // timer constants
 static constexpr size_t START_NIGHT_CONDITION = 22 * 60 * 60;
@@ -44,14 +45,17 @@ int main() {
   // setup collector for main system
   gpio::IGpioPtr mainSystem = std::make_shared<gpio::Gpio>(
       gpio::Function::Main, gpio::Direction::OUT, gpio::Value::LOW);
-  gpio::GpioCollectorPtr collector = std::make_shared<gpio::GpioCollector>(mainSystem);
-
+  gpio::GpioCollectorPtr collector =
+      std::make_shared<gpio::GpioCollector>(mainSystem);
 
   // setup roti
   gpio::IGpioPtr roti = std::make_shared<gpio::Gpio>(
       gpio::Function::Roti, gpio::Direction::OUT, gpio::Value::LOW);
-  humidity::HumidityController humidityController(measuredValues,
-                                                  weatherStation, roti, collector);
+  humidity::HumidityController humidityController(
+      measuredValues, weatherStation, roti, collector);
+
+  // setup night air
+  night_air::NightAir nightAir(collector);
 
   sleep(10);
 

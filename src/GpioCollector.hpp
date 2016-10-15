@@ -3,9 +3,9 @@
 
 #include <IGpio.hpp>
 
+#include <functional>
 #include <memory>
 #include <vector>
-#include <functional>
 
 namespace gpio {
 
@@ -14,7 +14,7 @@ namespace gpio {
  */
 class GpioCollector : public IGpio {
 public:
-  explicit GpioCollector(const IGpioPtr& gpio);
+  explicit GpioCollector(const IGpioPtr &gpio);
 
   bool setDirection(const Direction dir) override;
   Direction getDirection() const override;
@@ -24,11 +24,11 @@ public:
 
   size_t getPinNumber() const override;
 
-  void addValueFn(const std::function<Value()>& fn);
-
-  Value updateValue();
+  void addValueFn(const std::function<Value()> &fn);
 
 private:
+  Value updateValue();
+
   const IGpioPtr m_gpio;
   std::vector<std::function<Value()>> m_valueVector;
 };

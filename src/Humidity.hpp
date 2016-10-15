@@ -22,10 +22,8 @@ public:
   HumidityController(const sensor::ISensorPtr &indoorSensor,
                      const sensor::ISensorPtr &outdoorSensor,
                      const gpio::IGpioPtr &gpioRoti,
-                     const gpio::GpioCollectorPtr& gpioMainSystem);
+                     const gpio::GpioCollectorPtr &gpioMainSystem);
   ~HumidityController();
-
-  void setEnabled(bool enable);
 
 private:
   static float relHumidityToAbs(const float tempC, const float humidityRel);
@@ -33,8 +31,6 @@ private:
 
   void threadFn();
   void recall();
-
-  bool m_isEnabled{false};
 
   enabler::Enabler m_rotiEnabler;
 

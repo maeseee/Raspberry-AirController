@@ -3,8 +3,8 @@
 
 #include <GpioConstants.hpp>
 
-#include <memory>
 #include <array>
+#include <memory>
 
 namespace gpio {
 
