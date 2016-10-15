@@ -7,6 +7,10 @@
 
 #include <thread>
 
+namespace gpio {
+class GpioCollector;
+using GpioCollectorPtr = std::shared_ptr<GpioCollector>;
+}
 namespace humidity {
 
 class HumidityController {
@@ -17,7 +21,8 @@ public:
  */
   HumidityController(const sensor::ISensorPtr &indoorSensor,
                      const sensor::ISensorPtr &outdoorSensor,
-                     const gpio::IGpioPtr &gpio);
+                     const gpio::IGpioPtr &gpioRoti,
+                     const gpio::GpioCollectorPtr& gpioMainSystem);
   ~HumidityController();
 
   void setEnabled(bool enable);
@@ -35,7 +40,8 @@ private:
 
   sensor::ISensorPtr m_indoorSensor;
   sensor::ISensorPtr m_outdoorSensor;
-  gpio::IGpioPtr m_gpio;
+  gpio::IGpioPtr m_gpioRoti;
+  gpio::GpioCollectorPtr m_gpioMainSystem;
 
   float m_measuredTempIndoor;  // [°C]
   float m_measuredTempOutdoor; // [°C]

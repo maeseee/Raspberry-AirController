@@ -33,5 +33,7 @@ private:
   std::vector<std::function<Value()>> m_valueVector;
 };
 
+using GpioCollectorPtr = std::shared_ptr<GpioCollector>;
+
 } // gpio
 #endif

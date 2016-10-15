@@ -8,6 +8,7 @@
 #include <SensorSim.hpp>
 #include <TimeTrigger.hpp>
 #include <WeatherStation.hpp>
+#include <GpioCollector.hpp>
 
 // timer constants
 static constexpr size_t START_NIGHT_CONDITION = 22 * 60 * 60;
@@ -40,11 +41,17 @@ int main() {
       START_NIGHT_CONDITION + SAFETY_CONDITION,
       END_NIGHT_CONDITION - SAFETY_CONDITION, timer);
 
+  // setup collector for main system
+  gpio::IGpioPtr mainSystem = std::make_shared<gpio::Gpio>(
+      gpio::Function::Main, gpio::Direction::OUT, gpio::Value::LOW);
+  gpio::GpioCollectorPtr collector = std::make_shared<gpio::GpioCollector>(mainSystem);
+
+
   // setup roti
   gpio::IGpioPtr roti = std::make_shared<gpio::Gpio>(
       gpio::Function::Roti, gpio::Direction::OUT, gpio::Value::LOW);
   humidity::HumidityController humidityController(measuredValues,
-                                                  weatherStation, timer);
+                                                  weatherStation, roti, collector);
 
   sleep(10);
 

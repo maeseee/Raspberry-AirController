@@ -1,4 +1,5 @@
 #include "Humidity.hpp"
+#include <GpioCollector.hpp>
 
 #include <cassert>
 #include <cmath>
@@ -10,15 +11,16 @@ static const size_t CALL_INTERVALL = 5 * 60; // call upcate intervall for thread
 static constexpr float SET_HUM = 50.0;       // set point for humidity [%]
 static constexpr float SET_TEMP = 22.0;      // set point for temerautre [°C]
 
-HumidityController::HumidityController(const sensor::ISensorPtr &indoorSensor,
-                                       const sensor::ISensorPtr &outdoorSensor,
-                                       const gpio::IGpioPtr &gpio)
+HumidityController::HumidityController(
+    const sensor::ISensorPtr &indoorSensor,
+    const sensor::ISensorPtr &outdoorSensor, const gpio::IGpioPtr &gpioRoti,
+    const gpio::GpioCollectorPtr &gpioMainSystem)
     : m_rotiEnabler(enabler::Enabler(relHumidityToAbs(SET_TEMP, SET_HUM))),
       m_indoorSensor(indoorSensor), m_outdoorSensor(outdoorSensor),
-      m_gpio(gpio) {
+      m_gpioRoti(gpioRoti), m_gpioMainSystem(gpioMainSystem) {
   assert(m_indoorSensor);
   assert(m_outdoorSensor);
-  assert(m_gpio);
+  assert(m_gpioRoti);
 
   m_thread = std::thread(&HumidityController::threadFn, this);
 }
@@ -70,6 +72,11 @@ void HumidityController::threadFn() {
 }
 
 void HumidityController::recall() {
+  if (gpio::Value::LOW == m_gpioMainSystem->getValue()) {
+    // with switched of main system the roti makes no sense
+    return;
+  }
+
   sensor::SensorData indoor = m_indoorSensor->getData();
   if (std::numeric_limits<float>::min() == indoor.temperature) {
     // Invalid sensor data
@@ -87,9 +94,9 @@ void HumidityController::recall() {
       relHumidityToAbs(outdoor.temperature, outdoor.humidity);
 
   if (m_rotiEnabler.shouldBeEnabled(absHumIndoor, absHumOutdoor)) {
-    m_gpio->setValue(gpio::Value::HIGH);
+    m_gpioRoti->setValue(gpio::Value::HIGH);
   } else {
-    m_gpio->setValue(gpio::Value::LOW);
+    m_gpioRoti->setValue(gpio::Value::LOW);
   }
 }
 }
