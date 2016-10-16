@@ -1,4 +1,5 @@
-#include "Temperature.hpp"
+#include "TempController.hpp"
+#include <Constants.hpp>
 
 #include <cassert>
 #include <cmath>
@@ -8,8 +9,6 @@
 
 namespace temperature {
 
-static const size_t CALL_INTERVALL =
-    60 * 60; // call upcate intervall for thread
 static const size_t SUMMER_ON = 2 * 60 * 60;
 static const size_t WINTER_ON = 14 * 60 * 60;
 static const size_t ON_DURATION = 5 * 60;
@@ -27,7 +26,7 @@ TemperatureController::~TemperatureController() {
   m_thread.join();
 }
 
-bool TemperatureController::shouldWarmup() const {
+bool TemperatureController::shouldWarm() const {
   time_t t = time(0); // get time now
   struct tm *now = localtime(&t);
 
@@ -50,23 +49,23 @@ void TemperatureController::threadFn() {
       recall();
     }
     ++timeCounter;
-    timeCounter %= CALL_INTERVALL;
+    timeCounter %= CALL_INTERVALL_TEMP;
     sleep(1);
   }
 }
 
 void TemperatureController::recall() {
-  const bool shouldWarm = shouldWarmup();
-  if ((nullptr == m_timer) || (m_oldShouldWarmup != shouldWarm)) {
+  const bool isShouldWarm = shouldWarm();
+  if ((nullptr == m_timer) || (m_oldShouldWarmup != isShouldWarm)) {
     m_timer = nullptr; // Destruct current timer
-    if (shouldWarm) {
+    if (isShouldWarm) {
       m_timer = std::make_shared<time_trigger::TimeTrigger>(
           WINTER_ON, WINTER_ON + ON_DURATION, m_gpio);
     } else {
       m_timer = std::make_shared<time_trigger::TimeTrigger>(
           SUMMER_ON, SUMMER_ON + ON_DURATION, m_gpio);
     }
-    m_oldShouldWarmup = shouldWarm;
+    m_oldShouldWarmup = isShouldWarm;
   }
 }
 }

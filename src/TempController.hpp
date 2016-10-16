@@ -11,14 +11,14 @@ namespace temperature {
 class TemperatureController {
 public:
   /**
- * @brief HumidityController
- * @param setPointHumidity [%]
+ * @brief TemperatureController turns on and off the air system
+ * @param gpioMainSystem gpio for switching on and off
  */
   TemperatureController(const gpio::IGpioPtr &gpioMainSystem);
   ~TemperatureController();
 
 private:
-  bool shouldWarmup() const;
+  bool shouldWarm() const;
 
   void threadFn();
   void recall();

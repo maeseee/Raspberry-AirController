@@ -3,8 +3,6 @@
 
 #include <ISensor.hpp>
 
-#include <memory>
-
 namespace sensor {
 
 /**

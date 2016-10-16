@@ -1,12 +1,11 @@
 #include <Am2302Sensor.hpp>
+#include <Constants.hpp>
 #include <pi_2_dht_read.hpp>
 
 #include <iostream>
 #include <unistd.h>
 
 namespace sensor {
-
-static const size_t CALL_INTERVALL = 60; // call upcate intervall for thread
 
 Am2302Sensor::Am2302Sensor(const gpio::IGpioPtr &sensor) : m_sensor(sensor) {
   m_thread = std::thread(&Am2302Sensor::threadFn, this);
@@ -46,7 +45,7 @@ void Am2302Sensor::threadFn() {
       recall();
     }
     ++timeCounter;
-    timeCounter %= CALL_INTERVALL;
+    timeCounter %= CALL_INTERVALL_AM2302;
     sleep(1);
   }
 }

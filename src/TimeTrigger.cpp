@@ -1,11 +1,10 @@
 #include "TimeTrigger.hpp"
+#include <Constants.hpp>
 
 #include <ctime>
 #include <unistd.h> // for sleep
 
 namespace time_trigger {
-
-static const size_t CALL_INTERVALL = 30; // call upcate intervall for thread
 
 TimeTrigger::TimeTrigger(const size_t on, const size_t off,
                          const gpio::IGpioPtr &gpio)
@@ -47,7 +46,7 @@ void TimeTrigger::threadFn() {
       recall();
     }
     ++timeCounter;
-    timeCounter %= CALL_INTERVALL;
+    timeCounter %= CALL_INTERVALL_TIMER;
     sleep(1);
   }
 }

@@ -4,7 +4,6 @@
 #include <IGpio.hpp>
 #include <ISensor.hpp>
 
-#include <array>
 #include <thread>
 
 namespace sensor {

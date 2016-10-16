@@ -1,4 +1,5 @@
 #include "WeatherStation.hpp"
+#include <Constants.hpp>
 
 #include <boost/property_tree/json_parser.hpp>
 #include <boost/property_tree/ptree.hpp>
@@ -9,12 +10,10 @@
 
 namespace sensor {
 
-static constexpr float KELVIN = 273.15;
+static const float KELVIN = 273.15;
 static const char *WEATHER_URL = "api.openweathermap.org/data/2.5/"
                                  "weather?id=7285765&APPID="
                                  "e018bcd525a923f820afd5b43cac259e";
-static const size_t CALL_INTERVALL =
-    10 * 60; // call upcate intervall for thread
 
 WeatherStation::WeatherStation() {
   m_thread = std::thread(&WeatherStation::threadFn, this);
@@ -104,7 +103,7 @@ void WeatherStation::threadFn() {
       recall();
     }
     ++timeCounter;
-    timeCounter %= CALL_INTERVALL;
+    timeCounter %= CALL_INTERVALL_WEB;
     sleep(1);
   }
 }
