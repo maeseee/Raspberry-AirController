@@ -6,16 +6,16 @@
 
 #include <thread>
 
-namespace temperature {
+namespace temp_controller {
 
-class TemperatureController {
+class TempController {
 public:
   /**
  * @brief TemperatureController turns on and off the air system
  * @param gpioMainSystem gpio for switching on and off
  */
-  TemperatureController(const gpio::IGpioPtr &gpioMainSystem);
-  ~TemperatureController();
+  TempController(const gpio::IGpioPtr &gpioMainSystem);
+  ~TempController();
 
 private:
   bool shouldWarm() const;

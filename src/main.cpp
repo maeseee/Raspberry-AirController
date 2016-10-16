@@ -38,23 +38,23 @@ int main() {
       START_NIGHT_CONDITION + SAFETY_CONDITION,
       END_NIGHT_CONDITION - SAFETY_CONDITION, timer);
 
-  // setup collector and gpio for main system
-  gpio::IGpioPtr mainSystem = std::make_shared<gpio::Gpio>(
-      gpio::Function::Main, gpio::Direction::OUT, gpio::Value::LOW);
-  gpio::GpioCollectorPtr collector =
-      std::make_shared<gpio::GpioCollector>(mainSystem);
-
   // setup roti
   gpio::IGpioPtr roti = std::make_shared<gpio::Gpio>(
       gpio::Function::Roti, gpio::Direction::OUT, gpio::Value::LOW);
   roti_controller::RotiController humidityController(
       measuredValues, weatherStation, roti);
 
+  // setup collector and gpio for main system
+  gpio::IGpioPtr mainSystem = std::make_shared<gpio::Gpio>(
+      gpio::Function::Main, gpio::Direction::OUT, gpio::Value::LOW);
+  gpio::GpioCollectorPtr collector =
+      std::make_shared<gpio::GpioCollector>(mainSystem);
+
   // setup night air
   night_air::NightAir nightAir(collector);
 
   // setup temperature
-  temperature::TemperatureController temperature(collector);
+  temp_controller::TempController temp_controller(collector);
 
   sleep(10);
 

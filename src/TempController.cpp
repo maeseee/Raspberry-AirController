@@ -7,26 +7,26 @@
 #include <iostream>
 #include <unistd.h> // for sleep
 
-namespace temperature {
+namespace temp_controller {
 
 static const size_t SUMMER_ON = 2 * 60 * 60;
 static const size_t WINTER_ON = 14 * 60 * 60;
 static const size_t ON_DURATION = 5 * 60;
 
-TemperatureController::TemperatureController(
+TempController::TempController(
     const gpio::IGpioPtr &gpioMainSystem)
     : m_gpio(gpioMainSystem) {
   assert(m_gpio);
 
-  m_thread = std::thread(&TemperatureController::threadFn, this);
+  m_thread = std::thread(&TempController::threadFn, this);
 }
 
-TemperatureController::~TemperatureController() {
+TempController::~TempController() {
   m_stopThread = true;
   m_thread.join();
 }
 
-bool TemperatureController::shouldWarm() const {
+bool TempController::shouldWarm() const {
   time_t t = time(0); // get time now
   struct tm *now = localtime(&t);
 
@@ -42,7 +42,7 @@ bool TemperatureController::shouldWarm() const {
   }
 }
 
-void TemperatureController::threadFn() {
+void TempController::threadFn() {
   while (!m_stopThread) {
     static int timeCounter = 0;
     if (0 == timeCounter) {
@@ -54,7 +54,7 @@ void TemperatureController::threadFn() {
   }
 }
 
-void TemperatureController::recall() {
+void TempController::recall() {
   const bool isShouldWarm = shouldWarm();
   if ((nullptr == m_timer) || (m_oldShouldWarmup != isShouldWarm)) {
     m_timer = nullptr; // Destruct current timer
