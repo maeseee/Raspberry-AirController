@@ -45,7 +45,7 @@ int main() {
   }
 
   // initialize sensor for outdoor values
-  sensor::ISensorPtr weatherStation = std::make_shared<sensor::SensorSim>();
+  sensor::ISensorPtr weatherStation = std::make_shared<sensor::WeatherStation>();
 
   // initialize sensor for outdoor values
   // initialize gpio for one-wire-bus

@@ -1,0 +1,10 @@
+#!/bin/bash  
+
+#do not forget to add 
+#/home/marcel/AirControlling/doc/rcLocalScript &
+#to the file /etc/rc.local
+
+while [ true ]
+do
+    /home/marcel/AirControlling/build/lueftung
+done
