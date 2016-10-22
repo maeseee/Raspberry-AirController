@@ -1,4 +1,5 @@
 #include <iostream>
+#include <signal.h>
 #include <unistd.h>
 
 #include <Am2302Sensor.hpp>
@@ -16,7 +17,32 @@ static constexpr size_t START_NIGHT_CONDITION = 22 * 60 * 60;
 static constexpr size_t END_NIGHT_CONDITION = 7 * 60 * 60;
 static constexpr size_t SAFETY_CONDITION = 30 * 60;
 
+// signal handler
+bool m_runProgram{true};
+void sigHandler(int signo) {
+  if (signo == SIGINT) {
+    std::cout << "received SIGINT" << std::endl;
+    m_runProgram = false;
+  } else if (signo == SIGKILL) {
+    std::cout << "received SIGKILL" << std::endl;
+    m_runProgram = false;
+  } else if (signo == SIGSTOP) {
+    std::cout << "received SIGSTOP" << std::endl;
+    m_runProgram = false;
+  }
+}
+
 int main() {
+  // implement signal handler
+  if (signal(SIGINT, sigHandler) == SIG_ERR) {
+    std::cout << "can't catch SIGINT" << std::endl;
+  }
+  if (signal(SIGKILL, sigHandler) == SIG_ERR) {
+    std::cout << "can't catch SIGKILL" << std::endl;
+  }
+  if (signal(SIGSTOP, sigHandler) == SIG_ERR) {
+    std::cout << "can't catch SIGSTOP" << std::endl;
+  }
 
   // initialize sensor for outdoor values
   sensor::ISensorPtr weatherStation = std::make_shared<sensor::SensorSim>();
@@ -41,8 +67,8 @@ int main() {
   // setup roti
   gpio::IGpioPtr roti = std::make_shared<gpio::Gpio>(
       gpio::Function::Roti, gpio::Direction::OUT, gpio::Value::LOW);
-  roti_controller::RotiController humidityController(
-      measuredValues, weatherStation, roti);
+  roti_controller::RotiController humidityController(measuredValues,
+                                                     weatherStation, roti);
 
   // setup collector and gpio for main system
   gpio::IGpioPtr mainSystem = std::make_shared<gpio::Gpio>(
@@ -56,7 +82,9 @@ int main() {
   // setup temperature
   temp_controller::TempController temp_controller(collector);
 
-  sleep(10);
+  while(true == m_runProgram) {
+      sleep(1);
+  }
 
   return 0;
 }
