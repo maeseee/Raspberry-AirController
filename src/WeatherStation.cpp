@@ -6,7 +6,6 @@
 #include <curl/curl.h>
 
 #include <math.h>
-#include <unistd.h>
 
 namespace sensor {
 
@@ -15,14 +14,7 @@ static const char *WEATHER_URL = "api.openweathermap.org/data/2.5/"
                                  "weather?id=7285765&APPID="
                                  "e018bcd525a923f820afd5b43cac259e";
 
-WeatherStation::WeatherStation() {
-  m_thread = std::thread(&WeatherStation::threadFn, this);
-}
-
-WeatherStation::~WeatherStation() {
-  m_stopThread = true;
-  m_thread.join();
-}
+WeatherStation::WeatherStation() : threading::Threading(CALL_INTERVALL_WEB) {}
 
 void WeatherStation::recall() {
   CURL *curl;
@@ -94,17 +86,5 @@ void WeatherStation::updateData() {
   SensorData data = getData();
   std::cout << "Temperature: " << data.temperature
             << "\t Humidity: " << data.humidity << std::endl;
-}
-
-void WeatherStation::threadFn() {
-  while (!m_stopThread) {
-    static int timeCounter = 0;
-    if (0 == timeCounter) {
-      recall();
-    }
-    ++timeCounter;
-    timeCounter %= CALL_INTERVALL_WEB;
-    sleep(1);
-  }
 }
 }

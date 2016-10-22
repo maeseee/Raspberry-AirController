@@ -2,19 +2,13 @@
 #include <Constants.hpp>
 
 #include <ctime>
-#include <unistd.h> // for sleep
 
 namespace time_trigger {
 
 TimeTrigger::TimeTrigger(const size_t on, const size_t off,
                          const gpio::IGpioPtr &gpio)
-    : m_period(OnPeriod{on, off}), m_gpio(gpio) {
-  m_thread = std::thread(&TimeTrigger::threadFn, this);
-}
-
-TimeTrigger::~TimeTrigger() {
-  m_stopThread = true;
-  m_thread.join();
+    : threading::Threading(CALL_INTERVALL_TIMER), m_period(OnPeriod{on, off}),
+      m_gpio(gpio) {
 }
 
 gpio::Value TimeTrigger::getValue() const {
@@ -37,18 +31,6 @@ gpio::Value TimeTrigger::getValue() const {
     }
   }
   return result;
-}
-
-void TimeTrigger::threadFn() {
-  while (!m_stopThread) {
-    static int timeCounter = 0;
-    if (0 == timeCounter) {
-      recall();
-    }
-    ++timeCounter;
-    timeCounter %= CALL_INTERVALL_TIMER;
-    sleep(1);
-  }
 }
 
 void TimeTrigger::recall() { m_gpio->setValue(getValue()); }

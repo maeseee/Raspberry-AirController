@@ -2,33 +2,27 @@
 #define TEMPERATURE_H
 
 #include <IGpio.hpp>
+#include <Threading.hpp>
 #include <TimeTrigger.hpp>
-
-#include <thread>
 
 namespace temp_controller {
 
-class TempController {
+class TempController : public threading::Threading {
 public:
   /**
  * @brief TemperatureController turns on and off the air system
  * @param gpioMainSystem gpio for switching on and off
  */
   TempController(const gpio::IGpioPtr &gpioMainSystem);
-  ~TempController();
+
+  void recall() override;
 
 private:
   bool shouldWarm() const;
 
-  void threadFn();
-  void recall();
-
   gpio::IGpioPtr m_gpio;
   time_trigger::TimeTriggerPtr m_timer;
   bool m_oldShouldWarmup{true};
-
-  std::thread m_thread;
-  bool m_stopThread{false};
 };
 
 } // humidity

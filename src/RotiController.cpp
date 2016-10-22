@@ -4,25 +4,17 @@
 
 #include <cassert>
 #include <cmath>
-#include <unistd.h> // for sleep
 
 namespace roti_controller {
 
 RotiController::RotiController(const sensor::ISensorPtr &indoorSensor,
                                const sensor::ISensorPtr &outdoorSensor,
                                const gpio::IGpioPtr &gpioRoti)
-    : m_indoorSensor(indoorSensor), m_outdoorSensor(outdoorSensor),
-      m_gpioRoti(gpioRoti) {
+    : threading::Threading(CALL_INTERVALL_ROTI), m_indoorSensor(indoorSensor),
+      m_outdoorSensor(outdoorSensor), m_gpioRoti(gpioRoti) {
   assert(m_indoorSensor);
   assert(m_outdoorSensor);
   assert(m_gpioRoti);
-
-  m_thread = std::thread(&RotiController::threadFn, this);
-}
-
-RotiController::~RotiController() {
-  m_stopThread = true;
-  m_thread.join();
 }
 
 float RotiController::relHumidityToAbs(const float tempC,
@@ -58,18 +50,6 @@ bool RotiController::shouldBeEnabled(const float indoor,
   bool isOutdoorHigher = indoor < outdoor;
 
   return increaseIndoor ^ isOutdoorHigher;
-}
-
-void RotiController::threadFn() {
-  while (!m_stopThread) {
-    static int timeCounter = 0;
-    if (0 == timeCounter) {
-      recall();
-    }
-    ++timeCounter;
-    timeCounter %= CALL_INTERVALL_ROTI;
-    sleep(1);
-  }
 }
 
 void RotiController::recall() {

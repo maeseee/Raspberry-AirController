@@ -3,18 +3,11 @@
 #include <pi_2_dht_read.hpp>
 
 #include <iostream>
-#include <unistd.h>
 
 namespace sensor {
 
-Am2302Sensor::Am2302Sensor(const gpio::IGpioPtr &sensor) : m_sensor(sensor) {
-  m_thread = std::thread(&Am2302Sensor::threadFn, this);
-}
-
-Am2302Sensor::~Am2302Sensor() {
-  m_stopThread = true;
-  m_thread.join();
-}
+Am2302Sensor::Am2302Sensor(const gpio::IGpioPtr &sensor)
+    : threading::Threading(CALL_INTERVALL_AM2302), m_sensor(sensor) {}
 
 SensorData Am2302Sensor::getData() const {
   return SensorData{m_temperature, m_humidity};
@@ -35,18 +28,5 @@ void Am2302Sensor::recall() {
   }
   std::cout << "Sensorvalue measured of humidity=" << m_humidity
             << "% and temperature=" << m_temperature << "°C" << std::endl;
-}
-
-void Am2302Sensor::threadFn() {
-  sleep(1);
-  while (!m_stopThread) {
-    static int timeCounter = 0;
-    if (0 == timeCounter) {
-      recall();
-    }
-    ++timeCounter;
-    timeCounter %= CALL_INTERVALL_AM2302;
-    sleep(1);
-  }
 }
 }

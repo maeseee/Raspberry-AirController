@@ -4,7 +4,6 @@
 #include <cassert>
 #include <functional> // for bind
 #include <typeinfo>
-#include <unistd.h> // for sleep
 
 namespace night_air {
 

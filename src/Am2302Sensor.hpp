@@ -3,33 +3,27 @@
 
 #include <IGpio.hpp>
 #include <ISensor.hpp>
-
-#include <thread>
+#include <Threading.hpp>
 
 namespace sensor {
 
-class Am2302Sensor : public sensor::ISensor {
+class Am2302Sensor : public sensor::ISensor, public threading::Threading {
 public:
   Am2302Sensor(const gpio::IGpioPtr &sensor);
-  ~Am2302Sensor();
 
   SensorData getData() const override;
+
+  void recall() override;
 
 private:
   int waitForBit(const gpio::Value val) const;
   int readBit() const;
   int readByte() const;
 
-  void recall();
-  void threadFn();
-
   float m_temperature; // [°C]
   float m_humidity;    // [%]
 
   gpio::IGpioPtr m_sensor;
-
-  std::thread m_thread;
-  bool m_stopThread{false};
 };
 }
 #endif

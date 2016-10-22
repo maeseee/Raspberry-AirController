@@ -3,8 +3,7 @@
 
 #include <IGpio.hpp>
 #include <ISensor.hpp>
-
-#include <thread>
+#include <Threading.hpp>
 
 namespace gpio {
 class GpioCollector;
@@ -12,7 +11,7 @@ using GpioCollectorPtr = std::shared_ptr<GpioCollector>;
 }
 namespace roti_controller {
 
-class RotiController {
+class RotiController : public threading::Threading {
 public:
   /**
  * @brief RotiController controlls the humidity in the room
@@ -23,16 +22,14 @@ public:
   RotiController(const sensor::ISensorPtr &indoorSensor,
                  const sensor::ISensorPtr &outdoorSensor,
                  const gpio::IGpioPtr &gpioRoti);
-  ~RotiController();
+
+  void recall() override;
 
 private:
   float relHumidityToAbs(const float tempC, const float humidityRel) const;
   float absHumidityToRel(const float tempC, const float humidityAbs) const;
 
   bool shouldBeEnabled(const float indoor, const float outdoor) const;
-
-  void threadFn();
-  void recall();
 
   sensor::ISensorPtr m_indoorSensor;
   sensor::ISensorPtr m_outdoorSensor;
@@ -43,9 +40,6 @@ private:
 
   float m_measuredHumIndoor;  // [%]
   float m_measuredHumOutdoor; // [%]
-
-  std::thread m_thread;
-  bool m_stopThread{false};
 };
 
 } // humidity
