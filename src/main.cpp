@@ -8,6 +8,7 @@
 #include <NightAir.hpp>
 #include <RotiController.hpp>
 #include <SensorSim.hpp>
+#include <SysLogger.hpp>
 #include <TempController.hpp>
 #include <TimeTrigger.hpp>
 #include <WeatherStation.hpp>
@@ -45,7 +46,8 @@ int main() {
   }
 
   // initialize sensor for outdoor values
-  sensor::ISensorPtr weatherStation = std::make_shared<sensor::WeatherStation>();
+  sensor::ISensorPtr weatherStation =
+      std::make_shared<sensor::WeatherStation>();
 
   // initialize sensor for outdoor values
   // initialize gpio for one-wire-bus
@@ -82,8 +84,8 @@ int main() {
   // setup temperature
   temp_controller::TempController temp_controller(collector);
 
-  while(true == m_runProgram) {
-      sleep(1);
+  while (true == m_runProgram) {
+    sleep(1);
   }
 
   return 0;

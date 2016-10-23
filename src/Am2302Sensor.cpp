@@ -1,8 +1,9 @@
 #include <Am2302Sensor.hpp>
 #include <Constants.hpp>
+#include <SysLogger.hpp>
 #include <pi_2_dht_read.hpp>
 
-#include <iostream>
+#include <sstream>
 
 namespace sensor {
 
@@ -19,14 +20,17 @@ void Am2302Sensor::recall() {
 
   int returnValue =
       pi_2_dht_read(DHT22, m_sensor->getPinNumber(), &humidity, &temperature);
+
+  std::stringstream logSs;
   if (DHT_SUCCESS == returnValue) {
     m_humidity = humidity;
     m_temperature = temperature;
+    logSs << "New indoor temp: " << m_temperature << "°C\t";
+    logSs << "New indoor hum: " << m_humidity << "\%\t";
   } else {
-    std::cout << "1wire bus return invalid value of " << returnValue
-              << std::endl;
+    logSs << "1wire bus return invalid value of " << returnValue;
   }
-  std::cout << "Sensorvalue measured of humidity=" << m_humidity
-            << "% and temperature=" << m_temperature << "°C" << std::endl;
+
+  logger::SysLogger::instance().log(logSs.str());
 }
 }

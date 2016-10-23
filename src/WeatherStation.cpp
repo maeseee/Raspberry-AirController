@@ -1,11 +1,13 @@
 #include "WeatherStation.hpp"
 #include <Constants.hpp>
+#include <SysLogger.hpp>
 
 #include <boost/property_tree/json_parser.hpp>
 #include <boost/property_tree/ptree.hpp>
 #include <curl/curl.h>
 
 #include <math.h>
+#include <sstream>
 
 namespace sensor {
 
@@ -49,7 +51,7 @@ size_t writeCallback(char *buf, size_t size, size_t nmemb,
   // size*nmemb is the size of the buffer
 
   for (int c = 0; c < size * nmemb; c++) {
-    receivedData.push_back(buf[c]);
+    m_receivedData.push_back(buf[c]);
   }
   return size * nmemb; // tell curl how many bytes we handled
 }
@@ -61,30 +63,32 @@ SensorData WeatherStation::getData() const {
 void WeatherStation::updateData() {
   std::stringstream ss;
   // send your JSON above to the parser below, but populate ss first
-  ss << receivedData;
-  receivedData = "";
+  ss << m_receivedData;
+  m_receivedData = "";
 
   boost::property_tree::ptree pt;
   boost::property_tree::read_json(ss, pt);
 
   boost::optional<float> temp = pt.get_optional<float>("main.temp");
-  // std::cout << "Outside temperature is " << temp.get() - KELVIN << std::endl;
+
+  std::stringstream logSs;
   if (temp) {
     m_temperature = temp.get() - KELVIN;
+    logSs << "New outdoor temp: " << m_temperature << "°C\t";
   } else {
     m_temperature = std::numeric_limits<float>::min();
+    logSs << "Invalid new outdoor temp" << "\t";
   }
 
   boost::optional<float> humidity = pt.get_optional<float>("main.humidity");
-  // std::cout << "Outside humidity is " << humidity << std::endl;
   if (temp) {
     m_humidity = humidity.get();
+    logSs << "New outdoor hum: " << m_humidity << "\%\t";
   } else {
     m_humidity = std::numeric_limits<float>::min();
+    logSs << "Invalid new outdoor hum" << "\t";
   }
 
-  SensorData data = getData();
-  std::cout << "Temperature: " << data.temperature
-            << "\t Humidity: " << data.humidity << std::endl;
+  logger::SysLogger::instance().log(logSs.str());
 }
 }
