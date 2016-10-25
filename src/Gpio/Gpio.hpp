@@ -1,8 +1,8 @@
 #ifndef GPIO_CLASS_H
 #define GPIO_CLASS_H
 
-#include <GpioConstants.hpp>
-#include <IGpio.hpp>
+#include <Gpio/GpioConstants.hpp>
+#include <Gpio/IGpio.hpp>
 
 #include <memory>
 

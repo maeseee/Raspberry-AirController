@@ -1,7 +1,7 @@
 #ifndef GPIO_SIM_H
 #define GPIO_SIM_H
 
-#include <IGpio.hpp>
+#include <Gpio/IGpio.hpp>
 
 #include <string>
 

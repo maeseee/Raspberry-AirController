@@ -28,7 +28,7 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-#include "pi_2_mmio.hpp"
+#include <Sensor/pi_2_mmio.hpp>
 
 #define GPIO_BASE_OFFSET 0x200000
 #define GPIO_LENGTH 4096

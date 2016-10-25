@@ -6,9 +6,16 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 include_directories(src/)
 
-aux_source_directory(src/ lueftung_SRC)
+set(dir src/)
+# aux_source_directory(${dir} sources)
+file (GLOB sources "${dir}/*.cpp")
+file (GLOB sourcesSub "${dir}/*/*.cpp")
 
-add_executable(${PROJECT_NAME} ${lueftung_SRC})
+file (GLOB headers "${dir}/*.hpp")
+file (GLOB headersSub "${dir}/*/*.hpp")
+# message("My headers: " ${headers})
+
+add_executable(${PROJECT_NAME} ${sources} ${headers} ${sourcesSub} ${headersSub})
 target_link_libraries(${PROJECT_NAME} curl)
 target_link_libraries(${PROJECT_NAME} pthread)
 

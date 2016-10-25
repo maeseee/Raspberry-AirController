@@ -1,5 +1,5 @@
 #include "NightAir.hpp"
-#include <GpioCollector.hpp>
+#include <Gpio/GpioCollector.hpp>
 
 #include <cassert>
 #include <functional> // for bind

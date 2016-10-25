@@ -1,6 +1,8 @@
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
 
+#include <cstddef>
+
 // Sensors
 static const float SET_TEMP = 22.0; // set point for temerautre [°C]
 static const float SET_HUM = 50.0;  // set point for humidity [%]

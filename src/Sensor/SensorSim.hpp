@@ -1,7 +1,7 @@
 #ifndef SENSOR_SIM_H
 #define SENSOR_SIM_H
 
-#include <ISensor.hpp>
+#include <Sensor/ISensor.hpp>
 
 namespace sensor {
 

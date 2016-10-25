@@ -1,17 +1,17 @@
+#include <Controller/NightAir.hpp>
+#include <Controller/RotiController.hpp>
+#include <Controller/TempController.hpp>
+#include <Gpio/Gpio.hpp>
+#include <Gpio/GpioCollector.hpp>
+#include <Sensor/Am2302Sensor.hpp>
+#include <Sensor/SensorSim.hpp>
+#include <Sensor/WeatherStation.hpp>
+#include <SysLogger.hpp>
+#include <TimeTrigger.hpp>
+
 #include <iostream>
 #include <signal.h>
 #include <unistd.h>
-
-#include <Am2302Sensor.hpp>
-#include <Gpio.hpp>
-#include <GpioCollector.hpp>
-#include <NightAir.hpp>
-#include <RotiController.hpp>
-#include <SensorSim.hpp>
-#include <SysLogger.hpp>
-#include <TempController.hpp>
-#include <TimeTrigger.hpp>
-#include <WeatherStation.hpp>
 
 // timer constants
 static constexpr size_t START_NIGHT_CONDITION = 22 * 60 * 60;

@@ -8,7 +8,8 @@
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
 
-// The above copyright notice and this permission notice shall be included in all
+// The above copyright notice and this permission notice shall be included in
+// all
 // copies or substantial portions of the Software.
 
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
@@ -18,34 +19,19 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
-#ifndef COMMON_DHT_READ_H
-#define COMMON_DHT_READ_H
+#ifndef PI_2_DHT_READ_H
+#define PI_2_DHT_READ_H
 
-#include <stdint.h>
+#include <Sensor/common_dht_read.hpp>
 
-// Define errors and return values.
-#define DHT_ERROR_TIMEOUT -1
-#define DHT_ERROR_CHECKSUM -2
-#define DHT_ERROR_ARGUMENT -3
-#define DHT_ERROR_GPIO -4
-#define DHT_SUCCESS 0
-
-// Define sensor types.
-#define DHT11 11
-#define DHT22 22
-#define AM2302 22
-
-// Busy wait delay for most accurate timing, but high CPU usage.
-// Only use this for short periods of time (a few hundred milliseconds at most)!
-void busy_wait_milliseconds(uint32_t millis);
-
-// General delay that sleeps so CPU usage is low, but accuracy is potentially bad.
-void sleep_milliseconds(uint32_t millis);
-
-// Increase scheduling priority and algorithm to try to get 'real time' results.
-void set_max_priority(void);
-
-// Drop scheduling priority back to normal/default.
-void set_default_priority(void);
+// Read DHT sensor connected to GPIO pin (using BCM numbering).  Humidity and
+// temperature will be
+// returned in the provided parameters. If a successfull reading could be made a
+// value of 0
+// (DHT_SUCCESS) will be returned.  If there was an error reading the sensor a
+// negative value will
+// be returned.  Some errors can be ignored and retried, specifically
+// DHT_ERROR_TIMEOUT or DHT_ERROR_CHECKSUM.
+int pi_2_dht_read(int sensor, int pin, float *humidity, float *temperature);
 
 #endif

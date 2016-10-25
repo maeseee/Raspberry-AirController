@@ -77,7 +77,8 @@ void WeatherStation::updateData() {
     logSs << "New outdoor temp: " << m_temperature << "°C\t";
   } else {
     m_temperature = std::numeric_limits<float>::min();
-    logSs << "Invalid new outdoor temp" << "\t";
+    logSs << "Invalid new outdoor temp"
+          << "\t";
   }
 
   boost::optional<float> humidity = pt.get_optional<float>("main.humidity");
@@ -86,7 +87,8 @@ void WeatherStation::updateData() {
     logSs << "New outdoor hum: " << m_humidity << "\%\t";
   } else {
     m_humidity = std::numeric_limits<float>::min();
-    logSs << "Invalid new outdoor hum" << "\t";
+    logSs << "Invalid new outdoor hum"
+          << "\t";
   }
 
   logger::SysLogger::instance().log(logSs.str());

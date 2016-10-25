@@ -1,7 +1,7 @@
 #ifndef TEMPERATURE_H
 #define TEMPERATURE_H
 
-#include <IGpio.hpp>
+#include <Gpio/IGpio.hpp>
 #include <Threading.hpp>
 #include <TimeTrigger.hpp>
 

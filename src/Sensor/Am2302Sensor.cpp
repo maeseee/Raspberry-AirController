@@ -1,7 +1,7 @@
-#include <Am2302Sensor.hpp>
 #include <Constants.hpp>
+#include <Sensor/Am2302Sensor.hpp>
+#include <Sensor/pi_2_dht_read.hpp>
 #include <SysLogger.hpp>
-#include <pi_2_dht_read.hpp>
 
 #include <sstream>
 

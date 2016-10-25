@@ -1,7 +1,7 @@
 #ifndef IGPIO_H
 #define IGPIO_H
 
-#include <GpioConstants.hpp>
+#include <Gpio/GpioConstants.hpp>
 
 #include <array>
 #include <memory>

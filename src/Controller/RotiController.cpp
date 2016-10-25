@@ -1,6 +1,6 @@
 #include "RotiController.hpp"
 #include <Constants.hpp>
-#include <GpioCollector.hpp>
+#include <Gpio/GpioCollector.hpp>
 
 #include <cassert>
 #include <cmath>

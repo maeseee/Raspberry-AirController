@@ -1,7 +1,7 @@
 #ifndef TIME_TRIGGER_H
 #define TIME_TRIGGER_H
 
-#include <IGpio.hpp>
+#include <Gpio/IGpio.hpp>
 #include <Threading.hpp>
 
 namespace time_trigger {

@@ -1,7 +1,7 @@
 #ifndef WEATHER_STATION_H
 #define WEATHER_STATION_H
 
-#include <ISensor.hpp>
+#include <Sensor/ISensor.hpp>
 #include <Threading.hpp>
 
 #include <memory>
@@ -9,7 +9,7 @@
 
 namespace sensor {
 
-class WeatherStation : public sensor::ISensor, public threading::Threading{
+class WeatherStation : public sensor::ISensor, public threading::Threading {
 public:
   WeatherStation();
 

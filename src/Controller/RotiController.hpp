@@ -1,8 +1,8 @@
 #ifndef HUMIDITY_H
 #define HUMIDITY_H
 
-#include <IGpio.hpp>
-#include <ISensor.hpp>
+#include <Gpio/IGpio.hpp>
+#include <Sensor/ISensor.hpp>
 #include <Threading.hpp>
 
 namespace gpio {

@@ -1,7 +1,7 @@
 #ifndef GPIO_COLLECTOR_CLASS_H
 #define GPIO_COLLECTOR_CLASS_H
 
-#include <IGpio.hpp>
+#include <Gpio/IGpio.hpp>
 
 #include <functional>
 #include <memory>

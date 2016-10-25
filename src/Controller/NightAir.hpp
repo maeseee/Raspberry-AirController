@@ -1,7 +1,7 @@
 #ifndef NIGHT_TEMPERATURE_H
 #define NIGHT_TEMPERATURE_H
 
-#include <IGpio.hpp>
+#include <Gpio/IGpio.hpp>
 #include <TimeTrigger.hpp>
 
 #include <vector>
