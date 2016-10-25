@@ -1,5 +1,4 @@
-#ifndef GPIO_CLASS_H
-#define GPIO_CLASS_H
+#pragma once
 
 #include <Gpio/GpioConstants.hpp>
 #include <Gpio/IGpio.hpp>
@@ -44,6 +43,4 @@ private:
 };
 
 bool isRealBoard();
-
-} // gpio
-#endif
+}

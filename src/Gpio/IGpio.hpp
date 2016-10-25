@@ -1,5 +1,4 @@
-#ifndef IGPIO_H
-#define IGPIO_H
+#pragma once
 
 #include <Gpio/GpioConstants.hpp>
 
@@ -46,6 +45,4 @@ public:
   virtual size_t getPinNumber() const = 0;
 };
 using IGpioPtr = std::shared_ptr<IGpio>;
-
-} // gpio
-#endif
+}

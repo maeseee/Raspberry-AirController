@@ -1,5 +1,4 @@
-#ifndef NIGHT_TEMPERATURE_H
-#define NIGHT_TEMPERATURE_H
+#pragma once
 
 #include <Gpio/IGpio.hpp>
 #include <TimeTrigger.hpp>
@@ -20,6 +19,4 @@ private:
   gpio::IGpioPtr m_gpio;
   std::vector<time_trigger::TimeTriggerPtr> m_timers;
 };
-
-} // humidity
-#endif
+}

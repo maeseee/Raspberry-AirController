@@ -1,5 +1,4 @@
-#ifndef GPIO_SIM_H
-#define GPIO_SIM_H
+#pragma once
 
 #include <Gpio/IGpio.hpp>
 
@@ -28,5 +27,4 @@ private:
 
   std::string m_name;
 };
-} // gpio
-#endif
+}

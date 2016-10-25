@@ -1,5 +1,4 @@
-#ifndef SENSOR_SIM_H
-#define SENSOR_SIM_H
+#pragma once
 
 #include <Sensor/ISensor.hpp>
 
@@ -12,5 +11,4 @@ class SensorSim : public ISensor {
 public:
   SensorData getData() const override;
 };
-} // sensor
-#endif
+}

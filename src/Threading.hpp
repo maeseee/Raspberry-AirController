@@ -1,5 +1,4 @@
-#ifndef THREADING_H
-#define THREADING_H
+#pragma once
 
 #include <thread>
 
@@ -22,6 +21,4 @@ private:
   size_t m_intervall;
   bool m_stopThread{false};
 };
-
-} // threading
-#endif
+}

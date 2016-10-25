@@ -1,5 +1,4 @@
-#ifndef GPIO_COLLECTOR_CLASS_H
-#define GPIO_COLLECTOR_CLASS_H
+#pragma once
 
 #include <Gpio/IGpio.hpp>
 
@@ -34,6 +33,4 @@ private:
 };
 
 using GpioCollectorPtr = std::shared_ptr<GpioCollector>;
-
-} // gpio
-#endif
+}

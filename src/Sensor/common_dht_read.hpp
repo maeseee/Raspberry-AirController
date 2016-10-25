@@ -19,8 +19,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
-#ifndef COMMON_DHT_READ_H
-#define COMMON_DHT_READ_H
+#pragma once
 
 #include <stdint.h>
 
@@ -49,5 +48,3 @@ void set_max_priority(void);
 
 // Drop scheduling priority back to normal/default.
 void set_default_priority(void);
-
-#endif

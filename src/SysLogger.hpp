@@ -1,5 +1,4 @@
-#ifndef SYSLOGGER_HPP
-#define SYSLOGGER_HPP
+#pragma once
 
 #include <iostream>
 
@@ -17,7 +16,4 @@ public:
 private:
   SysLogger();
 };
-
-} // namespace safety
-
-#endif // SAFETYLOGICLIB_SRC_UTILITY_SYSLOGGER_H_
+}

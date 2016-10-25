@@ -1,5 +1,4 @@
-#ifndef TEMPERATURE_H
-#define TEMPERATURE_H
+#pragma once
 
 #include <Gpio/IGpio.hpp>
 #include <Threading.hpp>
@@ -24,6 +23,4 @@ private:
   time_trigger::TimeTriggerPtr m_timer;
   bool m_oldShouldWarmup{true};
 };
-
-} // humidity
-#endif
+}

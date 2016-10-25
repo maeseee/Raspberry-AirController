@@ -1,5 +1,4 @@
-#ifndef WEATHER_STATION_H
-#define WEATHER_STATION_H
+#pragma once
 
 #include <Sensor/ISensor.hpp>
 #include <Threading.hpp>
@@ -27,6 +26,4 @@ private:
 static std::string m_receivedData; // will hold the url's contents
 
 static size_t writeCallback(char *buf, size_t size, size_t nmemb, void *up);
-
-} // sensor
-#endif
+}

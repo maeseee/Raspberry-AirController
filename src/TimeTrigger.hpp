@@ -1,5 +1,4 @@
-#ifndef TIME_TRIGGER_H
-#define TIME_TRIGGER_H
+#pragma once
 
 #include <Gpio/IGpio.hpp>
 #include <Threading.hpp>
@@ -11,7 +10,7 @@ struct OnPeriod {
   size_t offTime; // [s]
 };
 
-class TimeTrigger : public threading::Threading{
+class TimeTrigger : public threading::Threading {
 public:
   /**
  * @brief TimeTrigger calls the std::function in the specific intervall
@@ -23,14 +22,11 @@ public:
   gpio::Value getValue() const;
 
   void recall() override;
-private:
 
+private:
   OnPeriod m_period;
   gpio::IGpioPtr m_gpio;
 };
 
 using TimeTriggerPtr = std::shared_ptr<TimeTrigger>;
-
-} // time_trigger
-
-#endif // TIME_TRIGGER_H
+}

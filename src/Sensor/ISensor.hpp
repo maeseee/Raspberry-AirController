@@ -1,5 +1,4 @@
-#ifndef ISENSOR_H
-#define ISENSOR_H
+#pragma once
 
 #include <memory>
 
@@ -17,6 +16,4 @@ public:
   virtual SensorData getData() const = 0;
 };
 using ISensorPtr = std::shared_ptr<ISensor>;
-
-} // sensor
-#endif
+}

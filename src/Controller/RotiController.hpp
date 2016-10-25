@@ -1,5 +1,4 @@
-#ifndef HUMIDITY_H
-#define HUMIDITY_H
+#pragma once
 
 #include <Gpio/IGpio.hpp>
 #include <Sensor/ISensor.hpp>
@@ -41,6 +40,4 @@ private:
   float m_measuredHumIndoor;  // [%]
   float m_measuredHumOutdoor; // [%]
 };
-
-} // humidity
-#endif
+}

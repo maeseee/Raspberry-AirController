@@ -23,8 +23,7 @@
 // SOFTWARE.
 
 // Simple fast memory-mapped GPIO library for the Raspberry Pi.
-#ifndef PI_2_MMIO_H
-#define PI_2_MMIO_H
+#pragma once
 
 #include <stdint.h>
 
@@ -61,5 +60,3 @@ static inline void pi_2_mmio_set_low(const int gpio_number) {
 static inline uint32_t pi_2_mmio_input(const int gpio_number) {
   return *(pi_2_mmio_gpio + 13) & (1 << gpio_number);
 }
-
-#endif

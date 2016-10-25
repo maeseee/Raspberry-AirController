@@ -1,5 +1,4 @@
-#ifndef CONSTANTS_H
-#define CONSTANTS_H
+#pragma once
 
 #include <cstddef>
 
@@ -14,5 +13,3 @@ static const size_t CALL_INTERVALL_ROTI = 5 * 60;  // [s]
 static const size_t CALL_INTERVALL_TEMP = 60 * 60; // [s]
 static const size_t CALL_INTERVALL_TIMER = 30;     // [s]
 static const size_t CALL_INTERVALL_WEB = 20 * 60;  // [s]
-
-#endif

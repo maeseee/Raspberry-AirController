@@ -1,5 +1,4 @@
-#ifndef GPIO_CONSTANTS_H
-#define GPIO_CONSTANTS_H
+#pragma once
 
 #include <cstddef>
 
@@ -25,8 +24,4 @@ enum class Function : size_t {
   Reserve = 7,
   NightTime = 8
 };
-
-
-
-} // gpio
-#endif
+}

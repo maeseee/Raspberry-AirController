@@ -1,5 +1,4 @@
-#ifndef SENSOR_AM2302_H
-#define SENSOR_AM2302_H
+#pragma once
 
 #include <Gpio/IGpio.hpp>
 #include <Sensor/ISensor.hpp>
@@ -26,4 +25,3 @@ private:
   gpio::IGpioPtr m_sensor;
 };
 }
-#endif

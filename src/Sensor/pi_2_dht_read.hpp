@@ -19,8 +19,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
-#ifndef PI_2_DHT_READ_H
-#define PI_2_DHT_READ_H
+#pragma once
 
 #include <Sensor/common_dht_read.hpp>
 
@@ -33,5 +32,3 @@
 // be returned.  Some errors can be ignored and retried, specifically
 // DHT_ERROR_TIMEOUT or DHT_ERROR_CHECKSUM.
 int pi_2_dht_read(int sensor, int pin, float *humidity, float *temperature);
-
-#endif
