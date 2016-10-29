@@ -3,6 +3,8 @@
 #include <Gpio/IGpio.hpp>
 #include <Threading.hpp>
 
+#include <string>
+
 namespace time_trigger {
 
 struct OnPeriod {
@@ -24,6 +26,13 @@ public:
   void recall() override;
 
 private:
+  /**
+   * @brief time2Str converts a time in seconds to a readable time
+   * @param time [s]
+   * @return string of time
+   */
+  std::string time2Str(size_t time) const;
+
   OnPeriod m_period;
   gpio::IGpioPtr m_gpio;
 };

@@ -3,6 +3,7 @@
 
 #include <cassert>
 #include <cmath>
+#include <iostream>
 
 namespace roti_controller {
 
@@ -69,6 +70,8 @@ void RotiController::recall() {
       relHumidityToAbs(indoor.temperature, indoor.humidity);
   const float absHumOutdoor =
       relHumidityToAbs(outdoor.temperature, outdoor.humidity);
+  std::cout << "RotiController: AbsHumIndoor: " << absHumIndoor
+            << "\tAbsHumOutdoor: " << absHumOutdoor << std::endl;
 
   // set roti output
   if (shouldBeEnabled(absHumIndoor, absHumOutdoor)) {

@@ -2,6 +2,9 @@
 #include <Constants.hpp>
 
 #include <ctime>
+#include <iomanip>
+#include <iostream>
+#include <sstream>
 
 namespace time_trigger {
 
@@ -9,6 +12,8 @@ TimeTrigger::TimeTrigger(const size_t on, const size_t off,
                          const gpio::IGpioPtr &gpio)
     : threading::Threading(CALL_INTERVALL_TIMER), m_period(OnPeriod{on, off}),
       m_gpio(gpio) {
+  std::cout << "Add TimeTrigger with on at " << time2Str(on) << " and off at  "
+            << time2Str(off) << std::endl;
 }
 
 gpio::Value TimeTrigger::getValue() const {
@@ -34,4 +39,15 @@ gpio::Value TimeTrigger::getValue() const {
 }
 
 void TimeTrigger::recall() { m_gpio->setValue(getValue()); }
+
+std::string TimeTrigger::time2Str(size_t time) const {
+
+  size_t timeMin = time / 60;
+  size_t timeH = timeMin / 60;
+  timeMin = timeMin - (timeH * 60);
+
+  std::stringstream ss;
+  ss << timeH << ":" << std::setfill('0') << std::setw(2) << timeMin;
+  return ss.str();
+}
 }
