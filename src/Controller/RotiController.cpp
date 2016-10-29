@@ -1,6 +1,5 @@
 #include "RotiController.hpp"
 #include <Constants.hpp>
-#include <Gpio/GpioCollector.hpp>
 
 #include <cassert>
 #include <cmath>
@@ -53,22 +52,25 @@ bool RotiController::shouldBeEnabled(const float indoor,
 }
 
 void RotiController::recall() {
+  // grap sensor values
   sensor::SensorData indoor = m_indoorSensor->getData();
   if (std::numeric_limits<float>::min() == indoor.temperature) {
     // Invalid sensor data
     return;
   }
-  const float absHumIndoor =
-      relHumidityToAbs(indoor.temperature, indoor.humidity);
-
   sensor::SensorData outdoor = m_indoorSensor->getData();
   if (std::numeric_limits<float>::min() == outdoor.temperature) {
     // Invalid sensor data
     return;
   }
+
+  // calculate absHum
+  const float absHumIndoor =
+      relHumidityToAbs(indoor.temperature, indoor.humidity);
   const float absHumOutdoor =
       relHumidityToAbs(outdoor.temperature, outdoor.humidity);
 
+  // set roti output
   if (shouldBeEnabled(absHumIndoor, absHumOutdoor)) {
     m_gpioRoti->setValue(gpio::Value::HIGH);
   } else {

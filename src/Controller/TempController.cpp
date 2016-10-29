@@ -10,7 +10,7 @@ namespace temp_controller {
 
 static const size_t SUMMER_ON = 2 * 60 * 60;
 static const size_t WINTER_ON = 14 * 60 * 60;
-static const size_t ON_DURATION = 5 * 60;
+static const size_t ON_DURATION = 2 * 60 * 60;
 
 TempController::TempController(const gpio::IGpioPtr &gpioMainSystem)
     : threading::Threading(CALL_INTERVALL_TEMP), m_gpio(gpioMainSystem) {
@@ -21,8 +21,9 @@ bool TempController::shouldWarm() const {
   time_t t = time(0); // get time now
   struct tm *now = localtime(&t);
 
-  std::cout << "Date of today is: " << (now->tm_year + 1900) << '-'
-            << (now->tm_mon + 1) << '-' << now->tm_mday << std::endl;
+  // Example of date of today
+  //  std::cout << "Date of today is: " << (now->tm_year + 1900) << '-'
+  //            << (now->tm_mon + 1) << '-' << now->tm_mday << std::endl;
 
   size_t month = now->tm_mon + 1;
   if (month < 7 && month > 8) {

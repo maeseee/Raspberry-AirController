@@ -1,4 +1,5 @@
 #include "Gpio.hpp"
+#include <SysLogger.hpp>
 
 #include <fstream>
 #include <iostream>
@@ -124,6 +125,10 @@ bool Gpio::setValue(const Value val) {
 
   setvalgpio << ((val == Value::HIGH ? "1" : "0")); // write value to value file
   setvalgpio.close();                               // close value file
+
+  std::stringstream logSs;
+  logSs << "GPIO " << m_gpioNumber << " set to " << static_cast<size_t>(val);
+  logger::SysLogger::instance().log(logSs.str());
   return true;
 }
 

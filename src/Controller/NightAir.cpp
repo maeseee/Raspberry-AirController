@@ -1,5 +1,4 @@
 #include "NightAir.hpp"
-#include <Gpio/GpioCollector.hpp>
 
 #include <cassert>
 #include <functional> // for bind
@@ -31,11 +30,5 @@ void NightAir::addTimer(size_t onTime) {
       std::make_shared<time_trigger::TimeTrigger>(
           onTime, onTime + ON_TIME_DURATION, m_gpio);
   m_timers.push_back(timer);
-  gpio::GpioCollectorPtr collector =
-      std::static_pointer_cast<gpio::GpioCollector>(m_gpio);
-  if (collector) {
-    collector->addValueFn(
-        std::bind(&time_trigger::TimeTrigger::getValue, timer));
-  }
 }
 }
