@@ -1,8 +1,6 @@
 #include "NightAir.hpp"
 
 #include <cassert>
-#include <functional> // for bind
-#include <typeinfo>
 
 namespace night_air {
 

@@ -2,7 +2,6 @@
 
 #include <Gpio/GpioConstants.hpp>
 
-#include <array>
 #include <memory>
 
 namespace gpio {

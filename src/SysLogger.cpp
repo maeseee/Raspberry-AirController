@@ -1,5 +1,6 @@
 #include "SysLogger.hpp"
 
+#include <iostream>
 #include <syslog.h>
 
 namespace logger {

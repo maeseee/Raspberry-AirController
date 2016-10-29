@@ -4,7 +4,6 @@
 #include <cassert>
 #include <cmath>
 #include <ctime>
-#include <iostream>
 
 namespace temp_controller {
 
