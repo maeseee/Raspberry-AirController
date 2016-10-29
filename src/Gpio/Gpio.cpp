@@ -15,10 +15,6 @@ bool isRealBoard() {
   return stream.good();
 }
 
-Gpio::Gpio(const Function gnum) : m_gpioNumber(static_cast<size_t>(gnum)) {
-  exportGpio();
-}
-
 Gpio::Gpio(const Function gnum, const Direction dir, const Value val)
     : m_gpioNumber(static_cast<size_t>(gnum)) {
   exportGpio();
@@ -26,7 +22,7 @@ Gpio::Gpio(const Function gnum, const Direction dir, const Value val)
   setValue(val);
 }
 
-Gpio::~Gpio() { unexportGpio(); }
+Gpio::~Gpio() { setValue(Value::LOW); }
 
 bool Gpio::exportGpio() {
   std::string export_str = GPIO_PATH + "export";

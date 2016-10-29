@@ -3,8 +3,6 @@
 #include <Gpio/GpioConstants.hpp>
 #include <Gpio/IGpio.hpp>
 
-#include <memory>
-
 namespace gpio {
 
 /**
@@ -12,8 +10,6 @@ namespace gpio {
  */
 class Gpio : public IGpio {
 public:
-  explicit Gpio(const Function gnum);
-
   explicit Gpio(const Function gnum, const Direction dir, const Value val);
 
   ~Gpio();

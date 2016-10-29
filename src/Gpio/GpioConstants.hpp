@@ -18,10 +18,10 @@ enum class Value : size_t { LOW, HIGH, INVALID };
  * @brief The Function enum maps a string to a pin number
  */
 enum class Function : size_t {
-  Main = 3,
-  Am2302 = 4,
-  Roti = 5,
-  Reserve = 7,
-  NightTime = 8
+  Am2302 = 4,    // Pin 07
+  Main = 5,      // Pin 29
+  Roti = 6,      // Pin 31
+  Reserve = 13,  // Pin 33
+  NightTime = 19 // Pin 35
 };
 }

@@ -50,7 +50,8 @@ int main() {
 
   // initialize sensor for outdoor values
   // initialize gpio for one-wire-bus
-  gpio::IGpioPtr am2302 = std::make_shared<gpio::Gpio>(gpio::Function::Am2302);
+  gpio::IGpioPtr am2302 = std::make_shared<gpio::Gpio>(
+      gpio::Function::Am2302, gpio::Direction::OUT, gpio::Value::LOW);
   // create sensor
   sensor::ISensorPtr measuredValues =
       std::make_shared<sensor::Am2302Sensor>(am2302);
