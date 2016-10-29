@@ -58,7 +58,7 @@ void RotiController::recall() {
     // Invalid sensor data
     return;
   }
-  sensor::SensorData outdoor = m_indoorSensor->getData();
+  sensor::SensorData outdoor = m_outdoorSensor->getData();
   if (std::numeric_limits<float>::min() == outdoor.temperature) {
     // Invalid sensor data
     return;

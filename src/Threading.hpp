@@ -18,7 +18,8 @@ private:
   void threadFn();
 
   std::thread m_thread;
-  size_t m_intervall;
+  const size_t m_intervall;
+  size_t m_timeCounter;
   bool m_stopThread{false};
 };
 }

@@ -23,12 +23,6 @@ void sigHandler(int signo) {
   if (signo == SIGINT) {
     std::cout << "received SIGINT" << std::endl;
     m_runProgram = false;
-  } else if (signo == SIGKILL) {
-    std::cout << "received SIGKILL" << std::endl;
-    m_runProgram = false;
-  } else if (signo == SIGSTOP) {
-    std::cout << "received SIGSTOP" << std::endl;
-    m_runProgram = false;
   }
 }
 
@@ -36,12 +30,6 @@ int main() {
   // implement signal handler
   if (signal(SIGINT, sigHandler) == SIG_ERR) {
     std::cout << "can't catch SIGINT" << std::endl;
-  }
-  if (signal(SIGKILL, sigHandler) == SIG_ERR) {
-    std::cout << "can't catch SIGKILL" << std::endl;
-  }
-  if (signal(SIGSTOP, sigHandler) == SIG_ERR) {
-    std::cout << "can't catch SIGSTOP" << std::endl;
   }
 
   // initialize sensor for outdoor values

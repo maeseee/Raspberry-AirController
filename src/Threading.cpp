@@ -5,7 +5,7 @@
 
 namespace threading {
 
-Threading::Threading(const size_t intervall) : m_intervall{intervall} {
+Threading::Threading(const size_t intervall) : m_intervall{intervall}, m_timeCounter{0} {
   m_thread = std::thread(&Threading::threadFn, this);
 }
 
@@ -23,12 +23,11 @@ void Threading::waitStopped() {
 
 void Threading::threadFn() {
   while (!m_stopThread) {
-    static int timeCounter = 0;
-    if (0 == timeCounter) {
+    if (0 == m_timeCounter) {
       recall();
     }
-    ++timeCounter;
-    timeCounter %= m_intervall;
+    ++m_timeCounter;
+    m_timeCounter %= m_intervall;
     sleep(1);
   }
 }
