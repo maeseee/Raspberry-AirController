@@ -2,11 +2,16 @@
 
 #include <Gpio/IGpio.hpp>
 
-#include <map>
 #include <memory>
+#include <vector>
 
 namespace gpio {
 
+/**
+ * @brief The GpioOr class checks if at least one controller say turnung on
+ * IMPORTANT. The destructor of the controller should set the value to
+ * Value::LOW
+ */
 class GpioOr : public IGpio {
 public:
   explicit GpioOr(const IGpioPtr &gpioOutput);
@@ -20,9 +25,9 @@ public:
   size_t getPinNumber() const override;
 
 private:
-  void updateOutput(const Value value);
   const IGpioPtr m_gpioOutput;
 
-  std::map<size_t, Value> m_valueMap;
+  std::vector<size_t> m_controllerIdHigh;
 };
+using GpioOrPtr = std::shared_ptr<GpioOr>;
 }

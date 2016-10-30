@@ -1,5 +1,6 @@
 #include "GpioOr.hpp"
 
+#include <algorithm>
 #include <cassert>
 
 namespace gpio {
@@ -15,26 +16,27 @@ bool GpioOr::setDirection(const size_t /*controllerId*/, const Direction dir) {
 Direction GpioOr::getDirection() const { return m_gpioOutput->getDirection(); }
 
 bool GpioOr::setValue(const size_t id, const Value val) {
-  m_valueMap[id] = val;
+  if (Value::HIGH == val) {
+    m_controllerIdHigh.push_back(id);
+  } else {
+    m_controllerIdHigh.erase(
+        std::remove(m_controllerIdHigh.begin(), m_controllerIdHigh.end(), id),
+        m_controllerIdHigh.end());
+  }
 
-  updateOutput(getValue());
+  m_gpioOutput->setValue(0, getValue());
 
   return true;
 }
 
 Value GpioOr::getValue() const {
-  Value result = Value::LOW;
-  for (auto const &value : m_valueMap) {
-    if (Value::HIGH == value.second) {
-      result = Value::HIGH;
-    }
+  if (m_controllerIdHigh.size() > 0) {
+    return Value::HIGH;
+  } else {
+    return Value::LOW;
   }
 }
 
 size_t GpioOr::getPinNumber() const { return m_gpioOutput->getPinNumber(); }
-
-void GpioOr::updateOutput(const Value value) {
-  m_gpioOutput->setValue(0, value);
-}
 
 } // gpio

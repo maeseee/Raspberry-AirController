@@ -23,7 +23,6 @@ RotiController::RotiController(const sensor::ISensorPtr &indoorSensor,
 RotiController::~RotiController()
 {
     m_gpioRoti->setValue(m_controllerId, gpio::Value::LOW);
-    // TODO probabely better to delete it from the map
 }
 
 float RotiController::relHumidityToAbs(const float tempC,

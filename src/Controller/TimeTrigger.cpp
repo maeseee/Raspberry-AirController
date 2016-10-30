@@ -21,7 +21,6 @@ TimeTrigger::TimeTrigger(const size_t on, const size_t off,
 
 TimeTrigger::~TimeTrigger() {
   m_gpio->setValue(m_controllerId, gpio::Value::LOW);
-  // TODO probabely better to delete it from the map
 }
 
 gpio::Value TimeTrigger::getValue() const {
