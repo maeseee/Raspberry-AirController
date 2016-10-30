@@ -47,10 +47,7 @@ gpio::Value TimeTrigger::getValue() const {
   return result;
 }
 
-void TimeTrigger::recall() {
-  // Invalid is not really true but it does not matter
-  m_gpio->setValue(m_controllerId, gpio::Value::INVALID);
-}
+void TimeTrigger::recall() { m_gpio->setValue(m_controllerId, getValue()); }
 
 std::string TimeTrigger::time2Str(size_t time) const {
 
