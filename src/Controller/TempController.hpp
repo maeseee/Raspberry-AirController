@@ -4,7 +4,7 @@
 #include <Threading.hpp>
 #include <TimeTrigger.hpp>
 
-namespace temp_controller {
+namespace controller {
 
 class TempController : public threading::Threading {
 public:

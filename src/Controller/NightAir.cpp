@@ -3,7 +3,7 @@
 
 #include <cassert>
 
-namespace night_air {
+namespace controller {
 
 static const size_t ON_TIME_DURATION =
     10 * MIN_TO_SEC; // call upcate intervall for thread

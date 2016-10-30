@@ -3,6 +3,7 @@
 #include <Controller/RotiController.hpp>
 #include <Controller/TempController.hpp>
 #include <Gpio/Gpio.hpp>
+#include <Gpio/GpioOr.hpp>
 #include <Sensor/Am2302Sensor.hpp>
 #include <Sensor/SensorSim.hpp>
 #include <Sensor/WeatherStation.hpp>
@@ -55,6 +56,7 @@ int main() {
       gpio::Function::Main, gpio::Direction::OUT, gpio::Value::LOW);
   gpio::IGpioPtr roti = std::make_shared<gpio::Gpio>(
       gpio::Function::Roti, gpio::Direction::OUT, gpio::Value::LOW);
+  gpio::IGpioPtr mainSystemOr = std::make_shared<gpio::GpioOr>(mainSystem);
 
   // setup timer
   time_trigger::TimeTrigger timeTrigger(
@@ -62,14 +64,14 @@ int main() {
       END_NIGHT_CONDITION - SAFETY_CONDITION, timer);
 
   // setup roti
-  roti_controller::RotiController humidityController(measuredValues,
-                                                     weatherStation, roti);
+  controller::RotiController humidityController(measuredValues, weatherStation,
+                                                roti);
 
   // setup night air
-  night_air::NightAir nightAir(mainSystem);
+  controller::NightAir nightAir(mainSystemOr);
 
   // setup temperature
-  temp_controller::TempController temp_controller(mainSystem);
+  controller::TempController temp_controller(mainSystemOr);
 
   while (true == m_runProgram) {
     sleep(1);

@@ -2,16 +2,14 @@
 
 #include <Gpio/IGpio.hpp>
 
-#include <string>
+#include <map>
+#include <memory>
 
 namespace gpio {
 
-/**
- * @brief The Gpio class controls one GPIO pin
- */
-class GpioSim : public IGpio {
+class GpioOr : public IGpio {
 public:
-  explicit GpioSim(const std::string &name);
+  explicit GpioOr(const IGpioPtr &gpioOutput);
 
   bool setDirection(const size_t controllerId, const Direction dir) override;
   Direction getDirection() const override;
@@ -22,9 +20,9 @@ public:
   size_t getPinNumber() const override;
 
 private:
-  Direction m_dir{Direction::UNSET};
-  Value m_val{Value::INVALID};
+  void updateOutput(const Value value);
+  const IGpioPtr m_gpioOutput;
 
-  std::string m_name;
+  std::map<size_t, Value> m_valueMap;
 };
 }

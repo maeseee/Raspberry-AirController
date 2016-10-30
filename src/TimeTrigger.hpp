@@ -7,11 +7,6 @@
 
 namespace time_trigger {
 
-struct OnPeriod {
-  size_t onTime;  // [s]
-  size_t offTime; // [s]
-};
-
 class TimeTrigger : public threading::Threading {
 public:
   /**
@@ -20,6 +15,7 @@ public:
  * @param off [s] from 00:00
  */
   TimeTrigger(const size_t on, const size_t off, const gpio::IGpioPtr &gpio);
+  ~TimeTrigger();
 
   gpio::Value getValue() const;
 
@@ -33,8 +29,10 @@ private:
    */
   std::string time2Str(size_t time) const;
 
-  OnPeriod m_period;
+  size_t m_onTime;  // [s]
+  size_t m_offTime; // [s]
   gpio::IGpioPtr m_gpio;
+  size_t m_controllerId;
 };
 
 using TimeTriggerPtr = std::shared_ptr<TimeTrigger>;

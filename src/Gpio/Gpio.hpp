@@ -14,10 +14,10 @@ public:
 
   ~Gpio();
 
-  bool setDirection(const Direction dir) override;
+  bool setDirection(const size_t controllerId, const Direction dir) override;
   Direction getDirection() const override;
 
-  bool setValue(const Value val) override;
+  bool setValue(const size_t controllerId, const Value val) override;
   Value getValue() const override;
 
   size_t getPinNumber() const override;

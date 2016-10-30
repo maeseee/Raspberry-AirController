@@ -8,14 +8,14 @@ GpioSim::GpioSim(const std::string &name) : m_name(name) {
   std::cout << "GPIO " << name << " is simuluted!" << std::endl;
 }
 
-bool GpioSim::setDirection(const Direction dir) {
+bool GpioSim::setDirection(const size_t /*controllerId*/, const Direction dir) {
   m_dir = dir;
   return true;
 }
 
 Direction GpioSim::getDirection() const { return m_dir; }
 
-bool GpioSim::setValue(const Value val) {
+bool GpioSim::setValue(const size_t /*controllerId*/, const Value val) {
   // only set value if it is an output
   if (Direction::OUT != m_dir) {
     return false;

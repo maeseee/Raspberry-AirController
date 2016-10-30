@@ -8,7 +8,7 @@ namespace gpio {
 class GpioCollector;
 using GpioCollectorPtr = std::shared_ptr<GpioCollector>;
 }
-namespace roti_controller {
+namespace controller {
 
 class RotiController : public threading::Threading {
 public:
@@ -21,6 +21,8 @@ public:
   RotiController(const sensor::ISensorPtr &indoorSensor,
                  const sensor::ISensorPtr &outdoorSensor,
                  const gpio::IGpioPtr &gpioRoti);
+
+  ~RotiController();
 
   void recall() override;
 
@@ -39,5 +41,7 @@ private:
 
   float m_measuredHumIndoor;  // [%]
   float m_measuredHumOutdoor; // [%]
+
+  size_t m_controllerId{0};
 };
 }

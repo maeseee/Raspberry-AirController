@@ -18,11 +18,11 @@ bool isRealBoard() {
 Gpio::Gpio(const Function gnum, const Direction dir, const Value val)
     : m_gpioNumber(static_cast<size_t>(gnum)) {
   exportGpio();
-  setDirection(dir);
-  setValue(val);
+  setDirection(0, dir);
+  setValue(0, val);
 }
 
-Gpio::~Gpio() { setValue(Value::LOW); }
+Gpio::~Gpio() { setValue(0, Value::LOW); }
 
 bool Gpio::exportGpio() {
   std::string export_str = GPIO_PATH + "export";
@@ -58,7 +58,7 @@ bool Gpio::unexportGpio() {
   return true;
 }
 
-bool Gpio::setDirection(const Direction dir) {
+bool Gpio::setDirection(const size_t /*controllerId*/, const Direction dir) {
   std::string setdir_str =
       GPIO_PATH + "gpio" + std::to_string(m_gpioNumber) + "/direction";
   std::ofstream setdirgpio(setdir_str.c_str()); // open direction file for gpio
@@ -99,7 +99,7 @@ Direction Gpio::getDirection() const {
   }
 }
 
-bool Gpio::setValue(const Value val) {
+bool Gpio::setValue(const size_t /*controllerId*/, const Value val) {
   if (val == getValue()) {
     return true;
   }

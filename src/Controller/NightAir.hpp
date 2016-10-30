@@ -5,7 +5,7 @@
 
 #include <vector>
 
-namespace night_air {
+namespace controller {
 
 class NightAir {
 public:

@@ -1,11 +1,12 @@
 #include "RotiController.hpp"
 #include <Constants.hpp>
+#include <Controller/ControllerIdGenerator.hpp>
 
 #include <cassert>
 #include <cmath>
 #include <iostream>
 
-namespace roti_controller {
+namespace controller {
 
 RotiController::RotiController(const sensor::ISensorPtr &indoorSensor,
                                const sensor::ISensorPtr &outdoorSensor,
@@ -15,6 +16,14 @@ RotiController::RotiController(const sensor::ISensorPtr &indoorSensor,
   assert(m_indoorSensor);
   assert(m_outdoorSensor);
   assert(m_gpioRoti);
+
+  m_controllerId = controller::IdGenerator::generateId();
+}
+
+RotiController::~RotiController()
+{
+    m_gpioRoti->setValue(m_controllerId, gpio::Value::LOW);
+    // TODO probabely better to delete it from the map
 }
 
 float RotiController::relHumidityToAbs(const float tempC,
@@ -75,9 +84,9 @@ void RotiController::recall() {
 
   // set roti output
   if (shouldBeEnabled(absHumIndoor, absHumOutdoor)) {
-    m_gpioRoti->setValue(gpio::Value::HIGH);
+    m_gpioRoti->setValue(m_controllerId, gpio::Value::HIGH);
   } else {
-    m_gpioRoti->setValue(gpio::Value::LOW);
+    m_gpioRoti->setValue(m_controllerId, gpio::Value::LOW);
   }
 }
 }

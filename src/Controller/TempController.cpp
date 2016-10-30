@@ -5,7 +5,7 @@
 #include <cmath>
 #include <ctime>
 
-namespace temp_controller {
+namespace controller {
 
 static const size_t SUMMER_ON = 2 * HOUR_TO_SEC;
 static const size_t WINTER_ON = 14 * HOUR_TO_SEC;

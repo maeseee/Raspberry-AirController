@@ -15,10 +15,11 @@ public:
 
   /**
    * @brief setdir_gpio Set the direction to the GPIO
+   * @param controllerId identifies the controller calling this function
    * @param dir Direction
    * @return true for succesful
    */
-  virtual bool setDirection(const Direction dir) = 0;
+  virtual bool setDirection(const size_t controllerId, const Direction dir) = 0;
 
   /**
   * @brief getDirection returns the direction of the gpio
@@ -27,10 +28,11 @@ public:
 
   /**
    * @brief setval_gpio Set the value to the GPIO
+   * @param controllerId identifies the controller calling this function
    * @param val Value
    * @return true for succesful
    */
-  virtual bool setValue(const Value val) = 0;
+  virtual bool setValue(const size_t controllerId, const Value val) = 0;
 
   /**
    * @brief getval_gpio Get the value to the GPIO
