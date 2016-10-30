@@ -1,7 +1,7 @@
 #pragma once
 
+#include <Controller/TimeTrigger.hpp>
 #include <Gpio/IGpio.hpp>
-#include <TimeTrigger.hpp>
 
 #include <vector>
 

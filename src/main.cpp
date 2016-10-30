@@ -2,13 +2,13 @@
 #include <Controller/NightAir.hpp>
 #include <Controller/RotiController.hpp>
 #include <Controller/TempController.hpp>
+#include <Controller/TimeTrigger.hpp>
 #include <Gpio/Gpio.hpp>
 #include <Gpio/GpioOr.hpp>
 #include <Sensor/Am2302Sensor.hpp>
 #include <Sensor/SensorSim.hpp>
 #include <Sensor/WeatherStation.hpp>
 #include <SysLogger.hpp>
-#include <TimeTrigger.hpp>
 
 #include <iostream>
 #include <signal.h>

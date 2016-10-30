@@ -1,8 +1,8 @@
 #pragma once
 
+#include <Controller/TimeTrigger.hpp>
 #include <Gpio/IGpio.hpp>
 #include <Threading.hpp>
-#include <TimeTrigger.hpp>
 
 namespace controller {
 
