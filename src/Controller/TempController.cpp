@@ -7,9 +7,9 @@
 
 namespace temp_controller {
 
-static const size_t SUMMER_ON = 2 * 60 * 60;
-static const size_t WINTER_ON = 14 * 60 * 60;
-static const size_t ON_DURATION = 2 * 60 * 60;
+static const size_t SUMMER_ON = 2 * HOUR_TO_SEC;
+static const size_t WINTER_ON = 14 * HOUR_TO_SEC;
+static const size_t ON_DURATION = 2 * HOUR_TO_SEC;
 
 TempController::TempController(const gpio::IGpioPtr &gpioMainSystem)
     : threading::Threading(CALL_INTERVALL_TEMP), m_gpio(gpioMainSystem) {

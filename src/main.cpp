@@ -1,3 +1,4 @@
+#include <Constants.hpp>
 #include <Controller/NightAir.hpp>
 #include <Controller/RotiController.hpp>
 #include <Controller/TempController.hpp>
@@ -13,9 +14,9 @@
 #include <unistd.h>
 
 // timer constants
-static constexpr size_t START_NIGHT_CONDITION = 22 * 60 * 60;
-static constexpr size_t END_NIGHT_CONDITION = 7 * 60 * 60;
-static constexpr size_t SAFETY_CONDITION = 30 * 60;
+static constexpr size_t START_NIGHT_CONDITION = 22 * HOUR_TO_SEC;
+static constexpr size_t END_NIGHT_CONDITION = 7 * HOUR_TO_SEC;
+static constexpr size_t SAFETY_CONDITION = 30 * MIN_TO_SEC;
 
 // signal handler
 bool m_runProgram{true};
