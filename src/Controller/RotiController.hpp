@@ -30,7 +30,8 @@ private:
   float relHumidityToAbs(const float tempC, const float humidityRel) const;
   float absHumidityToRel(const float tempC, const float humidityAbs) const;
 
-  bool shouldBeEnabled(const float indoor, const float outdoor) const;
+  bool shouldBeEnabled(const float indoor, const float outdoor,
+                       const float set) const;
 
   sensor::ISensorPtr m_indoorSensor;
   sensor::ISensorPtr m_outdoorSensor;

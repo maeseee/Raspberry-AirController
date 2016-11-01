@@ -51,14 +51,14 @@ float RotiController::absHumidityToRel(const float tempC,
   return humidityAbs / absHumidity100 * 100;
 }
 
-bool RotiController::shouldBeEnabled(const float indoor,
-                                     const float outdoor) const {
-  bool increaseIndoor = SET_HUM > indoor;
+bool RotiController::shouldBeEnabled(const float indoor, const float outdoor,
+                                     const float set) const {
+  bool increaseIndoor = set > indoor;
   bool isOutdoorHigher = indoor < outdoor;
 
   // decreaseIndoor  OutdoorLower   -> off
   // decreaseIndoor  OutdoorHigher  -> on
-  // increaseIndoor  OutdoorLower   -> on
+  // increaseIndoor  OutdoorLower  -> on
   // increaseIndoor  OutdoorHigher  -> off
   return increaseIndoor ^ isOutdoorHigher;
 }
@@ -81,11 +81,13 @@ void RotiController::recall() {
       relHumidityToAbs(indoor.temperature, indoor.humidity);
   const float absHumOutdoor =
       relHumidityToAbs(outdoor.temperature, outdoor.humidity);
+  const float absHumSet = relHumidityToAbs(SET_TEMP, SET_HUM);
   std::cout << "RotiController: AbsHumIndoor: " << absHumIndoor
-            << "\tAbsHumOutdoor: " << absHumOutdoor << std::endl;
+            << "\tAbsHumOutdoor: " << absHumOutdoor
+            << "\tAbsHumSet: " << absHumSet << std::endl;
 
   // set roti output
-  if (shouldBeEnabled(absHumIndoor, absHumOutdoor)) {
+  if (shouldBeEnabled(absHumIndoor, absHumOutdoor, absHumSet)) {
     m_gpioRoti->setValue(m_controllerId, gpio::Value::HIGH);
   } else {
     m_gpioRoti->setValue(m_controllerId, gpio::Value::LOW);
