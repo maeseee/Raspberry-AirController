@@ -101,6 +101,7 @@ Direction Gpio::getDirection() const {
 
 bool Gpio::setValue(const size_t /*controllerId*/, const Value val) {
   if (val == getValue()) {
+    // Value is already set
     return true;
   }
 

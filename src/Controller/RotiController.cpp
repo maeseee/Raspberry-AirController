@@ -20,9 +20,8 @@ RotiController::RotiController(const sensor::ISensorPtr &indoorSensor,
   m_controllerId = controller::IdGenerator::generateId();
 }
 
-RotiController::~RotiController()
-{
-    m_gpioRoti->setValue(m_controllerId, gpio::Value::LOW);
+RotiController::~RotiController() {
+  m_gpioRoti->setValue(m_controllerId, gpio::Value::LOW);
 }
 
 float RotiController::relHumidityToAbs(const float tempC,
@@ -57,6 +56,10 @@ bool RotiController::shouldBeEnabled(const float indoor,
   bool increaseIndoor = SET_HUM > indoor;
   bool isOutdoorHigher = indoor < outdoor;
 
+  // decreaseIndoor  OutdoorLower   -> off
+  // decreaseIndoor  OutdoorHigher  -> on
+  // increaseIndoor  OutdoorLower   -> on
+  // increaseIndoor  OutdoorHigher  -> off
   return increaseIndoor ^ isOutdoorHigher;
 }
 
