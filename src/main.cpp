@@ -10,7 +10,6 @@
 #include <Sensor/WeatherStation.hpp>
 #include <SysLogger.hpp>
 
-#include <iostream>
 #include <signal.h>
 #include <unistd.h>
 
@@ -23,7 +22,7 @@ static constexpr size_t SAFETY_CONDITION = 30 * MIN_TO_SEC;
 bool m_runProgram{true};
 void sigHandler(int signo) {
   if (signo == SIGINT) {
-    std::cout << "received SIGINT" << std::endl;
+    logger::SysLogger::instance().log("received SIGINT");
     m_runProgram = false;
   }
 }
@@ -31,7 +30,7 @@ void sigHandler(int signo) {
 int main() {
   // implement signal handler
   if (signal(SIGINT, sigHandler) == SIG_ERR) {
-    std::cout << "can't catch SIGINT" << std::endl;
+    logger::SysLogger::instance().log("can't catch SIGINT");
   }
 
   // initialize sensor for outdoor values

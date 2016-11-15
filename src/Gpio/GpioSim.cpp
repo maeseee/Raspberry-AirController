@@ -1,11 +1,11 @@
 #include "GpioSim.hpp"
-
-#include <iostream>
+#include <SysLogger.hpp>
 
 namespace gpio {
 
 GpioSim::GpioSim(const std::string &name) : m_name(name) {
-  std::cout << "GPIO " << name << " is simuluted!" << std::endl;
+
+  logger::SysLogger::instance().log("GPIO " + name + " is simuluted!");
 }
 
 bool GpioSim::setDirection(const size_t /*controllerId*/, const Direction dir) {
@@ -21,8 +21,10 @@ bool GpioSim::setValue(const size_t /*controllerId*/, const Value val) {
     return false;
   }
 
-  std::cout << "Set value " << static_cast<int>(val) << " on " << m_name
-            << std::endl;
+  std::string valueString = ((val == Value::HIGH) ? "1" : "0");
+  logger::SysLogger::instance().log("GPIO " + m_name + " set to " +
+                                    valueString);
+
   m_val = val;
   return true;
 }

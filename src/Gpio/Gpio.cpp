@@ -112,7 +112,7 @@ bool Gpio::setValue(const size_t /*controllerId*/, const Value val) {
     return false;
   }
 
-  std::string valueString = val == Value::HIGH ? "1" : "0";
+  std::string valueString = ((val == Value::HIGH) ? "1" : "0");
   std::string setval_str =
       GPIO_PATH + "gpio" + std::to_string(m_gpioNumber) + "/value";
   std::ofstream setvalgpio(setval_str.c_str()); // open value file for gpio
