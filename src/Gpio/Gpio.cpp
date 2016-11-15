@@ -2,8 +2,6 @@
 #include <SysLogger.hpp>
 
 #include <fstream>
-#include <iostream>
-#include <sstream>
 #include <string>
 
 namespace gpio {
@@ -32,8 +30,9 @@ bool Gpio::exportGpio() {
                                                 // Required for all Linux
                                                 // pathnames
   if (!exportgpio) {
-    std::cout << " OPERATION FAILED: Unable to export GPIO" << m_gpioNumber
-              << " ." << std::endl;
+    logger::SysLogger::instance().log(
+        "OPERATION FAILED: Unable to export GPIO " +
+        std::to_string(m_gpioNumber));
     return false;
   }
 
@@ -47,8 +46,9 @@ bool Gpio::unexportGpio() {
   std::string unexport_str = GPIO_PATH + "unexport";
   std::ofstream unexportgpio(unexport_str.c_str()); // Open unexport file
   if (!unexportgpio) {
-    std::cout << " OPERATION FAILED: Unable to unexport GPIO" << m_gpioNumber
-              << " ." << std::endl;
+    logger::SysLogger::instance().log(
+        "OPERATION FAILED: Unable to unexport GPIO " +
+        std::to_string(m_gpioNumber));
     return false;
   }
 
@@ -63,8 +63,9 @@ bool Gpio::setDirection(const size_t /*controllerId*/, const Direction dir) {
       GPIO_PATH + "gpio" + std::to_string(m_gpioNumber) + "/direction";
   std::ofstream setdirgpio(setdir_str.c_str()); // open direction file for gpio
   if (!setdirgpio) {
-    std::cout << " OPERATION FAILED: Unable to set direction of GPIO"
-              << m_gpioNumber << " ." << std::endl;
+    logger::SysLogger::instance().log(
+        "OPERATION FAILED: Unable to set direction of GPIO " +
+        std::to_string(m_gpioNumber));
     return false;
   }
 
@@ -81,8 +82,9 @@ Direction Gpio::getDirection() const {
       GPIO_PATH + "gpio" + std::to_string(m_gpioNumber) + "/direction";
   std::ifstream getdirgpio(setdir_str.c_str()); // open direction file for gpio
   if (!getdirgpio) {
-    std::cout << " OPERATION FAILED: Unable to set direction of GPIO"
-              << m_gpioNumber << " ." << std::endl;
+    logger::SysLogger::instance().log(
+        "OPERATION FAILED: Unable to get direction of GPIO " +
+        std::to_string(m_gpioNumber));
     return Direction::UNSET;
   }
 
@@ -110,22 +112,22 @@ bool Gpio::setValue(const size_t /*controllerId*/, const Value val) {
     return false;
   }
 
+  std::string valueString = val == Value::HIGH ? "1" : "0";
   std::string setval_str =
       GPIO_PATH + "gpio" + std::to_string(m_gpioNumber) + "/value";
   std::ofstream setvalgpio(setval_str.c_str()); // open value file for gpio
   if (!setvalgpio) {
-    std::cout << " OPERATION FAILED: Unable to set the value "
-              << static_cast<size_t>(val) << " of GPIO" << m_gpioNumber << " ."
-              << std::endl;
+    logger::SysLogger::instance().log("OPERATION FAILED: Unable to set value " +
+                                      valueString + " of GPIO " +
+                                      std::to_string(m_gpioNumber));
     return false;
   }
 
-  setvalgpio << ((val == Value::HIGH ? "1" : "0")); // write value to value file
-  setvalgpio.close();                               // close value file
+  setvalgpio << valueString; // write value to value file
+  setvalgpio.close();        // close value file
 
-  std::stringstream logSs;
-  logSs << "GPIO " << m_gpioNumber << " set to " << static_cast<size_t>(val);
-  logger::SysLogger::instance().log(logSs.str());
+  logger::SysLogger::instance().log("GPIO " + std::to_string(m_gpioNumber) +
+                                    " set to " + valueString);
   return true;
 }
 
@@ -135,8 +137,10 @@ Value Gpio::getValue() const {
       GPIO_PATH + "gpio" + std::to_string(m_gpioNumber) + "/value";
   std::ifstream getvalgpio(getval_str.c_str()); // open value file for gpio
   if (!getvalgpio) {
-    std::cout << " OPERATION FAILED: Unable to get value of GPIO"
-              << m_gpioNumber << " ." << std::endl;
+    logger::SysLogger::instance().log(
+        "OPERATION FAILED: Unable to get value of GPIO " +
+        std::to_string(m_gpioNumber));
+
     return Value::INVALID;
   }
 

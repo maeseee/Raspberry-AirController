@@ -4,7 +4,6 @@
 #include <SysLogger.hpp>
 
 #include <ctime>
-#include <iostream>
 
 namespace time_trigger {
 
@@ -12,9 +11,10 @@ TimeTrigger::TimeTrigger(const size_t on, const size_t off,
                          const gpio::IGpioPtr &gpio)
     : threading::Threading(CALL_INTERVALL_TIMER), m_onTime(on), m_offTime(off),
       m_gpio(gpio) {
-  std::cout << "Add TimeTrigger with on at "
-            << logger::SysLogger::instance().time2Str(on) << " and off at  "
-            << logger::SysLogger::instance().time2Str(off) << std::endl;
+  logger::SysLogger::instance().log(
+      "Add TimeTrigger with on at " +
+      logger::SysLogger::instance().time2Str(on) + " and off at  " +
+      logger::SysLogger::instance().time2Str(off));
 
   m_controllerId = controller::IdGenerator::generateId();
 }
@@ -47,5 +47,4 @@ gpio::Value TimeTrigger::getValue() const {
 }
 
 void TimeTrigger::recall() { m_gpio->setValue(m_controllerId, getValue()); }
-
 }

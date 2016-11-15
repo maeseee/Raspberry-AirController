@@ -1,12 +1,15 @@
 #include "RotiController.hpp"
 #include <Constants.hpp>
 #include <Controller/ControllerIdGenerator.hpp>
+#include <SysLogger.hpp>
 
 #include <cassert>
 #include <cmath>
-#include <iostream>
+#include <sstream>
 
 namespace controller {
+
+static const size_t LOG_INTERVALL = 30 * MIN_TO_SEC / CALL_INTERVALL_ROTI;
 
 RotiController::RotiController(const sensor::ISensorPtr &indoorSensor,
                                const sensor::ISensorPtr &outdoorSensor,
@@ -82,9 +85,17 @@ void RotiController::recall() {
   const float absHumOutdoor =
       relHumidityToAbs(outdoor.temperature, outdoor.humidity);
   const float absHumSet = relHumidityToAbs(SET_TEMP, SET_HUM);
-  std::cout << "RotiController: AbsHumIndoor: " << absHumIndoor
-            << "\tAbsHumOutdoor: " << absHumOutdoor
-            << "\tAbsHumSet: " << absHumSet << std::endl;
+
+  static size_t counter = 0;
+  if (0 == counter) {
+    std::stringstream logSs;
+    logSs << "RotiController: AbsHumIndoor: " << absHumIndoor
+          << "\tAbsHumOutdoor: " << absHumOutdoor
+          << "\tAbsHumSet: " << absHumSet;
+    logger::SysLogger::instance().log(logSs.str());
+    ++counter;
+    counter %= LOG_INTERVALL;
+  }
 
   // set roti output
   if (shouldBeEnabled(absHumIndoor, absHumOutdoor, absHumSet)) {
