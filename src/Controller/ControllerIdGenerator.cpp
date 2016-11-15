@@ -1,7 +1,5 @@
 #include "ControllerIdGenerator.hpp"
 
-#include <iostream>
-
 namespace controller {
 
 std::atomic<size_t> IdGenerator::idCounter(0);
