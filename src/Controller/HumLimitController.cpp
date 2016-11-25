@@ -18,7 +18,7 @@ HumLimitController::HumLimitController(const sensor::ISensorPtr &indoorSensor,
   assert(m_outdoorSensor);
   assert(m_gpio);
 
-  m_controllerId = controller::IdGenerator::generateId();
+  m_controllerId = controller::IdGenerator().generateId("HumLimitController");
 }
 
 void HumLimitController::recall() {

@@ -16,7 +16,7 @@ TimeTrigger::TimeTrigger(const size_t on, const size_t off,
       " with on at " + logger::SysLogger::instance().time2Str(on) +
       " and off at  " + logger::SysLogger::instance().time2Str(off));
 
-  m_controllerId = controller::IdGenerator::generateId();
+  m_controllerId = controller::IdGenerator().generateId("TimeTrigger");
 }
 
 TimeTrigger::~TimeTrigger() {
