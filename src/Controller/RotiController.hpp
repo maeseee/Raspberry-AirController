@@ -27,9 +27,6 @@ public:
   void recall() override;
 
 private:
-  float relHumidityToAbs(const float tempC, const float humidityRel) const;
-  float absHumidityToRel(const float tempC, const float humidityAbs) const;
-
   bool shouldBeEnabled(const float indoor, const float outdoor,
                        const float set) const;
 
