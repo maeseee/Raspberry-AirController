@@ -18,13 +18,13 @@ namespace gpio {
  */
 class GpioSim : public IGpio {
 public:
-  explicit GpioSim(const std::string &name,
+  explicit GpioSim(const Function function,
                    const logger::SysLoggerPtr &sysLogger);
 
   bool setDirection(const size_t controllerId, const Direction dir) override;
   Direction getDirection() const override;
 
-  bool setValue(const size_t controllerId, const Value val) override;
+  bool setValue(const size_t id, const Value val) override;
   Value getValue() const override;
 
   size_t getPinNumber() const override;
@@ -32,8 +32,6 @@ public:
 private:
   Direction m_dir{Direction::UNSET};
   Value m_val{Value::INVALID};
-
-  const std::string m_name;
 
   const logger::SysLoggerPtr m_sysLogger;
 };

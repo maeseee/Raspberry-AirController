@@ -1,4 +1,5 @@
 #include "Gpio.hpp"
+#include <Gpio/GpioSim.hpp>
 #include <SysLogger.hpp>
 
 #include <fstream>
@@ -98,10 +99,10 @@ Direction Gpio::getDirection() const {
   }
 }
 
-bool Gpio::setValue(const size_t /*controllerId*/, const Value val) {
+bool Gpio::setValue(const size_t loggerId, const Value val) {
   if (val == getValue()) {
     // Value is already set
-    return true;
+    return false;
   }
 
   // only set value if it is an output
@@ -122,8 +123,7 @@ bool Gpio::setValue(const size_t /*controllerId*/, const Value val) {
   setvalgpio << valueString; // write value to value file
   setvalgpio.close();        // close value file
 
-  m_sysLogger->logMsg("GPIO " + std::to_string(m_gpioNumber) + " set to " +
-                      valueString);
+  m_sysLogger->logOutput(loggerId, val);
   return true;
 }
 
@@ -152,4 +152,14 @@ Value Gpio::getValue() const {
 
 size_t Gpio::getPinNumber() const { return m_gpioNumber; }
 
+IGpioPtr createGpio(const Function function, const Direction dir,
+                    const Value val, const logger::SysLoggerPtr &sysLogger) {
+  gpio::IGpioPtr gpio;
+  if (isRealBoard()) {
+    gpio = std::make_shared<Gpio>(function, dir, val, sysLogger);
+  } else {
+    gpio = std::make_shared<GpioSim>(function, sysLogger);
+  }
+  return gpio;
+}
 } // gpio

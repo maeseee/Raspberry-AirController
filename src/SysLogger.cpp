@@ -29,7 +29,7 @@ void SysLogger::logMsg(const std::string &logMsg) {
 }
 
 void SysLogger::logOutput(const size_t id, const gpio::Value value) {
-  assert(0 != id && "Invalid id. Try to register this task");
+  // assert(0 != id && "Invalid id. Try to register this task");
 
   m_outputValues[id] = value;
 

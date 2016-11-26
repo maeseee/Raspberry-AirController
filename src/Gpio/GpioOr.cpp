@@ -24,7 +24,11 @@ bool GpioOr::setValue(const size_t id, const Value val) {
         m_controllerIdHigh.end());
   }
 
-  m_gpioOutput->setValue(0, getValue());
+  size_t currentId = id;
+  if (Value::HIGH == getValue()) {
+    currentId = m_controllerIdHigh.back();
+  }
+  m_gpioOutput->setValue(currentId, getValue());
 
   return true;
 }

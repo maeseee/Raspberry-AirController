@@ -25,7 +25,7 @@ public:
   bool setDirection(const size_t controllerId, const Direction dir) override;
   Direction getDirection() const override;
 
-  bool setValue(const size_t controllerId, const Value val) override;
+  bool setValue(const size_t loggerId, const Value val) override;
   Value getValue() const override;
 
   size_t getPinNumber() const override;
@@ -47,6 +47,4 @@ private:
 
   const logger::SysLoggerPtr m_sysLogger;
 };
-
-bool isRealBoard();
 }

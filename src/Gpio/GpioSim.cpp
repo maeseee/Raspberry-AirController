@@ -3,10 +3,12 @@
 
 namespace gpio {
 
-GpioSim::GpioSim(const std::string &name, const logger::SysLoggerPtr &sysLogger)
-    : m_name(name), m_sysLogger(sysLogger) {
+GpioSim::GpioSim(const Function function, const logger::SysLoggerPtr &sysLogger)
+    : m_sysLogger(sysLogger) {
 
-  m_sysLogger->logMsg("GPIO " + name + " is simuluted!");
+  m_sysLogger->logMsg("GPIO for " +
+                      std::to_string(static_cast<size_t>(function)) +
+                      " is simulated!");
 }
 
 bool GpioSim::setDirection(const size_t /*controllerId*/, const Direction dir) {
@@ -16,14 +18,14 @@ bool GpioSim::setDirection(const size_t /*controllerId*/, const Direction dir) {
 
 Direction GpioSim::getDirection() const { return m_dir; }
 
-bool GpioSim::setValue(const size_t /*controllerId*/, const Value val) {
+bool GpioSim::setValue(const size_t id, const Value val) {
   // only set value if it is an output
   if (Direction::OUT != m_dir) {
     return false;
   }
 
   std::string valueString = ((val == Value::HIGH) ? "1" : "0");
-  m_sysLogger->logMsg("GPIO " + m_name + " set to " + valueString);
+  m_sysLogger->logOutput(id, val);
 
   m_val = val;
   return true;

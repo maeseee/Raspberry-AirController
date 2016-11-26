@@ -4,6 +4,13 @@
 
 #include <memory>
 
+// FWD
+namespace logger {
+class SysLogger;
+using SysLoggerPtr = std::shared_ptr<SysLogger>;
+}
+
+// Class
 namespace gpio {
 
 /**
@@ -30,7 +37,7 @@ public:
    * @brief setval_gpio Set the value to the GPIO
    * @param controllerId identifies the controller calling this function
    * @param val Value
-   * @return true for succesful
+   * @return true if value has been set
    */
   virtual bool setValue(const size_t controllerId, const Value val) = 0;
 
@@ -46,4 +53,21 @@ public:
   virtual size_t getPinNumber() const = 0;
 };
 using IGpioPtr = std::shared_ptr<IGpio>;
+
+/**
+ * @brief isRealBoard Checks wether the current infrastructure is real or not
+ * @return true if real
+ */
+bool isRealBoard();
+
+/**
+ * @brief createGpio create a gpio conserning if the board is real or not
+ * @param function funtion for the gpio
+ * @param dir direction
+ * @param val value
+ * @param sysLogger system logger
+ * @return
+ */
+IGpioPtr createGpio(const Function function, const Direction dir,
+                    const Value val, const logger::SysLoggerPtr &sysLogger);
 }

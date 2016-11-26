@@ -11,6 +11,8 @@
 #include <Sensor/WeatherStation.hpp>
 #include <SysLogger.hpp>
 
+#include <cassert>
+#include <iostream>
 #include <signal.h>
 #include <unistd.h>
 
@@ -24,6 +26,8 @@ bool m_runProgram{true};
 void sigHandler(int signo) {
   if (signo == SIGINT) {
     m_runProgram = false;
+  } else if (signo == SIGSEGV) {
+    m_runProgram = false;
   }
 }
 
@@ -34,21 +38,24 @@ int main() {
   if (signal(SIGINT, sigHandler) == SIG_ERR) {
     sysLogger->logMsg("can't catch SIGINT");
   }
+  if (signal(SIGSEGV, sigHandler) == SIG_ERR) {
+    sysLogger->logMsg("can't catch SIGSEGV");
+  }
 
   // initialize outputs
-  gpio::IGpioPtr timer = std::make_shared<gpio::Gpio>(
-      gpio::Function::NightTime, gpio::Direction::OUT, gpio::Value::LOW,
-      sysLogger);
-  gpio::IGpioPtr mainSystem = std::make_shared<gpio::Gpio>(
+  gpio::IGpioPtr timer =
+      gpio::createGpio(gpio::Function::NightTime, gpio::Direction::OUT,
+                       gpio::Value::LOW, sysLogger);
+  gpio::IGpioPtr mainSystem = gpio::createGpio(
       gpio::Function::Main, gpio::Direction::OUT, gpio::Value::LOW, sysLogger);
-  gpio::IGpioPtr roti = std::make_shared<gpio::Gpio>(
+  gpio::IGpioPtr roti = gpio::createGpio(
       gpio::Function::Roti, gpio::Direction::OUT, gpio::Value::LOW, sysLogger);
 
   // initialize sensors
   sensor::ISensorPtr outdoorSensor =
       std::make_shared<sensor::WeatherStation>(sysLogger);
 
-  gpio::IGpioPtr am2302 = std::make_shared<gpio::Gpio>(
+  gpio::IGpioPtr am2302 = gpio::createGpio(
       gpio::Function::Am2302, gpio::Direction::OUT, gpio::Value::LOW,
       sysLogger); // initialize gpio for one-wire-bus
   sensor::ISensorPtr indoorSensor =
