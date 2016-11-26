@@ -28,6 +28,7 @@ private:
   float m_temperature; // [°C]
   float m_humidity;    // [%]
 
+  size_t m_loggerId{0};
   const logger::SysLoggerPtr m_sysLogger;
 };
 

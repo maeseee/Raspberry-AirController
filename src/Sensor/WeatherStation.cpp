@@ -6,9 +6,6 @@
 #include <boost/property_tree/ptree.hpp>
 #include <curl/curl.h>
 
-#include <math.h>
-#include <sstream>
-
 namespace sensor {
 
 static const float KELVIN = 273.15;
@@ -17,7 +14,9 @@ static const char *WEATHER_URL = "api.openweathermap.org/data/2.5/"
                                  "e018bcd525a923f820afd5b43cac259e";
 
 WeatherStation::WeatherStation(const logger::SysLoggerPtr &sysLogger)
-    : threading::Threading(CALL_INTERVALL_WEB), m_sysLogger(sysLogger) {}
+    : threading::Threading(CALL_INTERVALL_WEB), m_sysLogger(sysLogger) {
+  m_loggerId = m_sysLogger->getId("WeatherStation");
+}
 
 void WeatherStation::recall() {
   CURL *curl;
@@ -72,26 +71,21 @@ void WeatherStation::updateData() {
 
   boost::optional<float> temp = pt.get_optional<float>("main.temp");
 
-  std::stringstream logSs;
   if (temp) {
     m_temperature = temp.get() - KELVIN;
-    logSs << "New outdoor temp: " << m_temperature << "°C\t";
+    m_sysLogger->logSensorTemperature(m_loggerId, m_temperature);
   } else {
     m_temperature = std::numeric_limits<float>::min();
-    logSs << "Invalid new outdoor temp"
-          << "\t";
+    m_sysLogger->logError(m_loggerId, "invalid new outdoor temp");
   }
 
   boost::optional<float> humidity = pt.get_optional<float>("main.humidity");
   if (temp) {
     m_humidity = humidity.get();
-    logSs << "New outdoor hum: " << m_humidity << "\%\t";
+    m_sysLogger->logSensorHumidity(m_loggerId, m_humidity);
   } else {
     m_humidity = std::numeric_limits<float>::min();
-    logSs << "Invalid new outdoor hum"
-          << "\t";
+    m_sysLogger->logError(m_loggerId, "invalid new outdoor hum");
   }
-
-  m_sysLogger->logMsg(logSs.str());
 }
 }

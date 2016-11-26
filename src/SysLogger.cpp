@@ -4,6 +4,7 @@
 
 #include <cassert>
 #include <ctime>
+#include <ctime>
 #include <iomanip>
 #include <iostream>
 #include <sstream>
@@ -28,23 +29,41 @@ void SysLogger::logMsg(const std::string &logMsg) {
   std::cout << "LogMsg (" << time2Str(daytime) << "): " << logMsg << std::endl;
 }
 
+void SysLogger::logError(const size_t id, const std::string &logMessage) {
+  std::string logInfo =
+      "Error: " + getNameFromId(id) + " meantioned that " + logMessage;
+  logMsg(logInfo);
+}
+
 void SysLogger::logOutput(const size_t id, const gpio::Value value) {
-  // assert(0 != id && "Invalid id. Try to register this task");
-
+  // save data for later use
   m_outputValues[id] = value;
 
-  std::stringstream ss;
-  ss << "GPIO ";
-  if (m_idNames.count(id)) {
-    ss << m_idNames[id] << " (" << id << ")";
-  } else {
-    ss << id;
-  }
+  // log it
+  std::string logInfo = "GPIO " + getNameFromId(id) + " has been turn " +
+                        ((gpio::Value::HIGH == value) ? "on" : "off");
+  logMsg(logInfo);
+}
 
-  ss << " has been turn " << ((gpio::Value::HIGH == value) ? "on" : "off");
-  logMsg(ss.str());
+void SysLogger::logSensorTemperature(const size_t id, const float temperature) {
+  // save data for later use
+  m_temperatureValues[id] = {getTimeStamp(), temperature};
 
-  m_outputValues[id] = value;
+  // log it
+  std::string logInfo = "Temperature sensor " + getNameFromId(id) +
+                        " caught the value " + std::to_string(temperature) +
+                        "°C";
+  logMsg(logInfo);
+}
+
+void SysLogger::logSensorHumidity(const size_t id, const float humidity) {
+  // save data for later use
+  m_humidityValues[id] = {getTimeStamp(), humidity};
+
+  // log it
+  std::string logInfo = "Humidity sensor " + getNameFromId(id) +
+                        " caught the value " + std::to_string(humidity) + "%";
+  logMsg(logInfo);
 }
 
 std::string SysLogger::time2Str(size_t time) const {
@@ -58,6 +77,13 @@ std::string SysLogger::time2Str(size_t time) const {
   return ss.str();
 }
 
+size_t SysLogger::getTimeStamp() const {
+  time_t t = time(0); // get time now
+  struct tm *now = localtime(&t);
+  return (now->tm_hour * HOUR_TO_SEC) + (now->tm_min * MIN_TO_SEC) +
+         now->tm_sec;
+}
+
 SysLogger::SysLogger() {}
 
 size_t SysLogger::generateId() {
@@ -69,5 +95,15 @@ size_t SysLogger::generateId() {
   } while (!m_idCounter.compare_exchange_strong(expectedId, desiredId));
 
   return desiredId;
+}
+
+std::string SysLogger::getNameFromId(const size_t id) const {
+  assert(0 != id && "Invalid id. Try to register this task");
+
+  if (m_idNames.count(id)) {
+    return m_idNames.at(id) + " (" + std::to_string(id) + ")";
+  } else {
+    return std::to_string(id);
+  }
 }
 }

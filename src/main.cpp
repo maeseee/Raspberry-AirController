@@ -7,7 +7,6 @@
 #include <Gpio/Gpio.hpp>
 #include <Gpio/GpioOr.hpp>
 #include <Sensor/Am2302Sensor.hpp>
-#include <Sensor/SensorSim.hpp>
 #include <Sensor/WeatherStation.hpp>
 #include <SysLogger.hpp>
 

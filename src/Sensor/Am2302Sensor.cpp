@@ -3,16 +3,14 @@
 #include <Sensor/pi_2_dht_read.hpp>
 #include <SysLogger.hpp>
 
-#include <sstream>
-
 namespace sensor {
-static const size_t LOG_INTERVALL =
-    SENSOR_LOG_INTERVALL / CALL_INTERVALL_AM2302;
 
 Am2302Sensor::Am2302Sensor(const gpio::IGpioPtr &sensor,
                            const logger::SysLoggerPtr &sysLogger)
     : threading::Threading(CALL_INTERVALL_AM2302), m_sensor(sensor),
-      m_sysLogger(sysLogger) {}
+      m_sysLogger(sysLogger) {
+  m_loggerId = m_sysLogger->getId("Am2302 sensor");
+}
 
 SensorData Am2302Sensor::getData() const {
   return SensorData{m_temperature, m_humidity};
@@ -25,21 +23,14 @@ void Am2302Sensor::recall() {
   int returnValue =
       pi_2_dht_read(DHT22, m_sensor->getPinNumber(), &humidity, &temperature);
 
-  std::stringstream logSs;
   if (DHT_SUCCESS == returnValue) {
     m_humidity = humidity;
     m_temperature = temperature;
-    logSs << "New indoor temp: " << m_temperature << "°C\t";
-    logSs << "New indoor hum: " << m_humidity << "\%\t";
-    static size_t counter = 0;
-    if (0 == counter) {
-      m_sysLogger->logMsg(logSs.str());
-      ++counter;
-      counter %= LOG_INTERVALL;
-    }
+    m_sysLogger->logSensorTemperature(m_loggerId, m_temperature);
+    m_sysLogger->logSensorHumidity(m_loggerId, m_humidity);
   } else {
-    logSs << "1wire bus return invalid value of " << returnValue;
-    m_sysLogger->logMsg(logSs.str());
+    m_sysLogger->logError(m_loggerId, "1wire bus return invalid value of " +
+                                          std::to_string(returnValue));
   }
 }
 }
