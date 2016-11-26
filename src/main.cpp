@@ -10,7 +10,7 @@
 #include <Sensor/WeatherStation.hpp>
 #include <SysLogger.hpp>
 
-#include <cassert>
+#include <execinfo.h> // for call stack
 #include <iostream>
 #include <signal.h>
 #include <unistd.h>
@@ -20,25 +20,49 @@ static constexpr size_t START_NIGHT_CONDITION = 22 * HOUR_TO_SEC;
 static constexpr size_t END_NIGHT_CONDITION = 7 * HOUR_TO_SEC;
 static constexpr size_t SAFETY_CONDITION = 30 * MIN_TO_SEC;
 
+/* Obtain a backtrace and print it to stdout. */
+void printTrace(void) {
+  void *array[10];
+  size_t size;
+  char **strings;
+  size_t i;
+
+  size = backtrace(array, 10);
+  strings = backtrace_symbols(array, size);
+
+  printf("Obtained %zd stack frames.\n", size);
+
+  for (i = 0; i < size; i++)
+    printf("%s\n", strings[i]);
+
+  free(strings);
+}
+
 // signal handler
 bool m_runProgram{true};
 void sigHandler(int signo) {
   if (signo == SIGINT) {
     m_runProgram = false;
   } else if (signo == SIGSEGV) {
+    printTrace();
+    m_runProgram = false;
+  } else if (signo == SIGABRT) {
+    printTrace();
     m_runProgram = false;
   }
 }
 
 int main() {
   logger::SysLoggerPtr sysLogger = std::make_shared<logger::SysLogger>();
+  size_t loggerId = sysLogger->getId("Main");
 
   // implement signal handler
   if (signal(SIGINT, sigHandler) == SIG_ERR) {
-    sysLogger->logMsg("can't catch SIGINT");
-  }
-  if (signal(SIGSEGV, sigHandler) == SIG_ERR) {
-    sysLogger->logMsg("can't catch SIGSEGV");
+    sysLogger->logMsg(loggerId, "can't catch SIGINT");
+  } else if (signal(SIGSEGV, sigHandler) == SIG_ERR) {
+    sysLogger->logMsg(loggerId, "can't catch SIGSEGV");
+  } else if (signal(SIGABRT, sigHandler) == SIG_ERR) {
+    sysLogger->logMsg(loggerId, "can't catch SIGSEGV");
   }
 
   // initialize outputs

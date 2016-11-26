@@ -17,7 +17,7 @@ namespace gpio {
  */
 class Gpio : public IGpio {
 public:
-  explicit Gpio(const Function gnum, const Direction dir, const Value val,
+  explicit Gpio(const Function function, const Direction dir, const Value val,
                 const logger::SysLoggerPtr &sysLogger);
 
   ~Gpio();
@@ -46,5 +46,6 @@ private:
   size_t m_gpioNumber; // GPIO number associated with the instance of an object
 
   const logger::SysLoggerPtr m_sysLogger;
+  size_t m_loggerId{0};
 };
 }

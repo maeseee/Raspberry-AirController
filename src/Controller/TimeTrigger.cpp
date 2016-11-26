@@ -11,12 +11,13 @@ TimeTrigger::TimeTrigger(const size_t on, const size_t off,
                          const logger::SysLoggerPtr &sysLogger)
     : threading::Threading(CALL_INTERVALL_TIMER), m_onTime(on), m_offTime(off),
       m_gpio(gpio), m_sysLogger(sysLogger) {
-  m_sysLogger->logMsg("Add TimeTrigger for " +
-                      std::to_string(gpio->getPinNumber()) + " with on at " +
-                      m_sysLogger->time2Str(on) + " and off at  " +
-                      m_sysLogger->time2Str(off));
-
   m_loggerId = m_sysLogger->getId("TimeTrigger");
+
+  m_sysLogger->logMsg(m_loggerId, "Add TimeTrigger for gpio " +
+                                      std::to_string(gpio->getPinNumber()) +
+                                      ": on at " + m_sysLogger->time2Str(on) +
+                                      " and off at  " +
+                                      m_sysLogger->time2Str(off));
 }
 
 TimeTrigger::~TimeTrigger() { m_gpio->setValue(m_loggerId, gpio::Value::LOW); }

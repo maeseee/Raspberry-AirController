@@ -14,15 +14,17 @@ bool isRealBoard() {
   return stream.good();
 }
 
-Gpio::Gpio(const Function gnum, const Direction dir, const Value val,
+Gpio::Gpio(const Function function, const Direction dir, const Value val,
            const logger::SysLoggerPtr &sysLogger)
-    : m_gpioNumber(static_cast<size_t>(gnum)), m_sysLogger(sysLogger) {
+    : m_gpioNumber(static_cast<size_t>(function)), m_sysLogger(sysLogger) {
+  m_loggerId = m_sysLogger->getId("Gpio" + std::to_string(m_gpioNumber));
+
   exportGpio();
   setDirection(0, dir);
-  setValue(0, val);
+  setValue(m_loggerId, val);
 }
 
-Gpio::~Gpio() { setValue(0, Value::LOW); }
+Gpio::~Gpio() { setValue(m_loggerId, Value::LOW); }
 
 bool Gpio::exportGpio() {
   std::string export_str = GPIO_PATH + "export";
@@ -32,8 +34,7 @@ bool Gpio::exportGpio() {
                                                 // Required for all Linux
                                                 // pathnames
   if (!exportgpio) {
-    m_sysLogger->logMsg("OPERATION FAILED: Unable to export GPIO " +
-                        std::to_string(m_gpioNumber));
+    m_sysLogger->logError(m_loggerId, "Unable to export GPIO");
     return false;
   }
 
@@ -47,8 +48,7 @@ bool Gpio::unexportGpio() {
   std::string unexport_str = GPIO_PATH + "unexport";
   std::ofstream unexportgpio(unexport_str.c_str()); // Open unexport file
   if (!unexportgpio) {
-    m_sysLogger->logMsg("OPERATION FAILED: Unable to unexport GPIO " +
-                        std::to_string(m_gpioNumber));
+    m_sysLogger->logError(m_loggerId, "Unable to unexport GPIO");
     return false;
   }
 
@@ -63,8 +63,7 @@ bool Gpio::setDirection(const size_t /*controllerId*/, const Direction dir) {
       GPIO_PATH + "gpio" + std::to_string(m_gpioNumber) + "/direction";
   std::ofstream setdirgpio(setdir_str.c_str()); // open direction file for gpio
   if (!setdirgpio) {
-    m_sysLogger->logMsg("OPERATION FAILED: Unable to set direction of GPIO " +
-                        std::to_string(m_gpioNumber));
+    m_sysLogger->logError(m_loggerId, "Unable to set direction of GPIO");
     return false;
   }
 
@@ -81,8 +80,7 @@ Direction Gpio::getDirection() const {
       GPIO_PATH + "gpio" + std::to_string(m_gpioNumber) + "/direction";
   std::ifstream getdirgpio(setdir_str.c_str()); // open direction file for gpio
   if (!getdirgpio) {
-    m_sysLogger->logMsg("OPERATION FAILED: Unable to get direction of GPIO " +
-                        std::to_string(m_gpioNumber));
+    m_sysLogger->logError(m_loggerId, "Unable to get direction of GPIO");
     return Direction::UNSET;
   }
 
@@ -115,8 +113,8 @@ bool Gpio::setValue(const size_t loggerId, const Value val) {
       GPIO_PATH + "gpio" + std::to_string(m_gpioNumber) + "/value";
   std::ofstream setvalgpio(setval_str.c_str()); // open value file for gpio
   if (!setvalgpio) {
-    m_sysLogger->logMsg("OPERATION FAILED: Unable to set value " + valueString +
-                        " of GPIO " + std::to_string(m_gpioNumber));
+    m_sysLogger->logError(m_loggerId,
+                          "Unable to set GPIO value " + valueString);
     return false;
   }
 
@@ -133,8 +131,7 @@ Value Gpio::getValue() const {
       GPIO_PATH + "gpio" + std::to_string(m_gpioNumber) + "/value";
   std::ifstream getvalgpio(getval_str.c_str()); // open value file for gpio
   if (!getvalgpio) {
-    m_sysLogger->logMsg("OPERATION FAILED: Unable to get value of GPIO " +
-                        std::to_string(m_gpioNumber));
+    m_sysLogger->logError(m_loggerId, "Unable to get value of GPIO");
 
     return Value::INVALID;
   }

@@ -62,10 +62,10 @@ void RotiController::recall() {
   static size_t counter = 0;
   if (0 == counter) {
     std::stringstream logSs;
-    logSs << "RotiController: AbsHumIndoor: " << absHumIndoor
+    logSs << "AbsHumIndoor: " << absHumIndoor
           << "\tAbsHumOutdoor: " << absHumOutdoor
           << "\tAbsHumSet: " << absHumSet;
-    m_sysLogger->logMsg(logSs.str());
+    m_sysLogger->logMsg(m_loggerId, logSs.str());
     ++counter;
     counter %= LOG_INTERVALL;
   }

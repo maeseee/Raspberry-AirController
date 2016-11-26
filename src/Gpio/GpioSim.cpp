@@ -1,13 +1,15 @@
 #include "GpioSim.hpp"
 #include <SysLogger.hpp>
 
+#include <iostream>
 namespace gpio {
 
 GpioSim::GpioSim(const Function function, const logger::SysLoggerPtr &sysLogger)
     : m_sysLogger(sysLogger) {
 
-  m_sysLogger->logMsg("GPIO for " +
-                      std::to_string(static_cast<size_t>(function)) +
+  m_loggerId = m_sysLogger->getId("GpioSim");
+  m_sysLogger->logMsg(
+      m_loggerId, "GPIO for " + std::to_string(static_cast<size_t>(function)) +
                       " is simulated!");
 }
 
@@ -25,6 +27,7 @@ bool GpioSim::setValue(const size_t id, const Value val) {
   }
 
   std::string valueString = ((val == Value::HIGH) ? "1" : "0");
+
   m_sysLogger->logOutput(id, val);
 
   m_val = val;
