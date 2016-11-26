@@ -1,6 +1,5 @@
 #include "TimeTrigger.hpp"
 #include <Constants.hpp>
-#include <Controller/ControllerIdGenerator.hpp>
 #include <SysLogger.hpp>
 
 #include <ctime>
@@ -8,20 +7,19 @@
 namespace time_trigger {
 
 TimeTrigger::TimeTrigger(const size_t on, const size_t off,
-                         const gpio::IGpioPtr &gpio)
+                         const gpio::IGpioPtr &gpio,
+                         const logger::SysLoggerPtr &sysLogger)
     : threading::Threading(CALL_INTERVALL_TIMER), m_onTime(on), m_offTime(off),
-      m_gpio(gpio) {
-  logger::SysLogger::instance().log(
-      "Add TimeTrigger for " + std::to_string(gpio->getPinNumber()) +
-      " with on at " + logger::SysLogger::instance().time2Str(on) +
-      " and off at  " + logger::SysLogger::instance().time2Str(off));
+      m_gpio(gpio), m_sysLogger(sysLogger) {
+  m_sysLogger->logMsg("Add TimeTrigger for " +
+                      std::to_string(gpio->getPinNumber()) + " with on at " +
+                      m_sysLogger->time2Str(on) + " and off at  " +
+                      m_sysLogger->time2Str(off));
 
-  m_controllerId = controller::IdGenerator().generateId("TimeTrigger");
+  m_loggerId = m_sysLogger->getId("TimeTrigger");
 }
 
-TimeTrigger::~TimeTrigger() {
-  m_gpio->setValue(m_controllerId, gpio::Value::LOW);
-}
+TimeTrigger::~TimeTrigger() { m_gpio->setValue(m_loggerId, gpio::Value::LOW); }
 
 gpio::Value TimeTrigger::getValue() const {
   time_t t = time(0); // get time now
@@ -46,5 +44,5 @@ gpio::Value TimeTrigger::getValue() const {
   return result;
 }
 
-void TimeTrigger::recall() { m_gpio->setValue(m_controllerId, getValue()); }
+void TimeTrigger::recall() { m_gpio->setValue(m_loggerId, getValue()); }
 }

@@ -13,8 +13,9 @@ bool isRealBoard() {
   return stream.good();
 }
 
-Gpio::Gpio(const Function gnum, const Direction dir, const Value val)
-    : m_gpioNumber(static_cast<size_t>(gnum)) {
+Gpio::Gpio(const Function gnum, const Direction dir, const Value val,
+           const logger::SysLoggerPtr &sysLogger)
+    : m_gpioNumber(static_cast<size_t>(gnum)), m_sysLogger(sysLogger) {
   exportGpio();
   setDirection(0, dir);
   setValue(0, val);
@@ -30,9 +31,8 @@ bool Gpio::exportGpio() {
                                                 // Required for all Linux
                                                 // pathnames
   if (!exportgpio) {
-    logger::SysLogger::instance().log(
-        "OPERATION FAILED: Unable to export GPIO " +
-        std::to_string(m_gpioNumber));
+    m_sysLogger->logMsg("OPERATION FAILED: Unable to export GPIO " +
+                        std::to_string(m_gpioNumber));
     return false;
   }
 
@@ -46,9 +46,8 @@ bool Gpio::unexportGpio() {
   std::string unexport_str = GPIO_PATH + "unexport";
   std::ofstream unexportgpio(unexport_str.c_str()); // Open unexport file
   if (!unexportgpio) {
-    logger::SysLogger::instance().log(
-        "OPERATION FAILED: Unable to unexport GPIO " +
-        std::to_string(m_gpioNumber));
+    m_sysLogger->logMsg("OPERATION FAILED: Unable to unexport GPIO " +
+                        std::to_string(m_gpioNumber));
     return false;
   }
 
@@ -63,9 +62,8 @@ bool Gpio::setDirection(const size_t /*controllerId*/, const Direction dir) {
       GPIO_PATH + "gpio" + std::to_string(m_gpioNumber) + "/direction";
   std::ofstream setdirgpio(setdir_str.c_str()); // open direction file for gpio
   if (!setdirgpio) {
-    logger::SysLogger::instance().log(
-        "OPERATION FAILED: Unable to set direction of GPIO " +
-        std::to_string(m_gpioNumber));
+    m_sysLogger->logMsg("OPERATION FAILED: Unable to set direction of GPIO " +
+                        std::to_string(m_gpioNumber));
     return false;
   }
 
@@ -82,9 +80,8 @@ Direction Gpio::getDirection() const {
       GPIO_PATH + "gpio" + std::to_string(m_gpioNumber) + "/direction";
   std::ifstream getdirgpio(setdir_str.c_str()); // open direction file for gpio
   if (!getdirgpio) {
-    logger::SysLogger::instance().log(
-        "OPERATION FAILED: Unable to get direction of GPIO " +
-        std::to_string(m_gpioNumber));
+    m_sysLogger->logMsg("OPERATION FAILED: Unable to get direction of GPIO " +
+                        std::to_string(m_gpioNumber));
     return Direction::UNSET;
   }
 
@@ -117,17 +114,16 @@ bool Gpio::setValue(const size_t /*controllerId*/, const Value val) {
       GPIO_PATH + "gpio" + std::to_string(m_gpioNumber) + "/value";
   std::ofstream setvalgpio(setval_str.c_str()); // open value file for gpio
   if (!setvalgpio) {
-    logger::SysLogger::instance().log("OPERATION FAILED: Unable to set value " +
-                                      valueString + " of GPIO " +
-                                      std::to_string(m_gpioNumber));
+    m_sysLogger->logMsg("OPERATION FAILED: Unable to set value " + valueString +
+                        " of GPIO " + std::to_string(m_gpioNumber));
     return false;
   }
 
   setvalgpio << valueString; // write value to value file
   setvalgpio.close();        // close value file
 
-  logger::SysLogger::instance().log("GPIO " + std::to_string(m_gpioNumber) +
-                                    " set to " + valueString);
+  m_sysLogger->logMsg("GPIO " + std::to_string(m_gpioNumber) + " set to " +
+                      valueString);
   return true;
 }
 
@@ -137,9 +133,8 @@ Value Gpio::getValue() const {
       GPIO_PATH + "gpio" + std::to_string(m_gpioNumber) + "/value";
   std::ifstream getvalgpio(getval_str.c_str()); // open value file for gpio
   if (!getvalgpio) {
-    logger::SysLogger::instance().log(
-        "OPERATION FAILED: Unable to get value of GPIO " +
-        std::to_string(m_gpioNumber));
+    m_sysLogger->logMsg("OPERATION FAILED: Unable to get value of GPIO " +
+                        std::to_string(m_gpioNumber));
 
     return Value::INVALID;
   }

@@ -5,6 +5,13 @@
 
 #include <string>
 
+// FWD
+namespace logger {
+class SysLogger;
+using SysLoggerPtr = std::shared_ptr<SysLogger>;
+}
+
+// Class
 namespace time_trigger {
 
 class TimeTrigger : public threading::Threading {
@@ -14,7 +21,8 @@ public:
  * @param on [s] from 00:00
  * @param off [s] from 00:00
  */
-  TimeTrigger(const size_t on, const size_t off, const gpio::IGpioPtr &gpio);
+  TimeTrigger(const size_t on, const size_t off, const gpio::IGpioPtr &gpio,
+              const logger::SysLoggerPtr &sysLogger);
   ~TimeTrigger();
 
   gpio::Value getValue() const;
@@ -25,7 +33,9 @@ private:
   size_t m_onTime;  // [s]
   size_t m_offTime; // [s]
   gpio::IGpioPtr m_gpio;
-  size_t m_controllerId;
+
+  const logger::SysLoggerPtr m_sysLogger;
+  size_t m_loggerId{0};
 };
 
 using TimeTriggerPtr = std::shared_ptr<TimeTrigger>;

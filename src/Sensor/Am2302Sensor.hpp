@@ -4,11 +4,19 @@
 #include <Sensor/ISensor.hpp>
 #include <Threading.hpp>
 
+// FWD
+namespace logger {
+class SysLogger;
+using SysLoggerPtr = std::shared_ptr<SysLogger>;
+}
+
+// Class
 namespace sensor {
 
 class Am2302Sensor : public sensor::ISensor, public threading::Threading {
 public:
-  Am2302Sensor(const gpio::IGpioPtr &sensor);
+  Am2302Sensor(const gpio::IGpioPtr &sensor,
+               const logger::SysLoggerPtr &sysLogger);
 
   SensorData getData() const override;
 
@@ -23,5 +31,7 @@ private:
   float m_humidity;    // [%]
 
   gpio::IGpioPtr m_sensor;
+
+  const logger::SysLoggerPtr m_sysLogger;
 };
 }

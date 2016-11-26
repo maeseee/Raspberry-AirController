@@ -1,6 +1,6 @@
 #include "HumLimitController.hpp"
 #include <Constants.hpp>
-#include <Controller/ControllerIdGenerator.hpp>
+#include <SysLogger.hpp>
 
 #include <cassert>
 #include <cmath>
@@ -10,15 +10,16 @@ namespace controller {
 
 HumLimitController::HumLimitController(const sensor::ISensorPtr &indoorSensor,
                                        const sensor::ISensorPtr &outdoorSensor,
-                                       const gpio::IGpioPtr &gpioMainSystem)
+                                       const gpio::IGpioPtr &gpioMainSystem,
+                                       const logger::SysLoggerPtr &sysLogger)
     : threading::Threading(CALL_INTERVALL_HUMLIMIT),
       m_indoorSensor(indoorSensor), m_outdoorSensor(outdoorSensor),
-      m_gpio(gpioMainSystem) {
+      m_gpio(gpioMainSystem), m_sysLogger(sysLogger) {
   assert(m_indoorSensor);
   assert(m_outdoorSensor);
   assert(m_gpio);
 
-  m_controllerId = controller::IdGenerator().generateId("HumLimitController");
+  m_loggerId = m_sysLogger->getId("HumLimitController");
 }
 
 void HumLimitController::recall() {
@@ -39,14 +40,14 @@ void HumLimitController::recall() {
 
   if ((absHumUpperLimit < absHumIndoor) && (absHumOutdoor < absHumSetPoint)) {
     // Fresh air can be used for lower the indoor humidity
-    m_gpio->setValue(m_controllerId, gpio::Value::HIGH);
+    m_gpio->setValue(m_loggerId, gpio::Value::HIGH);
   } else if ((absHumLowerLimit > absHumIndoor) &&
              (absHumOutdoor > absHumSetPoint)) {
     // Fresh air can be used for higher the indoor humidity
-    m_gpio->setValue(m_controllerId, gpio::Value::HIGH);
+    m_gpio->setValue(m_loggerId, gpio::Value::HIGH);
   } else {
     // No additional fresh air to controll the indoor humidity
-    m_gpio->setValue(m_controllerId, gpio::Value::LOW);
+    m_gpio->setValue(m_loggerId, gpio::Value::LOW);
   }
 }
 }

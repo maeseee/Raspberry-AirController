@@ -1,5 +1,6 @@
 #include "NightAir.hpp"
 #include <Constants.hpp>
+#include <Controller/TimeTrigger.hpp>
 
 #include <cassert>
 
@@ -10,7 +11,9 @@ static const size_t ON_TIME_DURATION =
 static const size_t ON_OFFSET_NIGHT_TARIF =
     15 * MIN_TO_SEC; // call upcate intervall for thread
 
-NightAir::NightAir(const gpio::IGpioPtr &gpio) : m_gpio(gpio) {
+NightAir::NightAir(const gpio::IGpioPtr &gpio,
+                   const logger::SysLoggerPtr &sysLogger)
+    : m_gpio(gpio), m_sysLogger(sysLogger) {
   assert(m_gpio);
 
   addTimer(22 * HOUR_TO_SEC + ON_OFFSET_NIGHT_TARIF);
@@ -27,7 +30,7 @@ NightAir::NightAir(const gpio::IGpioPtr &gpio) : m_gpio(gpio) {
 void NightAir::addTimer(size_t onTime) {
   time_trigger::TimeTriggerPtr timer =
       std::make_shared<time_trigger::TimeTrigger>(
-          onTime, onTime + ON_TIME_DURATION, m_gpio);
+          onTime, onTime + ON_TIME_DURATION, m_gpio, m_sysLogger);
   m_timers.push_back(timer);
 }
 }

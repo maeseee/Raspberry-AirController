@@ -1,6 +1,5 @@
 #include "RotiController.hpp"
 #include <Constants.hpp>
-#include <Controller/ControllerIdGenerator.hpp>
 #include <SysLogger.hpp>
 
 #include <cassert>
@@ -12,18 +11,20 @@ static const size_t LOG_INTERVALL = 30 * MIN_TO_SEC / CALL_INTERVALL_ROTI;
 
 RotiController::RotiController(const sensor::ISensorPtr &indoorSensor,
                                const sensor::ISensorPtr &outdoorSensor,
-                               const gpio::IGpioPtr &gpioRoti)
+                               const gpio::IGpioPtr &gpioRoti,
+                               const logger::SysLoggerPtr &sysLogger)
     : threading::Threading(CALL_INTERVALL_ROTI), m_indoorSensor(indoorSensor),
-      m_outdoorSensor(outdoorSensor), m_gpioRoti(gpioRoti) {
+      m_outdoorSensor(outdoorSensor), m_gpioRoti(gpioRoti),
+      m_sysLogger(sysLogger) {
   assert(m_indoorSensor);
   assert(m_outdoorSensor);
   assert(m_gpioRoti);
 
-  m_controllerId = controller::IdGenerator().generateId("RotiController");
+  m_loggerId = m_sysLogger->getId("RotiController");
 }
 
 RotiController::~RotiController() {
-  m_gpioRoti->setValue(m_controllerId, gpio::Value::LOW);
+  m_gpioRoti->setValue(m_loggerId, gpio::Value::LOW);
 }
 
 bool RotiController::shouldBeEnabled(const float indoor, const float outdoor,
@@ -64,16 +65,16 @@ void RotiController::recall() {
     logSs << "RotiController: AbsHumIndoor: " << absHumIndoor
           << "\tAbsHumOutdoor: " << absHumOutdoor
           << "\tAbsHumSet: " << absHumSet;
-    logger::SysLogger::instance().log(logSs.str());
+    m_sysLogger->logMsg(logSs.str());
     ++counter;
     counter %= LOG_INTERVALL;
   }
 
   // set roti output
   if (shouldBeEnabled(absHumIndoor, absHumOutdoor, absHumSet)) {
-    m_gpioRoti->setValue(m_controllerId, gpio::Value::HIGH);
+    m_gpioRoti->setValue(m_loggerId, gpio::Value::HIGH);
   } else {
-    m_gpioRoti->setValue(m_controllerId, gpio::Value::LOW);
+    m_gpioRoti->setValue(m_loggerId, gpio::Value::LOW);
   }
 }
 }

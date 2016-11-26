@@ -1,9 +1,8 @@
 #include "TempController.hpp"
 #include <Constants.hpp>
+#include <Controller/TimeTrigger.hpp>
 
 #include <cassert>
-#include <cmath>
-#include <ctime>
 
 namespace controller {
 
@@ -11,8 +10,10 @@ static const size_t SUMMER_ON = 2 * HOUR_TO_SEC;
 static const size_t WINTER_ON = 13 * HOUR_TO_SEC;
 static const size_t ON_DURATION = 2 * HOUR_TO_SEC;
 
-TempController::TempController(const gpio::IGpioPtr &gpioMainSystem)
-    : threading::Threading(CALL_INTERVALL_TEMP), m_gpio(gpioMainSystem) {
+TempController::TempController(const gpio::IGpioPtr &gpioMainSystem,
+                               const logger::SysLoggerPtr &sysLogger)
+    : threading::Threading(CALL_INTERVALL_TEMP), m_gpio(gpioMainSystem),
+      m_sysLogger(sysLogger) {
   assert(m_gpio);
 }
 
@@ -39,10 +40,10 @@ void TempController::recall() {
     m_timer = nullptr; // Destruct current timer
     if (isShouldWarm) {
       m_timer = std::make_shared<time_trigger::TimeTrigger>(
-          WINTER_ON, WINTER_ON + ON_DURATION, m_gpio);
+          WINTER_ON, WINTER_ON + ON_DURATION, m_gpio, m_sysLogger);
     } else {
       m_timer = std::make_shared<time_trigger::TimeTrigger>(
-          SUMMER_ON, SUMMER_ON + ON_DURATION, m_gpio);
+          SUMMER_ON, SUMMER_ON + ON_DURATION, m_gpio, m_sysLogger);
     }
     m_oldShouldWarmup = isShouldWarm;
   }

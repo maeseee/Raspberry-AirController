@@ -3,6 +3,13 @@
 #include <Gpio/GpioConstants.hpp>
 #include <Gpio/IGpio.hpp>
 
+// FWD
+namespace logger {
+class SysLogger;
+using SysLoggerPtr = std::shared_ptr<SysLogger>;
+}
+
+// Class
 namespace gpio {
 
 /**
@@ -10,7 +17,8 @@ namespace gpio {
  */
 class Gpio : public IGpio {
 public:
-  explicit Gpio(const Function gnum, const Direction dir, const Value val);
+  explicit Gpio(const Function gnum, const Direction dir, const Value val,
+                const logger::SysLoggerPtr &sysLogger);
 
   ~Gpio();
 
@@ -36,6 +44,8 @@ private:
   bool unexportGpio();
 
   size_t m_gpioNumber; // GPIO number associated with the instance of an object
+
+  const logger::SysLoggerPtr m_sysLogger;
 };
 
 bool isRealBoard();

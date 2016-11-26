@@ -5,11 +5,18 @@
 
 #include <string>
 
+// FWD
+namespace logger {
+class SysLogger;
+using SysLoggerPtr = std::shared_ptr<SysLogger>;
+}
+
+// Class
 namespace sensor {
 
 class WeatherStation : public sensor::ISensor, public threading::Threading {
 public:
-  WeatherStation();
+  WeatherStation(const logger::SysLoggerPtr &sysLogger);
 
   SensorData getData() const override;
 
@@ -20,6 +27,8 @@ private:
 
   float m_temperature; // [°C]
   float m_humidity;    // [%]
+
+  const logger::SysLoggerPtr m_sysLogger;
 };
 
 static std::string m_receivedData; // will hold the url's contents

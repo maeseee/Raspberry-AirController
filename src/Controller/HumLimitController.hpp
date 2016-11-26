@@ -1,10 +1,21 @@
 #pragma once
 
-#include <Controller/TimeTrigger.hpp>
 #include <Gpio/IGpio.hpp>
 #include <Sensor/ISensor.hpp>
 #include <Threading.hpp>
 
+// FWD
+namespace logger {
+class SysLogger;
+using SysLoggerPtr = std::shared_ptr<SysLogger>;
+}
+
+namespace time_trigger {
+class TimeTrigger;
+using TimeTriggerPtr = std::shared_ptr<TimeTrigger>;
+}
+
+// Class
 namespace controller {
 
 class HumLimitController : public threading::Threading {
@@ -15,7 +26,8 @@ public:
  */
   HumLimitController(const sensor::ISensorPtr &indoorSensor,
                      const sensor::ISensorPtr &outdoorSensor,
-                     const gpio::IGpioPtr &gpioMainSystem);
+                     const gpio::IGpioPtr &gpioMainSystem,
+                     const logger::SysLoggerPtr &sysLogger);
 
   void recall() override;
 
@@ -28,6 +40,7 @@ private:
 
   time_trigger::TimeTriggerPtr m_timer;
 
-  size_t m_controllerId;
+  const logger::SysLoggerPtr m_sysLogger;
+  size_t m_loggerId{0};
 };
 }

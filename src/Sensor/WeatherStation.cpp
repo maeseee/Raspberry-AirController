@@ -16,7 +16,8 @@ static const char *WEATHER_URL = "api.openweathermap.org/data/2.5/"
                                  "weather?id=7285765&APPID="
                                  "e018bcd525a923f820afd5b43cac259e";
 
-WeatherStation::WeatherStation() : threading::Threading(CALL_INTERVALL_WEB) {}
+WeatherStation::WeatherStation(const logger::SysLoggerPtr &sysLogger)
+    : threading::Threading(CALL_INTERVALL_WEB), m_sysLogger(sysLogger) {}
 
 void WeatherStation::recall() {
   CURL *curl;
@@ -91,6 +92,6 @@ void WeatherStation::updateData() {
           << "\t";
   }
 
-  logger::SysLogger::instance().log(logSs.str());
+  m_sysLogger->logMsg(logSs.str());
 }
 }

@@ -9,8 +9,10 @@ namespace sensor {
 static const size_t LOG_INTERVALL =
     SENSOR_LOG_INTERVALL / CALL_INTERVALL_AM2302;
 
-Am2302Sensor::Am2302Sensor(const gpio::IGpioPtr &sensor)
-    : threading::Threading(CALL_INTERVALL_AM2302), m_sensor(sensor) {}
+Am2302Sensor::Am2302Sensor(const gpio::IGpioPtr &sensor,
+                           const logger::SysLoggerPtr &sysLogger)
+    : threading::Threading(CALL_INTERVALL_AM2302), m_sensor(sensor),
+      m_sysLogger(sysLogger) {}
 
 SensorData Am2302Sensor::getData() const {
   return SensorData{m_temperature, m_humidity};
@@ -31,13 +33,13 @@ void Am2302Sensor::recall() {
     logSs << "New indoor hum: " << m_humidity << "\%\t";
     static size_t counter = 0;
     if (0 == counter) {
-      logger::SysLogger::instance().log(logSs.str());
+      m_sysLogger->logMsg(logSs.str());
       ++counter;
       counter %= LOG_INTERVALL;
     }
   } else {
     logSs << "1wire bus return invalid value of " << returnValue;
-    logger::SysLogger::instance().log(logSs.str());
+    m_sysLogger->logMsg(logSs.str());
   }
 }
 }

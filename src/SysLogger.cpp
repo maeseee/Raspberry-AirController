@@ -1,6 +1,8 @@
 #include "SysLogger.hpp"
 #include <Constants.hpp>
+#include <Gpio/IGpio.hpp>
 
+#include <cassert>
 #include <ctime>
 #include <iomanip>
 #include <iostream>
@@ -9,12 +11,12 @@
 
 namespace logger {
 
-SysLogger SysLogger::instance() {
-  static SysLogger inst;
-  return inst;
+size_t SysLogger::getId(const std::string &name) {
+  size_t id = generateId();
+  m_idNames[id] = name;
 }
 
-void SysLogger::log(const std::string &logMsg) {
+void SysLogger::logMsg(const std::string &logMsg) {
   openlog("air_contr", LOG_PID | LOG_CONS, LOG_USER);
   syslog(LOG_INFO, "%s", logMsg.c_str());
   closelog();
@@ -24,6 +26,25 @@ void SysLogger::log(const std::string &logMsg) {
   size_t daytime =
       (now->tm_hour * HOUR_TO_SEC) + (now->tm_min * MIN_TO_SEC) + now->tm_sec;
   std::cout << "LogMsg (" << time2Str(daytime) << "): " << logMsg << std::endl;
+}
+
+void SysLogger::logOutput(const size_t id, const gpio::Value value) {
+  assert(0 != id && "Invalid id. Try to register this task");
+
+  m_outputValues[id] = value;
+
+  std::stringstream ss;
+  ss << "GPIO ";
+  if (m_idNames.count(id)) {
+    ss << m_idNames[id] << " (" << id << ")";
+  } else {
+    ss << id;
+  }
+
+  ss << " has been turn " << ((gpio::Value::HIGH == value) ? "on" : "off");
+  logMsg(ss.str());
+
+  m_outputValues[id] = value;
 }
 
 std::string SysLogger::time2Str(size_t time) const {
@@ -38,4 +59,15 @@ std::string SysLogger::time2Str(size_t time) const {
 }
 
 SysLogger::SysLogger() {}
+
+size_t SysLogger::generateId() {
+  size_t expectedId;
+  size_t desiredId;
+  do {
+    expectedId = m_idCounter.load();
+    desiredId = expectedId + 1;
+  } while (!m_idCounter.compare_exchange_strong(expectedId, desiredId));
+
+  return desiredId;
+}
 }

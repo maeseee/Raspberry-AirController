@@ -4,6 +4,13 @@
 #include <Sensor/ISensor.hpp>
 #include <Threading.hpp>
 
+// FWD
+namespace logger {
+class SysLogger;
+using SysLoggerPtr = std::shared_ptr<SysLogger>;
+}
+
+// Class
 namespace gpio {
 class GpioCollector;
 using GpioCollectorPtr = std::shared_ptr<GpioCollector>;
@@ -20,7 +27,8 @@ public:
  */
   RotiController(const sensor::ISensorPtr &indoorSensor,
                  const sensor::ISensorPtr &outdoorSensor,
-                 const gpio::IGpioPtr &gpioRoti);
+                 const gpio::IGpioPtr &gpioRoti,
+                 const logger::SysLoggerPtr &sysLogger);
 
   ~RotiController();
 
@@ -40,6 +48,7 @@ private:
   float m_measuredHumIndoor;  // [%]
   float m_measuredHumOutdoor; // [%]
 
-  size_t m_controllerId{0};
+  const logger::SysLoggerPtr m_sysLogger;
+  size_t m_loggerId{0};
 };
 }
