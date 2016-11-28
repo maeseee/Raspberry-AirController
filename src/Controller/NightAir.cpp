@@ -30,7 +30,8 @@ NightAir::NightAir(const gpio::IGpioPtr &gpio,
 void NightAir::addTimer(size_t onTime) {
   time_trigger::TimeTriggerPtr timer =
       std::make_shared<time_trigger::TimeTrigger>(
-          onTime, onTime + ON_TIME_DURATION, m_gpio, m_sysLogger);
+          onTime, onTime + ON_TIME_DURATION, m_gpio, "Night hourly air",
+          m_sysLogger);
   m_timers.push_back(timer);
 }
 }

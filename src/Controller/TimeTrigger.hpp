@@ -22,7 +22,7 @@ public:
  * @param off [s] from 00:00
  */
   TimeTrigger(const size_t on, const size_t off, const gpio::IGpioPtr &gpio,
-              const logger::SysLoggerPtr &sysLogger);
+              const std::string &name, const logger::SysLoggerPtr &sysLogger);
   ~TimeTrigger();
 
   gpio::Value getValue() const;

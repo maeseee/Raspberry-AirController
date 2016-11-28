@@ -32,22 +32,28 @@ void HumLimitController::recall() {
       relHumidityToAbs(indoorData.temperature, indoorData.humidity);
   const float absHumOutdoor =
       relHumidityToAbs(outdoorData.temperature, outdoorData.humidity);
-  const float absHumSetPoint = relHumidityToAbs(SET_TEMP, SET_HUM);
   const float absHumUpperLimit =
       relHumidityToAbs(SET_TEMP, SET_HUM + HUM_LIMIT_TOLERANCE);
   const float absHumLowerLimit =
       relHumidityToAbs(SET_TEMP, SET_HUM - HUM_LIMIT_TOLERANCE);
 
-  if ((absHumUpperLimit < absHumIndoor) && (absHumOutdoor < absHumSetPoint)) {
-    // Fresh air can be used for lower the indoor humidity
+  if ((absHumUpperLimit < absHumIndoor) && (absHumOutdoor < absHumIndoor)) {
     m_gpio->setValue(m_loggerId, gpio::Value::HIGH);
+    m_sysLogger->logMsg(m_loggerId,
+                        "Fresh air can be used to lower the indoor humidity");
   } else if ((absHumLowerLimit > absHumIndoor) &&
-             (absHumOutdoor > absHumSetPoint)) {
-    // Fresh air can be used for higher the indoor humidity
+             (absHumOutdoor > absHumIndoor)) {
     m_gpio->setValue(m_loggerId, gpio::Value::HIGH);
+    m_sysLogger->logMsg(m_loggerId,
+                        "Fresh air can be used to higher the indoor humidity");
   } else {
-    // No additional fresh air to controll the indoor humidity
     m_gpio->setValue(m_loggerId, gpio::Value::LOW);
+    m_sysLogger->logMsg(
+        m_loggerId,
+        ("Humidity is in range: absHumIndoor(" + std::to_string(absHumIndoor) +
+         ") absHumOutdoor(" + std::to_string(absHumOutdoor) +
+         ") absHumUpperLimit(" + std::to_string(absHumUpperLimit) +
+         ") absHumLowerLimit" + std::to_string(absHumLowerLimit) + ")"));
   }
 }
 }

@@ -1,6 +1,7 @@
 #include "TempController.hpp"
 #include <Constants.hpp>
 #include <Controller/TimeTrigger.hpp>
+#include <SysLogger.hpp>
 
 #include <cassert>
 
@@ -15,6 +16,8 @@ TempController::TempController(const gpio::IGpioPtr &gpioMainSystem,
     : threading::Threading(CALL_INTERVALL_TEMP), m_gpio(gpioMainSystem),
       m_sysLogger(sysLogger) {
   assert(m_gpio);
+
+  m_loggerId = m_sysLogger->getId("TempController");
 }
 
 bool TempController::shouldWarm() const {
@@ -40,10 +43,12 @@ void TempController::recall() {
     m_timer = nullptr; // Destruct current timer
     if (isShouldWarm) {
       m_timer = std::make_shared<time_trigger::TimeTrigger>(
-          WINTER_ON, WINTER_ON + ON_DURATION, m_gpio, m_sysLogger);
+          WINTER_ON, WINTER_ON + ON_DURATION, m_gpio, "Winter fresh air",
+          m_sysLogger);
     } else {
       m_timer = std::make_shared<time_trigger::TimeTrigger>(
-          SUMMER_ON, SUMMER_ON + ON_DURATION, m_gpio, m_sysLogger);
+          SUMMER_ON, SUMMER_ON + ON_DURATION, m_gpio, "Summer fresh air",
+          m_sysLogger);
     }
     m_oldShouldWarmup = isShouldWarm;
   }

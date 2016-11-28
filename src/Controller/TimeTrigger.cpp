@@ -7,11 +7,11 @@
 namespace time_trigger {
 
 TimeTrigger::TimeTrigger(const size_t on, const size_t off,
-                         const gpio::IGpioPtr &gpio,
+                         const gpio::IGpioPtr &gpio, const std::string &name,
                          const logger::SysLoggerPtr &sysLogger)
     : threading::Threading(CALL_INTERVALL_TIMER), m_onTime(on), m_offTime(off),
       m_gpio(gpio), m_sysLogger(sysLogger) {
-  m_loggerId = m_sysLogger->getId("TimeTrigger");
+  m_loggerId = m_sysLogger->getId("TimeTrigger " + name);
 
   m_sysLogger->logMsg(m_loggerId, "Add TimeTrigger for gpio " +
                                       std::to_string(gpio->getPinNumber()) +
@@ -45,5 +45,9 @@ gpio::Value TimeTrigger::getValue() const {
   return result;
 }
 
-void TimeTrigger::recall() { m_gpio->setValue(m_loggerId, getValue()); }
+void TimeTrigger::recall() {
+  gpio::Value value = getValue();
+  m_gpio->setValue(m_loggerId, value);
+  // m_sysLogger->logOutput(m_loggerId, value);
+}
 }

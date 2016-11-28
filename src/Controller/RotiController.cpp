@@ -71,10 +71,11 @@ void RotiController::recall() {
   }
 
   // set roti output
+  gpio::Value value = gpio::Value::LOW;
   if (shouldBeEnabled(absHumIndoor, absHumOutdoor, absHumSet)) {
-    m_gpioRoti->setValue(m_loggerId, gpio::Value::HIGH);
-  } else {
-    m_gpioRoti->setValue(m_loggerId, gpio::Value::LOW);
+    value = gpio::Value::HIGH;
   }
+  m_gpioRoti->setValue(m_loggerId, value);
+  m_sysLogger->logOutput(m_loggerId, value);
 }
 }

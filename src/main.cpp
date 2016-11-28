@@ -55,6 +55,7 @@ void sigHandler(int signo) {
 int main() {
   logger::SysLoggerPtr sysLogger = std::make_shared<logger::SysLogger>();
   size_t loggerId = sysLogger->getId("Main");
+  sysLogger->logMsg(loggerId, "Start application");
 
   // implement signal handler
   if (signal(SIGINT, sigHandler) == SIG_ERR) {
@@ -90,7 +91,7 @@ int main() {
   // setup timer
   time_trigger::TimeTrigger timeTrigger(
       START_NIGHT_CONDITION + SAFETY_CONDITION,
-      END_NIGHT_CONDITION - SAFETY_CONDITION, timer, sysLogger);
+      END_NIGHT_CONDITION - SAFETY_CONDITION, timer, "NightPower", sysLogger);
 
   // setup roti
   controller::RotiController humidityController(indoorSensor, outdoorSensor,
@@ -109,5 +110,6 @@ int main() {
     sleep(1);
   }
 
+  sysLogger->logMsg(loggerId, "Finish application");
   return 0;
 }

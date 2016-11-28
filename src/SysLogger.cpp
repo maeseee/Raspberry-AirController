@@ -4,7 +4,6 @@
 
 #include <cassert>
 #include <ctime>
-#include <ctime>
 #include <iomanip>
 #include <iostream>
 #include <sstream>

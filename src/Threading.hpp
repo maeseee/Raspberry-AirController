@@ -19,7 +19,7 @@ private:
 
   std::thread m_thread;
   const size_t m_intervall;
-  size_t m_timeCounter;
+  size_t m_timeCounter {0};
   bool m_stopThread{false};
 };
 }

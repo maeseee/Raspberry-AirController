@@ -6,7 +6,7 @@
 namespace threading {
 
 Threading::Threading(const size_t intervall)
-    : m_intervall{intervall}, m_timeCounter{0} {
+    : m_intervall{intervall} {
   m_thread = std::thread(&Threading::threadFn, this);
 }
 
