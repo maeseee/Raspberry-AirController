@@ -6,6 +6,7 @@
 #include <Controller/TimeTrigger.hpp>
 #include <Gpio/Gpio.hpp>
 #include <Gpio/GpioOr.hpp>
+#include <Http/HttpServer.hpp>
 #include <Sensor/Am2302Sensor.hpp>
 #include <Sensor/WeatherStation.hpp>
 #include <SysLogger.hpp>
@@ -105,6 +106,8 @@ int main() {
   // setup humidity limit controller
   controller::HumLimitController humLimitController(indoorSensor, outdoorSensor,
                                                     mainSystemOr, sysLogger);
+
+  initHttpServer();
 
   while (true == m_runProgram) {
     sleep(1);

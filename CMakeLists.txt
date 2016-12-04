@@ -19,4 +19,5 @@ file (GLOB headersSub "${dir}/*/*.hpp")
 add_executable(${PROJECT_NAME} ${sources} ${headers} ${sourcesSub} ${headersSub})
 target_link_libraries(${PROJECT_NAME} curl)
 target_link_libraries(${PROJECT_NAME} pthread)
+target_link_libraries(${PROJECT_NAME} boost_system)
 
