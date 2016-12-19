@@ -6,8 +6,11 @@
 #include <memory>
 #include <utility>
 
-Session::Session(boost::asio::ip::tcp::socket socket)
-    : m_socket(std::move(socket)) {}
+namespace http_server {
+
+Session::Session(boost::asio::ip::tcp::socket socket,
+                 const logger::SysLoggerPtr &sysLogger)
+    : m_socket(std::move(socket)), m_logger(sysLogger) {}
 
 void Session::start() { doRead(); }
 
@@ -33,10 +36,11 @@ void Session::doWrite(std::size_t length) {
       });
 }
 
-Server::Server(boost::asio::io_service &io_service, short port)
+Server::Server(boost::asio::io_service &io_service, short port,
+               const logger::SysLoggerPtr &sysLogger)
     : m_acceptor(io_service, boost::asio::ip::tcp::endpoint(
                                  boost::asio::ip::tcp::v4(), port)),
-      m_socket(io_service) {
+      m_socket(io_service), m_logger(sysLogger) {
   doAccept();
 }
 
@@ -44,18 +48,18 @@ void Server::doAccept() {
 
   m_acceptor.async_accept(m_socket, [this](boost::system::error_code ec) {
     if (!ec) {
-      std::make_shared<Session>(std::move(m_socket))->start();
+      std::make_shared<Session>(std::move(m_socket), m_logger)->start();
     }
 
     doAccept();
   });
 }
 
-int initHttpServer() {
+int initHttpServer(const logger::SysLoggerPtr &sysLogger) {
   try {
     boost::asio::io_service io_service;
 
-    Server s(io_service, 5000);
+    Server s(io_service, 5000, sysLogger);
 
     io_service.run();
   } catch (std::exception &e) {
@@ -63,4 +67,5 @@ int initHttpServer() {
   }
 
   return 0;
+}
 }

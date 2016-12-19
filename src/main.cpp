@@ -107,7 +107,7 @@ int main() {
   controller::HumLimitController humLimitController(indoorSensor, outdoorSensor,
                                                     mainSystemOr, sysLogger);
 
-  initHttpServer();
+  http_server::initHttpServer(sysLogger);
 
   while (true == m_runProgram) {
     sleep(1);

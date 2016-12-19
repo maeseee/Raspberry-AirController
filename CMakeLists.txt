@@ -21,3 +21,6 @@ target_link_libraries(${PROJECT_NAME} curl)
 target_link_libraries(${PROJECT_NAME} pthread)
 target_link_libraries(${PROJECT_NAME} boost_system)
 
+add_executable(HTTP_Client tests/TcpClient.cpp)
+target_link_libraries(HTTP_Client pthread)
+target_link_libraries(HTTP_Client boost_system)
