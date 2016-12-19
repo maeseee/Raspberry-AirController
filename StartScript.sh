@@ -1,7 +1,7 @@
 #!/bin/sh
 
 while true; do 
-/home/pi/AirControlling/build/lueftung> /home/pi/AirControlling/log.log;
+/home/pi/AirControlling/build/lueftung
 done
 
 
