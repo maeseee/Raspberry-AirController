@@ -19,7 +19,7 @@ HumLimitController::HumLimitController(const sensor::ISensorPtr &indoorSensor,
   assert(m_outdoorSensor);
   assert(m_gpio);
 
-  m_loggerId = m_sysLogger->getId("HumLimitController");
+  m_loggerId = m_sysLogger->generateId("HumLimitController");
 }
 
 void HumLimitController::recall() {

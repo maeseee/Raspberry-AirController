@@ -17,7 +17,7 @@ bool isRealBoard() {
 Gpio::Gpio(const Function function, const Direction dir, const Value val,
            const logger::SysLoggerPtr &sysLogger)
     : m_gpioNumber(static_cast<size_t>(function)), m_sysLogger(sysLogger) {
-  m_loggerId = m_sysLogger->getId("Gpio" + std::to_string(m_gpioNumber));
+  m_loggerId = m_sysLogger->generateId("Gpio" + std::to_string(m_gpioNumber));
 
   exportGpio();
   setDirection(0, dir);

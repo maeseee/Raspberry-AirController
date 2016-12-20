@@ -20,7 +20,7 @@ class SysLogger {
 public:
   SysLogger();
 
-  size_t getId(const std::string &name);
+  size_t generateId(const std::string &name);
 
   void logMsg(const size_t id, const std::string &logMessage);
   void logError(const size_t id, const std::string &logMessage);
@@ -40,7 +40,7 @@ public:
 private:
   void logMsg(const std::string &logMessage);
 
-  size_t generateId();
+  size_t newId();
   std::string getNameFromId(const size_t id) const;
 
   // log values

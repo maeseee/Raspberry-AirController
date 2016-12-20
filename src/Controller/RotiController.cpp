@@ -20,7 +20,7 @@ RotiController::RotiController(const sensor::ISensorPtr &indoorSensor,
   assert(m_outdoorSensor);
   assert(m_gpioRoti);
 
-  m_loggerId = m_sysLogger->getId("RotiController");
+  m_loggerId = m_sysLogger->generateId("RotiController");
 }
 
 RotiController::~RotiController() {

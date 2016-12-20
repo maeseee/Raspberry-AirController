@@ -13,8 +13,8 @@ namespace logger {
 
 SysLogger::SysLogger() {}
 
-size_t SysLogger::getId(const std::string &name) {
-  size_t id = generateId();
+size_t SysLogger::generateId(const std::string &name) {
+  size_t id = newId();
   m_idNames[id] = name;
   return id;
 }
@@ -84,7 +84,7 @@ void SysLogger::logMsg(const std::string &logMsg) {
   std::cout << "LogMsg (" << time2Str(daytime) << "): " << logMsg << std::endl;
 }
 
-size_t SysLogger::generateId() {
+size_t SysLogger::newId() {
   size_t expectedId;
   size_t desiredId;
   do {

@@ -15,7 +15,7 @@ static const char *WEATHER_URL = "api.openweathermap.org/data/2.5/"
 
 WeatherStation::WeatherStation(const logger::SysLoggerPtr &sysLogger)
     : threading::Threading(CALL_INTERVALL_WEB), m_sysLogger(sysLogger) {
-  m_loggerId = m_sysLogger->getId("WeatherStation");
+  m_loggerId = m_sysLogger->generateId("WeatherStation");
 }
 
 void WeatherStation::recall() {

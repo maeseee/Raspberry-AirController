@@ -55,7 +55,7 @@ void sigHandler(int signo) {
 
 int main() {
   logger::SysLoggerPtr sysLogger = std::make_shared<logger::SysLogger>();
-  size_t loggerId = sysLogger->getId("Main");
+  size_t loggerId = sysLogger->generateId("Main");
   sysLogger->logMsg(loggerId, "Start application");
 
   // implement signal handler

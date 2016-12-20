@@ -9,7 +9,7 @@ Am2302Sensor::Am2302Sensor(const gpio::IGpioPtr &sensor,
                            const logger::SysLoggerPtr &sysLogger)
     : threading::Threading(CALL_INTERVALL_AM2302), m_sensor(sensor),
       m_sysLogger(sysLogger) {
-  m_loggerId = m_sysLogger->getId("Am2302 sensor");
+  m_loggerId = m_sysLogger->generateId("Am2302 sensor");
 }
 
 SensorData Am2302Sensor::getData() const {

@@ -7,7 +7,7 @@ namespace gpio {
 GpioSim::GpioSim(const Function function, const logger::SysLoggerPtr &sysLogger)
     : m_sysLogger(sysLogger) {
 
-  m_loggerId = m_sysLogger->getId("GpioSim");
+  m_loggerId = m_sysLogger->generateId("GpioSim");
   m_sysLogger->logMsg(
       m_loggerId, "GPIO for " + std::to_string(static_cast<size_t>(function)) +
                       " is simulated!");
