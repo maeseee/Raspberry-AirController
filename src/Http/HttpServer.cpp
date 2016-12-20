@@ -15,23 +15,36 @@ Session::Session(boost::asio::ip::tcp::socket socket,
 void Session::start() { doRead(); }
 
 void Session::doRead() {
+  std::fill(m_rxData, m_rxData + MAX_LENGTH, 0);
   auto self(shared_from_this());
   m_socket.async_read_some(
-      boost::asio::buffer(m_data, MAX_LENGTH),
-      [this, self](boost::system::error_code ec, std::size_t length) {
+      boost::asio::buffer(m_rxData, MAX_LENGTH),
+      [this, self](boost::system::error_code ec, std::size_t /*length*/) {
         if (!ec) {
-          doWrite(length);
+          std::fill(m_txData, m_txData + MAX_LENGTH, 0);
+          std::cout << "HttpServer received: " << m_rxData << std::endl;
+          std::string answer = processData(std::string(m_rxData));
+          strcpy(m_txData, answer.c_str());
+          doWrite();
         }
       });
 }
 
-void Session::doWrite(std::size_t length) {
+std::string Session::processData(const std::string &receivedData) const {
+  if ("SystemState" == receivedData) {
+    return "System is on";
+  } else {
+    return receivedData;
+  }
+}
+
+void Session::doWrite() {
   auto self(shared_from_this());
   boost::asio::async_write(
-      m_socket, boost::asio::buffer(m_data, length),
+      m_socket, boost::asio::buffer(m_txData, strlen(m_txData)),
       [this, self](boost::system::error_code ec, std::size_t /*length*/) {
         if (!ec) {
-          doRead();
+          // doRead();
         }
       });
 }

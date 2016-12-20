@@ -1,18 +1,15 @@
+#include <boost/asio.hpp>
 #include <cstdlib>
 #include <cstring>
 #include <iostream>
-#include <boost/asio.hpp>
 
 using boost::asio::ip::tcp;
 
-enum { max_length = 1024 };
+static const size_t MAX_LENGTH = 1024;
 
-int main(int argc, char* argv[])
-{
-  try
-  {
-    if (argc != 3)
-    {
+int main(int argc, char *argv[]) {
+  try {
+    if (argc != 3) {
       std::cerr << "Usage: blocking_tcp_echo_client <host> <port>\n";
       return 1;
     }
@@ -24,20 +21,21 @@ int main(int argc, char* argv[])
     boost::asio::connect(s, resolver.resolve({argv[1], argv[2]}));
 
     std::cout << "Enter message: ";
-    char request[max_length];
-    std::cin.getline(request, max_length);
-    size_t request_length = std::strlen(request);
-    boost::asio::write(s, boost::asio::buffer(request, request_length));
+    char request[MAX_LENGTH];
+    std::cin.getline(request, MAX_LENGTH);
+    size_t requestLength = std::strlen(request);
+    boost::asio::write(s, boost::asio::buffer(request, requestLength));
 
-    char reply[max_length];
-    size_t reply_length = boost::asio::read(s,
-        boost::asio::buffer(reply, request_length));
+    boost::asio::streambuf response;
+    boost::asio::read_until(s, response, "\0");
+
     std::cout << "Reply is: ";
-    std::cout.write(reply, reply_length);
-    std::cout << "\n";
-  }
-  catch (std::exception& e)
-  {
+    std::istream is(&response);
+    std::string line;
+    std::getline(is, line);
+
+    std::cout << line << std::endl;
+  } catch (std::exception &e) {
     std::cerr << "Exception: " << e.what() << "\n";
   }
 

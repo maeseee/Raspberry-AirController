@@ -15,12 +15,20 @@ public:
 private:
   void doRead();
 
-  void doWrite(std::size_t length);
+  /**
+   * @brief processData interpret the received data
+   * @param receivedData
+   * @return answer
+   */
+  std::string processData(const std::string &receivedData) const;
+
+  void doWrite();
 
   static const size_t MAX_LENGTH = 1024;
 
   boost::asio::ip::tcp::socket m_socket;
-  char m_data[MAX_LENGTH];
+  char m_rxData[MAX_LENGTH];
+  char m_txData[MAX_LENGTH];
 
   logger::SysLoggerPtr m_logger;
 };
