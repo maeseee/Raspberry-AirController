@@ -31,11 +31,29 @@ void Session::doRead() {
 }
 
 std::string Session::processData(const std::string &receivedData) const {
-  if ("SystemState" == receivedData) {
-    return "System is on";
+  std::stringstream ss;
+  auto ids = m_logger->getIds(receivedData);
+  if (0 < ids.size()) {
+    std::string space = "";
+    for (const size_t &id : ids) {
+      std::string value = m_logger->getValueFromId(id);
+      if ("" != value) {
+        ss << space;
+        ss << receivedData << ": " << value;
+        space = ", ";
+      }
+    }
+    if ("" == space) {
+        ss << "No data received so far";
+    }
+  } else if ("SystemState" == receivedData) {
+    ss << "System is on";
   } else {
-    return receivedData;
+    ss << receivedData;
   }
+
+  std::cout << ss.str() << std::endl;
+  return ss.str();
 }
 
 void Session::doWrite() {
