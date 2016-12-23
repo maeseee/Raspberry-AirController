@@ -42,24 +42,13 @@ void SysLogger::logOutput(const size_t id, const gpio::Value value) {
   logMsg(logInfo);
 }
 
-void SysLogger::logSensorTemperature(const size_t id, const float temperature) {
+void SysLogger::logSensorValue(const size_t id, const float value) {
   // save data for later use
-  m_values[id] = std::to_string(temperature);
+  m_values[id] = std::to_string(value);
 
   // log it
-  std::string logInfo = "Temperature sensor " + getNameFromId(id) +
-                        " caught the value " + std::to_string(temperature) +
-                        "C";
-  logMsg(logInfo);
-}
-
-void SysLogger::logSensorHumidity(const size_t id, const float humidity) {
-  // save data for later use
-  m_values[id] = std::to_string(humidity);
-
-  // log it
-  std::string logInfo = "Humidity sensor " + getNameFromId(id) +
-                        " caught the value " + std::to_string(humidity) + "%";
+  std::string logInfo = "Sensor value of " + getNameFromId(id) +
+                        " caught the value " + std::to_string(value);
   logMsg(logInfo);
 }
 
@@ -80,6 +69,14 @@ std::vector<size_t> SysLogger::getIds(const std::string &name) const {
     if (std::string::npos != entry.second.find(name)) {
       ids.push_back(entry.first);
     }
+  }
+  return ids;
+}
+
+std::vector<size_t> SysLogger::getAllIds() const {
+  std::vector<size_t> ids;
+  for (auto &entry : m_idNames) {
+    ids.push_back(entry.first);
   }
   return ids;
 }

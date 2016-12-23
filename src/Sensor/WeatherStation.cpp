@@ -15,7 +15,8 @@ static const char *WEATHER_URL = "api.openweathermap.org/data/2.5/"
 
 WeatherStation::WeatherStation(const logger::SysLoggerPtr &sysLogger)
     : threading::Threading(CALL_INTERVALL_WEB), m_sysLogger(sysLogger) {
-  m_loggerId = m_sysLogger->generateId("WeatherStation");
+  m_loggerIdTemp = m_sysLogger->generateId("Outdoor Temperature");
+  m_loggerIdHum = m_sysLogger->generateId("Outdoor Humidity");
 }
 
 void WeatherStation::recall() {
@@ -73,19 +74,19 @@ void WeatherStation::updateData() {
 
   if (temp) {
     m_temperature = temp.get() - KELVIN;
-    m_sysLogger->logSensorTemperature(m_loggerId, m_temperature);
+    m_sysLogger->logSensorValue(m_loggerIdTemp, m_temperature);
   } else {
     m_temperature = std::numeric_limits<float>::min();
-    m_sysLogger->logError(m_loggerId, "invalid new outdoor temp");
+    m_sysLogger->logError(m_loggerIdTemp, "invalid new outdoor temp");
   }
 
   boost::optional<float> humidity = pt.get_optional<float>("main.humidity");
   if (temp) {
     m_humidity = humidity.get();
-    m_sysLogger->logSensorHumidity(m_loggerId, m_humidity);
+    m_sysLogger->logSensorValue(m_loggerIdHum, m_humidity);
   } else {
     m_humidity = std::numeric_limits<float>::min();
-    m_sysLogger->logError(m_loggerId, "invalid new outdoor hum");
+    m_sysLogger->logError(m_loggerIdHum, "invalid new outdoor hum");
   }
 }
 }

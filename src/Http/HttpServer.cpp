@@ -38,18 +38,27 @@ std::string Session::processData(const std::string &receivedData) const {
     for (const size_t &id : ids) {
       std::string value = m_logger->getValueFromId(id);
       if ("" != value) {
+        std::string valueName = m_logger->getNameFromId(id);
         ss << space;
-        ss << receivedData << ": " << value;
+        ss << valueName << ": " << value;
         space = ", ";
       }
     }
     if ("" == space) {
-        ss << "No data received so far";
+      ss << "No data received so far";
     }
-  } else if ("SystemState" == receivedData) {
-    ss << "System is on";
+  } else if ("ListAll" == receivedData) {
+    auto allIds = m_logger->getAllIds();
+    std::string space = "";
+    for (const size_t &id : allIds) {
+      std::string value = m_logger->getNameFromId(id);
+      ss << space;
+      ss << value;
+      space = ", ";
+    }
+  } else if ("MainSystemOn" == receivedData) {
   } else {
-    ss << receivedData;
+    ss << "No command to execute " << receivedData;
   }
 
   std::cout << ss.str() << std::endl;

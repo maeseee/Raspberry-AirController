@@ -27,9 +27,7 @@ public:
   void logError(const size_t id, const std::string &logMessage);
 
   void logOutput(const size_t id, const gpio::Value value);
-  void logSensorTemperature(const size_t id, const float temperature);
-
-  void logSensorHumidity(const size_t id, const float humidity);
+  void logSensorValue(const size_t id, const float value);
 
   /**
    * @brief time2Str converts a time in seconds to a readable time
@@ -38,15 +36,16 @@ public:
    */
   std::string time2Str(size_t time) const;
 
-  std::vector<size_t> getIds(const std::string& name) const;
+  std::vector<size_t> getIds(const std::string &name) const;
+  std::vector<size_t> getAllIds() const;
   std::string getValueFromId(const size_t id) const;
+  std::string getNameFromId(const size_t id) const;
 
 private:
   void logMsg(const std::string &logMessage);
   std::string gpioValue2Str(const gpio::Value value);
 
   size_t newId();
-  std::string getNameFromId(const size_t id) const;
 
   // log values
   std::map<size_t, std::string> m_idNames;

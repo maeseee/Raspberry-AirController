@@ -33,6 +33,7 @@ private:
   gpio::IGpioPtr m_sensor;
 
   const logger::SysLoggerPtr m_sysLogger;
-  size_t m_loggerId{0};
+  size_t m_loggerIdTemp{0};
+  size_t m_loggerIdHum{0};
 };
 }

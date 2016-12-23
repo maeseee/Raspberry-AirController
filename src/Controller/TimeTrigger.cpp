@@ -48,6 +48,5 @@ gpio::Value TimeTrigger::getValue() const {
 void TimeTrigger::recall() {
   gpio::Value value = getValue();
   m_gpio->setValue(m_loggerId, value);
-  // m_sysLogger->logOutput(m_loggerId, value);
 }
 }

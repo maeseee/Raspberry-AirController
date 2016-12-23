@@ -9,7 +9,8 @@ Am2302Sensor::Am2302Sensor(const gpio::IGpioPtr &sensor,
                            const logger::SysLoggerPtr &sysLogger)
     : threading::Threading(CALL_INTERVALL_AM2302), m_sensor(sensor),
       m_sysLogger(sysLogger) {
-  m_loggerId = m_sysLogger->generateId("Am2302 sensor");
+  m_loggerIdTemp = m_sysLogger->generateId("Indoor Temperature");
+  m_loggerIdHum = m_sysLogger->generateId("Indoor Humidity");
 }
 
 SensorData Am2302Sensor::getData() const {
@@ -26,10 +27,10 @@ void Am2302Sensor::recall() {
   if (DHT_SUCCESS == returnValue) {
     m_humidity = humidity;
     m_temperature = temperature;
-    m_sysLogger->logSensorTemperature(m_loggerId, m_temperature);
-    m_sysLogger->logSensorHumidity(m_loggerId, m_humidity);
+    m_sysLogger->logSensorValue(m_loggerIdTemp, m_temperature);
+    m_sysLogger->logSensorValue(m_loggerIdHum, m_humidity);
   } else {
-    m_sysLogger->logError(m_loggerId, "1wire bus return invalid value of " +
+    m_sysLogger->logError(m_loggerIdTemp, "1wire bus return invalid value of " +
                                           std::to_string(returnValue));
   }
 }
