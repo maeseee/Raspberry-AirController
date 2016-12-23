@@ -17,6 +17,7 @@ static const size_t CALL_INTERVALL_TEMP = 60 * MIN_TO_SEC;     // [s]
 static const size_t CALL_INTERVALL_TIMER = 1 * MIN_TO_SEC;     // [s]
 static const size_t CALL_INTERVALL_WEB = 30 * MIN_TO_SEC;      // [s]
 static const size_t CALL_INTERVALL_HUMLIMIT = 20 * MIN_TO_SEC; // [s]
+static const size_t ONE_TIME_ON_DURATION = 30 * MIN_TO_SEC;    // [s]
 
 // Helper functions
 float relHumidityToAbs(const float tempC, const float humidityRel);

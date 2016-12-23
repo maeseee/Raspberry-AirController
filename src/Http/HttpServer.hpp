@@ -3,11 +3,20 @@
 #include <boost/asio/io_service.hpp>
 #include <boost/asio/ip/tcp.hpp>
 
+// FWD
+namespace time_trigger {
+class OneTimeTrigger;
+using OneTimeTriggerPtr = std::shared_ptr<OneTimeTrigger>;
+}
+
+// Class
+
 namespace http_server {
 
 class Session : public std::enable_shared_from_this<Session> {
 public:
   Session(boost::asio::ip::tcp::socket socket,
+          const time_trigger::OneTimeTriggerPtr &oneTimeTrigger,
           const logger::SysLoggerPtr &sysLogger);
 
   void start();
@@ -30,22 +39,26 @@ private:
   char m_rxData[MAX_LENGTH];
   char m_txData[MAX_LENGTH];
 
-  logger::SysLoggerPtr m_logger;
+  const logger::SysLoggerPtr m_logger;
+  const time_trigger::OneTimeTriggerPtr m_oneTimeTrigger;
 };
 
 class Server {
 public:
   Server(boost::asio::io_service &io_service, short port,
+         const time_trigger::OneTimeTriggerPtr &oneTimeTrigger,
          const logger::SysLoggerPtr &sysLogger);
 
 private:
   void doAccept();
 
-  logger::SysLoggerPtr m_logger;
+  const logger::SysLoggerPtr m_logger;
+  const time_trigger::OneTimeTriggerPtr m_oneTimeTrigger;
 
   boost::asio::ip::tcp::acceptor m_acceptor;
   boost::asio::ip::tcp::socket m_socket;
 };
 
-int initHttpServer(const logger::SysLoggerPtr &sysLogger);
+int initHttpServer(const time_trigger::OneTimeTriggerPtr &oneTimeTrigger,
+                   const logger::SysLoggerPtr &sysLogger);
 }

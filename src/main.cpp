@@ -1,6 +1,7 @@
 #include <Constants.hpp>
 #include <Controller/HumLimitController.hpp>
 #include <Controller/NightAir.hpp>
+#include <Controller/OneTimeTrigger.hpp>
 #include <Controller/RotiController.hpp>
 #include <Controller/TempController.hpp>
 #include <Controller/TimeTrigger.hpp>
@@ -107,7 +108,9 @@ int main() {
   controller::HumLimitController humLimitController(indoorSensor, outdoorSensor,
                                                     mainSystemOr, sysLogger);
 
-  http_server::initHttpServer(sysLogger);
+  time_trigger::OneTimeTriggerPtr oneTimeTrigger =
+      std::make_shared<time_trigger::OneTimeTrigger>(mainSystemOr, sysLogger);
+  http_server::initHttpServer(oneTimeTrigger, sysLogger);
 
   while (true == m_runProgram) {
     sleep(1);
