@@ -30,8 +30,10 @@ void Am2302Sensor::recall() {
     m_sysLogger->logSensorValue(m_loggerIdTemp, m_temperature);
     m_sysLogger->logSensorValue(m_loggerIdHum, m_humidity);
   } else {
+    m_humidity = std::numeric_limits<float>::min();
+    m_temperature = std::numeric_limits<float>::min();
     m_sysLogger->logError(m_loggerIdTemp, "1wire bus return invalid value of " +
-                                          std::to_string(returnValue));
+                                              std::to_string(returnValue));
   }
 }
 }
