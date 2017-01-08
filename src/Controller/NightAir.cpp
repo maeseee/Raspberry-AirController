@@ -25,6 +25,7 @@ NightAir::NightAir(const gpio::IGpioPtr &gpio,
   addTimer(4 * HOUR_TO_SEC + ON_OFFSET_NIGHT_TARIF);
   addTimer(5 * HOUR_TO_SEC + ON_OFFSET_NIGHT_TARIF);
   addTimer(6 * HOUR_TO_SEC + ON_OFFSET_NIGHT_TARIF);
+  addTimer(7 * HOUR_TO_SEC + ON_OFFSET_NIGHT_TARIF);
 }
 
 void NightAir::addTimer(size_t onTime) {
