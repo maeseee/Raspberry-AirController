@@ -22,31 +22,34 @@ TimeTrigger::TimeTrigger(const size_t on, const size_t off,
 
 TimeTrigger::~TimeTrigger() { m_gpio->setValue(m_loggerId, gpio::Value::LOW); }
 
-gpio::Value TimeTrigger::getValue() const {
+bool TimeTrigger::inTimeRange() const {
   time_t t = time(0); // get time now
   struct tm *now = localtime(&t);
   size_t daytime =
       (now->tm_hour * HOUR_TO_SEC) + (now->tm_min * MIN_TO_SEC) + now->tm_sec;
 
-  gpio::Value result;
+  bool isInTimeRange = false;
   if (m_offTime < m_onTime) {
     if (daytime < m_onTime && daytime > m_offTime) {
-      result = gpio::Value::LOW;
+      isInTimeRange = false;
     } else {
-      result = gpio::Value::HIGH;
+      isInTimeRange = true;
     }
   } else {
     if (daytime < m_offTime && daytime > m_onTime) {
-      result = gpio::Value::HIGH;
+      isInTimeRange = true;
     } else {
-      result = gpio::Value::LOW;
+      isInTimeRange = false;
     }
   }
-  return result;
+  return isInTimeRange;
 }
 
 void TimeTrigger::recall() {
-  gpio::Value value = getValue();
+  gpio::Value value = gpio::Value::LOW;
+  if (inTimeRange()) {
+    value = gpio::Value::HIGH;
+  }
   m_gpio->setValue(m_loggerId, value);
 }
 }

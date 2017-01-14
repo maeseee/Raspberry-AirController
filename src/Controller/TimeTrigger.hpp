@@ -25,13 +25,13 @@ public:
               const std::string &name, const logger::SysLoggerPtr &sysLogger);
   ~TimeTrigger();
 
-  gpio::Value getValue() const;
+  bool inTimeRange() const;
 
   void recall() override;
 
 private:
-  size_t m_onTime;  // [s]
-  size_t m_offTime; // [s]
+  const size_t m_onTime;  // [s]
+  const size_t m_offTime; // [s]
   gpio::IGpioPtr m_gpio;
 
   const logger::SysLoggerPtr m_sysLogger;

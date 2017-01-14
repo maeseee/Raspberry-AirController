@@ -112,6 +112,7 @@ int main() {
       std::make_shared<time_trigger::OneTimeTrigger>(mainSystemOr, sysLogger);
   http_server::initHttpServer(oneTimeTrigger, sysLogger);
 
+  sysLogger->logMsg(loggerId, "Set up finished");
   while (true == m_runProgram) {
     sleep(1);
   }
