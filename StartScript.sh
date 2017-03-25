@@ -2,6 +2,7 @@
 
 while true; do 
 /home/pi/AirControlling/build/lueftung
+cp log.log lastErrorLog.log
 sleep 5s # just sleep a little
 done
 
