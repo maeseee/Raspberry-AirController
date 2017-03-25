@@ -5,25 +5,26 @@
 #include <thread>
 
 // Class
-namespace time_trigger {
+namespace time_trigger
+{
 
-class OneTimeTrigger {
+class OneTimeTrigger
+{
 public:
-  OneTimeTrigger(const gpio::IGpioPtr &gpio,
-                 const logger::SysLoggerPtr &sysLogger);
-  ~OneTimeTrigger();
+    OneTimeTrigger(const gpio::IGpioPtr& gpio, const logger::SysLoggerPtr& sysLogger);
+    ~OneTimeTrigger();
 
-  void addTrigger(const size_t duration);
+    void addTrigger(const size_t duration);
 
 private:
-  void threadFn(size_t duration);
+    void threadFn(size_t duration);
 
-  gpio::IGpioPtr m_gpio;
+    gpio::IGpioPtr m_gpio;
 
-  const logger::SysLoggerPtr m_sysLogger;
+    const logger::SysLoggerPtr m_sysLogger;
 
-  std::thread m_thread;
-  bool m_stopThread{false};
+    std::thread m_thread;
+    bool m_stopThread{false};
 };
 
 using OneTimeTriggerPtr = std::shared_ptr<OneTimeTrigger>;

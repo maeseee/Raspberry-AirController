@@ -5,35 +5,37 @@
 #include <Threading.hpp>
 
 // FWD
-namespace logger {
+namespace logger
+{
 class SysLogger;
 using SysLoggerPtr = std::shared_ptr<SysLogger>;
 }
 
 // Class
-namespace sensor {
+namespace sensor
+{
 
-class Am2302Sensor : public sensor::ISensor, public threading::Threading {
+class Am2302Sensor : public sensor::ISensor, public threading::Threading
+{
 public:
-  Am2302Sensor(const gpio::IGpioPtr &sensor,
-               const logger::SysLoggerPtr &sysLogger);
+    Am2302Sensor(const gpio::IGpioPtr& sensor, const logger::SysLoggerPtr& sysLogger);
 
-  SensorData getData() const override;
+    SensorData getData() const override;
 
-  void recall() override;
+    void recall() override;
 
 private:
-  int waitForBit(const gpio::Value val) const;
-  int readBit() const;
-  int readByte() const;
+    int waitForBit(const gpio::Value val) const;
+    int readBit() const;
+    int readByte() const;
 
-  float m_temperature; // [°C]
-  float m_humidity;    // [%]
+    float m_temperature; // [°C]
+    float m_humidity;    // [%]
 
-  gpio::IGpioPtr m_sensor;
+    gpio::IGpioPtr m_sensor;
 
-  const logger::SysLoggerPtr m_sysLogger;
-  size_t m_loggerIdTemp{0};
-  size_t m_loggerIdHum{0};
+    const logger::SysLoggerPtr m_sysLogger;
+    size_t m_loggerIdTemp{0};
+    size_t m_loggerIdHum{0};
 };
 }

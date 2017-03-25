@@ -4,38 +4,41 @@
 #include <Threading.hpp>
 
 // FWD
-namespace logger {
+namespace logger
+{
 class SysLogger;
 using SysLoggerPtr = std::shared_ptr<SysLogger>;
 }
 
-namespace time_trigger {
+namespace time_trigger
+{
 class TimeTrigger;
 using TimeTriggerPtr = std::shared_ptr<TimeTrigger>;
 }
 
 // Class
-namespace controller {
+namespace controller
+{
 
-class TempController : public threading::Threading {
+class TempController : public threading::Threading
+{
 public:
-  /**
- * @brief TemperatureController turns on and off the air system
- * @param gpioMainSystem gpio for switching on and off
- */
-  TempController(const gpio::IGpioPtr &gpioMainSystem,
-                 const logger::SysLoggerPtr &sysLogger);
+    /**
+   * @brief TemperatureController turns on and off the air system
+   * @param gpioMainSystem gpio for switching on and off
+   */
+    TempController(const gpio::IGpioPtr& gpioMainSystem, const logger::SysLoggerPtr& sysLogger);
 
-  void recall() override;
+    void recall() override;
 
 private:
-  bool shouldWarm() const;
+    bool shouldWarm() const;
 
-  gpio::IGpioPtr m_gpio;
-  time_trigger::TimeTriggerPtr m_timer;
-  bool m_oldShouldWarmup{true};
+    gpio::IGpioPtr m_gpio;
+    time_trigger::TimeTriggerPtr m_timer;
+    bool m_oldShouldWarmup{true};
 
-  const logger::SysLoggerPtr m_sysLogger;
-  size_t m_loggerId{0};
+    const logger::SysLoggerPtr m_sysLogger;
+    size_t m_loggerId{0};
 };
 }

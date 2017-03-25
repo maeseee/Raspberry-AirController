@@ -4,61 +4,65 @@
 #include <boost/asio/ip/tcp.hpp>
 
 // FWD
-namespace time_trigger {
+namespace time_trigger
+{
 class OneTimeTrigger;
 using OneTimeTriggerPtr = std::shared_ptr<OneTimeTrigger>;
 }
 
 // Class
 
-namespace http_server {
+namespace http_server
+{
 
-class Session : public std::enable_shared_from_this<Session> {
+class Session : public std::enable_shared_from_this<Session>
+{
 public:
-  Session(boost::asio::ip::tcp::socket socket,
-          const time_trigger::OneTimeTriggerPtr &oneTimeTrigger,
-          const logger::SysLoggerPtr &sysLogger);
+    Session(boost::asio::ip::tcp::socket socket,
+            const time_trigger::OneTimeTriggerPtr& oneTimeTrigger,
+            const logger::SysLoggerPtr& sysLogger);
 
-  void start();
+    void start();
 
 private:
-  void doRead();
+    void doRead();
 
-  /**
-   * @brief processData interpret the received data
-   * @param receivedData
-   * @return answer
-   */
-  std::string processData(const std::string &receivedData) const;
+    /**
+     * @brief processData interpret the received data
+     * @param receivedData
+     * @return answer
+     */
+    std::string processData(const std::string& receivedData) const;
 
-  void doWrite();
+    void doWrite();
 
-  static const size_t MAX_LENGTH = 1024;
+    static const size_t MAX_LENGTH = 1024;
 
-  boost::asio::ip::tcp::socket m_socket;
-  char m_rxData[MAX_LENGTH];
-  char m_txData[MAX_LENGTH];
+    boost::asio::ip::tcp::socket m_socket;
+    char m_rxData[MAX_LENGTH];
+    char m_txData[MAX_LENGTH];
 
-  const logger::SysLoggerPtr m_logger;
-  const time_trigger::OneTimeTriggerPtr m_oneTimeTrigger;
+    const logger::SysLoggerPtr m_logger;
+    const time_trigger::OneTimeTriggerPtr m_oneTimeTrigger;
 };
 
-class Server {
+class Server
+{
 public:
-  Server(boost::asio::io_service &io_service, short port,
-         const time_trigger::OneTimeTriggerPtr &oneTimeTrigger,
-         const logger::SysLoggerPtr &sysLogger);
+    Server(boost::asio::io_service& io_service,
+           short port,
+           const time_trigger::OneTimeTriggerPtr& oneTimeTrigger,
+           const logger::SysLoggerPtr& sysLogger);
 
 private:
-  void doAccept();
+    void doAccept();
 
-  const logger::SysLoggerPtr m_logger;
-  const time_trigger::OneTimeTriggerPtr m_oneTimeTrigger;
+    const logger::SysLoggerPtr m_logger;
+    const time_trigger::OneTimeTriggerPtr m_oneTimeTrigger;
 
-  boost::asio::ip::tcp::acceptor m_acceptor;
-  boost::asio::ip::tcp::socket m_socket;
+    boost::asio::ip::tcp::acceptor m_acceptor;
+    boost::asio::ip::tcp::socket m_socket;
 };
 
-int initHttpServer(const time_trigger::OneTimeTriggerPtr &oneTimeTrigger,
-                   const logger::SysLoggerPtr &sysLogger);
+int initHttpServer(const time_trigger::OneTimeTriggerPtr& oneTimeTrigger, const logger::SysLoggerPtr& sysLogger);
 }
