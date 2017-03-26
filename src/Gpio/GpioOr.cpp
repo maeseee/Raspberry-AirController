@@ -1,14 +1,18 @@
 #include "GpioOr.hpp"
+#include <SysLogger.hpp>
 
 #include <algorithm>
 #include <cassert>
+#include <sstream>
 
 namespace gpio
 {
 
-GpioOr::GpioOr(const IGpioPtr& gpioOutput)
+GpioOr::GpioOr(const IGpioPtr& gpioOutput, const logger::SysLoggerPtr& sysLogger)
     : m_gpioOutput(gpioOutput)
+    , m_sysLogger(sysLogger)
 {
+    m_loggerId = m_sysLogger->generateId("GpioOr");
 }
 
 bool GpioOr::setDirection(const size_t /*controllerId*/, const Direction dir)
@@ -36,7 +40,11 @@ bool GpioOr::setValue(const size_t id, const Value val)
     if (Value::HIGH == getValue()) {
         currentId = m_controllerIdHigh.back();
     }
-    m_gpioOutput->setValue(currentId, getValue());
+    const Value systemState = getValue();
+    std::stringstream logSs;
+    logSs << "Turning system " << (Value::HIGH == systemState ? "on" : "off");
+    m_sysLogger->logMsg(m_loggerId, logSs.str());
+    m_gpioOutput->setValue(currentId, systemState);
 
     return true;
 }

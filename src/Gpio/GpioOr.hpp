@@ -16,7 +16,7 @@ namespace gpio
 class GpioOr : public IGpio
 {
 public:
-    explicit GpioOr(const IGpioPtr& gpioOutput);
+    explicit GpioOr(const IGpioPtr& gpioOutput, const logger::SysLoggerPtr& sysLogger);
 
     bool setDirection(const size_t controllerId, const Direction dir) override;
     Direction getDirection() const override;
@@ -30,6 +30,9 @@ private:
     const IGpioPtr m_gpioOutput;
 
     std::vector<size_t> m_controllerIdHigh;
+
+    const logger::SysLoggerPtr m_sysLogger;
+    size_t m_loggerId{0};
 };
 using GpioOrPtr = std::shared_ptr<GpioOr>;
 }
