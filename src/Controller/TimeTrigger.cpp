@@ -17,9 +17,8 @@ TimeTrigger::TimeTrigger(const size_t on,
     , m_offTime(off)
     , m_gpio(gpio)
     , m_sysLogger(sysLogger)
+    , m_loggerId(sysLogger->generateId("TimeTrigger " + name))
 {
-    m_loggerId = m_sysLogger->generateId("TimeTrigger " + name);
-
     m_sysLogger->logMsg(m_loggerId, "Add TimeTrigger for gpio " + std::to_string(gpio->getPinNumber()) + ": on at " +
                                         m_sysLogger->time2Str(on) + " and off at  " + m_sysLogger->time2Str(off));
 }

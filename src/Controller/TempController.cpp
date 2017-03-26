@@ -16,10 +16,9 @@ TempController::TempController(const gpio::IGpioPtr& gpioMainSystem, const logge
     : threading::Threading(CALL_INTERVALL_TEMP)
     , m_gpio(gpioMainSystem)
     , m_sysLogger(sysLogger)
+    , m_loggerId(sysLogger->generateId("TempController"))
 {
     assert(m_gpio);
-
-    m_loggerId = m_sysLogger->generateId("TempController");
 }
 
 bool TempController::shouldWarm() const

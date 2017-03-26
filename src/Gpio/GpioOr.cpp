@@ -11,8 +11,8 @@ namespace gpio
 GpioOr::GpioOr(const IGpioPtr& gpioOutput, const logger::SysLoggerPtr& sysLogger)
     : m_gpioOutput(gpioOutput)
     , m_sysLogger(sysLogger)
+    , m_loggerId(sysLogger->generateId("GpioOr"))
 {
-    m_loggerId = m_sysLogger->generateId("GpioOr");
 }
 
 bool GpioOr::setDirection(const size_t /*controllerId*/, const Direction dir)

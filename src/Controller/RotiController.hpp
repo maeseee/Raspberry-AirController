@@ -52,6 +52,6 @@ private:
     float m_measuredHumOutdoor; // [%]
 
     const logger::SysLoggerPtr m_sysLogger;
-    size_t m_loggerId{0};
+    const size_t m_loggerId;
 };
 }

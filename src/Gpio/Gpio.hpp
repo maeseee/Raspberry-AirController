@@ -48,6 +48,6 @@ private:
     size_t m_gpioNumber; // GPIO number associated with the instance of an object
 
     const logger::SysLoggerPtr m_sysLogger;
-    size_t m_loggerId{0};
+    const size_t m_loggerId;
 };
 }

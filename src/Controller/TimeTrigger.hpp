@@ -41,7 +41,7 @@ private:
     gpio::IGpioPtr m_gpio;
 
     const logger::SysLoggerPtr m_sysLogger;
-    size_t m_loggerId{0};
+    const size_t m_loggerId;
 };
 
 using TimeTriggerPtr = std::shared_ptr<TimeTrigger>;
