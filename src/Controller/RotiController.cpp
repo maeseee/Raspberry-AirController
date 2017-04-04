@@ -50,11 +50,11 @@ void RotiController::recall()
     // grap sensor values
     sensor::SensorData indoor = m_indoorSensor->getData();
     sensor::SensorData outdoor = m_outdoorSensor->getData();
-    if (std::numeric_limits<float>::min() == indoor.temperature) {
+    if (INVALID_FLOAT == indoor.temperature) {
         // Invalid sensor data
         m_sysLogger->logError(m_loggerId, "Invalid indoor value");
         return;
-    } else if (std::numeric_limits<float>::min() == outdoor.temperature) {
+    } else if (INVALID_FLOAT == outdoor.temperature) {
         // Invalid sensor data
         m_sysLogger->logError(m_loggerId, "Invalid outdoor value");
         return;

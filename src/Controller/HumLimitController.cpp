@@ -5,6 +5,7 @@
 #include <cassert>
 #include <cmath>
 #include <ctime>
+#include <sstream>
 
 namespace controller
 {
@@ -29,29 +30,40 @@ void HumLimitController::recall()
 {
 
     const sensor::SensorData indoorData = m_indoorSensor->getData();
+    if((indoorData.temperature == INVALID_FLOAT) || (indoorData.humidity == INVALID_FLOAT)){
+        m_sysLogger->logMsg(m_loggerId, "Invalid indoor sensor data. Process is canceled");
+        return;
+    }
+
     const sensor::SensorData outdoorData = m_outdoorSensor->getData();
+    if((outdoorData.temperature == INVALID_FLOAT) || (outdoorData.humidity == INVALID_FLOAT)){
+        m_sysLogger->logMsg(m_loggerId, "Invalid outdoor sensor data. Process is canceled");
+        return;
+    }
 
     // calculate absHum
     const float absHumIndoor = relHumidityToAbs(indoorData.temperature, indoorData.humidity);
     const float absHumOutdoor = relHumidityToAbs(outdoorData.temperature, outdoorData.humidity);
-    const float absHumUpperLimit = relHumidityToAbs(SET_TEMP, SET_HUM + HUM_LIMIT_TOLERANCE);
-    const float absHumLowerLimit = relHumidityToAbs(SET_TEMP, SET_HUM - HUM_LIMIT_TOLERANCE);
+    const float absHumUpperLimit = relHumidityToAbs(indoorData.temperature, SET_HUM + HUM_LIMIT_TOLERANCE);
+    const float absHumLowerLimit = relHumidityToAbs(indoorData.temperature, SET_HUM - HUM_LIMIT_TOLERANCE);
+
+    std::stringstream logSs;
+    logSs << "AbsHumIndoor is " << absHumIndoor << " and AbsHumOutdoor is " << absHumOutdoor << ": ";
 
     if ((absHumUpperLimit < absHumIndoor) && (absHumOutdoor < absHumIndoor)) {
         // turn on the air controller to lower humidity
         m_gpio->setValue(m_loggerId, gpio::Value::HIGH);
-        m_sysLogger->logMsg(m_loggerId, "Fresh air can be used to lower the indoor humidity");
+        logSs << "The upper limit is " << absHumUpperLimit << " -> So fresh air is used to lower the indoor humidity";
     } else if ((absHumLowerLimit > absHumIndoor) && (absHumOutdoor > absHumIndoor)) {
         // turn on the air controller to higher humidity
         m_gpio->setValue(m_loggerId, gpio::Value::HIGH);
-        m_sysLogger->logMsg(m_loggerId, "Fresh air can be used to higher the indoor humidity");
+        logSs << "The lower limit is " << absHumLowerLimit << " -> So fresh air is used to higher the indoor humidity";
     } else {
         // turn off the air controller. Turning on does not make a better situation
         m_gpio->setValue(m_loggerId, gpio::Value::LOW);
-        m_sysLogger->logMsg(m_loggerId,
-                            ("Humidity is in range: absHumIndoor(" + std::to_string(absHumIndoor) + ") absHumOutdoor(" +
-                             std::to_string(absHumOutdoor) + ") absHumUpperLimit(" + std::to_string(absHumUpperLimit) +
-                             ") absHumLowerLimit" + std::to_string(absHumLowerLimit) + ")"));
+        logSs << "Lower limit is " << absHumLowerLimit << " and upper limit is " << absHumUpperLimit
+             << " -> So humidity is in range";
     }
+    m_sysLogger->logMsg(m_loggerId, logSs.str());
 }
 }

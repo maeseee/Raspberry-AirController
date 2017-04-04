@@ -41,10 +41,12 @@ bool GpioOr::setValue(const size_t id, const Value val)
         currentId = m_controllerIdHigh.back();
     }
     const Value systemState = getValue();
-    std::stringstream logSs;
-    logSs << "Turning system " << (Value::HIGH == systemState ? "on" : "off");
-    m_sysLogger->logMsg(m_loggerId, logSs.str());
-    m_gpioOutput->setValue(currentId, systemState);
+    if (systemState != m_gpioOutput->getValue()) {
+        std::stringstream logSs;
+        logSs << "Turning system " << (Value::HIGH == systemState ? "on" : "off");
+        m_sysLogger->logMsg(m_loggerId, logSs.str());
+        m_gpioOutput->setValue(currentId, systemState);
+    }
 
     return true;
 }

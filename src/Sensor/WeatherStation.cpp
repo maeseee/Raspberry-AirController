@@ -17,6 +17,8 @@ static const char* WEATHER_URL =
 
 WeatherStation::WeatherStation(const logger::SysLoggerPtr& sysLogger)
     : threading::Threading(CALL_INTERVALL_WEB)
+    , m_temperature(INVALID_FLOAT)
+    , m_humidity(INVALID_FLOAT)
     , m_sysLogger(sysLogger)
 {
     m_loggerIdTemp = m_sysLogger->generateId("Outdoor Temperature");
@@ -82,7 +84,7 @@ void WeatherStation::updateData()
         m_temperature = temp.get() - KELVIN;
         m_sysLogger->logSensorValue(m_loggerIdTemp, m_temperature);
     } else {
-        m_temperature = std::numeric_limits<float>::min();
+        m_temperature = INVALID_FLOAT;
         m_sysLogger->logError(m_loggerIdTemp, "invalid new outdoor temp");
     }
 
@@ -91,7 +93,7 @@ void WeatherStation::updateData()
         m_humidity = humidity.get();
         m_sysLogger->logSensorValue(m_loggerIdHum, m_humidity);
     } else {
-        m_humidity = std::numeric_limits<float>::min();
+        m_humidity = INVALID_FLOAT;
         m_sysLogger->logError(m_loggerIdHum, "invalid new outdoor hum");
     }
 }
