@@ -24,6 +24,8 @@ RotiController::RotiController(const sensor::ISensorPtr& indoorSensor,
     assert(m_indoorSensor);
     assert(m_outdoorSensor);
     assert(m_gpioRoti);
+
+    setInitialized();
 }
 
 RotiController::~RotiController()

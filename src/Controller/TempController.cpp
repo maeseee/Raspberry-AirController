@@ -19,6 +19,8 @@ TempController::TempController(const gpio::IGpioPtr& gpioMainSystem, const logge
     , m_loggerId(sysLogger->generateId("TempController"))
 {
     assert(m_gpio);
+
+    setInitialized();
 }
 
 bool TempController::shouldWarm() const

@@ -24,6 +24,8 @@ HumLimitController::HumLimitController(const sensor::ISensorPtr& indoorSensor,
     assert(m_indoorSensor);
     assert(m_outdoorSensor);
     assert(m_gpio);
+
+    setInitialized();
 }
 
 void HumLimitController::recall()

@@ -3,6 +3,8 @@
 #include <Sensor/pi_2_dht_read.hpp>
 #include <SysLogger.hpp>
 
+#include <cassert>
+
 namespace sensor
 {
 
@@ -11,8 +13,12 @@ Am2302Sensor::Am2302Sensor(const gpio::IGpioPtr& sensor, const logger::SysLogger
     , m_sensor(sensor)
     , m_sysLogger(sysLogger)
 {
+    assert(m_sensor);
+
     m_loggerIdTemp = m_sysLogger->generateId("Indoor Temperature");
     m_loggerIdHum = m_sysLogger->generateId("Indoor Humidity");
+
+    setInitialized();
 }
 
 SensorData Am2302Sensor::getData() const

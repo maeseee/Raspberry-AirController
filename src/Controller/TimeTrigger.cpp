@@ -2,6 +2,7 @@
 #include <Constants.hpp>
 #include <SysLogger.hpp>
 
+#include <cassert>
 #include <ctime>
 
 namespace time_trigger
@@ -19,8 +20,12 @@ TimeTrigger::TimeTrigger(const size_t on,
     , m_sysLogger(sysLogger)
     , m_loggerId(sysLogger->generateId("TimeTrigger " + name))
 {
+    assert(m_gpio);
+
     m_sysLogger->logMsg(m_loggerId, "Add TimeTrigger for gpio " + std::to_string(gpio->getPinNumber()) + ": on at " +
                                         m_sysLogger->time2Str(on) + " and off at  " + m_sysLogger->time2Str(off));
+
+    setInitialized();
 }
 
 TimeTrigger::~TimeTrigger()

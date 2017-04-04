@@ -29,8 +29,18 @@ void Threading::waitStopped()
     m_thread.join();
 }
 
+void Threading::setInitialized()
+{
+    m_isInitialized = true;
+}
+
 void Threading::threadFn()
 {
+    // wait until the derived object is completely constructed
+    while(!m_isInitialized) {
+        sleep(1);
+    }
+
     while (!m_stopThread) {
         if (0 == m_timeCounter) {
             recall();

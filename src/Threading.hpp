@@ -1,6 +1,7 @@
 #pragma once
 
 #include <thread>
+#include <atomic>
 
 namespace threading
 {
@@ -16,12 +17,19 @@ public:
 
     virtual void recall() = 0;
 
+    /**
+     * @brief setInitialized call as last call in the constructor in a derived class
+     */
+    void setInitialized();
+
 private:
     void threadFn();
 
     std::thread m_thread;
     const size_t m_intervall;
     size_t m_timeCounter{0};
-    bool m_stopThread{false};
+
+    std::atomic_bool m_isInitialized{false};
+    std::atomic_bool m_stopThread{false};
 };
 }

@@ -23,6 +23,8 @@ WeatherStation::WeatherStation(const logger::SysLoggerPtr& sysLogger)
 {
     m_loggerIdTemp = m_sysLogger->generateId("Outdoor Temperature");
     m_loggerIdHum = m_sysLogger->generateId("Outdoor Humidity");
+
+    setInitialized();
 }
 
 void WeatherStation::recall()
