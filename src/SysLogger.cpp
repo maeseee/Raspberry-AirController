@@ -107,8 +107,10 @@ void SysLogger::logMsg(const std::string& logMsg)
 
     time_t t = time(0); // get time now
     struct tm* now = localtime(&t);
-    size_t daytime = (now->tm_hour * HOUR_TO_SEC) + (now->tm_min * MIN_TO_SEC) + now->tm_sec;
-    std::cout << "LogMsg (" << time2Str(daytime) << "): " << logMsg << std::endl;
+    std::stringstream date;
+    date << (now->tm_mday) << "." << (now->tm_mon + 1) << "." << (now->tm_year + 1900) << ":"
+         << time2Str((now->tm_hour * HOUR_TO_SEC) + (now->tm_min * MIN_TO_SEC) + now->tm_sec);
+    std::cout << "LogMsg (" << date.str() << "): " << logMsg << std::endl;
 }
 
 std::string SysLogger::gpioValue2Str(const gpio::Value value)
