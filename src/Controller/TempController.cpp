@@ -35,7 +35,7 @@ bool TempController::shouldWarm() const
     const size_t month = now->tm_mon + 1;
     const size_t day = now->tm_mday;
     const float month_fp = static_cast<float>(month) + static_cast<float>(day) / 30.0;
-    if (month_fp < 5.5 && month_fp > 9.0) {
+    if ((month_fp > 5.5) && (month_fp < 9.0)) {
         // Cool in the months July and August
         return false;
     } else {
