@@ -8,7 +8,7 @@
 namespace controller
 {
 
-static const size_t SUMMER_ON = 2 * HOUR_TO_SEC;
+static const size_t SUMMER_ON = 3 * HOUR_TO_SEC;
 static const size_t WINTER_ON = 13 * HOUR_TO_SEC;
 static const size_t ON_DURATION = 2 * HOUR_TO_SEC;
 
@@ -25,15 +25,17 @@ TempController::TempController(const gpio::IGpioPtr& gpioMainSystem, const logge
 
 bool TempController::shouldWarm() const
 {
-    time_t t = time(0); // get time now
+    time_t t = time(NULL); // get time now
     struct tm* now = localtime(&t);
 
     // Example of date of today
     //  std::cout << "Date of today is: " << (now->tm_year + 1900) << '-'
     //            << (now->tm_mon + 1) << '-' << now->tm_mday << std::endl;
 
-    size_t month = now->tm_mon + 1;
-    if (month < 7 && month > 8) {
+    const size_t month = now->tm_mon + 1;
+    const size_t day = now->tm_mday;
+    const float month_fp = static_cast<float>(month) + static_cast<float>(day) / 30.0;
+    if (month_fp < 5.5 && month_fp > 9.0) {
         // Cool in the months July and August
         return false;
     } else {
