@@ -32,13 +32,13 @@ void HumLimitController::recall()
 {
 
     const sensor::SensorData indoorData = m_indoorSensor->getData();
-    if ((indoorData.temperature == INVALID_FLOAT) || (indoorData.humidity == INVALID_FLOAT)) {
+    if ((INVALID_FLOAT >= indoorData.temperature) || (INVALID_FLOAT >= indoorData.humidity)) {
         m_sysLogger->logMsg(m_loggerId, "Invalid indoor sensor data. Process is canceled");
         return;
     }
 
     const sensor::SensorData outdoorData = m_outdoorSensor->getData();
-    if ((outdoorData.temperature == INVALID_FLOAT) || (outdoorData.humidity == INVALID_FLOAT)) {
+    if ((INVALID_FLOAT >= outdoorData.temperature) || (INVALID_FLOAT >= outdoorData.humidity)) {
         m_sysLogger->logMsg(m_loggerId, "Invalid outdoor sensor data. Process is canceled");
         return;
     }

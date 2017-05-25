@@ -51,8 +51,8 @@ bool GpioOr::setValue(const size_t id, const Value val)
         logSs << "Turning system ";
         if (Value::HIGH == aimSystemState) {
             logSs << "on because of ";
-            for (const size_t id : m_controllerIdHigh) {
-                logSs << m_sysLogger->getNameFromId(id) << " (" << id << "),";
+            for (const size_t taskId : m_controllerIdHigh) {
+                logSs << m_sysLogger->getNameFromId(taskId) << " (" << taskId << "),";
             }
         } else {
             logSs << "off";

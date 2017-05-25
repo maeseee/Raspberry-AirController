@@ -26,16 +26,15 @@ static constexpr size_t SAFETY_CONDITION = 15 * MIN_TO_SEC;
 void printTrace(void)
 {
     void* array[10];
-    size_t size;
+    int size;
     char** strings;
-    size_t i;
 
     size = backtrace(array, 10);
     strings = backtrace_symbols(array, size);
 
-    printf("Obtained %zd stack frames.\n", size);
+    printf("Obtained %i stack frames.\n", size);
 
-    for (i = 0; i < size; i++)
+    for (int i = 0; i < size; i++)
         printf("%s\n", strings[i]);
 
     free(strings);

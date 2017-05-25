@@ -13,9 +13,7 @@ struct SensorData {
 class ISensor
 {
 public:
-    virtual ~ISensor()
-    {
-    }
+    virtual ~ISensor() = default;
 
     virtual SensorData getData() const = 0;
 };

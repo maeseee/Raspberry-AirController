@@ -21,9 +21,7 @@ namespace gpio
 class IGpio
 {
 public:
-    virtual ~IGpio()
-    {
-    }
+    virtual ~IGpio() = default;
 
     /**
      * @brief setdir_gpio Set the direction to the GPIO

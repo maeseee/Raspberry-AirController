@@ -60,7 +60,7 @@ void WeatherStation::recall()
     updateData();
 }
 
-size_t writeCallback(char* buf, size_t size, size_t nmemb, void* up)
+size_t writeCallback(char* buf, size_t size, size_t nmemb, void* /*up*/)
 { // callback must have this declaration
     // buf is a pointer to the data that curl has for us
     // size*nmemb is the size of the buffer

@@ -35,8 +35,8 @@ RotiController::~RotiController()
 
 bool RotiController::shouldBeEnabled(const float indoor, const float outdoor, const float set) const
 {
-    bool increaseIndoor = set > indoor;
-    bool isOutdoorHigher = indoor < outdoor;
+    const bool increaseIndoor = set > indoor;
+    const bool isOutdoorHigher = indoor < outdoor;
 
     // decreaseIndoor  OutdoorLower   -> off
     // decreaseIndoor  OutdoorHigher  -> on
@@ -52,11 +52,11 @@ void RotiController::recall()
     // grap sensor values
     sensor::SensorData indoor = m_indoorSensor->getData();
     sensor::SensorData outdoor = m_outdoorSensor->getData();
-    if (INVALID_FLOAT == indoor.temperature) {
+    if (INVALID_FLOAT >= indoor.temperature) {
         // Invalid sensor data
         m_sysLogger->logError(m_loggerId, "Invalid indoor value");
         return;
-    } else if (INVALID_FLOAT == outdoor.temperature) {
+    } else if (INVALID_FLOAT >= outdoor.temperature) {
         // Invalid sensor data
         m_sysLogger->logError(m_loggerId, "Invalid outdoor value");
         return;
