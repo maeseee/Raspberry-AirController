@@ -10,9 +10,14 @@ namespace sensor
 {
 
 static const float KELVIN = 273.15;
-static const char* WEATHER_URL =
+static const char* CURRENT_WEATHER_URL =
     "api.openweathermap.org/data/2.5/"
     "weather?id=7285765&APPID="
+    "e018bcd525a923f820afd5b43cac259e";
+
+static const char* FORECAST_WEATHER_URL =
+    "api.openweathermap.org/data/2.5/"
+    "forecast?id=7285765&APPID="
     "e018bcd525a923f820afd5b43cac259e";
 
 WeatherStation::WeatherStation(const logger::SysLoggerPtr& sysLogger)
@@ -23,6 +28,7 @@ WeatherStation::WeatherStation(const logger::SysLoggerPtr& sysLogger)
 {
     m_loggerIdTemp = m_sysLogger->generateId("Outdoor Temperature");
     m_loggerIdHum = m_sysLogger->generateId("Outdoor Humidity");
+    m_loggerIdCon = m_sysLogger->generateId("Outdoor Connection");
 
     setInitialized();
 }
@@ -34,7 +40,7 @@ void WeatherStation::recall()
 
     curl = curl_easy_init();
     if (curl) {
-        curl_easy_setopt(curl, CURLOPT_URL, WEATHER_URL);
+        curl_easy_setopt(curl, CURLOPT_URL, CURRENT_WEATHER_URL);
         curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, writeCallback);
         // curl_easy_setopt(curl, CURLOPT_WRITEDATA, this);
 
@@ -46,7 +52,7 @@ void WeatherStation::recall()
 
         /* Check for errors */
         if (res != CURLE_OK) {
-            fprintf(stderr, "curl_easy_perform() failed: %s\n", curl_easy_strerror(res));
+            m_sysLogger->logError(m_loggerIdCon, "curl_easy_perform() failed: " + std::string(curl_easy_strerror(res)));
             return;
         }
     }

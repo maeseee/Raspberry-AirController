@@ -33,6 +33,7 @@ private:
 
     size_t m_loggerIdTemp{0};
     size_t m_loggerIdHum{0};
+    size_t m_loggerIdCon{0};
     const logger::SysLoggerPtr m_sysLogger;
 };
 
