@@ -20,7 +20,7 @@
 // timer constants
 static constexpr size_t START_NIGHT_CONDITION = 22 * HOUR_TO_SEC;
 static constexpr size_t END_NIGHT_CONDITION = 7 * HOUR_TO_SEC;
-static constexpr size_t SAFETY_CONDITION = 30 * MIN_TO_SEC;
+static constexpr size_t SAFETY_CONDITION = 15 * MIN_TO_SEC;
 
 /* Obtain a backtrace and print it to stdout. */
 void printTrace(void)

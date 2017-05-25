@@ -22,8 +22,9 @@ TimeTrigger::TimeTrigger(const size_t on,
 {
     assert(m_gpio);
 
-    m_sysLogger->logMsg(m_loggerId, "Add TimeTrigger for gpio " + std::to_string(gpio->getPinNumber()) + ": on at " +
-                                        m_sysLogger->time2Str(on) + " and off at  " + m_sysLogger->time2Str(off));
+    m_sysLogger->logMsg(m_loggerId,
+                        "Add TimeTrigger for gpio " + std::to_string(gpio->getPinNumber()) + ": on at " +
+                            m_sysLogger->time2Str(on) + " and off at  " + m_sysLogger->time2Str(off));
 
     setInitialized();
 }
@@ -35,9 +36,7 @@ TimeTrigger::~TimeTrigger()
 
 bool TimeTrigger::inTimeRange() const
 {
-    time_t t = time(0); // get time now
-    struct tm* now = localtime(&t);
-    size_t daytime = (now->tm_hour * HOUR_TO_SEC) + (now->tm_min * MIN_TO_SEC) + now->tm_sec;
+    size_t daytime = getDaytime();
 
     bool isInTimeRange = false;
     if (m_offTime < m_onTime) {

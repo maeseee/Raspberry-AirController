@@ -32,8 +32,6 @@ public:
     void recall() override;
 
 private:
-    bool shouldWarm() const;
-
     gpio::IGpioPtr m_gpio;
     time_trigger::TimeTriggerPtr m_timer;
     bool m_oldShouldWarmup{true};

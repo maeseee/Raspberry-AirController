@@ -103,9 +103,11 @@ Direction Gpio::getDirection() const
 
 bool Gpio::setValue(const size_t loggerId, const Value val)
 {
+    bool writeLogger = true;
     if (val == getValue()) {
         // Value is already set
-        return false;
+        // Do not break if already written because in case of misswriting. Write it anyway.
+        writeLogger = false;
     }
 
     // only set value if it is an output
@@ -124,7 +126,9 @@ bool Gpio::setValue(const size_t loggerId, const Value val)
     setvalgpio << valueString; // write value to value file
     setvalgpio.close();        // close value file
 
-    m_sysLogger->logOutput(loggerId, val);
+    if (writeLogger) {
+        m_sysLogger->logOutput(loggerId, val);
+    }
     return true;
 }
 
