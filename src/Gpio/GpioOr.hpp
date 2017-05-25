@@ -31,6 +31,7 @@ private:
 
     std::vector<size_t> m_controllerIdHigh;
 
+    Value m_lastSetValue{Value::INVALID}; // Used because of threading problems
     const logger::SysLoggerPtr m_sysLogger;
     const size_t m_loggerId;
 };
