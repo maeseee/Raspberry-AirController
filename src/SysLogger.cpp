@@ -1,6 +1,6 @@
 #include "SysLogger.hpp"
-#include <Constants.hpp>
 #include <Gpio/IGpio.hpp>
+#include <Utility/Constants.hpp>
 
 #include <cassert>
 #include <ctime>

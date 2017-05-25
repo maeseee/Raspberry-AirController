@@ -1,6 +1,6 @@
 #include "HumLimitController.hpp"
-#include <Constants.hpp>
 #include <SysLogger.hpp>
+#include <Utility/Constants.hpp>
 
 #include <cassert>
 #include <cmath>
@@ -32,13 +32,13 @@ void HumLimitController::recall()
 {
 
     const sensor::SensorData indoorData = m_indoorSensor->getData();
-    if((indoorData.temperature == INVALID_FLOAT) || (indoorData.humidity == INVALID_FLOAT)){
+    if ((indoorData.temperature == INVALID_FLOAT) || (indoorData.humidity == INVALID_FLOAT)) {
         m_sysLogger->logMsg(m_loggerId, "Invalid indoor sensor data. Process is canceled");
         return;
     }
 
     const sensor::SensorData outdoorData = m_outdoorSensor->getData();
-    if((outdoorData.temperature == INVALID_FLOAT) || (outdoorData.humidity == INVALID_FLOAT)){
+    if ((outdoorData.temperature == INVALID_FLOAT) || (outdoorData.humidity == INVALID_FLOAT)) {
         m_sysLogger->logMsg(m_loggerId, "Invalid outdoor sensor data. Process is canceled");
         return;
     }
@@ -64,7 +64,7 @@ void HumLimitController::recall()
         // turn off the air controller. Turning on does not make a better situation
         m_gpio->setValue(m_loggerId, gpio::Value::LOW);
         logSs << "Lower limit is " << absHumLowerLimit << " and upper limit is " << absHumUpperLimit
-             << " -> So humidity is in range";
+              << " -> So humidity is in range";
     }
     m_sysLogger->logMsg(m_loggerId, logSs.str());
 }

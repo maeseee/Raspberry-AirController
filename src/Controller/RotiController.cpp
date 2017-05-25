@@ -1,6 +1,6 @@
 #include "RotiController.hpp"
-#include <Constants.hpp>
 #include <SysLogger.hpp>
+#include <Utility/Constants.hpp>
 
 #include <cassert>
 #include <sstream>

@@ -1,6 +1,6 @@
 #include "HttpServer.hpp"
-#include <Constants.hpp>
 #include <Controller/OneTimeTrigger.hpp>
+#include <Utility/Constants.hpp>
 
 #include <boost/asio.hpp>
 #include <cstdlib>

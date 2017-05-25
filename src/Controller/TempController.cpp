@@ -1,7 +1,7 @@
 #include "TempController.hpp"
-#include <Constants.hpp>
 #include <Controller/TimeTrigger.hpp>
 #include <SysLogger.hpp>
+#include <Utility/Constants.hpp>
 
 #include <cassert>
 

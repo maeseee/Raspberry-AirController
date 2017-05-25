@@ -1,4 +1,3 @@
-#include <Constants.hpp>
 #include <Controller/HumLimitController.hpp>
 #include <Controller/NightAir.hpp>
 #include <Controller/OneTimeTrigger.hpp>
@@ -11,6 +10,7 @@
 #include <Sensor/Am2302Sensor.hpp>
 #include <Sensor/WeatherStation.hpp>
 #include <SysLogger.hpp>
+#include <Utility/Constants.hpp>
 
 #include <execinfo.h> // for call stack
 #include <iostream>
