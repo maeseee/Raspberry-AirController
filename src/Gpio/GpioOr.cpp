@@ -77,7 +77,6 @@ Value GpioOr::getValue() const
     if (not shouldWarm()) {
         const size_t daytime = getDaytime();
 
-        bool isHotDayTime = false;
         const size_t startHotDay = 10 * HOUR_TO_SEC;
         const size_t endHotDay = 20 * HOUR_TO_SEC;
         if ((daytime > startHotDay) && (daytime < endHotDay)) {

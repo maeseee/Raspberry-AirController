@@ -42,8 +42,8 @@ private:
     char m_rxData[MAX_LENGTH];
     char m_txData[MAX_LENGTH];
 
-    const logger::SysLoggerPtr m_logger;
     const time_trigger::OneTimeTriggerPtr m_oneTimeTrigger;
+    const logger::SysLoggerPtr m_logger;
 };
 
 class Server
@@ -57,11 +57,11 @@ public:
 private:
     void doAccept();
 
-    const logger::SysLoggerPtr m_logger;
-    const time_trigger::OneTimeTriggerPtr m_oneTimeTrigger;
-
     boost::asio::ip::tcp::acceptor m_acceptor;
     boost::asio::ip::tcp::socket m_socket;
+
+    const time_trigger::OneTimeTriggerPtr m_oneTimeTrigger;
+    const logger::SysLoggerPtr m_logger;
 };
 
 int initHttpServer(const time_trigger::OneTimeTriggerPtr& oneTimeTrigger, const logger::SysLoggerPtr& sysLogger);

@@ -122,6 +122,8 @@ std::string SysLogger::gpioValue2Str(const gpio::Value value)
         return "GPIO is high";
     case gpio::Value::INVALID:
         return "GPIO not set";
+    default:
+        return "ERROR should never been called";
     }
 }
 

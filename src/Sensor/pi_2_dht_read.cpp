@@ -56,7 +56,7 @@ int pi_2_dht_read(int type, int pin, float* humidity, float* temperature)
 
     // Store the count that each DHT bit pulse is low and high.
     // Make sure array is initialized to start at zero.
-    int pulseCounts[DHT_PULSES * 2] = {0};
+    size_t pulseCounts[DHT_PULSES * 2] = {0};
 
     // Set pin to output.
     pi_2_mmio_set_output(pin);

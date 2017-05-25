@@ -39,5 +39,5 @@ private:
 
 static std::string m_receivedData; // will hold the url's contents
 
-static size_t writeCallback(char* buf, size_t size, size_t nmemb, void* up);
+size_t writeCallback(char* buf, size_t size, size_t nmemb, void* up);
 }

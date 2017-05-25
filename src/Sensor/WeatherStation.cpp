@@ -15,10 +15,10 @@ static const char* CURRENT_WEATHER_URL =
     "weather?id=7285765&APPID="
     "e018bcd525a923f820afd5b43cac259e";
 
-static const char* FORECAST_WEATHER_URL =
-    "api.openweathermap.org/data/2.5/"
-    "forecast?id=7285765&APPID="
-    "e018bcd525a923f820afd5b43cac259e";
+// static const char* FORECAST_WEATHER_URL =
+//    "api.openweathermap.org/data/2.5/"
+//    "forecast?id=7285765&APPID="
+//    "e018bcd525a923f820afd5b43cac259e";
 
 WeatherStation::WeatherStation(const logger::SysLoggerPtr& sysLogger)
     : threading::Threading(CALL_INTERVALL_WEB)
@@ -65,7 +65,7 @@ size_t writeCallback(char* buf, size_t size, size_t nmemb, void* up)
     // buf is a pointer to the data that curl has for us
     // size*nmemb is the size of the buffer
 
-    for (int c = 0; c < size * nmemb; c++) {
+    for (size_t c = 0; c < size * nmemb; c++) {
         m_receivedData.push_back(buf[c]);
     }
     return size * nmemb; // tell curl how many bytes we handled
