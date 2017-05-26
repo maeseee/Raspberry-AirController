@@ -40,18 +40,18 @@
 // the data afterwards.
 #define DHT_PULSES 41
 
-int pi_2_dht_read(int type, int pin, float* humidity, float* temperature)
+DhtState pi_2_dht_read(size_t type, size_t pin, float* humidity, float* temperature)
 {
     // Validate humidity and temperature arguments and set them to zero.
     if (humidity == NULL || temperature == NULL) {
-        return DHT_ERROR_ARGUMENT;
+        return DhtState::ARGUMENT_ERROR;
     }
     *temperature = 0.0f;
     *humidity = 0.0f;
 
     // Initialize GPIO library.
-    if (pi_2_mmio_init() < 0) {
-        return DHT_ERROR_GPIO;
+    if (pi_2_mmio_init() != MmioState::SUCCESS) {
+        return DhtState::GPIO_ERROR;
     }
 
     // Store the count that each DHT bit pulse is low and high.
@@ -89,7 +89,7 @@ int pi_2_dht_read(int type, int pin, float* humidity, float* temperature)
         if (++count >= DHT_MAXCOUNT) {
             // Timeout waiting for response.
             set_default_priority();
-            return DHT_ERROR_TIMEOUT;
+            return DhtState::TIMEOUT_ERROR;
         }
     }
 
@@ -100,7 +100,7 @@ int pi_2_dht_read(int type, int pin, float* humidity, float* temperature)
             if (++pulseCounts[i] >= DHT_MAXCOUNT) {
                 // Timeout waiting for response.
                 set_default_priority();
-                return DHT_ERROR_TIMEOUT;
+                return DhtState::TIMEOUT_ERROR;
             }
         }
         // Count how long pin is high and store in pulseCounts[i+1]
@@ -108,7 +108,7 @@ int pi_2_dht_read(int type, int pin, float* humidity, float* temperature)
             if (++pulseCounts[i + 1] >= DHT_MAXCOUNT) {
                 // Timeout waiting for response.
                 set_default_priority();
-                return DHT_ERROR_TIMEOUT;
+                return DhtState::TIMEOUT_ERROR;
             }
         }
     }
@@ -162,8 +162,8 @@ int pi_2_dht_read(int type, int pin, float* humidity, float* temperature)
                 *temperature *= -1.0f;
             }
         }
-        return DHT_SUCCESS;
+        return DhtState::SUCCESS;
     } else {
-        return DHT_ERROR_CHECKSUM;
+        return DhtState::CHECKSUM_ERROR;
     }
 }

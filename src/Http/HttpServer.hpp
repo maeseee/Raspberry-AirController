@@ -64,5 +64,5 @@ private:
     const logger::SysLoggerPtr m_logger;
 };
 
-int initHttpServer(const time_trigger::OneTimeTriggerPtr& oneTimeTrigger, const logger::SysLoggerPtr& sysLogger);
+size_t initHttpServer(const time_trigger::OneTimeTriggerPtr& oneTimeTrigger, const logger::SysLoggerPtr& sysLogger);
 }

@@ -31,9 +31,9 @@ void Am2302Sensor::recall()
     float humidity = 0;
     float temperature = 0;
 
-    int returnValue = pi_2_dht_read(DHT22, m_sensor->getPinNumber(), &humidity, &temperature);
+    const DhtState dhtState = pi_2_dht_read(DHT22, m_sensor->getPinNumber(), &humidity, &temperature);
 
-    if (DHT_SUCCESS == returnValue) {
+    if (DhtState::SUCCESS == dhtState) {
         m_humidity = humidity;
         m_temperature = temperature;
         m_sysLogger->logSensorValue(m_loggerIdTemp, m_temperature);
@@ -41,7 +41,8 @@ void Am2302Sensor::recall()
     } else {
         m_humidity = INVALID_FLOAT;
         m_temperature = INVALID_FLOAT;
-        m_sysLogger->logError(m_loggerIdTemp, "1wire bus return invalid value of " + std::to_string(returnValue));
+        m_sysLogger->logError(m_loggerIdTemp,
+                              "1wire bus return invalid value of " + std::to_string(static_cast<size_t>(dhtState)));
     }
 }
 }

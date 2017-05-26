@@ -114,7 +114,7 @@ void Server::doAccept()
     });
 }
 
-int initHttpServer(const time_trigger::OneTimeTriggerPtr& oneTimeTrigger, const logger::SysLoggerPtr& sysLogger)
+size_t initHttpServer(const time_trigger::OneTimeTriggerPtr& oneTimeTrigger, const logger::SysLoggerPtr& sysLogger)
 {
     try {
         boost::asio::io_service io_service;
