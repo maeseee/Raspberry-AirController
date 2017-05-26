@@ -55,5 +55,6 @@ private:
 
     const logger::SysLoggerPtr m_sysLogger;
     const size_t m_loggerId;
+    size_t m_logCounter{0};
 };
 }

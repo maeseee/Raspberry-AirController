@@ -68,14 +68,13 @@ void RotiController::recall()
     const float absHumSet = relHumidityToAbs(SET_TEMP, SET_HUM);
 
     // add some sensor information in the log file
-    static size_t counter = 0;
-    if (0 == counter) {
+    if (0 == m_logCounter) {
         std::stringstream logSs;
         logSs << "AbsHumIndoor: " << absHumIndoor << "\tAbsHumOutdoor: " << absHumOutdoor
               << "\tAbsHumSet: " << absHumSet;
         m_sysLogger->logMsg(m_loggerId, logSs.str());
-        ++counter;
-        counter %= LOG_INTERVALL;
+        ++m_logCounter;
+        m_logCounter %= LOG_INTERVALL;
     }
 
     // set roti output

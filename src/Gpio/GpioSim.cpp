@@ -31,8 +31,6 @@ bool GpioSim::setValue(const size_t id, const Value val)
         return false;
     }
 
-    std::string valueString = ((val == Value::HIGH) ? "1" : "0");
-
     m_sysLogger->logOutput(id, val);
 
     m_val = val;
@@ -46,7 +44,7 @@ Value GpioSim::getValue() const
 
 size_t gpio::GpioSim::getPinNumber() const
 {
-    return 0;
+    return 0U;
 }
 
 } // gpio
