@@ -31,15 +31,9 @@ Direction GpioOr::getDirection() const
 bool GpioOr::setValue(const size_t id, const Value val)
 {
     if (Value::HIGH == val) {
-        m_controllerIdHigh.push_back(id);
+        m_controllerIdHigh.insert(id);
     } else {
-        m_controllerIdHigh.erase(std::remove(m_controllerIdHigh.begin(), m_controllerIdHigh.end(), id),
-                                 m_controllerIdHigh.end());
-    }
-
-    size_t currentId = id;
-    if (Value::HIGH == getValue()) {
-        currentId = m_controllerIdHigh.back();
+        m_controllerIdHigh.erase(id);
     }
 
     const Value aimSystemState = getValue();
@@ -52,14 +46,14 @@ bool GpioOr::setValue(const size_t id, const Value val)
         if (Value::HIGH == aimSystemState) {
             logSs << "on because of ";
             for (const size_t taskId : m_controllerIdHigh) {
-                logSs << m_sysLogger->getNameFromId(taskId) << " (" << taskId << "),";
+                logSs << m_sysLogger->getNameFromId(taskId);
             }
         } else {
             logSs << "off";
         }
         m_sysLogger->logMsg(m_loggerId, logSs.str());
     }
-    m_gpioOutput->setValue(currentId, aimSystemState);
+    m_gpioOutput->setValue(id, aimSystemState);
 
     return true;
 }
@@ -74,7 +68,7 @@ Value GpioOr::getValue() const
     }
 
     // Don't switch on durring the hot daytime
-    if (not shouldWarm()) {
+    if ((not shouldWarm()) && (Value::HIGH == aimSystemState)) {
         const size_t daytime = getDaytime();
 
         const size_t startHotDay = 10 * HOUR_TO_SEC;
@@ -82,6 +76,7 @@ Value GpioOr::getValue() const
         if ((daytime > startHotDay) && (daytime < endHotDay)) {
             // It is durring the hot day time. Switch of the air
             aimSystemState = Value::LOW;
+            m_sysLogger->logMsg(m_loggerId, "GpioOr set to off because of the heat although it should be on");
         }
     }
 

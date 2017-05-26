@@ -3,7 +3,7 @@
 #include <Gpio/IGpio.hpp>
 
 #include <memory>
-#include <vector>
+#include <set>
 
 namespace gpio
 {
@@ -29,7 +29,7 @@ public:
 private:
     const IGpioPtr m_gpioOutput;
 
-    std::vector<size_t> m_controllerIdHigh;
+    std::set<size_t> m_controllerIdHigh;
 
     Value m_lastSetValue{Value::INVALID}; // Used because of threading problems
     const logger::SysLoggerPtr m_sysLogger;

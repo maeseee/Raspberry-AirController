@@ -51,6 +51,8 @@ private:
     float m_measuredHumIndoor;  // [%]
     float m_measuredHumOutdoor; // [%]
 
+    gpio::Value m_lastOutputValue{gpio::Value::INVALID};
+
     const logger::SysLoggerPtr m_sysLogger;
     const size_t m_loggerId;
 };

@@ -8,7 +8,7 @@
 namespace controller
 {
 
-static const size_t LOG_INTERVALL = 30 * MIN_TO_SEC / CALL_INTERVALL_ROTI;
+static const size_t LOG_INTERVALL = 1 * HOUR_TO_SEC / CALL_INTERVALL_ROTI;
 
 RotiController::RotiController(const sensor::ISensorPtr& indoorSensor,
                                const sensor::ISensorPtr& outdoorSensor,
@@ -60,28 +60,34 @@ void RotiController::recall()
         // Invalid sensor data
         m_sysLogger->logError(m_loggerId, "Invalid outdoor value");
         return;
-    } else {
-        // calculate absHum
-        const float absHumIndoor = relHumidityToAbs(indoor.temperature, indoor.humidity);
-        const float absHumOutdoor = relHumidityToAbs(outdoor.temperature, outdoor.humidity);
-        const float absHumSet = relHumidityToAbs(SET_TEMP, SET_HUM);
-
-        static size_t counter = 0;
-        if (0 == counter) {
-            std::stringstream logSs;
-            logSs << "AbsHumIndoor: " << absHumIndoor << "\tAbsHumOutdoor: " << absHumOutdoor
-                  << "\tAbsHumSet: " << absHumSet;
-            m_sysLogger->logMsg(m_loggerId, logSs.str());
-            ++counter;
-            counter %= LOG_INTERVALL;
-        }
-
-        // set roti output
-        if (shouldBeEnabled(absHumIndoor, absHumOutdoor, absHumSet)) {
-            outputValue = gpio::Value::HIGH;
-        }
     }
+
+    // calculate absHum
+    const float absHumIndoor = relHumidityToAbs(indoor.temperature, indoor.humidity);
+    const float absHumOutdoor = relHumidityToAbs(outdoor.temperature, outdoor.humidity);
+    const float absHumSet = relHumidityToAbs(SET_TEMP, SET_HUM);
+
+    // add some sensor information in the log file
+    static size_t counter = 0;
+    if (0 == counter) {
+        std::stringstream logSs;
+        logSs << "AbsHumIndoor: " << absHumIndoor << "\tAbsHumOutdoor: " << absHumOutdoor
+              << "\tAbsHumSet: " << absHumSet;
+        m_sysLogger->logMsg(m_loggerId, logSs.str());
+        ++counter;
+        counter %= LOG_INTERVALL;
+    }
+
+    // set roti output
+    if (shouldBeEnabled(absHumIndoor, absHumOutdoor, absHumSet)) {
+        outputValue = gpio::Value::HIGH;
+    }
+
     m_gpioRoti->setValue(m_loggerId, outputValue);
-    m_sysLogger->logOutput(m_loggerId, outputValue);
+
+    if (outputValue != m_lastOutputValue) {
+        m_sysLogger->logOutput(m_loggerId, outputValue);
+        m_lastOutputValue = outputValue;
+    }
 }
 }
