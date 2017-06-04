@@ -50,21 +50,16 @@ void RotiController::recall()
     gpio::Value outputValue = gpio::Value::LOW;
 
     // grap sensor values
-    sensor::SensorData indoor = m_indoorSensor->getData();
-    sensor::SensorData outdoor = m_outdoorSensor->getData();
-    if (INVALID_FLOAT >= indoor.temperature) {
-        // Invalid sensor data
-        m_sysLogger->logError(m_loggerId, "Invalid indoor value");
-        return;
-    } else if (INVALID_FLOAT >= outdoor.temperature) {
-        // Invalid sensor data
-        m_sysLogger->logError(m_loggerId, "Invalid outdoor value");
+    const sensor::SensorDataPtr indoor = m_indoorSensor->getData();
+    const sensor::SensorDataPtr outdoor = m_outdoorSensor->getData();
+    if ((nullptr == indoor) || (nullptr == outdoor)) {
+        m_sysLogger->logError(m_loggerId, "Invalid sensor value");
         return;
     }
 
     // calculate absHum
-    const float absHumIndoor = relHumidityToAbs(indoor.temperature, indoor.humidity);
-    const float absHumOutdoor = relHumidityToAbs(outdoor.temperature, outdoor.humidity);
+    const float absHumIndoor = relHumidityToAbs(indoor->m_temperature, indoor->m_humidity);
+    const float absHumOutdoor = relHumidityToAbs(outdoor->m_temperature, outdoor->m_humidity);
     const float absHumSet = relHumidityToAbs(SET_TEMP, SET_HUM);
 
     // add some sensor information in the log file

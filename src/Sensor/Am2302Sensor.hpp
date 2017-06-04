@@ -20,7 +20,7 @@ class Am2302Sensor : public sensor::ISensor, public threading::Threading
 public:
     Am2302Sensor(const gpio::IGpioPtr& sensor, const logger::SysLoggerPtr& sysLogger);
 
-    SensorData getData() const override;
+    SensorDataPtr getData() const override;
 
     void recall() override;
 
@@ -35,7 +35,7 @@ private:
     gpio::IGpioPtr m_sensor;
 
     const logger::SysLoggerPtr m_sysLogger;
-    size_t m_loggerIdTemp{0};
-    size_t m_loggerIdHum{0};
+    const size_t m_loggerIdTemp{0};
+    const size_t m_loggerIdHum{0};
 };
 }

@@ -12,18 +12,27 @@ Am2302Sensor::Am2302Sensor(const gpio::IGpioPtr& sensor, const logger::SysLogger
     : threading::Threading(CALL_INTERVALL_AM2302)
     , m_sensor(sensor)
     , m_sysLogger(sysLogger)
+    , m_loggerIdTemp(sysLogger->generateId("Indoor Temperature"))
+    , m_loggerIdHum(sysLogger->generateId("Indoor Humidity"))
+
 {
     assert(m_sensor);
 
-    m_loggerIdTemp = m_sysLogger->generateId("Indoor Temperature");
-    m_loggerIdHum = m_sysLogger->generateId("Indoor Humidity");
 
     setInitialized();
 }
 
-SensorData Am2302Sensor::getData() const
+SensorDataPtr Am2302Sensor::getData() const
 {
-    return SensorData{m_temperature, m_humidity};
+    if (INVALID_FLOAT >= m_temperature) {
+        m_sysLogger->logError(m_loggerIdTemp, "Invalid indoor value");
+        return nullptr;
+    } else if (INVALID_FLOAT >= m_humidity) {
+        m_sysLogger->logError(m_loggerIdHum, "Invalid indoor value");
+        return nullptr;
+    } else {
+        return std::make_shared<SensorData>(m_temperature, m_humidity);
+    }
 }
 
 void Am2302Sensor::recall()

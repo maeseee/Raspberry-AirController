@@ -1,7 +1,6 @@
 #pragma once
 
 #include <cstddef>
-#include <limits>
 
 // Sensors
 static constexpr float SET_TEMP = 21.0;         // set point for temerautre [°C]
@@ -24,6 +23,3 @@ float relHumidityToAbs(const float tempC, const float humidityRel);
 float absHumidityToRel(const float tempC, const float humidityAbs);
 bool shouldWarm();
 size_t getDaytime();
-
-// Others
-static constexpr float INVALID_FLOAT = std::numeric_limits<float>::min();

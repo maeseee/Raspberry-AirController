@@ -30,24 +30,19 @@ HumLimitController::HumLimitController(const sensor::ISensorPtr& indoorSensor,
 
 void HumLimitController::recall()
 {
-
-    const sensor::SensorData indoorData = m_indoorSensor->getData();
-    if ((INVALID_FLOAT >= indoorData.temperature) || (INVALID_FLOAT >= indoorData.humidity)) {
-        m_sysLogger->logMsg(m_loggerId, "Invalid indoor sensor data. Process is canceled");
-        return;
-    }
-
-    const sensor::SensorData outdoorData = m_outdoorSensor->getData();
-    if ((INVALID_FLOAT >= outdoorData.temperature) || (INVALID_FLOAT >= outdoorData.humidity)) {
-        m_sysLogger->logMsg(m_loggerId, "Invalid outdoor sensor data. Process is canceled");
+    // grap sensor values
+    const sensor::SensorDataPtr indoor = m_indoorSensor->getData();
+    const sensor::SensorDataPtr outdoor = m_outdoorSensor->getData();
+    if ((nullptr == indoor) || (nullptr == outdoor)) {
+        m_sysLogger->logError(m_loggerId, "Invalid sensor value");
         return;
     }
 
     // calculate absHum
-    const float absHumIndoor = relHumidityToAbs(indoorData.temperature, indoorData.humidity);
-    const float absHumOutdoor = relHumidityToAbs(outdoorData.temperature, outdoorData.humidity);
-    const float absHumUpperLimit = relHumidityToAbs(indoorData.temperature, SET_HUM + HUM_LIMIT_TOLERANCE);
-    const float absHumLowerLimit = relHumidityToAbs(indoorData.temperature, SET_HUM - HUM_LIMIT_TOLERANCE);
+    const float absHumIndoor = relHumidityToAbs(indoor->m_temperature, indoor->m_humidity);
+    const float absHumOutdoor = relHumidityToAbs(outdoor->m_temperature, outdoor->m_humidity);
+    const float absHumUpperLimit = relHumidityToAbs(indoor->m_temperature, SET_HUM + HUM_LIMIT_TOLERANCE);
+    const float absHumLowerLimit = relHumidityToAbs(indoor->m_temperature, SET_HUM - HUM_LIMIT_TOLERANCE);
 
     std::stringstream logSs;
     logSs << "AbsHumIndoor is " << absHumIndoor << " and AbsHumOutdoor is " << absHumOutdoor << ": ";

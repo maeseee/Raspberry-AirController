@@ -21,7 +21,7 @@ class WeatherStation : public sensor::ISensor, public threading::Threading
 public:
     WeatherStation(const logger::SysLoggerPtr& sysLogger);
 
-    SensorData getData() const override;
+    SensorDataPtr getData() const override;
 
     void recall() override;
 
@@ -31,10 +31,10 @@ private:
     float m_temperature; // [°C]
     float m_humidity;    // [%]
 
-    size_t m_loggerIdTemp{0};
-    size_t m_loggerIdHum{0};
-    size_t m_loggerIdCon{0};
     const logger::SysLoggerPtr m_sysLogger;
+    const size_t m_loggerIdTemp{0};
+    const size_t m_loggerIdHum{0};
+    const size_t m_loggerIdCon{0};
 };
 
 static std::string m_receivedData; // will hold the url's contents

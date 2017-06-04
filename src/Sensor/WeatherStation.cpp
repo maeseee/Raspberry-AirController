@@ -25,10 +25,10 @@ WeatherStation::WeatherStation(const logger::SysLoggerPtr& sysLogger)
     , m_temperature(INVALID_FLOAT)
     , m_humidity(INVALID_FLOAT)
     , m_sysLogger(sysLogger)
+    , m_loggerIdTemp(m_sysLogger->generateId("Outdoor Temperature"))
+    , m_loggerIdHum(m_sysLogger->generateId("Outdoor Humidity"))
+    , m_loggerIdCon(m_sysLogger->generateId("Outdoor Connection"))
 {
-    m_loggerIdTemp = m_sysLogger->generateId("Outdoor Temperature");
-    m_loggerIdHum = m_sysLogger->generateId("Outdoor Humidity");
-    m_loggerIdCon = m_sysLogger->generateId("Outdoor Connection");
 
     setInitialized();
 }
@@ -71,9 +71,17 @@ size_t writeCallback(char* buf, size_t size, size_t nmemb, void* /*up*/)
     return size * nmemb; // tell curl how many bytes we handled
 }
 
-SensorData WeatherStation::getData() const
+SensorDataPtr WeatherStation::getData() const
 {
-    return SensorData{m_temperature, m_humidity};
+    if (INVALID_FLOAT >= m_temperature) {
+        m_sysLogger->logError(m_loggerIdTemp, "Invalid outdoor value");
+        return nullptr;
+    } else if (INVALID_FLOAT >= m_humidity) {
+        m_sysLogger->logError(m_loggerIdHum, "Invalid outdoor value");
+        return nullptr;
+    } else {
+        return std::make_shared<SensorData>(m_temperature, m_humidity);
+    }
 }
 
 void WeatherStation::updateData()
