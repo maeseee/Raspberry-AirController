@@ -10,8 +10,8 @@
 namespace controller
 {
 
-HumLimitController::HumLimitController(const sensor::ISensorPtr& indoorSensor,
-                                       const sensor::ISensorPtr& outdoorSensor,
+HumLimitController::HumLimitController(const sensor::SensorDataCPtr& indoorSensor,
+                                       const sensor::SensorDataCPtr& outdoorSensor,
                                        const gpio::IGpioPtr& gpioMainSystem,
                                        const logger::SysLoggerPtr& sysLogger)
     : threading::Threading(CALL_INTERVALL_HUMLIMIT)
@@ -30,19 +30,11 @@ HumLimitController::HumLimitController(const sensor::ISensorPtr& indoorSensor,
 
 void HumLimitController::recall()
 {
-    // grap sensor values
-    const sensor::SensorDataPtr indoor = m_indoorSensor->getData();
-    const sensor::SensorDataPtr outdoor = m_outdoorSensor->getData();
-    if ((nullptr == indoor) || (nullptr == outdoor)) {
-        m_sysLogger->logError(m_loggerId, "Invalid sensor value");
-        return;
-    }
-
     // calculate absHum
-    const float absHumIndoor = relHumidityToAbs(indoor->m_temperature, indoor->m_humidity);
-    const float absHumOutdoor = relHumidityToAbs(outdoor->m_temperature, outdoor->m_humidity);
-    const float absHumUpperLimit = relHumidityToAbs(indoor->m_temperature, SET_HUM + HUM_LIMIT_TOLERANCE);
-    const float absHumLowerLimit = relHumidityToAbs(indoor->m_temperature, SET_HUM - HUM_LIMIT_TOLERANCE);
+    const float absHumIndoor = relHumidityToAbs(m_indoorSensor->m_temperature, m_indoorSensor->m_humidity);
+    const float absHumOutdoor = relHumidityToAbs(m_outdoorSensor->m_temperature, m_outdoorSensor->m_humidity);
+    const float absHumUpperLimit = relHumidityToAbs(m_indoorSensor->m_temperature, SET_HUM + HUM_LIMIT_TOLERANCE);
+    const float absHumLowerLimit = relHumidityToAbs(m_indoorSensor->m_temperature, SET_HUM - HUM_LIMIT_TOLERANCE);
 
     std::stringstream logSs;
     logSs << "AbsHumIndoor is " << absHumIndoor << " and AbsHumOutdoor is " << absHumOutdoor << ": ";

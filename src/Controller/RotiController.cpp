@@ -50,8 +50,8 @@ void RotiController::recall()
     gpio::Value outputValue = gpio::Value::LOW;
 
     // grap sensor values
-    const sensor::SensorDataPtr indoor = m_indoorSensor->getData();
-    const sensor::SensorDataPtr outdoor = m_outdoorSensor->getData();
+    const sensor::SensorDataCPtr indoor = m_indoorSensor->getData();
+    const sensor::SensorDataCPtr outdoor = m_outdoorSensor->getData();
     if ((nullptr == indoor) || (nullptr == outdoor)) {
         m_sysLogger->logError(m_loggerId, "Invalid sensor value");
         return;

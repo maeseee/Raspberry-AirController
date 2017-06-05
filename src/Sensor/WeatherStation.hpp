@@ -21,15 +21,14 @@ class WeatherStation : public sensor::ISensor, public threading::Threading
 public:
     WeatherStation(const logger::SysLoggerPtr& sysLogger);
 
-    SensorDataPtr getData() const override;
+    SensorDataCPtr getData() const override;
 
     void recall() override;
 
 private:
     void updateData();
 
-    float m_temperature; // [°C]
-    float m_humidity;    // [%]
+    SensorDataPtr m_data;
 
     const logger::SysLoggerPtr m_sysLogger;
     const size_t m_loggerIdTemp{0};

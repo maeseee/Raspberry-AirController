@@ -20,7 +20,7 @@ class Am2302Sensor : public sensor::ISensor, public threading::Threading
 public:
     Am2302Sensor(const gpio::IGpioPtr& sensor, const logger::SysLoggerPtr& sysLogger);
 
-    SensorDataPtr getData() const override;
+    SensorDataCPtr getData() const override;
 
     void recall() override;
 
@@ -29,8 +29,7 @@ private:
     int readBit() const;
     int readByte() const;
 
-    float m_temperature; // [°C]
-    float m_humidity;    // [%]
+    SensorDataPtr m_data;
 
     gpio::IGpioPtr m_sensor;
 

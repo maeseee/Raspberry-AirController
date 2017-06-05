@@ -100,7 +100,8 @@ int main()
     // setup temperature controller
     controller::TempController tempController(mainSystemOr, sysLogger);
     // setup humidity limit controller
-    controller::HumLimitController humLimitController(indoorSensor, outdoorSensor, mainSystemOr, sysLogger);
+    controller::HumLimitController humLimitController(indoorSensor->getData(), outdoorSensor->getData(), mainSystemOr,
+                                                      sysLogger);
 
     time_trigger::OneTimeTriggerPtr oneTimeTrigger =
         std::make_shared<time_trigger::OneTimeTrigger>(mainSystemOr, sysLogger);

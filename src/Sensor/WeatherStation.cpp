@@ -22,8 +22,7 @@ static const char* CURRENT_WEATHER_URL =
 
 WeatherStation::WeatherStation(const logger::SysLoggerPtr& sysLogger)
     : threading::Threading(CALL_INTERVALL_WEB)
-    , m_temperature(INVALID_FLOAT)
-    , m_humidity(INVALID_FLOAT)
+    , m_data(std::make_shared<SensorData>(SET_TEMP, SET_HUM))
     , m_sysLogger(sysLogger)
     , m_loggerIdTemp(m_sysLogger->generateId("Outdoor Temperature"))
     , m_loggerIdHum(m_sysLogger->generateId("Outdoor Humidity"))
@@ -71,17 +70,9 @@ size_t writeCallback(char* buf, size_t size, size_t nmemb, void* /*up*/)
     return size * nmemb; // tell curl how many bytes we handled
 }
 
-SensorDataPtr WeatherStation::getData() const
+SensorDataCPtr WeatherStation::getData() const
 {
-    if (INVALID_FLOAT >= m_temperature) {
-        m_sysLogger->logError(m_loggerIdTemp, "Invalid outdoor value");
-        return nullptr;
-    } else if (INVALID_FLOAT >= m_humidity) {
-        m_sysLogger->logError(m_loggerIdHum, "Invalid outdoor value");
-        return nullptr;
-    } else {
-        return std::make_shared<SensorData>(m_temperature, m_humidity);
-    }
+    return m_data;
 }
 
 void WeatherStation::updateData()
@@ -97,19 +88,17 @@ void WeatherStation::updateData()
     boost::optional<float> temp = pt.get_optional<float>("main.temp");
 
     if (temp) {
-        m_temperature = temp.get() - KELVIN;
-        m_sysLogger->logSensorValue(m_loggerIdTemp, m_temperature);
+        m_data->m_temperature = temp.get() - KELVIN;
+        m_sysLogger->logSensorValue(m_loggerIdTemp, m_data->m_temperature);
     } else {
-        m_temperature = INVALID_FLOAT;
         m_sysLogger->logError(m_loggerIdTemp, "invalid new outdoor temp");
     }
 
     boost::optional<float> humidity = pt.get_optional<float>("main.humidity");
     if (temp) {
-        m_humidity = humidity.get();
-        m_sysLogger->logSensorValue(m_loggerIdHum, m_humidity);
+        m_data->m_humidity = humidity.get();
+        m_sysLogger->logSensorValue(m_loggerIdHum, m_data->m_humidity);
     } else {
-        m_humidity = INVALID_FLOAT;
         m_sysLogger->logError(m_loggerIdHum, "invalid new outdoor hum");
     }
 }

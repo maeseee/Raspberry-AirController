@@ -17,10 +17,12 @@ class TimeTrigger;
 using TimeTriggerPtr = std::shared_ptr<TimeTrigger>;
 }
 
-// Class
 namespace controller
 {
+class SensorController;
+using SensorControllerPtr = std::shared_ptr<SensorController>;
 
+// Class
 class HumLimitController : public threading::Threading
 {
 public:
@@ -28,8 +30,8 @@ public:
    * @brief TemperatureController turns on and off the air system
    * @param gpioMainSystem gpio for switching on and off
    */
-    HumLimitController(const sensor::ISensorPtr& indoorSensor,
-                       const sensor::ISensorPtr& outdoorSensor,
+    HumLimitController(const sensor::SensorDataCPtr& indoorSensor,
+                       const sensor::SensorDataCPtr& outdoorSensor,
                        const gpio::IGpioPtr& gpioMainSystem,
                        const logger::SysLoggerPtr& sysLogger);
 
@@ -38,8 +40,8 @@ public:
 private:
     bool shouldWarm() const;
 
-    sensor::ISensorPtr m_indoorSensor;
-    sensor::ISensorPtr m_outdoorSensor;
+    sensor::SensorDataCPtr m_indoorSensor;
+    sensor::SensorDataCPtr m_outdoorSensor;
     gpio::IGpioPtr m_gpio;
 
     time_trigger::TimeTriggerPtr m_timer;

@@ -20,13 +20,14 @@ public:
     float m_humidity;    // [%] humadity
 };
 using SensorDataPtr = std::shared_ptr<SensorData>;
+using SensorDataCPtr = std::shared_ptr<const SensorData>;
 
 class ISensor
 {
 public:
     virtual ~ISensor() = default;
 
-    virtual SensorDataPtr getData() const = 0;
+    virtual SensorDataCPtr getData() const = 0;
 };
 using ISensorPtr = std::shared_ptr<ISensor>;
 }

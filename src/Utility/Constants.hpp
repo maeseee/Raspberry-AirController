@@ -3,7 +3,7 @@
 #include <cstddef>
 
 // Sensors
-static constexpr float SET_TEMP = 21.0;         // set point for temerautre [°C]
+static constexpr float SET_TEMP = 22.0;         // set point for temerautre [°C]
 static constexpr float SET_HUM = 50.0;          // set point for humidity [%]
 static constexpr float HUM_LIMIT_TOLERANCE = 5; // +- to rel set_hum. This tolenrance for no action
 
