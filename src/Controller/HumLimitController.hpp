@@ -1,7 +1,5 @@
 #pragma once
 
-#include <Gpio/IGpio.hpp>
-#include <Sensor/ISensor.hpp>
 #include <Threading.hpp>
 
 // FWD
@@ -9,6 +7,12 @@ namespace logger
 {
 class SysLogger;
 using SysLoggerPtr = std::shared_ptr<SysLogger>;
+}
+
+namespace gpio
+{
+class IGpio;
+using IGpioPtr = std::shared_ptr<IGpio>;
 }
 
 namespace time_trigger
@@ -21,8 +25,12 @@ namespace controller
 {
 class SensorController;
 using SensorControllerPtr = std::shared_ptr<SensorController>;
+}
 
 // Class
+namespace controller
+{
+
 class HumLimitController : public threading::Threading
 {
 public:
@@ -30,8 +38,7 @@ public:
    * @brief TemperatureController turns on and off the air system
    * @param gpioMainSystem gpio for switching on and off
    */
-    HumLimitController(const sensor::SensorDataCPtr& indoorSensor,
-                       const sensor::SensorDataCPtr& outdoorSensor,
+    HumLimitController(const SensorControllerPtr& sensController,
                        const gpio::IGpioPtr& gpioMainSystem,
                        const logger::SysLoggerPtr& sysLogger);
 
@@ -40,9 +47,8 @@ public:
 private:
     bool shouldWarm() const;
 
-    sensor::SensorDataCPtr m_indoorSensor;
-    sensor::SensorDataCPtr m_outdoorSensor;
-    gpio::IGpioPtr m_gpio;
+    const controller::SensorControllerPtr m_sensController;
+    const gpio::IGpioPtr m_gpio;
 
     time_trigger::TimeTriggerPtr m_timer;
 

@@ -2,6 +2,7 @@
 #include <Controller/NightAir.hpp>
 #include <Controller/OneTimeTrigger.hpp>
 #include <Controller/RotiController.hpp>
+#include <Controller/SensorController.hpp>
 #include <Controller/TempController.hpp>
 #include <Controller/TimeTrigger.hpp>
 #include <Gpio/Gpio.hpp>
@@ -91,8 +92,11 @@ int main()
     time_trigger::TimeTrigger timeTrigger(START_NIGHT_CONDITION + SAFETY_CONDITION,
                                           END_NIGHT_CONDITION - SAFETY_CONDITION, timer, "NightPower", sysLogger);
 
+    // setup sensor controller
+    controller::SensorControllerPtr sensorController =
+        std::make_shared<controller::SensorController>(indoorSensor->getData(), outdoorSensor->getData());
     // setup roti
-    controller::RotiController humidityController(indoorSensor, outdoorSensor, roti, sysLogger);
+    controller::RotiController humidityController(sensorController, roti, sysLogger);
     // setup main system
     gpio::IGpioPtr mainSystemOr = std::make_shared<gpio::GpioOr>(mainSystem, sysLogger);
     // setup night air controller
@@ -100,8 +104,7 @@ int main()
     // setup temperature controller
     controller::TempController tempController(mainSystemOr, sysLogger);
     // setup humidity limit controller
-    controller::HumLimitController humLimitController(indoorSensor->getData(), outdoorSensor->getData(), mainSystemOr,
-                                                      sysLogger);
+    controller::HumLimitController humLimitController(sensorController, mainSystemOr, sysLogger);
 
     time_trigger::OneTimeTriggerPtr oneTimeTrigger =
         std::make_shared<time_trigger::OneTimeTrigger>(mainSystemOr, sysLogger);

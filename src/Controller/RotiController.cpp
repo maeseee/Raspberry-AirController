@@ -1,4 +1,5 @@
 #include "RotiController.hpp"
+#include <Controller/SensorController.hpp>
 #include <Gpio/IGpio.hpp>
 #include <Sensor/ISensor.hpp>
 #include <SysLogger.hpp>
@@ -12,20 +13,17 @@ namespace controller
 
 static const size_t LOG_INTERVALL = 1 * HOUR_TO_SEC / CALL_INTERVALL_ROTI;
 
-RotiController::RotiController(const sensor::ISensorPtr& indoorSensor,
-                               const sensor::ISensorPtr& outdoorSensor,
+RotiController::RotiController(const controller::SensorControllerPtr sensController,
                                const gpio::IGpioPtr& gpioRoti,
                                const logger::SysLoggerPtr& sysLogger)
     : threading::Threading(CALL_INTERVALL_ROTI)
-    , m_indoorSensor(indoorSensor)
-    , m_outdoorSensor(outdoorSensor)
+    , m_sensController(sensController)
     , m_gpioRoti(gpioRoti)
-    , m_lastOutputValue{gpio::Value::INVALID}
+    , m_lastOutputValue(gpio::Value::INVALID)
     , m_sysLogger(sysLogger)
     , m_loggerId(sysLogger->generateId("RotiController"))
 {
-    assert(m_indoorSensor);
-    assert(m_outdoorSensor);
+    assert(m_sensController);
     assert(m_gpioRoti);
 
     setInitialized();
@@ -52,31 +50,8 @@ void RotiController::recall()
 {
     gpio::Value outputValue = gpio::Value::LOW;
 
-    // grap sensor values
-    const sensor::SensorDataCPtr indoor = m_indoorSensor->getData();
-    const sensor::SensorDataCPtr outdoor = m_outdoorSensor->getData();
-    if ((nullptr == indoor) || (nullptr == outdoor)) {
-        m_sysLogger->logError(m_loggerId, "Invalid sensor value");
-        return;
-    }
-
-    // calculate absHum
-    const float absHumIndoor = relHumidityToAbs(indoor->m_temperature, indoor->m_humidity);
-    const float absHumOutdoor = relHumidityToAbs(outdoor->m_temperature, outdoor->m_humidity);
-    const float absHumSet = relHumidityToAbs(SET_TEMP, SET_HUM);
-
-    // add some sensor information in the log file
-    if (0 == m_logCounter) {
-        std::stringstream logSs;
-        logSs << "AbsHumIndoor: " << absHumIndoor << "\tAbsHumOutdoor: " << absHumOutdoor
-              << "\tAbsHumSet: " << absHumSet;
-        m_sysLogger->logMsg(m_loggerId, logSs.str());
-        ++m_logCounter;
-        m_logCounter %= LOG_INTERVALL;
-    }
-
     // set roti output
-    if (shouldBeEnabled(absHumIndoor, absHumOutdoor, absHumSet)) {
+    if (m_sensController->shouldRotiBeEnabled()) {
         outputValue = gpio::Value::HIGH;
     }
 

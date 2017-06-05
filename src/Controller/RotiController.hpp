@@ -9,7 +9,6 @@ class SysLogger;
 using SysLoggerPtr = std::shared_ptr<SysLogger>;
 }
 
-// Class
 namespace gpio
 {
 class GpioCollector;
@@ -21,11 +20,13 @@ using IGpioPtr = std::shared_ptr<IGpio>;
 enum class Value;
 }
 
-namespace sensor
+namespace controller
 {
-class ISensor;
-using ISensorPtr = std::shared_ptr<ISensor>;
+class SensorController;
+using SensorControllerPtr = std::shared_ptr<SensorController>;
 }
+
+// Class
 namespace controller
 {
 
@@ -38,8 +39,7 @@ public:
    * @param outdoorSensor sensor for outdoor humidity [%]
    * @param gpioRoti gpio for controlling the roti
    */
-    RotiController(const sensor::ISensorPtr& indoorSensor,
-                   const sensor::ISensorPtr& outdoorSensor,
+    RotiController(const controller::SensorControllerPtr sensController,
                    const gpio::IGpioPtr& gpioRoti,
                    const logger::SysLoggerPtr& sysLogger);
 
@@ -50,20 +50,12 @@ public:
 private:
     bool shouldBeEnabled(const float indoor, const float outdoor, const float set) const;
 
-    sensor::ISensorPtr m_indoorSensor;
-    sensor::ISensorPtr m_outdoorSensor;
-    gpio::IGpioPtr m_gpioRoti;
-
-    float m_measuredTempIndoor;  // [°C]
-    float m_measuredTempOutdoor; // [°C]
-
-    float m_measuredHumIndoor;  // [%]
-    float m_measuredHumOutdoor; // [%]
+    const controller::SensorControllerPtr m_sensController;
+    const gpio::IGpioPtr m_gpioRoti;
 
     gpio::Value m_lastOutputValue;
 
     const logger::SysLoggerPtr m_sysLogger;
     const size_t m_loggerId;
-    size_t m_logCounter{0};
 };
 }
