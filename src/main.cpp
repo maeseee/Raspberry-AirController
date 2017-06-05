@@ -98,7 +98,7 @@ int main()
     // setup roti
     controller::RotiController humidityController(sensorController, roti, sysLogger);
     // setup main system
-    gpio::IGpioPtr mainSystemOr = std::make_shared<gpio::GpioOr>(mainSystem, sysLogger);
+    gpio::IGpioPtr mainSystemOr = std::make_shared<gpio::GpioOr>(mainSystem, sensorController, sysLogger);
     // setup night air controller
     controller::NightAir nightAir(mainSystemOr, sysLogger);
     // setup temperature controller

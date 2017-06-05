@@ -5,6 +5,20 @@
 #include <memory>
 #include <set>
 
+// FWD
+namespace controller
+{
+class SensorController;
+using SensorControllerPtr = std::shared_ptr<SensorController>;
+}
+
+namespace logger
+{
+class SysLogger;
+using SysLoggerPtr = std::shared_ptr<SysLogger>;
+}
+
+// class
 namespace gpio
 {
 
@@ -16,7 +30,9 @@ namespace gpio
 class GpioOr : public IGpio
 {
 public:
-    explicit GpioOr(const IGpioPtr& gpioOutput, const logger::SysLoggerPtr& sysLogger);
+    explicit GpioOr(const IGpioPtr& gpioOutput,
+                    const controller::SensorControllerPtr& sensController,
+                    const logger::SysLoggerPtr& sysLogger);
 
     bool setDirection(const size_t controllerId, const Direction dir) override;
     Direction getDirection() const override;
@@ -28,6 +44,7 @@ public:
 
 private:
     const IGpioPtr m_gpioOutput;
+    const controller::SensorControllerPtr m_sensController;
 
     std::set<size_t> m_controllerIdHigh;
 

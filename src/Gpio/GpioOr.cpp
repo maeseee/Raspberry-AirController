@@ -1,4 +1,5 @@
 #include "GpioOr.hpp"
+#include <Controller/SensorController.hpp>
 #include <SysLogger.hpp>
 #include <Utility/Constants.hpp>
 
@@ -9,11 +10,17 @@
 namespace gpio
 {
 
-GpioOr::GpioOr(const IGpioPtr& gpioOutput, const logger::SysLoggerPtr& sysLogger)
+GpioOr::GpioOr(const IGpioPtr& gpioOutput,
+               const controller::SensorControllerPtr& sensController,
+               const logger::SysLoggerPtr& sysLogger)
     : m_gpioOutput(gpioOutput)
+    , m_sensController(sensController)
     , m_sysLogger(sysLogger)
     , m_loggerId(sysLogger->generateId("GpioOr"))
 {
+    assert(m_gpioOutput);
+    assert(m_sensController);
+    assert(m_sysLogger);
 }
 
 bool GpioOr::setDirection(const size_t /*controllerId*/, const Direction dir)
@@ -68,7 +75,9 @@ Value GpioOr::getValue() const
     }
 
     // Don't switch on durring the hot daytime
-    if ((not shouldWarm()) && (Value::HIGH == aimSystemState)) {
+
+    if ((m_sensController->difIndoorTemperatur2Outdoor() < 0) && (not shouldWarm()) &&
+        (Value::HIGH == aimSystemState)) {
         const size_t daytime = getDaytime();
 
         const size_t startHotDay = 10 * HOUR_TO_SEC;
