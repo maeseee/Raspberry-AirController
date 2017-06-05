@@ -1,4 +1,6 @@
 #include "RotiController.hpp"
+#include <Gpio/IGpio.hpp>
+#include <Sensor/ISensor.hpp>
 #include <SysLogger.hpp>
 #include <Utility/Constants.hpp>
 
@@ -18,6 +20,7 @@ RotiController::RotiController(const sensor::ISensorPtr& indoorSensor,
     , m_indoorSensor(indoorSensor)
     , m_outdoorSensor(outdoorSensor)
     , m_gpioRoti(gpioRoti)
+    , m_lastOutputValue{gpio::Value::INVALID}
     , m_sysLogger(sysLogger)
     , m_loggerId(sysLogger->generateId("RotiController"))
 {

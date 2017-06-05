@@ -1,7 +1,5 @@
 #pragma once
 
-#include <Gpio/IGpio.hpp>
-#include <Sensor/ISensor.hpp>
 #include <Threading.hpp>
 
 // FWD
@@ -16,6 +14,17 @@ namespace gpio
 {
 class GpioCollector;
 using GpioCollectorPtr = std::shared_ptr<GpioCollector>;
+
+class IGpio;
+using IGpioPtr = std::shared_ptr<IGpio>;
+
+enum class Value;
+}
+
+namespace sensor
+{
+class ISensor;
+using ISensorPtr = std::shared_ptr<ISensor>;
 }
 namespace controller
 {
@@ -51,7 +60,7 @@ private:
     float m_measuredHumIndoor;  // [%]
     float m_measuredHumOutdoor; // [%]
 
-    gpio::Value m_lastOutputValue{gpio::Value::INVALID};
+    gpio::Value m_lastOutputValue;
 
     const logger::SysLoggerPtr m_sysLogger;
     const size_t m_loggerId;

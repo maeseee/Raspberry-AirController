@@ -1,5 +1,6 @@
 #include "NightAir.hpp"
 #include <Controller/TimeTrigger.hpp>
+#include <Gpio/IGpio.hpp>
 #include <Utility/Constants.hpp>
 
 #include <cassert>

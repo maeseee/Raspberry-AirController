@@ -1,5 +1,6 @@
 #include "TempController.hpp"
 #include <Controller/TimeTrigger.hpp>
+#include <Gpio/IGpio.hpp>
 #include <SysLogger.hpp>
 #include <Utility/Constants.hpp>
 

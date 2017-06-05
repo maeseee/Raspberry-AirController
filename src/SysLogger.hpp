@@ -9,7 +9,7 @@
 // FWD
 namespace gpio
 {
-enum class Value : size_t;
+enum class Value;
 }
 
 // Class

@@ -1,6 +1,5 @@
 #pragma once
 
-#include <Gpio/IGpio.hpp>
 #include <Threading.hpp>
 
 #include <string>
@@ -10,6 +9,12 @@ namespace logger
 {
 class SysLogger;
 using SysLoggerPtr = std::shared_ptr<SysLogger>;
+}
+
+namespace gpio
+{
+class IGpio;
+using IGpioPtr = std::shared_ptr<IGpio>;
 }
 
 // Class

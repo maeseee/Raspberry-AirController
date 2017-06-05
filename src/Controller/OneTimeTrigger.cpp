@@ -1,4 +1,5 @@
 #include "OneTimeTrigger.hpp"
+#include <Gpio/IGpio.hpp>
 #include <SysLogger.hpp>
 
 #include <unistd.h> // for sleep
