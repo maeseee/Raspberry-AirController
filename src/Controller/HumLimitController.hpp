@@ -45,8 +45,6 @@ public:
     void recall() override;
 
 private:
-    bool shouldWarm() const;
-
     const controller::SensorControllerPtr m_sensController;
     const gpio::IGpioPtr m_gpio;
 
