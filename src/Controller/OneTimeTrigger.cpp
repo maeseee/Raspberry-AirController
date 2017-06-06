@@ -9,6 +9,7 @@ namespace time_trigger
 
 time_trigger::OneTimeTrigger::OneTimeTrigger(const gpio::IGpioPtr& gpio, const logger::SysLoggerPtr& sysLogger)
     : m_gpio(gpio)
+    , m_thread(std::thread())
     , m_sysLogger(sysLogger)
 {
 }
@@ -31,7 +32,7 @@ void OneTimeTrigger::addTrigger(const size_t duration)
 
 void OneTimeTrigger::threadFn(size_t duration)
 {
-    size_t loggerId = m_sysLogger->generateId("OneTimeTrigger");
+    const size_t loggerId = m_sysLogger->generateId("OneTimeTrigger");
     m_gpio->setValue(loggerId, gpio::Value::HIGH);
 
     for (size_t durationCounter = 0; (false == m_stopThread) && (durationCounter < duration); ++durationCounter) {

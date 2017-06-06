@@ -60,7 +60,8 @@ MmioState pi_2_mmio_init(void)
             return MmioState::DEVMEM_ERROR;
         }
         // Map GPIO memory to location in process space.
-        pi_2_mmio_gpio = (uint32_t*)mmap(NULL, GPIO_LENGTH, PROT_READ | PROT_WRITE, MAP_SHARED, fd, gpio_base);
+        pi_2_mmio_gpio =
+            static_cast<uint32_t*>(mmap(NULL, GPIO_LENGTH, PROT_READ | PROT_WRITE, MAP_SHARED, fd, gpio_base));
         close(fd);
         if (pi_2_mmio_gpio == MAP_FAILED) {
             // Don't save the result if the memory mapping failed.

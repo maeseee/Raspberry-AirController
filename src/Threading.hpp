@@ -1,7 +1,7 @@
 #pragma once
 
-#include <thread>
 #include <atomic>
+#include <thread>
 
 namespace threading
 {
@@ -25,8 +25,8 @@ public:
 private:
     void threadFn();
 
-    std::thread m_thread;
     const size_t m_intervall;
+    std::thread m_thread;
     size_t m_timeCounter{0};
 
     std::atomic_bool m_isInitialized{false};

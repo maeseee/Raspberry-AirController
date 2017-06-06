@@ -32,10 +32,10 @@ private:
 
     gpio::IGpioPtr m_gpio;
 
-    const logger::SysLoggerPtr m_sysLogger;
-
     std::thread m_thread;
     bool m_stopThread{false};
+
+    const logger::SysLoggerPtr m_sysLogger;
 };
 
 using OneTimeTriggerPtr = std::shared_ptr<OneTimeTrigger>;

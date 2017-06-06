@@ -8,8 +8,8 @@ namespace threading
 
 Threading::Threading(const size_t intervall)
     : m_intervall{intervall}
+    , m_thread(std::thread(&Threading::threadFn, this))
 {
-    m_thread = std::thread(&Threading::threadFn, this);
 }
 
 Threading::~Threading()
@@ -37,7 +37,7 @@ void Threading::setInitialized()
 void Threading::threadFn()
 {
     // wait until the derived object is completely constructed
-    while(!m_isInitialized) {
+    while (!m_isInitialized) {
         sleep(1);
     }
 

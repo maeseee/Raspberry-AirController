@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.6)
 
 project(lueftung)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -O2 -Wall -Werror -Wextra -Wchkp -Wnull-dereference -Waddress -Wsuggest-override -Wduplicated-cond -Wfloat-equal -Wshadow -Wuseless-cast -Wpedantic")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -O2 -Wall -Werror -Wextra -Wchkp -Wnull-dereference -Waddress -Wsuggest-override -Wduplicated-cond -Wfloat-equal -Wshadow -Wuseless-cast -Wpedantic -Wunused-value -Wold-style-cast -Winit-self")
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS} -std=c++11 -O2")
 
 include_directories(src/)

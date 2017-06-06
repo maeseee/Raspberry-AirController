@@ -152,8 +152,8 @@ DhtState pi_2_dht_read(size_t type, size_t pin, float* humidity, float* temperat
     if (data[4] == ((data[0] + data[1] + data[2] + data[3]) & 0xFF)) {
         if (type == DHT11) {
             // Get humidity and temp for DHT11 sensor.
-            *humidity = (float)data[0];
-            *temperature = (float)data[2];
+            *humidity = static_cast<float>(data[0]);
+            *temperature = static_cast<float>(data[2]);
         } else if (type == DHT22) {
             // Calculate humidity and temp for DHT22 sensor.
             *humidity = (data[0] * 256 + data[1]) / 10.0f;
