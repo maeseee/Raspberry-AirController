@@ -1,0 +1,880 @@
+LogMsg (25.5.2017:13:58): Main (1) mentioned that: Newly generated
+LogMsg (25.5.2017:13:58): Main (1) mentioned that: Start application
+LogMsg (25.5.2017:13:58): Gpio19 (2) mentioned that: Newly generated
+LogMsg (25.5.2017:13:58): Gpio5 (3) mentioned that: Newly generated
+LogMsg (25.5.2017:13:58): Gpio6 (4) mentioned that: Newly generated
+LogMsg (25.5.2017:13:58): Outdoor Temperature (5) mentioned that: Newly generated
+LogMsg (25.5.2017:13:58): Outdoor Humidity (6) mentioned that: Newly generated
+LogMsg (25.5.2017:13:58): Outdoor Connection (7) mentioned that: Newly generated
+LogMsg (25.5.2017:13:58): Gpio4 (8) mentioned that: Newly generated
+LogMsg (25.5.2017:13:58): Indoor Temperature (9) mentioned that: Newly generated
+LogMsg (25.5.2017:13:58): Indoor Humidity (10) mentioned that: Newly generated
+LogMsg (25.5.2017:13:58): Error: Outdoor Connection (7) mentioned that: curl_easy_perform() failed: Couldn't resolve host name
+LogMsg (25.5.2017:13:58): Sensor value of Indoor Temperature (9) caught the value 23.200001
+LogMsg (25.5.2017:13:58): Sensor value of Indoor Humidity (10) caught the value 57.000000
+LogMsg (25.5.2017:13:58): TimeTrigger NightPower (11) mentioned that: Newly generated
+LogMsg (25.5.2017:13:58): TimeTrigger NightPower (11) mentioned that: Add TimeTrigger for gpio 19: on at 22:15 and off at  6:45
+LogMsg (25.5.2017:13:58): RotiController (12) mentioned that: Newly generated
+LogMsg (25.5.2017:13:58): GpioOr (13) mentioned that: Newly generated
+LogMsg (25.5.2017:13:58): TimeTrigger Night hourly air (14) mentioned that: Newly generated
+LogMsg (25.5.2017:13:58): TimeTrigger Night hourly air (14) mentioned that: Add TimeTrigger for gpio 5: on at 22:15 and off at  22:25
+LogMsg (25.5.2017:13:58): TimeTrigger Night hourly air (15) mentioned that: Newly generated
+LogMsg (25.5.2017:13:58): TimeTrigger Night hourly air (15) mentioned that: Add TimeTrigger for gpio 5: on at 23:15 and off at  23:25
+LogMsg (25.5.2017:13:58): TimeTrigger Night hourly air (16) mentioned that: Newly generated
+LogMsg (25.5.2017:13:58): TimeTrigger Night hourly air (16) mentioned that: Add TimeTrigger for gpio 5: on at 0:15 and off at  0:25
+LogMsg (25.5.2017:13:58): TimeTrigger Night hourly air (17) mentioned that: Newly generated
+LogMsg (25.5.2017:13:58): TimeTrigger Night hourly air (17) mentioned that: Add TimeTrigger for gpio 5: on at 1:15 and off at  1:25
+LogMsg (25.5.2017:13:58): TimeTrigger Night hourly air (18) mentioned that: Newly generated
+LogMsg (25.5.2017:13:58): TimeTrigger Night hourly air (18) mentioned that: Add TimeTrigger for gpio 5: on at 2:15 and off at  2:25
+LogMsg (25.5.2017:13:58): GpioOr (13) mentioned that: Turning system off
+LogMsg (25.5.2017:13:58): TimeTrigger Night hourly air (19) mentioned that: Newly generated
+LogMsg (25.5.2017:13:58): TimeTrigger Night hourly air (19) mentioned that: Add TimeTrigger for gpio 5: on at 3:15 and off at  3:25
+LogMsg (25.5.2017:13:58): TimeTrigger Night hourly air (20) mentioned that: Newly generated
+LogMsg (25.5.2017:13:58): TimeTrigger Night hourly air (20) mentioned that: Add TimeTrigger for gpio 5: on at 4:15 and off at  4:25
+LogMsg (25.5.2017:13:58): TimeTrigger Night hourly air (21) mentioned that: Newly generated
+LogMsg (25.5.2017:13:58): TimeTrigger Night hourly air (21) mentioned that: Add TimeTrigger for gpio 5: on at 5:15 and off at  5:25
+LogMsg (25.5.2017:13:58): TimeTrigger Night hourly air (22) mentioned that: Newly generated
+LogMsg (25.5.2017:13:58): TimeTrigger Night hourly air (22) mentioned that: Add TimeTrigger for gpio 5: on at 6:15 and off at  6:25
+LogMsg (25.5.2017:13:58): TimeTrigger Night hourly air (23) mentioned that: Newly generated
+LogMsg (25.5.2017:13:58): TimeTrigger Night hourly air (23) mentioned that: Add TimeTrigger for gpio 5: on at 7:15 and off at  7:25
+LogMsg (25.5.2017:13:58): TimeTrigger Night hourly air (24) mentioned that: Newly generated
+LogMsg (25.5.2017:13:58): TimeTrigger Night hourly air (24) mentioned that: Add TimeTrigger for gpio 5: on at 8:15 and off at  8:25
+LogMsg (25.5.2017:13:58): TempController (25) mentioned that: Newly generated
+LogMsg (25.5.2017:13:58): HumLimitController (26) mentioned that: Newly generated
+LogMsg (25.5.2017:13:58): Error: RotiController (12) mentioned that: Invalid outdoor value
+LogMsg (25.5.2017:13:58): TimeTrigger Summer fresh air (27) mentioned that: Newly generated
+LogMsg (25.5.2017:13:58): TimeTrigger Summer fresh air (27) mentioned that: Add TimeTrigger for gpio 5: on at 1:00 and off at  7:00
+LogMsg (25.5.2017:13:58): HumLimitController (26) mentioned that: Invalid outdoor sensor data. Process is canceled
+LogMsg (25.5.2017:14:03): Sensor value of Indoor Temperature (9) caught the value 23.100000
+LogMsg (25.5.2017:14:03): Sensor value of Indoor Humidity (10) caught the value 56.400002
+LogMsg (25.5.2017:14:03): Error: RotiController (12) mentioned that: Invalid outdoor value
+LogMsg (25.5.2017:14:08): Sensor value of Indoor Temperature (9) caught the value 23.200001
+LogMsg (25.5.2017:14:08): Sensor value of Indoor Humidity (10) caught the value 56.400002
+LogMsg (25.5.2017:14:08): Error: RotiController (12) mentioned that: Invalid outdoor value
+LogMsg (25.5.2017:14:13): Sensor value of Indoor Temperature (9) caught the value 23.200001
+LogMsg (25.5.2017:14:13): Sensor value of Indoor Humidity (10) caught the value 56.400002
+LogMsg (25.5.2017:14:13): Error: RotiController (12) mentioned that: Invalid outdoor value
+LogMsg (25.5.2017:14:18): Sensor value of Indoor Temperature (9) caught the value 23.200001
+LogMsg (25.5.2017:14:18): Sensor value of Indoor Humidity (10) caught the value 56.500000
+LogMsg (25.5.2017:14:18): Error: RotiController (12) mentioned that: Invalid outdoor value
+LogMsg (25.5.2017:14:18): HumLimitController (26) mentioned that: Invalid outdoor sensor data. Process is canceled
+LogMsg (25.5.2017:14:23): Error: RotiController (12) mentioned that: Invalid outdoor value
+LogMsg (25.5.2017:14:23): Sensor value of Indoor Temperature (9) caught the value 23.299999
+LogMsg (25.5.2017:14:23): Sensor value of Indoor Humidity (10) caught the value 56.700001
+LogMsg (25.5.2017:14:28): Sensor value of Outdoor Temperature (5) caught the value 22.000000
+LogMsg (25.5.2017:14:28): Sensor value of Outdoor Humidity (6) caught the value 53.000000
+LogMsg (25.5.2017:14:28): RotiController (12) mentioned that: AbsHumIndoor: 11.3668	AbsHumOutdoor: 9.74326	AbsHumSet: 8.59915
+LogMsg (25.5.2017:14:28): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:14:28): Sensor value of Indoor Temperature (9) caught the value 23.200001
+LogMsg (25.5.2017:14:28): Sensor value of Indoor Humidity (10) caught the value 56.500000
+LogMsg (25.5.2017:14:33): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:14:33): Sensor value of Indoor Temperature (9) caught the value 23.299999
+LogMsg (25.5.2017:14:33): Sensor value of Indoor Humidity (10) caught the value 56.700001
+LogMsg (25.5.2017:14:38): HumLimitController (26) mentioned that: AbsHumIndoor is 11.3668 and AbsHumOutdoor is 9.74326: The upper limit is 11.026 -> So fresh air is used to lower the indoor humidity
+LogMsg (25.5.2017:14:38): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:14:38): Sensor value of Indoor Temperature (9) caught the value 23.200001
+LogMsg (25.5.2017:14:38): Sensor value of Indoor Humidity (10) caught the value 56.500000
+LogMsg (25.5.2017:14:43): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:14:43): Sensor value of Indoor Temperature (9) caught the value 23.200001
+LogMsg (25.5.2017:14:43): Sensor value of Indoor Humidity (10) caught the value 56.599998
+LogMsg (25.5.2017:14:48): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:14:48): Sensor value of Indoor Temperature (9) caught the value 23.200001
+LogMsg (25.5.2017:14:48): Sensor value of Indoor Humidity (10) caught the value 56.299999
+LogMsg (25.5.2017:14:53): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:14:53): Sensor value of Indoor Temperature (9) caught the value 23.299999
+LogMsg (25.5.2017:14:53): Sensor value of Indoor Humidity (10) caught the value 56.299999
+LogMsg (25.5.2017:14:58): Sensor value of Outdoor Temperature (5) caught the value 22.330017
+LogMsg (25.5.2017:14:58): Sensor value of Outdoor Humidity (6) caught the value 40.000000
+LogMsg (25.5.2017:14:58): HumLimitController (26) mentioned that: AbsHumIndoor is 11.2866 and AbsHumOutdoor is 7.51692: The upper limit is 11.026 -> So fresh air is used to lower the indoor humidity
+LogMsg (25.5.2017:14:58): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:14:58): Sensor value of Indoor Temperature (9) caught the value 23.299999
+LogMsg (25.5.2017:14:58): Sensor value of Indoor Humidity (10) caught the value 56.000000
+LogMsg (25.5.2017:15:03): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:15:03): Sensor value of Indoor Temperature (9) caught the value 23.299999
+LogMsg (25.5.2017:15:03): Sensor value of Indoor Humidity (10) caught the value 56.400002
+LogMsg (25.5.2017:15:08): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:15:08): Sensor value of Indoor Temperature (9) caught the value 23.299999
+LogMsg (25.5.2017:15:08): Sensor value of Indoor Humidity (10) caught the value 56.599998
+LogMsg (25.5.2017:15:13): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:15:13): Sensor value of Indoor Temperature (9) caught the value 23.299999
+LogMsg (25.5.2017:15:13): Sensor value of Indoor Humidity (10) caught the value 56.700001
+LogMsg (25.5.2017:15:18): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:15:18): HumLimitController (26) mentioned that: AbsHumIndoor is 11.3668 and AbsHumOutdoor is 7.51692: The upper limit is 11.026 -> So fresh air is used to lower the indoor humidity
+LogMsg (25.5.2017:15:18): Sensor value of Indoor Temperature (9) caught the value 23.299999
+LogMsg (25.5.2017:15:18): Sensor value of Indoor Humidity (10) caught the value 56.599998
+LogMsg (25.5.2017:15:23): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:15:23): Sensor value of Indoor Temperature (9) caught the value 23.299999
+LogMsg (25.5.2017:15:23): Sensor value of Indoor Humidity (10) caught the value 56.500000
+LogMsg (25.5.2017:15:28): Sensor value of Outdoor Temperature (5) caught the value 22.670013
+LogMsg (25.5.2017:15:28): Sensor value of Outdoor Humidity (6) caught the value 43.000000
+LogMsg (25.5.2017:15:28): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:15:28): Sensor value of Indoor Temperature (9) caught the value 23.299999
+LogMsg (25.5.2017:15:28): Sensor value of Indoor Humidity (10) caught the value 56.500000
+LogMsg (25.5.2017:15:33): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:15:33): Sensor value of Indoor Temperature (9) caught the value 23.299999
+LogMsg (25.5.2017:15:33): Sensor value of Indoor Humidity (10) caught the value 56.700001
+LogMsg (25.5.2017:15:38): HumLimitController (26) mentioned that: AbsHumIndoor is 11.3668 and AbsHumOutdoor is 8.26587: The upper limit is 11.026 -> So fresh air is used to lower the indoor humidity
+LogMsg (25.5.2017:15:38): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:15:38): Sensor value of Indoor Temperature (9) caught the value 23.299999
+LogMsg (25.5.2017:15:38): Sensor value of Indoor Humidity (10) caught the value 56.700001
+LogMsg (25.5.2017:15:43): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:15:43): Sensor value of Indoor Temperature (9) caught the value 23.299999
+LogMsg (25.5.2017:15:43): Sensor value of Indoor Humidity (10) caught the value 56.900002
+LogMsg (25.5.2017:15:48): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:15:48): Sensor value of Indoor Temperature (9) caught the value 23.299999
+LogMsg (25.5.2017:15:48): Sensor value of Indoor Humidity (10) caught the value 57.099998
+LogMsg (25.5.2017:15:53): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:15:53): Sensor value of Indoor Temperature (9) caught the value 23.299999
+LogMsg (25.5.2017:15:53): Sensor value of Indoor Humidity (10) caught the value 57.200001
+LogMsg (25.5.2017:15:58): Sensor value of Outdoor Temperature (5) caught the value 22.670013
+LogMsg (25.5.2017:15:58): Sensor value of Outdoor Humidity (6) caught the value 40.000000
+LogMsg (25.5.2017:15:58): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:15:58): HumLimitController (26) mentioned that: AbsHumIndoor is 11.467 and AbsHumOutdoor is 7.68918: The upper limit is 11.026 -> So fresh air is used to lower the indoor humidity
+LogMsg (25.5.2017:15:58): Sensor value of Indoor Temperature (9) caught the value 23.299999
+LogMsg (25.5.2017:15:58): Sensor value of Indoor Humidity (10) caught the value 57.200001
+LogMsg (25.5.2017:16:03): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:16:03): Sensor value of Indoor Temperature (9) caught the value 23.299999
+LogMsg (25.5.2017:16:03): Sensor value of Indoor Humidity (10) caught the value 57.200001
+LogMsg (25.5.2017:16:08): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:16:08): Sensor value of Indoor Temperature (9) caught the value 23.299999
+LogMsg (25.5.2017:16:08): Sensor value of Indoor Humidity (10) caught the value 57.200001
+LogMsg (25.5.2017:16:13): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:16:13): Sensor value of Indoor Temperature (9) caught the value 23.299999
+LogMsg (25.5.2017:16:13): Sensor value of Indoor Humidity (10) caught the value 57.200001
+LogMsg (25.5.2017:16:18): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:16:18): HumLimitController (26) mentioned that: AbsHumIndoor is 11.467 and AbsHumOutdoor is 7.68918: The upper limit is 11.026 -> So fresh air is used to lower the indoor humidity
+LogMsg (25.5.2017:16:18): Sensor value of Indoor Temperature (9) caught the value 23.299999
+LogMsg (25.5.2017:16:18): Sensor value of Indoor Humidity (10) caught the value 57.099998
+LogMsg (25.5.2017:16:23): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:16:23): Sensor value of Indoor Temperature (9) caught the value 23.299999
+LogMsg (25.5.2017:16:23): Sensor value of Indoor Humidity (10) caught the value 57.099998
+LogMsg (25.5.2017:16:28): Sensor value of Outdoor Temperature (5) caught the value 22.500000
+LogMsg (25.5.2017:16:28): Sensor value of Outdoor Humidity (6) caught the value 49.000000
+LogMsg (25.5.2017:16:28): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:16:28): Sensor value of Indoor Temperature (9) caught the value 23.299999
+LogMsg (25.5.2017:16:28): Sensor value of Indoor Humidity (10) caught the value 56.700001
+LogMsg (25.5.2017:16:33): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:16:33): Sensor value of Indoor Temperature (9) caught the value 23.299999
+LogMsg (25.5.2017:16:33): Sensor value of Indoor Humidity (10) caught the value 56.900002
+LogMsg (25.5.2017:16:38): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:16:38): HumLimitController (26) mentioned that: AbsHumIndoor is 11.4069 and AbsHumOutdoor is 9.31313: The upper limit is 11.026 -> So fresh air is used to lower the indoor humidity
+LogMsg (25.5.2017:16:38): Sensor value of Indoor Temperature (9) caught the value 23.299999
+LogMsg (25.5.2017:16:38): Sensor value of Indoor Humidity (10) caught the value 57.099998
+LogMsg (25.5.2017:16:43): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:16:43): Sensor value of Indoor Temperature (9) caught the value 23.400000
+LogMsg (25.5.2017:16:43): Sensor value of Indoor Humidity (10) caught the value 57.099998
+LogMsg (25.5.2017:16:48): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:16:48): Sensor value of Indoor Temperature (9) caught the value 23.400000
+LogMsg (25.5.2017:16:48): Sensor value of Indoor Humidity (10) caught the value 57.200001
+LogMsg (25.5.2017:16:53): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:16:53): Sensor value of Indoor Temperature (9) caught the value 23.400000
+LogMsg (25.5.2017:16:53): Sensor value of Indoor Humidity (10) caught the value 57.200001
+LogMsg (25.5.2017:16:58): Sensor value of Outdoor Temperature (5) caught the value 22.500000
+LogMsg (25.5.2017:16:58): Sensor value of Outdoor Humidity (6) caught the value 40.000000
+LogMsg (25.5.2017:16:58): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:16:58): HumLimitController (26) mentioned that: AbsHumIndoor is 11.5437 and AbsHumOutdoor is 7.60255: The upper limit is 11.0997 -> So fresh air is used to lower the indoor humidity
+LogMsg (25.5.2017:16:58): Sensor value of Indoor Temperature (9) caught the value 23.400000
+LogMsg (25.5.2017:16:58): Sensor value of Indoor Humidity (10) caught the value 57.200001
+LogMsg (25.5.2017:17:03): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:17:03): Sensor value of Indoor Temperature (9) caught the value 23.400000
+LogMsg (25.5.2017:17:03): Sensor value of Indoor Humidity (10) caught the value 57.299999
+LogMsg (25.5.2017:17:08): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:17:08): Sensor value of Indoor Temperature (9) caught the value 23.400000
+LogMsg (25.5.2017:17:08): Sensor value of Indoor Humidity (10) caught the value 57.400002
+LogMsg (25.5.2017:17:13): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:17:13): Sensor value of Indoor Temperature (9) caught the value 23.400000
+LogMsg (25.5.2017:17:13): Sensor value of Indoor Humidity (10) caught the value 57.500000
+LogMsg (25.5.2017:17:18): HumLimitController (26) mentioned that: AbsHumIndoor is 11.6042 and AbsHumOutdoor is 7.60255: The upper limit is 11.0997 -> So fresh air is used to lower the indoor humidity
+LogMsg (25.5.2017:17:18): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:17:18): Sensor value of Indoor Temperature (9) caught the value 23.400000
+LogMsg (25.5.2017:17:18): Sensor value of Indoor Humidity (10) caught the value 57.400002
+LogMsg (25.5.2017:17:23): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:17:23): Sensor value of Indoor Temperature (9) caught the value 23.400000
+LogMsg (25.5.2017:17:23): Sensor value of Indoor Humidity (10) caught the value 57.299999
+LogMsg (25.5.2017:17:28): Sensor value of Outdoor Temperature (5) caught the value 23.000000
+LogMsg (25.5.2017:17:28): Sensor value of Outdoor Humidity (6) caught the value 38.000000
+LogMsg (25.5.2017:17:28): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:17:28): Sensor value of Indoor Temperature (9) caught the value 23.400000
+LogMsg (25.5.2017:17:28): Sensor value of Indoor Humidity (10) caught the value 57.200001
+LogMsg (25.5.2017:17:33): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:17:33): Sensor value of Indoor Temperature (9) caught the value 23.400000
+LogMsg (25.5.2017:17:33): Sensor value of Indoor Humidity (10) caught the value 57.099998
+LogMsg (25.5.2017:17:38): HumLimitController (26) mentioned that: AbsHumIndoor is 11.5235 and AbsHumOutdoor is 7.46714: The upper limit is 11.0997 -> So fresh air is used to lower the indoor humidity
+LogMsg (25.5.2017:17:38): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:17:38): Sensor value of Indoor Temperature (9) caught the value 23.400000
+LogMsg (25.5.2017:17:38): Sensor value of Indoor Humidity (10) caught the value 57.200001
+LogMsg (25.5.2017:17:43): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:17:43): Sensor value of Indoor Temperature (9) caught the value 23.400000
+LogMsg (25.5.2017:17:43): Sensor value of Indoor Humidity (10) caught the value 57.200001
+LogMsg (25.5.2017:17:48): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:17:48): Sensor value of Indoor Temperature (9) caught the value 23.400000
+LogMsg (25.5.2017:17:48): Sensor value of Indoor Humidity (10) caught the value 57.099998
+LogMsg (25.5.2017:17:53): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:17:53): Sensor value of Indoor Temperature (9) caught the value 23.400000
+LogMsg (25.5.2017:17:53): Sensor value of Indoor Humidity (10) caught the value 57.099998
+LogMsg (25.5.2017:17:58): Sensor value of Outdoor Temperature (5) caught the value 23.000000
+LogMsg (25.5.2017:17:58): Sensor value of Outdoor Humidity (6) caught the value 40.000000
+LogMsg (25.5.2017:17:58): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:17:58): HumLimitController (26) mentioned that: AbsHumIndoor is 11.5235 and AbsHumOutdoor is 7.86015: The upper limit is 11.0997 -> So fresh air is used to lower the indoor humidity
+LogMsg (25.5.2017:17:58): Sensor value of Indoor Temperature (9) caught the value 23.400000
+LogMsg (25.5.2017:17:58): Sensor value of Indoor Humidity (10) caught the value 57.000000
+LogMsg (25.5.2017:18:03): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:18:03): Sensor value of Indoor Temperature (9) caught the value 23.400000
+LogMsg (25.5.2017:18:03): Sensor value of Indoor Humidity (10) caught the value 56.500000
+LogMsg (25.5.2017:18:08): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:18:08): Sensor value of Indoor Temperature (9) caught the value 23.400000
+LogMsg (25.5.2017:18:08): Sensor value of Indoor Humidity (10) caught the value 57.000000
+LogMsg (25.5.2017:18:13): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:18:13): Sensor value of Indoor Temperature (9) caught the value 23.400000
+LogMsg (25.5.2017:18:13): Sensor value of Indoor Humidity (10) caught the value 57.299999
+LogMsg (25.5.2017:18:18): HumLimitController (26) mentioned that: AbsHumIndoor is 11.5639 and AbsHumOutdoor is 7.86015: The upper limit is 11.0997 -> So fresh air is used to lower the indoor humidity
+LogMsg (25.5.2017:18:18): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:18:18): Sensor value of Indoor Temperature (9) caught the value 23.400000
+LogMsg (25.5.2017:18:18): Sensor value of Indoor Humidity (10) caught the value 57.700001
+LogMsg (25.5.2017:18:23): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:18:23): Sensor value of Indoor Temperature (9) caught the value 23.500000
+LogMsg (25.5.2017:18:23): Sensor value of Indoor Humidity (10) caught the value 57.700001
+LogMsg (25.5.2017:18:28): Sensor value of Outdoor Temperature (5) caught the value 23.000000
+LogMsg (25.5.2017:18:28): Sensor value of Outdoor Humidity (6) caught the value 43.000000
+LogMsg (25.5.2017:18:28): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:18:28): Sensor value of Indoor Temperature (9) caught the value 23.500000
+LogMsg (25.5.2017:18:28): Sensor value of Indoor Humidity (10) caught the value 57.700001
+LogMsg (25.5.2017:18:33): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:18:33): Sensor value of Indoor Temperature (9) caught the value 23.500000
+LogMsg (25.5.2017:18:33): Sensor value of Indoor Humidity (10) caught the value 57.599998
+LogMsg (25.5.2017:18:38): HumLimitController (26) mentioned that: AbsHumIndoor is 11.7021 and AbsHumOutdoor is 8.44966: The upper limit is 11.1739 -> So fresh air is used to lower the indoor humidity
+LogMsg (25.5.2017:18:38): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:18:38): Sensor value of Indoor Temperature (9) caught the value 23.500000
+LogMsg (25.5.2017:18:38): Sensor value of Indoor Humidity (10) caught the value 57.700001
+LogMsg (25.5.2017:18:43): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:18:43): Sensor value of Indoor Temperature (9) caught the value 23.500000
+LogMsg (25.5.2017:18:43): Sensor value of Indoor Humidity (10) caught the value 57.500000
+LogMsg (25.5.2017:18:48): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:18:48): Sensor value of Indoor Temperature (9) caught the value 23.500000
+LogMsg (25.5.2017:18:48): Sensor value of Indoor Humidity (10) caught the value 57.500000
+LogMsg (25.5.2017:18:53): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:18:53): Sensor value of Indoor Temperature (9) caught the value 23.500000
+LogMsg (25.5.2017:18:53): Sensor value of Indoor Humidity (10) caught the value 57.500000
+LogMsg (25.5.2017:18:58): Sensor value of Outdoor Temperature (5) caught the value 23.000000
+LogMsg (25.5.2017:18:58): Sensor value of Outdoor Humidity (6) caught the value 43.000000
+LogMsg (25.5.2017:18:58): HumLimitController (26) mentioned that: AbsHumIndoor is 11.6818 and AbsHumOutdoor is 8.44966: The upper limit is 11.1739 -> So fresh air is used to lower the indoor humidity
+LogMsg (25.5.2017:18:58): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:18:59): Sensor value of Indoor Temperature (9) caught the value 23.500000
+LogMsg (25.5.2017:18:59): Sensor value of Indoor Humidity (10) caught the value 57.500000
+LogMsg (25.5.2017:19:03): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:19:04): Sensor value of Indoor Temperature (9) caught the value 23.500000
+LogMsg (25.5.2017:19:04): Sensor value of Indoor Humidity (10) caught the value 57.700001
+LogMsg (25.5.2017:19:08): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:19:09): Sensor value of Indoor Temperature (9) caught the value 23.500000
+LogMsg (25.5.2017:19:09): Sensor value of Indoor Humidity (10) caught the value 57.900002
+LogMsg (25.5.2017:19:13): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:19:14): Sensor value of Indoor Temperature (9) caught the value 23.500000
+LogMsg (25.5.2017:19:14): Sensor value of Indoor Humidity (10) caught the value 57.700001
+LogMsg (25.5.2017:19:18): HumLimitController (26) mentioned that: AbsHumIndoor is 11.7224 and AbsHumOutdoor is 8.44966: The upper limit is 11.1739 -> So fresh air is used to lower the indoor humidity
+LogMsg (25.5.2017:19:18): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:19:19): Sensor value of Indoor Temperature (9) caught the value 23.500000
+LogMsg (25.5.2017:19:19): Sensor value of Indoor Humidity (10) caught the value 57.400002
+LogMsg (25.5.2017:19:23): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:19:24): Sensor value of Indoor Temperature (9) caught the value 23.500000
+LogMsg (25.5.2017:19:24): Sensor value of Indoor Humidity (10) caught the value 57.200001
+LogMsg (25.5.2017:19:28): Sensor value of Outdoor Temperature (5) caught the value 22.330017
+LogMsg (25.5.2017:19:28): Sensor value of Outdoor Humidity (6) caught the value 46.000000
+LogMsg (25.5.2017:19:28): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:19:29): Sensor value of Indoor Temperature (9) caught the value 23.500000
+LogMsg (25.5.2017:19:29): Sensor value of Indoor Humidity (10) caught the value 57.099998
+LogMsg (25.5.2017:19:33): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:19:34): Sensor value of Indoor Temperature (9) caught the value 23.500000
+LogMsg (25.5.2017:19:34): Sensor value of Indoor Humidity (10) caught the value 57.200001
+LogMsg (25.5.2017:19:38): HumLimitController (26) mentioned that: AbsHumIndoor is 11.6209 and AbsHumOutdoor is 8.64446: The upper limit is 11.1739 -> So fresh air is used to lower the indoor humidity
+LogMsg (25.5.2017:19:38): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:19:39): Sensor value of Indoor Temperature (9) caught the value 23.500000
+LogMsg (25.5.2017:19:39): Sensor value of Indoor Humidity (10) caught the value 57.200001
+LogMsg (25.5.2017:19:43): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:19:44): Sensor value of Indoor Temperature (9) caught the value 23.500000
+LogMsg (25.5.2017:19:44): Sensor value of Indoor Humidity (10) caught the value 57.200001
+LogMsg (25.5.2017:19:48): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:19:49): Sensor value of Indoor Temperature (9) caught the value 23.500000
+LogMsg (25.5.2017:19:49): Sensor value of Indoor Humidity (10) caught the value 57.200001
+LogMsg (25.5.2017:19:53): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:19:54): Sensor value of Indoor Temperature (9) caught the value 23.500000
+LogMsg (25.5.2017:19:54): Sensor value of Indoor Humidity (10) caught the value 57.200001
+LogMsg (25.5.2017:19:58): Sensor value of Outdoor Temperature (5) caught the value 22.000000
+LogMsg (25.5.2017:19:58): Sensor value of Outdoor Humidity (6) caught the value 43.000000
+LogMsg (25.5.2017:19:58): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:19:58): HumLimitController (26) mentioned that: AbsHumIndoor is 11.6209 and AbsHumOutdoor is 7.90491: The upper limit is 11.1739 -> So fresh air is used to lower the indoor humidity
+LogMsg (25.5.2017:19:59): Sensor value of Indoor Temperature (9) caught the value 23.500000
+LogMsg (25.5.2017:19:59): Sensor value of Indoor Humidity (10) caught the value 57.200001
+LogMsg (25.5.2017:20:00): GpioOr (13) mentioned that: Turning system on because of HumLimitController (26) (26),HumLimitController (26) (26),HumLimitController (26) (26),HumLimitController (26) (26),HumLimitController (26) (26),HumLimitController (26) (26),HumLimitController (26) (26),HumLimitController (26) (26),HumLimitController (26) (26),HumLimitController (26) (26),HumLimitController (26) (26),HumLimitController (26) (26),HumLimitController (26) (26),HumLimitController (26) (26),HumLimitController (26) (26),HumLimitController (26) (26),HumLimitController (26) (26),
+LogMsg (25.5.2017:20:00): GPIO HumLimitController (26) has been turned on
+LogMsg (25.5.2017:20:03): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:20:04): Sensor value of Indoor Temperature (9) caught the value 23.500000
+LogMsg (25.5.2017:20:04): Sensor value of Indoor Humidity (10) caught the value 57.200001
+LogMsg (25.5.2017:20:08): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:20:09): Sensor value of Indoor Temperature (9) caught the value 23.500000
+LogMsg (25.5.2017:20:09): Sensor value of Indoor Humidity (10) caught the value 57.099998
+LogMsg (25.5.2017:20:13): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:20:14): Sensor value of Indoor Temperature (9) caught the value 23.600000
+LogMsg (25.5.2017:20:14): Sensor value of Indoor Humidity (10) caught the value 56.900002
+LogMsg (25.5.2017:20:18): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:20:18): HumLimitController (26) mentioned that: AbsHumIndoor is 11.6372 and AbsHumOutdoor is 7.90491: The upper limit is 11.2486 -> So fresh air is used to lower the indoor humidity
+LogMsg (25.5.2017:20:19): Sensor value of Indoor Temperature (9) caught the value 23.500000
+LogMsg (25.5.2017:20:19): Sensor value of Indoor Humidity (10) caught the value 56.500000
+LogMsg (25.5.2017:20:23): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:20:24): Sensor value of Indoor Temperature (9) caught the value 23.500000
+LogMsg (25.5.2017:20:24): Sensor value of Indoor Humidity (10) caught the value 56.599998
+LogMsg (25.5.2017:20:28): Sensor value of Outdoor Temperature (5) caught the value 22.000000
+LogMsg (25.5.2017:20:28): Sensor value of Outdoor Humidity (6) caught the value 46.000000
+LogMsg (25.5.2017:20:28): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:20:29): Sensor value of Indoor Temperature (9) caught the value 23.600000
+LogMsg (25.5.2017:20:29): Sensor value of Indoor Humidity (10) caught the value 56.700001
+LogMsg (25.5.2017:20:33): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:20:34): Sensor value of Indoor Temperature (9) caught the value 23.500000
+LogMsg (25.5.2017:20:34): Sensor value of Indoor Humidity (10) caught the value 56.900002
+LogMsg (25.5.2017:20:38): HumLimitController (26) mentioned that: AbsHumIndoor is 11.5599 and AbsHumOutdoor is 8.45641: The upper limit is 11.1739 -> So fresh air is used to lower the indoor humidity
+LogMsg (25.5.2017:20:38): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:20:39): Sensor value of Indoor Temperature (9) caught the value 23.500000
+LogMsg (25.5.2017:20:39): Sensor value of Indoor Humidity (10) caught the value 56.900002
+LogMsg (25.5.2017:20:43): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:20:44): Sensor value of Indoor Temperature (9) caught the value 23.500000
+LogMsg (25.5.2017:20:44): Sensor value of Indoor Humidity (10) caught the value 56.900002
+LogMsg (25.5.2017:20:48): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:20:49): Sensor value of Indoor Temperature (9) caught the value 23.500000
+LogMsg (25.5.2017:20:49): Sensor value of Indoor Humidity (10) caught the value 57.200001
+LogMsg (25.5.2017:20:53): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:20:54): Sensor value of Indoor Temperature (9) caught the value 23.500000
+LogMsg (25.5.2017:20:54): Sensor value of Indoor Humidity (10) caught the value 57.099998
+LogMsg (25.5.2017:20:58): Sensor value of Outdoor Temperature (5) caught the value 21.339996
+LogMsg (25.5.2017:20:58): Sensor value of Outdoor Humidity (6) caught the value 46.000000
+LogMsg (25.5.2017:20:58): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:20:58): HumLimitController (26) mentioned that: AbsHumIndoor is 11.6005 and AbsHumOutdoor is 8.09252: The upper limit is 11.1739 -> So fresh air is used to lower the indoor humidity
+LogMsg (25.5.2017:20:59): Sensor value of Indoor Temperature (9) caught the value 23.500000
+LogMsg (25.5.2017:20:59): Sensor value of Indoor Humidity (10) caught the value 57.700001
+LogMsg (25.5.2017:21:03): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:21:04): Sensor value of Indoor Temperature (9) caught the value 23.500000
+LogMsg (25.5.2017:21:04): Sensor value of Indoor Humidity (10) caught the value 57.299999
+LogMsg (25.5.2017:21:08): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:21:09): Sensor value of Indoor Temperature (9) caught the value 23.500000
+LogMsg (25.5.2017:21:09): Sensor value of Indoor Humidity (10) caught the value 57.299999
+LogMsg (25.5.2017:21:13): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:21:14): Sensor value of Indoor Temperature (9) caught the value 23.500000
+LogMsg (25.5.2017:21:14): Sensor value of Indoor Humidity (10) caught the value 57.400002
+LogMsg (25.5.2017:21:18): HumLimitController (26) mentioned that: AbsHumIndoor is 11.6615 and AbsHumOutdoor is 8.09252: The upper limit is 11.1739 -> So fresh air is used to lower the indoor humidity
+LogMsg (25.5.2017:21:18): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:21:19): Sensor value of Indoor Temperature (9) caught the value 23.500000
+LogMsg (25.5.2017:21:19): Sensor value of Indoor Humidity (10) caught the value 57.200001
+LogMsg (25.5.2017:21:23): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:21:24): Sensor value of Indoor Temperature (9) caught the value 23.400000
+LogMsg (25.5.2017:21:24): Sensor value of Indoor Humidity (10) caught the value 57.000000
+LogMsg (25.5.2017:21:28): Sensor value of Outdoor Temperature (5) caught the value 20.000000
+LogMsg (25.5.2017:21:28): Sensor value of Outdoor Humidity (6) caught the value 49.000000
+LogMsg (25.5.2017:21:28): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:21:29): Sensor value of Indoor Temperature (9) caught the value 23.400000
+LogMsg (25.5.2017:21:29): Sensor value of Indoor Humidity (10) caught the value 57.099998
+LogMsg (25.5.2017:21:33): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:21:34): Sensor value of Indoor Temperature (9) caught the value 23.400000
+LogMsg (25.5.2017:21:34): Sensor value of Indoor Humidity (10) caught the value 57.099998
+LogMsg (25.5.2017:21:38): HumLimitController (26) mentioned that: AbsHumIndoor is 11.5235 and AbsHumOutdoor is 7.88387: The upper limit is 11.0997 -> So fresh air is used to lower the indoor humidity
+LogMsg (25.5.2017:21:38): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:21:39): Sensor value of Indoor Temperature (9) caught the value 23.400000
+LogMsg (25.5.2017:21:39): Sensor value of Indoor Humidity (10) caught the value 57.099998
+LogMsg (25.5.2017:21:43): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:21:44): Sensor value of Indoor Temperature (9) caught the value 23.299999
+LogMsg (25.5.2017:21:44): Sensor value of Indoor Humidity (10) caught the value 57.000000
+LogMsg (25.5.2017:21:48): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:21:49): Sensor value of Indoor Temperature (9) caught the value 23.299999
+LogMsg (25.5.2017:21:49): Sensor value of Indoor Humidity (10) caught the value 56.900002
+LogMsg (25.5.2017:21:53): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:21:54): Sensor value of Indoor Temperature (9) caught the value 23.299999
+LogMsg (25.5.2017:21:54): Sensor value of Indoor Humidity (10) caught the value 56.900002
+LogMsg (25.5.2017:21:58): Sensor value of Outdoor Temperature (5) caught the value 19.520020
+LogMsg (25.5.2017:21:58): Sensor value of Outdoor Humidity (6) caught the value 48.000000
+LogMsg (25.5.2017:21:58): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:21:58): HumLimitController (26) mentioned that: AbsHumIndoor is 11.4069 and AbsHumOutdoor is 7.47984: The upper limit is 11.026 -> So fresh air is used to lower the indoor humidity
+LogMsg (25.5.2017:21:59): Sensor value of Indoor Temperature (9) caught the value 23.299999
+LogMsg (25.5.2017:21:59): Sensor value of Indoor Humidity (10) caught the value 56.599998
+LogMsg (25.5.2017:22:03): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:22:04): Sensor value of Indoor Temperature (9) caught the value 23.299999
+LogMsg (25.5.2017:22:04): Sensor value of Indoor Humidity (10) caught the value 56.500000
+LogMsg (25.5.2017:22:08): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:22:09): Sensor value of Indoor Temperature (9) caught the value 23.299999
+LogMsg (25.5.2017:22:09): Sensor value of Indoor Humidity (10) caught the value 56.299999
+LogMsg (25.5.2017:22:13): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:22:14): Sensor value of Indoor Temperature (9) caught the value 23.200001
+LogMsg (25.5.2017:22:14): Sensor value of Indoor Humidity (10) caught the value 56.200001
+LogMsg (25.5.2017:22:15): GPIO TimeTrigger NightPower (11) has been turned on
+LogMsg (25.5.2017:22:18): HumLimitController (26) mentioned that: AbsHumIndoor is 11.1917 and AbsHumOutdoor is 7.47984: The upper limit is 10.9527 -> So fresh air is used to lower the indoor humidity
+LogMsg (25.5.2017:22:18): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:22:19): Sensor value of Indoor Temperature (9) caught the value 23.200001
+LogMsg (25.5.2017:22:19): Sensor value of Indoor Humidity (10) caught the value 56.200001
+LogMsg (25.5.2017:22:23): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:22:24): Sensor value of Indoor Temperature (9) caught the value 23.200001
+LogMsg (25.5.2017:22:24): Sensor value of Indoor Humidity (10) caught the value 55.799999
+LogMsg (25.5.2017:22:28): Sensor value of Outdoor Temperature (5) caught the value 18.510010
+LogMsg (25.5.2017:22:28): Sensor value of Outdoor Humidity (6) caught the value 59.000000
+LogMsg (25.5.2017:22:28): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:22:29): Sensor value of Indoor Temperature (9) caught the value 23.200001
+LogMsg (25.5.2017:22:29): Sensor value of Indoor Humidity (10) caught the value 55.599998
+LogMsg (25.5.2017:22:33): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:22:34): Sensor value of Indoor Temperature (9) caught the value 23.200001
+LogMsg (25.5.2017:22:34): Sensor value of Indoor Humidity (10) caught the value 56.099998
+LogMsg (25.5.2017:22:38): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:22:38): HumLimitController (26) mentioned that: AbsHumIndoor is 11.1718 and AbsHumOutdoor is 8.5955: The upper limit is 10.9527 -> So fresh air is used to lower the indoor humidity
+LogMsg (25.5.2017:22:39): Sensor value of Indoor Temperature (9) caught the value 23.200001
+LogMsg (25.5.2017:22:39): Sensor value of Indoor Humidity (10) caught the value 56.200001
+LogMsg (25.5.2017:22:43): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:22:44): Sensor value of Indoor Temperature (9) caught the value 23.200001
+LogMsg (25.5.2017:22:44): Sensor value of Indoor Humidity (10) caught the value 56.000000
+LogMsg (25.5.2017:22:48): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:22:49): Sensor value of Indoor Temperature (9) caught the value 23.200001
+LogMsg (25.5.2017:22:49): Sensor value of Indoor Humidity (10) caught the value 55.900002
+LogMsg (25.5.2017:22:53): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:22:54): Sensor value of Indoor Temperature (9) caught the value 23.100000
+LogMsg (25.5.2017:22:54): Sensor value of Indoor Humidity (10) caught the value 55.900002
+LogMsg (25.5.2017:22:58): Sensor value of Outdoor Temperature (5) caught the value 17.690002
+LogMsg (25.5.2017:22:58): Sensor value of Outdoor Humidity (6) caught the value 52.000000
+LogMsg (25.5.2017:22:58): HumLimitController (26) mentioned that: AbsHumIndoor is 11.058 and AbsHumOutdoor is 7.17281: The upper limit is 10.88 -> So fresh air is used to lower the indoor humidity
+LogMsg (25.5.2017:22:58): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:22:59): Sensor value of Indoor Temperature (9) caught the value 23.200001
+LogMsg (25.5.2017:22:59): Sensor value of Indoor Humidity (10) caught the value 55.599998
+LogMsg (25.5.2017:23:03): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:23:04): Sensor value of Indoor Temperature (9) caught the value 23.100000
+LogMsg (25.5.2017:23:04): Sensor value of Indoor Humidity (10) caught the value 55.500000
+LogMsg (25.5.2017:23:08): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:23:09): Sensor value of Indoor Temperature (9) caught the value 23.100000
+LogMsg (25.5.2017:23:09): Sensor value of Indoor Humidity (10) caught the value 55.200001
+LogMsg (25.5.2017:23:13): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:23:14): Sensor value of Indoor Temperature (9) caught the value 23.100000
+LogMsg (25.5.2017:23:14): Sensor value of Indoor Humidity (10) caught the value 55.299999
+LogMsg (25.5.2017:23:18): HumLimitController (26) mentioned that: AbsHumIndoor is 10.9393 and AbsHumOutdoor is 7.17281: The upper limit is 10.88 -> So fresh air is used to lower the indoor humidity
+LogMsg (25.5.2017:23:18): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:23:19): Sensor value of Indoor Temperature (9) caught the value 23.100000
+LogMsg (25.5.2017:23:19): Sensor value of Indoor Humidity (10) caught the value 55.200001
+LogMsg (25.5.2017:23:23): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:23:24): Sensor value of Indoor Temperature (9) caught the value 23.100000
+LogMsg (25.5.2017:23:24): Sensor value of Indoor Humidity (10) caught the value 55.200001
+LogMsg (25.5.2017:23:28): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:23:28): Sensor value of Outdoor Temperature (5) caught the value 15.980011
+LogMsg (25.5.2017:23:28): Sensor value of Outdoor Humidity (6) caught the value 63.000000
+LogMsg (25.5.2017:23:29): Sensor value of Indoor Temperature (9) caught the value 23.100000
+LogMsg (25.5.2017:23:29): Sensor value of Indoor Humidity (10) caught the value 55.099998
+LogMsg (25.5.2017:23:33): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:23:34): Sensor value of Indoor Temperature (9) caught the value 23.000000
+LogMsg (25.5.2017:23:34): Sensor value of Indoor Humidity (10) caught the value 55.099998
+LogMsg (25.5.2017:23:38): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:23:38): HumLimitController (26) mentioned that: AbsHumIndoor is 10.8274 and AbsHumOutdoor is 7.75416: The upper limit is 10.8077 -> So fresh air is used to lower the indoor humidity
+LogMsg (25.5.2017:23:39): Sensor value of Indoor Temperature (9) caught the value 23.000000
+LogMsg (25.5.2017:23:39): Sensor value of Indoor Humidity (10) caught the value 55.000000
+LogMsg (25.5.2017:23:43): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:23:44): Sensor value of Indoor Temperature (9) caught the value 23.000000
+LogMsg (25.5.2017:23:44): Sensor value of Indoor Humidity (10) caught the value 54.900002
+LogMsg (25.5.2017:23:48): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:23:49): Sensor value of Indoor Temperature (9) caught the value 23.000000
+LogMsg (25.5.2017:23:49): Sensor value of Indoor Humidity (10) caught the value 54.799999
+LogMsg (25.5.2017:23:53): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:23:54): Sensor value of Indoor Temperature (9) caught the value 23.000000
+LogMsg (25.5.2017:23:54): Sensor value of Indoor Humidity (10) caught the value 54.700001
+LogMsg (25.5.2017:23:58): GPIO RotiController (12) has been turned off
+LogMsg (25.5.2017:23:58): GpioOr (13) mentioned that: Turning system off
+LogMsg (25.5.2017:23:58): HumLimitController (26) mentioned that: AbsHumIndoor is 10.7488 and AbsHumOutdoor is 7.75416: Lower limit is 8.84267 and upper limit is 10.8077 -> So humidity is in range
+LogMsg (25.5.2017:23:58): GPIO TimeTrigger Night hourly air (18) has been turned off
+LogMsg (25.5.2017:23:58): Sensor value of Outdoor Temperature (5) caught the value 15.980011
+LogMsg (25.5.2017:23:58): Sensor value of Outdoor Humidity (6) caught the value 59.000000
+LogMsg (25.5.2017:23:59): Sensor value of Indoor Temperature (9) caught the value 23.000000
+LogMsg (25.5.2017:23:59): Sensor value of Indoor Humidity (10) caught the value 54.599998
+LogMsg (26.5.2017:0:03): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:0:04): Sensor value of Indoor Temperature (9) caught the value 23.000000
+LogMsg (26.5.2017:0:04): Sensor value of Indoor Humidity (10) caught the value 53.000000
+LogMsg (26.5.2017:0:08): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:0:09): Sensor value of Indoor Temperature (9) caught the value 23.000000
+LogMsg (26.5.2017:0:09): Sensor value of Indoor Humidity (10) caught the value 54.500000
+LogMsg (26.5.2017:0:13): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:0:14): Sensor value of Indoor Temperature (9) caught the value 23.000000
+LogMsg (26.5.2017:0:14): Sensor value of Indoor Humidity (10) caught the value 54.900002
+LogMsg (26.5.2017:0:15): GpioOr (13) mentioned that: Turning system on because of TimeTrigger Night hourly air (16) (16),
+LogMsg (26.5.2017:0:15): GPIO TimeTrigger Night hourly air (16) has been turned on
+LogMsg (26.5.2017:0:18): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:0:18): HumLimitController (26) mentioned that: AbsHumIndoor is 10.7881 and AbsHumOutdoor is 7.26183: Lower limit is 8.84267 and upper limit is 10.8077 -> So humidity is in range
+LogMsg (26.5.2017:0:19): Sensor value of Indoor Temperature (9) caught the value 23.000000
+LogMsg (26.5.2017:0:19): Sensor value of Indoor Humidity (10) caught the value 54.900002
+LogMsg (26.5.2017:0:23): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:0:24): Sensor value of Indoor Temperature (9) caught the value 23.100000
+LogMsg (26.5.2017:0:24): Sensor value of Indoor Humidity (10) caught the value 54.799999
+LogMsg (26.5.2017:0:25): GpioOr (13) mentioned that: Turning system off
+LogMsg (26.5.2017:0:25): GPIO TimeTrigger Night hourly air (16) has been turned off
+LogMsg (26.5.2017:0:28): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:0:28): Sensor value of Outdoor Temperature (5) caught the value 15.470001
+LogMsg (26.5.2017:0:28): Sensor value of Outdoor Humidity (6) caught the value 59.000000
+LogMsg (26.5.2017:0:29): Sensor value of Indoor Temperature (9) caught the value 23.200001
+LogMsg (26.5.2017:0:29): Sensor value of Indoor Humidity (10) caught the value 54.500000
+LogMsg (26.5.2017:0:33): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:0:34): Sensor value of Indoor Temperature (9) caught the value 23.100000
+LogMsg (26.5.2017:0:34): Sensor value of Indoor Humidity (10) caught the value 53.099998
+LogMsg (26.5.2017:0:38): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:0:38): HumLimitController (26) mentioned that: AbsHumIndoor is 10.5041 and AbsHumOutdoor is 7.01916: Lower limit is 8.9018 and upper limit is 10.88 -> So humidity is in range
+LogMsg (26.5.2017:0:39): Sensor value of Indoor Temperature (9) caught the value 23.100000
+LogMsg (26.5.2017:0:39): Sensor value of Indoor Humidity (10) caught the value 54.500000
+LogMsg (26.5.2017:0:43): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:0:44): Sensor value of Indoor Temperature (9) caught the value 23.100000
+LogMsg (26.5.2017:0:44): Sensor value of Indoor Humidity (10) caught the value 54.400002
+LogMsg (26.5.2017:0:48): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:0:49): Sensor value of Indoor Temperature (9) caught the value 23.100000
+LogMsg (26.5.2017:0:49): Sensor value of Indoor Humidity (10) caught the value 54.400002
+LogMsg (26.5.2017:0:53): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:0:54): Sensor value of Indoor Temperature (9) caught the value 23.100000
+LogMsg (26.5.2017:0:54): Sensor value of Indoor Humidity (10) caught the value 54.500000
+LogMsg (26.5.2017:0:58): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:0:58): HumLimitController (26) mentioned that: AbsHumIndoor is 10.7811 and AbsHumOutdoor is 7.01916: Lower limit is 8.9018 and upper limit is 10.88 -> So humidity is in range
+LogMsg (26.5.2017:0:58): Sensor value of Outdoor Temperature (5) caught the value 15.149994
+LogMsg (26.5.2017:0:58): Sensor value of Outdoor Humidity (6) caught the value 59.000000
+LogMsg (26.5.2017:0:59): Sensor value of Indoor Temperature (9) caught the value 23.100000
+LogMsg (26.5.2017:0:59): Sensor value of Indoor Humidity (10) caught the value 54.400002
+LogMsg (26.5.2017:1:00): GpioOr (13) mentioned that: Turning system on because of TimeTrigger Summer fresh air (27) (27),
+LogMsg (26.5.2017:1:00): GPIO TimeTrigger Summer fresh air (27) has been turned on
+LogMsg (26.5.2017:1:03): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:1:04): Sensor value of Indoor Temperature (9) caught the value 23.100000
+LogMsg (26.5.2017:1:04): Sensor value of Indoor Humidity (10) caught the value 54.299999
+LogMsg (26.5.2017:1:08): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:1:09): Sensor value of Indoor Temperature (9) caught the value 23.200001
+LogMsg (26.5.2017:1:09): Sensor value of Indoor Humidity (10) caught the value 54.400002
+LogMsg (26.5.2017:1:13): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:1:14): Sensor value of Indoor Temperature (9) caught the value 23.200001
+LogMsg (26.5.2017:1:14): Sensor value of Indoor Humidity (10) caught the value 53.700001
+LogMsg (26.5.2017:1:18): HumLimitController (26) mentioned that: AbsHumIndoor is 10.6938 and AbsHumOutdoor is 6.87105: Lower limit is 8.96132 and upper limit is 10.9527 -> So humidity is in range
+LogMsg (26.5.2017:1:18): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:1:19): Sensor value of Indoor Temperature (9) caught the value 23.299999
+LogMsg (26.5.2017:1:19): Sensor value of Indoor Humidity (10) caught the value 53.299999
+LogMsg (26.5.2017:1:23): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:1:24): Sensor value of Indoor Temperature (9) caught the value 23.299999
+LogMsg (26.5.2017:1:24): Sensor value of Indoor Humidity (10) caught the value 53.299999
+LogMsg (26.5.2017:1:28): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:1:28): Sensor value of Outdoor Temperature (5) caught the value 13.980011
+LogMsg (26.5.2017:1:28): Sensor value of Outdoor Humidity (6) caught the value 71.000000
+LogMsg (26.5.2017:1:29): Sensor value of Indoor Temperature (9) caught the value 23.200001
+LogMsg (26.5.2017:1:29): Sensor value of Indoor Humidity (10) caught the value 53.099998
+LogMsg (26.5.2017:1:33): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:1:34): Sensor value of Indoor Temperature (9) caught the value 23.100000
+LogMsg (26.5.2017:1:34): Sensor value of Indoor Humidity (10) caught the value 53.099998
+LogMsg (26.5.2017:1:38): HumLimitController (26) mentioned that: AbsHumIndoor is 10.5041 and AbsHumOutdoor is 7.64834: Lower limit is 8.9018 and upper limit is 10.88 -> So humidity is in range
+LogMsg (26.5.2017:1:38): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:1:39): Sensor value of Indoor Temperature (9) caught the value 23.100000
+LogMsg (26.5.2017:1:39): Sensor value of Indoor Humidity (10) caught the value 53.500000
+LogMsg (26.5.2017:1:43): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:1:44): Sensor value of Indoor Temperature (9) caught the value 23.100000
+LogMsg (26.5.2017:1:44): Sensor value of Indoor Humidity (10) caught the value 53.700001
+LogMsg (26.5.2017:1:48): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:1:49): Sensor value of Indoor Temperature (9) caught the value 23.100000
+LogMsg (26.5.2017:1:49): Sensor value of Indoor Humidity (10) caught the value 53.500000
+LogMsg (26.5.2017:1:53): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:1:54): Sensor value of Indoor Temperature (9) caught the value 23.000000
+LogMsg (26.5.2017:1:54): Sensor value of Indoor Humidity (10) caught the value 54.799999
+LogMsg (26.5.2017:1:58): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:1:58): HumLimitController (26) mentioned that: AbsHumIndoor is 10.7684 and AbsHumOutdoor is 7.64834: Lower limit is 8.84267 and upper limit is 10.8077 -> So humidity is in range
+LogMsg (26.5.2017:1:58): Sensor value of Outdoor Temperature (5) caught the value 13.640015
+LogMsg (26.5.2017:1:58): Sensor value of Outdoor Humidity (6) caught the value 62.000000
+LogMsg (26.5.2017:1:59): Sensor value of Indoor Temperature (9) caught the value 23.000000
+LogMsg (26.5.2017:1:59): Sensor value of Indoor Humidity (10) caught the value 55.200001
+LogMsg (26.5.2017:2:03): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:2:04): Sensor value of Indoor Temperature (9) caught the value 23.000000
+LogMsg (26.5.2017:2:04): Sensor value of Indoor Humidity (10) caught the value 55.700001
+LogMsg (26.5.2017:2:08): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:2:09): Sensor value of Indoor Temperature (9) caught the value 22.900000
+LogMsg (26.5.2017:2:09): Sensor value of Indoor Humidity (10) caught the value 56.799999
+LogMsg (26.5.2017:2:13): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:2:14): Sensor value of Indoor Temperature (9) caught the value 23.000000
+LogMsg (26.5.2017:2:14): Sensor value of Indoor Humidity (10) caught the value 56.400002
+LogMsg (26.5.2017:2:18): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:2:18): HumLimitController (26) mentioned that: AbsHumIndoor is 11.0828 and AbsHumOutdoor is 6.52921: The upper limit is 10.8077 -> So fresh air is used to lower the indoor humidity
+LogMsg (26.5.2017:2:19): Sensor value of Indoor Temperature (9) caught the value 23.000000
+LogMsg (26.5.2017:2:19): Sensor value of Indoor Humidity (10) caught the value 57.299999
+LogMsg (26.5.2017:2:23): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:2:24): Sensor value of Indoor Temperature (9) caught the value 23.100000
+LogMsg (26.5.2017:2:24): Sensor value of Indoor Humidity (10) caught the value 58.000000
+LogMsg (26.5.2017:2:28): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:2:28): Sensor value of Outdoor Temperature (5) caught the value 13.140015
+LogMsg (26.5.2017:2:28): Sensor value of Outdoor Humidity (6) caught the value 67.000000
+LogMsg (26.5.2017:2:29): Sensor value of Indoor Temperature (9) caught the value 23.100000
+LogMsg (26.5.2017:2:29): Sensor value of Indoor Humidity (10) caught the value 58.200001
+LogMsg (26.5.2017:2:33): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:2:34): Sensor value of Indoor Temperature (9) caught the value 23.100000
+LogMsg (26.5.2017:2:34): Sensor value of Indoor Humidity (10) caught the value 57.099998
+LogMsg (26.5.2017:2:38): HumLimitController (26) mentioned that: AbsHumIndoor is 11.2954 and AbsHumOutdoor is 6.82452: The upper limit is 10.88 -> So fresh air is used to lower the indoor humidity
+LogMsg (26.5.2017:2:38): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:2:39): Sensor value of Indoor Temperature (9) caught the value 23.200001
+LogMsg (26.5.2017:2:39): Sensor value of Indoor Humidity (10) caught the value 57.000000
+LogMsg (26.5.2017:2:43): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:2:44): Sensor value of Indoor Temperature (9) caught the value 23.200001
+LogMsg (26.5.2017:2:44): Sensor value of Indoor Humidity (10) caught the value 57.099998
+LogMsg (26.5.2017:2:48): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:2:49): Sensor value of Indoor Temperature (9) caught the value 23.200001
+LogMsg (26.5.2017:2:49): Sensor value of Indoor Humidity (10) caught the value 57.500000
+LogMsg (26.5.2017:2:53): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:2:54): Sensor value of Indoor Temperature (9) caught the value 23.200001
+LogMsg (26.5.2017:2:54): Sensor value of Indoor Humidity (10) caught the value 56.799999
+LogMsg (26.5.2017:2:58): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:2:58): HumLimitController (26) mentioned that: AbsHumIndoor is 11.3112 and AbsHumOutdoor is 6.82452: The upper limit is 10.9527 -> So fresh air is used to lower the indoor humidity
+LogMsg (26.5.2017:2:58): Sensor value of Outdoor Temperature (5) caught the value 12.809998
+LogMsg (26.5.2017:2:58): Sensor value of Outdoor Humidity (6) caught the value 67.000000
+LogMsg (26.5.2017:2:59): Sensor value of Indoor Temperature (9) caught the value 23.200001
+LogMsg (26.5.2017:2:59): Sensor value of Indoor Humidity (10) caught the value 56.599998
+LogMsg (26.5.2017:3:03): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:3:04): Sensor value of Indoor Temperature (9) caught the value 23.200001
+LogMsg (26.5.2017:3:04): Sensor value of Indoor Humidity (10) caught the value 57.599998
+LogMsg (26.5.2017:3:08): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:3:09): Sensor value of Indoor Temperature (9) caught the value 23.200001
+LogMsg (26.5.2017:3:09): Sensor value of Indoor Humidity (10) caught the value 57.400002
+LogMsg (26.5.2017:3:13): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:3:14): Sensor value of Indoor Temperature (9) caught the value 23.200001
+LogMsg (26.5.2017:3:14): Sensor value of Indoor Humidity (10) caught the value 56.200001
+LogMsg (26.5.2017:3:18): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:3:18): HumLimitController (26) mentioned that: AbsHumIndoor is 11.1917 and AbsHumOutdoor is 6.67607: The upper limit is 10.9527 -> So fresh air is used to lower the indoor humidity
+LogMsg (26.5.2017:3:19): Sensor value of Indoor Temperature (9) caught the value 23.200001
+LogMsg (26.5.2017:3:19): Sensor value of Indoor Humidity (10) caught the value 55.900002
+LogMsg (26.5.2017:3:23): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:3:24): Sensor value of Indoor Temperature (9) caught the value 23.200001
+LogMsg (26.5.2017:3:24): Sensor value of Indoor Humidity (10) caught the value 55.700001
+LogMsg (26.5.2017:3:28): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:3:28): Sensor value of Outdoor Temperature (5) caught the value 12.209991
+LogMsg (26.5.2017:3:28): Sensor value of Outdoor Humidity (6) caught the value 81.000000
+LogMsg (26.5.2017:3:29): Sensor value of Indoor Temperature (9) caught the value 23.299999
+LogMsg (26.5.2017:3:29): Sensor value of Indoor Humidity (10) caught the value 56.099998
+LogMsg (26.5.2017:3:33): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:3:34): Sensor value of Indoor Temperature (9) caught the value 23.299999
+LogMsg (26.5.2017:3:34): Sensor value of Indoor Humidity (10) caught the value 55.299999
+LogMsg (26.5.2017:3:38): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:3:38): HumLimitController (26) mentioned that: AbsHumIndoor is 11.0861 and AbsHumOutdoor is 7.7547: The upper limit is 11.026 -> So fresh air is used to lower the indoor humidity
+LogMsg (26.5.2017:3:39): Sensor value of Indoor Temperature (9) caught the value 23.299999
+LogMsg (26.5.2017:3:39): Sensor value of Indoor Humidity (10) caught the value 55.400002
+LogMsg (26.5.2017:3:43): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:3:44): Sensor value of Indoor Temperature (9) caught the value 23.299999
+LogMsg (26.5.2017:3:44): Sensor value of Indoor Humidity (10) caught the value 55.799999
+LogMsg (26.5.2017:3:48): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:3:49): Sensor value of Indoor Temperature (9) caught the value 23.299999
+LogMsg (26.5.2017:3:49): Sensor value of Indoor Humidity (10) caught the value 54.700001
+LogMsg (26.5.2017:3:53): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:3:54): Sensor value of Indoor Temperature (9) caught the value 23.299999
+LogMsg (26.5.2017:3:54): Sensor value of Indoor Humidity (10) caught the value 53.900002
+LogMsg (26.5.2017:3:58): HumLimitController (26) mentioned that: AbsHumIndoor is 10.8054 and AbsHumOutdoor is 7.7547: Lower limit is 9.02124 and upper limit is 11.026 -> So humidity is in range
+LogMsg (26.5.2017:3:58): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:3:58): Sensor value of Outdoor Temperature (5) caught the value 12.000000
+LogMsg (26.5.2017:3:58): Sensor value of Outdoor Humidity (6) caught the value 76.000000
+LogMsg (26.5.2017:3:59): Sensor value of Indoor Temperature (9) caught the value 23.299999
+LogMsg (26.5.2017:3:59): Sensor value of Indoor Humidity (10) caught the value 53.599998
+LogMsg (26.5.2017:4:03): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:4:05): Sensor value of Indoor Temperature (9) caught the value 23.299999
+LogMsg (26.5.2017:4:05): Sensor value of Indoor Humidity (10) caught the value 54.700001
+LogMsg (26.5.2017:4:08): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:4:10): Sensor value of Indoor Temperature (9) caught the value 23.200001
+LogMsg (26.5.2017:4:10): Sensor value of Indoor Humidity (10) caught the value 53.900002
+LogMsg (26.5.2017:4:13): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:4:15): Sensor value of Indoor Temperature (9) caught the value 23.200001
+LogMsg (26.5.2017:4:15): Sensor value of Indoor Humidity (10) caught the value 54.200001
+LogMsg (26.5.2017:4:18): HumLimitController (26) mentioned that: AbsHumIndoor is 10.7934 and AbsHumOutdoor is 7.1749: Lower limit is 8.96132 and upper limit is 10.9527 -> So humidity is in range
+LogMsg (26.5.2017:4:18): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:4:20): Sensor value of Indoor Temperature (9) caught the value 23.200001
+LogMsg (26.5.2017:4:20): Sensor value of Indoor Humidity (10) caught the value 53.799999
+LogMsg (26.5.2017:4:23): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:4:25): Sensor value of Indoor Temperature (9) caught the value 23.100000
+LogMsg (26.5.2017:4:25): Sensor value of Indoor Humidity (10) caught the value 53.900002
+LogMsg (26.5.2017:4:28): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:4:28): Sensor value of Outdoor Temperature (5) caught the value 11.589996
+LogMsg (26.5.2017:4:28): Sensor value of Outdoor Humidity (6) caught the value 81.000000
+LogMsg (26.5.2017:4:30): Sensor value of Indoor Temperature (9) caught the value 23.100000
+LogMsg (26.5.2017:4:30): Sensor value of Indoor Humidity (10) caught the value 54.299999
+LogMsg (26.5.2017:4:33): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:4:35): Sensor value of Indoor Temperature (9) caught the value 23.100000
+LogMsg (26.5.2017:4:35): Sensor value of Indoor Humidity (10) caught the value 53.200001
+LogMsg (26.5.2017:4:38): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:4:38): HumLimitController (26) mentioned that: AbsHumIndoor is 10.5239 and AbsHumOutdoor is 7.44082: Lower limit is 8.9018 and upper limit is 10.88 -> So humidity is in range
+LogMsg (26.5.2017:4:40): Sensor value of Indoor Temperature (9) caught the value 23.100000
+LogMsg (26.5.2017:4:40): Sensor value of Indoor Humidity (10) caught the value 53.099998
+LogMsg (26.5.2017:4:43): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:4:45): Sensor value of Indoor Temperature (9) caught the value 23.100000
+LogMsg (26.5.2017:4:45): Sensor value of Indoor Humidity (10) caught the value 53.900002
+LogMsg (26.5.2017:4:48): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:4:50): Sensor value of Indoor Temperature (9) caught the value 23.000000
+LogMsg (26.5.2017:4:50): Sensor value of Indoor Humidity (10) caught the value 53.000000
+LogMsg (26.5.2017:4:53): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:4:55): Sensor value of Indoor Temperature (9) caught the value 23.000000
+LogMsg (26.5.2017:4:55): Sensor value of Indoor Humidity (10) caught the value 53.000000
+LogMsg (26.5.2017:4:58): HumLimitController (26) mentioned that: AbsHumIndoor is 10.4147 and AbsHumOutdoor is 7.44082: Lower limit is 8.84267 and upper limit is 10.8077 -> So humidity is in range
+LogMsg (26.5.2017:4:58): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:4:58): Sensor value of Outdoor Temperature (5) caught the value 11.790009
+LogMsg (26.5.2017:4:58): Sensor value of Outdoor Humidity (6) caught the value 76.000000
+LogMsg (26.5.2017:5:00): Sensor value of Indoor Temperature (9) caught the value 23.000000
+LogMsg (26.5.2017:5:00): Sensor value of Indoor Humidity (10) caught the value 53.000000
+LogMsg (26.5.2017:5:03): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:5:05): Sensor value of Indoor Temperature (9) caught the value 23.000000
+LogMsg (26.5.2017:5:05): Sensor value of Indoor Humidity (10) caught the value 53.000000
+LogMsg (26.5.2017:5:08): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:5:10): Sensor value of Indoor Temperature (9) caught the value 22.900000
+LogMsg (26.5.2017:5:10): Sensor value of Indoor Humidity (10) caught the value 52.900002
+LogMsg (26.5.2017:5:13): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:5:15): Sensor value of Indoor Temperature (9) caught the value 22.900000
+LogMsg (26.5.2017:5:15): Sensor value of Indoor Humidity (10) caught the value 52.900002
+LogMsg (26.5.2017:5:18): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:5:18): HumLimitController (26) mentioned that: AbsHumIndoor is 10.326 and AbsHumOutdoor is 7.07519: Lower limit is 8.78393 and upper limit is 10.7359 -> So humidity is in range
+LogMsg (26.5.2017:5:20): Sensor value of Indoor Temperature (9) caught the value 22.900000
+LogMsg (26.5.2017:5:20): Sensor value of Indoor Humidity (10) caught the value 52.900002
+LogMsg (26.5.2017:5:23): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:5:25): Sensor value of Indoor Temperature (9) caught the value 22.900000
+LogMsg (26.5.2017:5:25): Sensor value of Indoor Humidity (10) caught the value 52.900002
+LogMsg (26.5.2017:5:28): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:5:28): Sensor value of Outdoor Temperature (5) caught the value 10.790009
+LogMsg (26.5.2017:5:28): Sensor value of Outdoor Humidity (6) caught the value 87.000000
+LogMsg (26.5.2017:5:30): Sensor value of Indoor Temperature (9) caught the value 22.900000
+LogMsg (26.5.2017:5:30): Sensor value of Indoor Humidity (10) caught the value 52.900002
+LogMsg (26.5.2017:5:33): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:5:35): Sensor value of Indoor Temperature (9) caught the value 22.799999
+LogMsg (26.5.2017:5:35): Sensor value of Indoor Humidity (10) caught the value 52.799999
+LogMsg (26.5.2017:5:38): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:5:38): HumLimitController (26) mentioned that: AbsHumIndoor is 10.238 and AbsHumOutdoor is 7.57707: Lower limit is 8.72559 and upper limit is 10.6646 -> So humidity is in range
+LogMsg (26.5.2017:5:40): Sensor value of Indoor Temperature (9) caught the value 22.799999
+LogMsg (26.5.2017:5:40): Sensor value of Indoor Humidity (10) caught the value 52.799999
+LogMsg (26.5.2017:5:43): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:5:45): Sensor value of Indoor Temperature (9) caught the value 22.799999
+LogMsg (26.5.2017:5:45): Sensor value of Indoor Humidity (10) caught the value 52.799999
+LogMsg (26.5.2017:5:48): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:5:50): Sensor value of Indoor Temperature (9) caught the value 22.799999
+LogMsg (26.5.2017:5:50): Sensor value of Indoor Humidity (10) caught the value 52.799999
+LogMsg (26.5.2017:5:53): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:5:55): Sensor value of Indoor Temperature (9) caught the value 22.700001
+LogMsg (26.5.2017:5:55): Sensor value of Indoor Humidity (10) caught the value 52.700001
+LogMsg (26.5.2017:5:58): HumLimitController (26) mentioned that: AbsHumIndoor is 10.1508 and AbsHumOutdoor is 7.57707: Lower limit is 8.66763 and upper limit is 10.5938 -> So humidity is in range
+LogMsg (26.5.2017:5:58): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:5:58): Sensor value of Outdoor Temperature (5) caught the value 10.589996
+LogMsg (26.5.2017:5:58): Sensor value of Outdoor Humidity (6) caught the value 81.000000
+LogMsg (26.5.2017:6:00): Sensor value of Indoor Temperature (9) caught the value 22.700001
+LogMsg (26.5.2017:6:00): Sensor value of Indoor Humidity (10) caught the value 52.700001
+LogMsg (26.5.2017:6:03): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:6:05): Sensor value of Indoor Temperature (9) caught the value 22.700001
+LogMsg (26.5.2017:6:05): Sensor value of Indoor Humidity (10) caught the value 52.700001
+LogMsg (26.5.2017:6:08): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:6:10): Sensor value of Indoor Temperature (9) caught the value 22.600000
+LogMsg (26.5.2017:6:10): Sensor value of Indoor Humidity (10) caught the value 52.599998
+LogMsg (26.5.2017:6:13): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:6:15): Sensor value of Indoor Temperature (9) caught the value 22.600000
+LogMsg (26.5.2017:6:15): Sensor value of Indoor Humidity (10) caught the value 52.599998
+LogMsg (26.5.2017:6:18): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:6:18): HumLimitController (26) mentioned that: AbsHumIndoor is 10.0642 and AbsHumOutdoor is 6.96111: Lower limit is 8.61006 and upper limit is 10.5234 -> So humidity is in range
+LogMsg (26.5.2017:6:20): Sensor value of Indoor Temperature (9) caught the value 22.600000
+LogMsg (26.5.2017:6:20): Sensor value of Indoor Humidity (10) caught the value 52.599998
+LogMsg (26.5.2017:6:23): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:6:25): Sensor value of Indoor Temperature (9) caught the value 22.600000
+LogMsg (26.5.2017:6:25): Sensor value of Indoor Humidity (10) caught the value 52.599998
+LogMsg (26.5.2017:6:28): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:6:28): Sensor value of Outdoor Temperature (5) caught the value 9.320007
+LogMsg (26.5.2017:6:28): Sensor value of Outdoor Humidity (6) caught the value 87.000000
+LogMsg (26.5.2017:6:30): Sensor value of Indoor Temperature (9) caught the value 22.600000
+LogMsg (26.5.2017:6:30): Sensor value of Indoor Humidity (10) caught the value 52.599998
+LogMsg (26.5.2017:6:33): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:6:35): Sensor value of Indoor Temperature (9) caught the value 22.600000
+LogMsg (26.5.2017:6:35): Sensor value of Indoor Humidity (10) caught the value 52.599998
+LogMsg (26.5.2017:6:38): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:6:38): HumLimitController (26) mentioned that: AbsHumIndoor is 10.0642 and AbsHumOutdoor is 6.86998: Lower limit is 8.61006 and upper limit is 10.5234 -> So humidity is in range
+LogMsg (26.5.2017:6:40): Sensor value of Indoor Temperature (9) caught the value 22.600000
+LogMsg (26.5.2017:6:40): Sensor value of Indoor Humidity (10) caught the value 52.599998
+LogMsg (26.5.2017:6:43): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:6:45): Sensor value of Indoor Temperature (9) caught the value 22.600000
+LogMsg (26.5.2017:6:45): Sensor value of Indoor Humidity (10) caught the value 52.599998
+LogMsg (26.5.2017:6:45): GPIO TimeTrigger NightPower (11) has been turned off
+LogMsg (26.5.2017:6:48): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:6:50): Sensor value of Indoor Temperature (9) caught the value 22.600000
+LogMsg (26.5.2017:6:50): Sensor value of Indoor Humidity (10) caught the value 52.599998
+LogMsg (26.5.2017:6:53): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:6:55): Sensor value of Indoor Temperature (9) caught the value 22.500000
+LogMsg (26.5.2017:6:55): Sensor value of Indoor Humidity (10) caught the value 52.500000
+LogMsg (26.5.2017:6:58): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:6:58): HumLimitController (26) mentioned that: AbsHumIndoor is 9.97835 and AbsHumOutdoor is 6.86998: Lower limit is 8.55287 and upper limit is 10.4535 -> So humidity is in range
+LogMsg (26.5.2017:6:58): Sensor value of Outdoor Temperature (5) caught the value 9.490021
+LogMsg (26.5.2017:6:58): Sensor value of Outdoor Humidity (6) caught the value 87.000000
+LogMsg (26.5.2017:7:00): Sensor value of Indoor Temperature (9) caught the value 22.600000
+LogMsg (26.5.2017:7:00): Sensor value of Indoor Humidity (10) caught the value 52.599998
+LogMsg (26.5.2017:7:00): GpioOr (13) mentioned that: Turning system off
+LogMsg (26.5.2017:7:00): GPIO TimeTrigger Summer fresh air (27) has been turned off
+LogMsg (26.5.2017:7:03): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:7:05): Sensor value of Indoor Temperature (9) caught the value 22.500000
+LogMsg (26.5.2017:7:05): Sensor value of Indoor Humidity (10) caught the value 52.500000
+LogMsg (26.5.2017:7:08): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:7:10): Sensor value of Indoor Temperature (9) caught the value 22.500000
+LogMsg (26.5.2017:7:10): Sensor value of Indoor Humidity (10) caught the value 52.500000
+LogMsg (26.5.2017:7:13): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:7:15): Sensor value of Indoor Temperature (9) caught the value 22.600000
+LogMsg (26.5.2017:7:15): Sensor value of Indoor Humidity (10) caught the value 52.599998
+LogMsg (26.5.2017:7:15): GpioOr (13) mentioned that: Turning system on because of TimeTrigger Night hourly air (23) (23),
+LogMsg (26.5.2017:7:15): GPIO TimeTrigger Night hourly air (23) has been turned on
+LogMsg (26.5.2017:7:15): GPIO TimeTrigger Night hourly air (23) has been turned on
+LogMsg (26.5.2017:7:18): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:7:18): HumLimitController (26) mentioned that: AbsHumIndoor is 10.0642 and AbsHumOutdoor is 6.94827: Lower limit is 8.61006 and upper limit is 10.5234 -> So humidity is in range
+LogMsg (26.5.2017:7:20): Sensor value of Indoor Temperature (9) caught the value 22.600000
+LogMsg (26.5.2017:7:20): Sensor value of Indoor Humidity (10) caught the value 52.599998
+LogMsg (26.5.2017:7:23): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:7:25): Sensor value of Indoor Temperature (9) caught the value 22.600000
+LogMsg (26.5.2017:7:25): Sensor value of Indoor Humidity (10) caught the value 52.599998
+LogMsg (26.5.2017:7:25): GpioOr (13) mentioned that: Turning system off
+LogMsg (26.5.2017:7:25): GPIO TimeTrigger Night hourly air (23) has been turned off
+LogMsg (26.5.2017:7:25): GPIO TimeTrigger Night hourly air (14) has been turned off
+LogMsg (26.5.2017:7:28): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:7:28): Sensor value of Outdoor Temperature (5) caught the value 10.320007
+LogMsg (26.5.2017:7:28): Sensor value of Outdoor Humidity (6) caught the value 93.000000
+LogMsg (26.5.2017:7:30): Sensor value of Indoor Temperature (9) caught the value 22.600000
+LogMsg (26.5.2017:7:30): Sensor value of Indoor Humidity (10) caught the value 52.599998
+LogMsg (26.5.2017:7:33): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:7:35): Sensor value of Indoor Temperature (9) caught the value 22.700001
+LogMsg (26.5.2017:7:35): Sensor value of Indoor Humidity (10) caught the value 52.700001
+LogMsg (26.5.2017:7:38): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:7:38): HumLimitController (26) mentioned that: AbsHumIndoor is 10.1508 and AbsHumOutdoor is 7.84986: Lower limit is 8.66763 and upper limit is 10.5938 -> So humidity is in range
+LogMsg (26.5.2017:7:40): Sensor value of Indoor Temperature (9) caught the value 22.700001
+LogMsg (26.5.2017:7:40): Sensor value of Indoor Humidity (10) caught the value 52.700001
+LogMsg (26.5.2017:7:43): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:7:45): Error: Indoor Temperature (9) mentioned that: 1wire bus return invalid value of -2
+LogMsg (26.5.2017:7:48): Error: RotiController (12) mentioned that: Invalid indoor value
+LogMsg (26.5.2017:7:50): Sensor value of Indoor Temperature (9) caught the value 22.700001
+LogMsg (26.5.2017:7:50): Sensor value of Indoor Humidity (10) caught the value 52.700001
+LogMsg (26.5.2017:7:53): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:7:55): Sensor value of Indoor Temperature (9) caught the value 22.799999
+LogMsg (26.5.2017:7:55): Sensor value of Indoor Humidity (10) caught the value 52.799999
+LogMsg (26.5.2017:7:58): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:7:58): HumLimitController (26) mentioned that: AbsHumIndoor is 10.238 and AbsHumOutdoor is 7.84986: Lower limit is 8.72559 and upper limit is 10.6646 -> So humidity is in range
+LogMsg (26.5.2017:7:58): Sensor value of Outdoor Temperature (5) caught the value 11.480011
+LogMsg (26.5.2017:7:58): Sensor value of Outdoor Humidity (6) caught the value 76.000000
+LogMsg (26.5.2017:8:00): Sensor value of Indoor Temperature (9) caught the value 22.799999
+LogMsg (26.5.2017:8:00): Sensor value of Indoor Humidity (10) caught the value 52.799999
+LogMsg (26.5.2017:8:03): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:8:05): Sensor value of Indoor Temperature (9) caught the value 22.799999
+LogMsg (26.5.2017:8:05): Sensor value of Indoor Humidity (10) caught the value 52.799999
+LogMsg (26.5.2017:8:08): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:8:10): Sensor value of Indoor Temperature (9) caught the value 22.799999
+LogMsg (26.5.2017:8:10): Sensor value of Indoor Humidity (10) caught the value 52.200001
+LogMsg (26.5.2017:8:13): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:8:15): Sensor value of Indoor Temperature (9) caught the value 22.900000
+LogMsg (26.5.2017:8:15): Sensor value of Indoor Humidity (10) caught the value 52.900002
+LogMsg (26.5.2017:8:15): GpioOr (13) mentioned that: Turning system on because of TimeTrigger Night hourly air (24) (24),
+LogMsg (26.5.2017:8:15): GPIO TimeTrigger Night hourly air (24) has been turned on
+LogMsg (26.5.2017:8:18): HumLimitController (26) mentioned that: AbsHumIndoor is 10.326 and AbsHumOutdoor is 6.93053: Lower limit is 8.78393 and upper limit is 10.7359 -> So humidity is in range
+LogMsg (26.5.2017:8:18): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:8:20): Sensor value of Indoor Temperature (9) caught the value 22.700001
+LogMsg (26.5.2017:8:20): Sensor value of Indoor Humidity (10) caught the value 47.500000
+LogMsg (26.5.2017:8:23): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:8:25): Sensor value of Indoor Temperature (9) caught the value 22.700001
+LogMsg (26.5.2017:8:25): Sensor value of Indoor Humidity (10) caught the value 52.700001
+LogMsg (26.5.2017:8:25): GpioOr (13) mentioned that: Turning system off
+LogMsg (26.5.2017:8:25): GPIO TimeTrigger Night hourly air (24) has been turned off
+LogMsg (26.5.2017:8:25): GPIO TimeTrigger Night hourly air (14) has been turned off
+LogMsg (26.5.2017:8:28): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:8:28): Sensor value of Outdoor Temperature (5) caught the value 13.980011
+LogMsg (26.5.2017:8:28): Sensor value of Outdoor Humidity (6) caught the value 72.000000
+LogMsg (26.5.2017:8:30): Sensor value of Indoor Temperature (9) caught the value 22.799999
+LogMsg (26.5.2017:8:30): Sensor value of Indoor Humidity (10) caught the value 52.799999
+LogMsg (26.5.2017:8:33): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:8:35): Sensor value of Indoor Temperature (9) caught the value 22.799999
+LogMsg (26.5.2017:8:35): Sensor value of Indoor Humidity (10) caught the value 52.799999
+LogMsg (26.5.2017:8:38): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:8:38): HumLimitController (26) mentioned that: AbsHumIndoor is 10.238 and AbsHumOutdoor is 7.75607: Lower limit is 8.72559 and upper limit is 10.6646 -> So humidity is in range
+LogMsg (26.5.2017:8:40): Sensor value of Indoor Temperature (9) caught the value 22.799999
+LogMsg (26.5.2017:8:40): Sensor value of Indoor Humidity (10) caught the value 52.799999
+LogMsg (26.5.2017:8:43): GPIO RotiController (12) has been turned off
+LogMsg (26.5.2017:8:45): Error: Indoor Temperature (9) mentioned that: 1wire bus return invalid value of -2
+LogMsg (26.5.2017:8:48): Error: RotiController (12) mentioned that: Invalid indoor value
+LogMsg (26.5.2017:8:50): Sensor value of Indoor Temperature (9) caught the value 22.799999
+LogMsg (26.5.2017:8:50): Sensor value of Indoor Humidity (10) caught the value 52.799999
+LogMsg (26.5.2017:8:53): GPIO RotiController (12) has been turned off
