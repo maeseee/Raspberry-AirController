@@ -51,7 +51,7 @@ void RotiController::recall()
     gpio::Value outputValue = gpio::Value::LOW;
 
     // set roti output
-    if (m_sensController->shouldRotiBeEnabled()) {
+    if (m_sensController->shouldRotiBeEnabled(SET_HUM)) {
         outputValue = gpio::Value::HIGH;
     }
 

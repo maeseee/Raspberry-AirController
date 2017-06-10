@@ -76,8 +76,8 @@ Value GpioOr::getValue() const
 
     // Don't switch on durring the hot daytime
 
-    if ((m_sensController->difIndoorTemperatur2Outdoor() < 0) && (m_sensController->difIndoorTemperatur2Set() > 0) &&
-        (Value::HIGH == aimSystemState)) {
+    if ((m_sensController->difIndoorTemperatur2Outdoor() < 0) &&
+        (m_sensController->difIndoorTemperatur2Set(SET_TEMP) > 0) && (Value::HIGH == aimSystemState)) {
         const size_t daytime = getDaytime();
 
         const size_t startHotDay = 10 * HOUR_TO_SEC;

@@ -48,15 +48,16 @@ public:
      * @brief difIndoorTemperatur2Set (Indoor - Set)
      * @return difference [K]
      */
-    float difIndoorTemperatur2Set() const;
+    float difIndoorTemperatur2Set(const float tempSet) const;
 
     /**
      * @brief difIndoorHumidity2Set (IndoorAbs - SetAbs)
+     * @param humiditySet [%]
      * @return difference [g/m3]
      */
-    float difIndoorHumidity2Set() const;
+    float difIndoorHumidity2Set(const float humiditySet) const;
 
-    bool shouldRotiBeEnabled() const;
+    bool shouldRotiBeEnabled(const float humiditySet) const;
     bool shouldHumControllerBeEnabled() const;
 
 private:
