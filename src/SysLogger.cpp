@@ -50,12 +50,21 @@ void SysLogger::logOutput(const size_t id, const gpio::Value value)
 
 void SysLogger::logSensorValue(const size_t id, const float value)
 {
-    // save data for later use
+    std::string lastValue = "-";
+
+    if (m_values.count(id)) {
+        // value is already in the map
+        lastValue = m_values[id];
+    }
+
+    // save data anyway for later use
     m_values[id] = std::to_string(value);
 
-    // log it
-    std::string logInfo = "Sensor value of " + getNameFromId(id) + " caught the value " + std::to_string(value);
-    logMsg(logInfo);
+    // log it only on changes
+    if (m_values[id].compare(lastValue) != 0) {
+        std::string logInfo = "Sensor value of " + getNameFromId(id) + " caught the value " + std::to_string(value);
+        logMsg(logInfo);
+    }
 }
 
 std::string SysLogger::time2Str(size_t time) const

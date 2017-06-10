@@ -31,13 +31,6 @@ void HumLimitController::recall()
 {
     if (m_sensController->shouldHumControllerBeEnabled()) {
         m_gpio->setValue(m_loggerId, gpio::Value::HIGH);
-
-        // logger
-        std::stringstream logSs;
-        //        logSs << "AbsDifHumIndoorOutdoor is " << m_sensController->difIndoorHumidity2Outdoor()
-        //              << " and AbsDifHumIndoorSet is " << m_sensController->difIndoorHumidity2Set()
-        //              << " -> System gets enabled";
-        m_sysLogger->logMsg(m_loggerId, logSs.str());
     } else {
         m_gpio->setValue(m_loggerId, gpio::Value::LOW);
     }
