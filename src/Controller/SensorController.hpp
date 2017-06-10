@@ -61,6 +61,9 @@ public:
     bool shouldHumControllerBeEnabled() const;
 
 private:
+    float relHumidityToAbs(const float tempC, const float humidityRel) const;
+    float absHumidityToRel(const float tempC, const float humidityAbs) const;
+
     const sensor::SensorDataCPtr m_indoorSensor;
     const sensor::SensorDataCPtr m_outdoorSensor;
 };

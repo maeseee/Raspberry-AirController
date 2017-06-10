@@ -37,7 +37,7 @@ TimeTrigger::~TimeTrigger()
 
 bool TimeTrigger::inTimeRange() const
 {
-    size_t daytime = getDaytime();
+    const size_t daytime = getDaytime();
 
     bool isInTimeRange = false;
     if (m_offTime < m_onTime) {

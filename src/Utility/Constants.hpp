@@ -18,6 +18,4 @@ static constexpr size_t CALL_INTERVALL_HUMLIMIT = 20 * MIN_TO_SEC; // [s]
 static constexpr size_t ONE_TIME_ON_DURATION = 30 * MIN_TO_SEC;    // [s]
 
 // Helper functions
-float relHumidityToAbs(const float tempC, const float humidityRel);
-float absHumidityToRel(const float tempC, const float humidityAbs);
 size_t getDaytime();
