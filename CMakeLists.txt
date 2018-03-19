@@ -2,10 +2,14 @@ cmake_minimum_required(VERSION 3.6)
 
 project(lueftung)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -O2 -Wall -Werror -Wextra -Wchkp -Wnull-dereference -Waddress -Wsuggest-override -Wduplicated-cond -Wfloat-equal -Wshadow -Wuseless-cast -Wpedantic -Wunused-value -Wold-style-cast -Winit-self")
-set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS} -std=c++11 -O2")
+#SET (CMAKE_C_COMPILER "/usr/bin/clang")
+#SET (CMAKE_CXX_COMPILER "/usr/bin/clang++")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -O2 -Wall -Werror -Wextra -Wno-conversion -Wnull-dereference -Waddress -Wfloat-equal -Wfloat-conversion -Wshadow -Wpedantic -Wunused-value -Wold-style-cast -Winit-self")
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS} -std=c++11 -O0")
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 include_directories(src/)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/lib/Mosquitto)
 
 set(dir src/)
 # aux_source_directory(${dir} sources)
@@ -14,13 +18,9 @@ file (GLOB sourcesSub "${dir}/*/*.cpp")
 
 file (GLOB headers "${dir}/*.hpp")
 file (GLOB headersSub "${dir}/*/*.hpp")
-# message("My headers: " ${headers})
 
 add_executable(${PROJECT_NAME} ${sources} ${headers} ${sourcesSub} ${headersSub})
-target_link_libraries(${PROJECT_NAME} curl)
-target_link_libraries(${PROJECT_NAME} pthread)
-target_link_libraries(${PROJECT_NAME} boost_system)
+target_link_libraries(${PROJECT_NAME} curl pthread boost_system libmosquitto mosquittopp)
 
 add_executable(HTTP_Client tests/TcpClient.cpp)
-target_link_libraries(HTTP_Client pthread)
-target_link_libraries(HTTP_Client boost_system)
+target_link_libraries(HTTP_Client pthread boost_system)
