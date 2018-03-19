@@ -22,7 +22,7 @@ namespace logger
 class SysLogger
 {
 public:
-    SysLogger();
+    SysLogger() = default;
 
     size_t generateId(const std::string& name);
 
@@ -45,7 +45,7 @@ public:
     std::string getNameFromId(const size_t id) const;
 
 private:
-    void logMsg(const std::string& logMessage);
+    void logMsg(const std::string& logMsg);
     std::string gpioValue2Str(const gpio::Value value);
 
     size_t newId();

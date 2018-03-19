@@ -12,10 +12,6 @@
 namespace logger
 {
 
-SysLogger::SysLogger()
-{
-}
-
 size_t SysLogger::generateId(const std::string& name)
 {
     size_t id = newId();
@@ -52,7 +48,7 @@ void SysLogger::logSensorValue(const size_t id, const float value)
 {
     std::string lastValue = "-";
 
-    if (m_values.count(id)) {
+    if (0 < m_values.count(id)) {
         // value is already in the map
         lastValue = m_values[id];
     }
@@ -61,7 +57,7 @@ void SysLogger::logSensorValue(const size_t id, const float value)
     m_values[id] = std::to_string(value);
 
     // log it only on changes
-    if (m_values[id].compare(lastValue) != 0) {
+    if (m_values[id] != lastValue) {
         std::string logInfo = "Sensor value of " + getNameFromId(id) + " caught the value " + std::to_string(value);
         logMsg(logInfo);
     }
@@ -101,7 +97,7 @@ std::vector<size_t> SysLogger::getAllIds() const
 
 std::string SysLogger::getValueFromId(const size_t id) const
 {
-    if (m_values.count(id)) {
+    if (0 < m_values.count(id)) {
         return m_values.at(id);
     } else {
         return "";
@@ -114,7 +110,7 @@ void SysLogger::logMsg(const std::string& logMsg)
     syslog(LOG_INFO, "%s", logMsg.c_str());
     closelog();
 
-    time_t t = time(0); // get time now
+    time_t t = time(nullptr); // get time now
     struct tm* now = localtime(&t);
     std::stringstream date;
     date << (now->tm_mday) << "." << (now->tm_mon + 1) << "." << (now->tm_year + 1900) << ":"
@@ -152,7 +148,7 @@ std::string SysLogger::getNameFromId(const size_t id) const
 {
     assert(0 != id && "Invalid id. Try to register this task");
 
-    if (m_idNames.count(id)) {
+    if (0 < m_idNames.count(id)) {
         return m_idNames.at(id) + " (" + std::to_string(id) + ")";
     } else {
         return std::to_string(id);

@@ -11,8 +11,6 @@
 namespace controller
 {
 
-static const size_t LOG_INTERVALL = 1 * HOUR_TO_SEC / CALL_INTERVALL_ROTI;
-
 RotiController::RotiController(const controller::SensorControllerPtr sensController,
                                const gpio::IGpioPtr& gpioRoti,
                                const logger::SysLoggerPtr& sysLogger)

@@ -13,9 +13,9 @@
 #include <SysLogger.hpp>
 #include <Utility/Constants.hpp>
 
+#include <csignal>
 #include <execinfo.h> // for call stack
 #include <iostream>
-#include <signal.h>
 #include <unistd.h>
 
 // timer constants
@@ -24,19 +24,19 @@ static constexpr size_t END_NIGHT_CONDITION = 7 * HOUR_TO_SEC;
 static constexpr size_t SAFETY_CONDITION = 15 * MIN_TO_SEC;
 
 /* Obtain a backtrace and print it to stdout. */
-void printTrace(void)
+void printTrace()
 {
     void* array[10];
-    int size;
     char** strings;
 
-    size = backtrace(array, 10);
+    const int size = backtrace(array, 10);
     strings = backtrace_symbols(array, size);
 
-    printf("Obtained %i stack frames.\n", size);
+    std::cout << "Obtained " << size << " stack frames." << std::endl;
 
-    for (int i = 0; i < size; i++)
-        printf("%s\n", strings[i]);
+    for (int i = 0; i < size; i++) {
+        std::cout << strings[i] << std::endl;
+    }
 
     free(strings);
 }
@@ -68,7 +68,7 @@ int main()
     } else if (signal(SIGSEGV, sigHandler) == SIG_ERR) {
         sysLogger->logMsg(loggerId, "can't catch SIGSEGV");
     } else if (signal(SIGABRT, sigHandler) == SIG_ERR) {
-        sysLogger->logMsg(loggerId, "can't catch SIGSEGV");
+        sysLogger->logMsg(loggerId, "can't catch SIGABRT");
     }
 
     // initialize outputs
@@ -111,7 +111,7 @@ int main()
     http_server::initHttpServer(oneTimeTrigger, sysLogger);
 
     sysLogger->logMsg(loggerId, "Set up finished");
-    while (true == m_runProgram) {
+    while (m_runProgram) {
         sleep(1);
     }
 

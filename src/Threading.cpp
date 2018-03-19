@@ -25,7 +25,7 @@ void Threading::stopThreading()
 
 void Threading::waitStopped()
 {
-    assert(true == m_stopThread);
+    assert(m_stopThread);
     m_thread.join();
 }
 
@@ -50,4 +50,4 @@ void Threading::threadFn()
         sleep(1);
     }
 }
-}
+} // namespace threading
