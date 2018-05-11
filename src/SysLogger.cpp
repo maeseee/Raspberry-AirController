@@ -44,7 +44,7 @@ void SysLogger::logOutput(const size_t id, const gpio::Value value)
     logMsg(logInfo);
 }
 
-void SysLogger::logSensorValue(const size_t id, const float value)
+void SysLogger::logSensorValue(const size_t id, const double value)
 {
     std::string lastValue = "-";
 

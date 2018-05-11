@@ -19,32 +19,32 @@ SensorController::SensorController(const sensor::SensorDataCPtr& indoorSensor,
     assert(m_outdoorSensor);
 }
 
-float SensorController::difIndoorTemperatur2Outdoor() const
+double SensorController::difIndoorTemperatur2Outdoor() const
 {
     return m_indoorSensor->m_temperature - m_outdoorSensor->m_temperature;
 }
 
-float SensorController::difIndoorHumidity2Outdoor() const
+double SensorController::difIndoorHumidity2Outdoor() const
 {
-    const float absHumIndoor = relHumidityToAbs(m_indoorSensor->m_temperature, m_indoorSensor->m_humidity);
-    const float absHumOutdoor = relHumidityToAbs(m_outdoorSensor->m_temperature, m_outdoorSensor->m_humidity);
+    const double absHumIndoor = relHumidityToAbs(m_indoorSensor->m_temperature, m_indoorSensor->m_humidity);
+    const double absHumOutdoor = relHumidityToAbs(m_outdoorSensor->m_temperature, m_outdoorSensor->m_humidity);
 
     return absHumIndoor - absHumOutdoor;
 }
 
-float SensorController::difIndoorTemperatur2Set(const float tempSet) const
+double SensorController::difIndoorTemperatur2Set(const double tempSet) const
 {
     return m_indoorSensor->m_temperature - tempSet;
 }
 
-float SensorController::difIndoorHumidity2Set(const float humiditySet) const
+double SensorController::difIndoorHumidity2Set(const double humiditySet) const
 {
-    const float absHumIndoor = relHumidityToAbs(m_indoorSensor->m_temperature, m_indoorSensor->m_humidity);
-    const float absHumSet = relHumidityToAbs(m_indoorSensor->m_temperature, humiditySet);
+    const double absHumIndoor = relHumidityToAbs(m_indoorSensor->m_temperature, m_indoorSensor->m_humidity);
+    const double absHumSet = relHumidityToAbs(m_indoorSensor->m_temperature, humiditySet);
     return absHumIndoor - absHumSet;
 }
 
-bool SensorController::shouldRotiBeEnabled(const float humiditySet) const
+bool SensorController::shouldRotiBeEnabled(const double humiditySet) const
 {
     const bool isSetHigherThanIndoor = difIndoorHumidity2Set(humiditySet) > 0 ? false : true;
     const bool isOutdoorHigherThanIndoor = difIndoorHumidity2Outdoor() > 0 ? false : true;
@@ -61,7 +61,7 @@ bool SensorController::shouldHumControllerBeEnabled() const
     return !shouldRotiBeEnabled(SET_HUM + 5.0);
 }
 
-float SensorController::relHumidityToAbs(const float tempC, const float humidityRel) const
+double SensorController::relHumidityToAbs(const double tempC, const double humidityRel) const
 {
     // function calculated for
     // Temperatur [°C]  water for 100 % [g/m3]
@@ -79,12 +79,12 @@ float SensorController::relHumidityToAbs(const float tempC, const float humidity
     //  35	           39.6
     //  40	           51.1
 
-    return 4.2431796244 * exp(0.0666427637 * tempC) * humidityRel / 100;
+    return static_cast<double>(4.2431796244 * exp(0.0666427637 * tempC) * humidityRel / 100.0);
 }
 
-float SensorController::absHumidityToRel(const float tempC, const float humidityAbs) const
+double SensorController::absHumidityToRel(const double tempC, const double humidityAbs) const
 {
-    const float absHumidity100 = relHumidityToAbs(tempC, 100);
+    const double absHumidity100 = relHumidityToAbs(tempC, 100);
     return humidityAbs / absHumidity100 * 100;
 }
 }

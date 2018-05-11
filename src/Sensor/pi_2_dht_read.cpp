@@ -40,7 +40,7 @@
 // the data afterwards.
 #define DHT_PULSES 41
 
-DhtState pi_2_dht_read(size_t type, size_t pin, float* humidity, float* temperature)
+DhtState pi_2_dht_read(size_t type, size_t pin, double* humidity, double* temperature)
 {
     // Validate humidity and temperature arguments and set them to zero.
     if (humidity == NULL || temperature == NULL) {
@@ -152,8 +152,8 @@ DhtState pi_2_dht_read(size_t type, size_t pin, float* humidity, float* temperat
     if (data[4] == ((data[0] + data[1] + data[2] + data[3]) & 0xFF)) {
         if (type == DHT11) {
             // Get humidity and temp for DHT11 sensor.
-            *humidity = static_cast<float>(data[0]);
-            *temperature = static_cast<float>(data[2]);
+            *humidity = static_cast<double>(data[0]);
+            *temperature = static_cast<double>(data[2]);
         } else if (type == DHT22) {
             // Calculate humidity and temp for DHT22 sensor.
             *humidity = (data[0] * 256 + data[1]) / 10.0f;

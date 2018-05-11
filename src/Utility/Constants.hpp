@@ -3,8 +3,8 @@
 #include <cstddef>
 
 // Sensors
-static constexpr float SET_TEMP = 22.0; // set point for temerautre [°C]
-static constexpr float SET_HUM = 50.0;  // set point for humidity [%]
+static constexpr double SET_TEMP = 22.0; // set point for temerautre [°C]
+static constexpr double SET_HUM = 50.0;  // set point for humidity [%]
 
 // Time
 static constexpr size_t MIN_TO_SEC = 60;                           // [s]

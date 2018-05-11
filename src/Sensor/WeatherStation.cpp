@@ -9,7 +9,7 @@
 namespace sensor
 {
 
-static const float KELVIN = 273.15;
+static const double KELVIN = 273.15;
 static const char* CURRENT_WEATHER_URL =
     "api.openweathermap.org/data/2.5/"
     "weather?id=7285765&APPID="
@@ -85,7 +85,7 @@ void WeatherStation::updateData()
     boost::property_tree::ptree pt;
     boost::property_tree::read_json(ss, pt);
 
-    boost::optional<float> temp = pt.get_optional<float>("main.temp");
+    boost::optional<double> temp = pt.get_optional<double>("main.temp");
 
     if (temp) {
         m_data->m_temperature = temp.get() - KELVIN;
@@ -94,7 +94,7 @@ void WeatherStation::updateData()
         m_sysLogger->logError(m_loggerIdTemp, "invalid new outdoor temp");
     }
 
-    boost::optional<float> humidity = pt.get_optional<float>("main.humidity");
+    boost::optional<double> humidity = pt.get_optional<double>("main.humidity");
     if (temp) {
         m_data->m_humidity = humidity.get();
         m_sysLogger->logSensorValue(m_loggerIdHum, m_data->m_humidity);

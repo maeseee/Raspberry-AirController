@@ -48,7 +48,7 @@ public:
     void recall() override;
 
 private:
-    bool shouldBeEnabled(const float indoor, const float outdoor, const float set) const;
+    bool shouldBeEnabled(const double indoor, const double outdoor, const double set) const;
 
     const controller::SensorControllerPtr m_sensController;
     const gpio::IGpioPtr m_gpioRoti;

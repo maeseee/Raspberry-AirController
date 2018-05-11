@@ -36,33 +36,33 @@ public:
      * @brief difIndoorTemperatur2Outdoor (Indoor - Outdoor)
      * @return difference [K]
      */
-    float difIndoorTemperatur2Outdoor() const;
+    double difIndoorTemperatur2Outdoor() const;
 
     /**
      * @brief difIndoorHumidity2Outdoor (Indoor - Outdoor)
      * @return difference [g/m3]
      */
-    float difIndoorHumidity2Outdoor() const;
+    double difIndoorHumidity2Outdoor() const;
 
     /**
      * @brief difIndoorTemperatur2Set (Indoor - Set)
      * @return difference [K]
      */
-    float difIndoorTemperatur2Set(const float tempSet) const;
+    double difIndoorTemperatur2Set(const double tempSet) const;
 
     /**
      * @brief difIndoorHumidity2Set (IndoorAbs - SetAbs)
      * @param humiditySet [%]
      * @return difference [g/m3]
      */
-    float difIndoorHumidity2Set(const float humiditySet) const;
+    double difIndoorHumidity2Set(const double humiditySet) const;
 
-    bool shouldRotiBeEnabled(const float humiditySet) const;
+    bool shouldRotiBeEnabled(const double humiditySet) const;
     bool shouldHumControllerBeEnabled() const;
 
 private:
-    float relHumidityToAbs(const float tempC, const float humidityRel) const;
-    float absHumidityToRel(const float tempC, const float humidityAbs) const;
+    double relHumidityToAbs(const double tempC, const double humidityRel) const;
+    double absHumidityToRel(const double tempC, const double humidityAbs) const;
 
     const sensor::SensorDataCPtr m_indoorSensor;
     const sensor::SensorDataCPtr m_outdoorSensor;

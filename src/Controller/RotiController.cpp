@@ -32,7 +32,7 @@ RotiController::~RotiController()
     m_gpioRoti->setValue(m_loggerId, gpio::Value::LOW);
 }
 
-bool RotiController::shouldBeEnabled(const float indoor, const float outdoor, const float set) const
+bool RotiController::shouldBeEnabled(const double indoor, const double outdoor, const double set) const
 {
     const bool increaseIndoor = set > indoor;
     const bool isOutdoorHigher = indoor < outdoor;

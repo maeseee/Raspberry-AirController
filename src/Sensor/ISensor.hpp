@@ -5,7 +5,7 @@
 
 namespace sensor
 {
-static constexpr float INVALID_FLOAT = std::numeric_limits<float>::min();
+static constexpr double INVALID_double = std::numeric_limits<double>::min();
 
 class SensorData
 {
@@ -16,8 +16,8 @@ public:
     {
     }
 
-    float m_temperature; // [°C] temperature
-    float m_humidity;    // [%] humadity
+    double m_temperature; // [°C] temperature
+    double m_humidity;    // [%] humadity
 };
 using SensorDataPtr = std::shared_ptr<SensorData>;
 using SensorDataCPtr = std::shared_ptr<const SensorData>;

@@ -30,8 +30,8 @@ SensorDataCPtr Am2302Sensor::getData() const
 
 void Am2302Sensor::recall()
 {
-    float humidity = 0;
-    float temperature = 0;
+    double humidity = 0.0;
+    double temperature = 0.0;
 
     const DhtState dhtState = pi_2_dht_read(DHT22, m_sensor->getPinNumber(), &humidity, &temperature);
 

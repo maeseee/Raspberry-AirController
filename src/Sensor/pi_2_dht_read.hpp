@@ -31,4 +31,4 @@
 // negative value will
 // be returned.  Some errors can be ignored and retried, specifically
 // DHT_ERROR_TIMEOUT or DHT_ERROR_CHECKSUM.
-DhtState pi_2_dht_read(size_t sensor, size_t pin, float* humidity, float* temperature);
+DhtState pi_2_dht_read(size_t sensor, size_t pin, double* humidity, double* temperature);

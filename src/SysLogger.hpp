@@ -30,7 +30,7 @@ public:
     void logError(const size_t id, const std::string& logMessage);
 
     void logOutput(const size_t id, const gpio::Value value);
-    void logSensorValue(const size_t id, const float value);
+    void logSensorValue(const size_t id, const double value);
 
     /**
      * @brief time2Str converts a time in seconds to a readable time
