@@ -20,7 +20,7 @@ file (GLOB headers "${dir}/*.hpp")
 file (GLOB headersSub "${dir}/*/*.hpp")
 
 add_executable(${PROJECT_NAME} ${sources} ${headers} ${sourcesSub} ${headersSub})
-target_link_libraries(${PROJECT_NAME} curl pthread boost_system libmosquitto mosquittopp)
+target_link_libraries(${PROJECT_NAME} curl pthread boost_system)
 
 add_executable(HTTP_Client tests/TcpClient.cpp)
 target_link_libraries(HTTP_Client pthread boost_system)
