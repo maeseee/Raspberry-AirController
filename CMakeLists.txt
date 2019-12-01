@@ -1,12 +1,47 @@
 cmake_minimum_required(VERSION 3.6)
 
+# Compile a release version
+# mkdir build
+# cd build
+# cmake -DCMAKE_BUILD_TYPE=Release ..
+# make
+
+# Compile a debug version
+# mkdir buildDebug
+# cd buildDebug
+# cmake -DCMAKE_BUILD_TYPE=Debug ..
+# make
+
 project(lueftung)
 
+# choose compiler
 set(CMAKE_C_COMPILER "/usr/bin/clang")
 set(CMAKE_CXX_COMPILER "/usr/bin/clang++")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -O2 -Wall -Werror -Wextra -Wno-conversion -Wnull-dereference -Waddress -Wfloat-equal -Wfloat-conversion -Wshadow -Wpedantic -Wunused-value -Wold-style-cast -Winit-self")
-set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS} -std=c++11 -O0")
+
+# set compile flags
+add_compile_options(
+  "-std=c++17" 
+  "-Wall"
+  "-Werror"
+  "-Wextra"
+  "-Wno-conversion"
+  "-Wnull-dereference"
+  "-Waddress"
+  "-Wfloat-equal"
+  "-Wfloat-conversion"
+  "-Wshadow"
+  "-Wpedantic"
+  "-Wunused-value"
+  "-Wold-style-cast"
+  "-Winit-self")
+
+set(CMAKE_CXX_FLAGS_RELEASE "-O2")
+set(CMAKE_CXX_FLAGS_DEBUG "-O0")
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+# add clang address sanitizer to debug version
+set (CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -fno-omit-frame-pointer -fsanitize=address")
+set (CMAKE_LINKER_FLAGS_DEBUG "${CMAKE_LINKER_FLAGS_DEBUG} -fno-omit-frame-pointer -fsanitize=address")
 
 include_directories(src/)
 #add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/lib/Mosquitto)
