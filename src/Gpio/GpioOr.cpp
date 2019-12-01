@@ -52,9 +52,8 @@ bool GpioOr::setValue(const size_t id, const Value val)
         logSs << "Turning system ";
         if (Value::HIGH == aimSystemState) {
             logSs << "on because of ";
-            for (const size_t taskId : m_controllerIdHigh) {
-                logSs << m_sysLogger->getNameFromId(taskId);
-            }
+            std::for_each(std::begin(m_controllerIdHigh), std::end(m_controllerIdHigh),
+                          [&logSs, this](const size_t taskId) { logSs << m_sysLogger->getNameFromId(taskId); });
         } else {
             logSs << "off";
         }
@@ -97,4 +96,4 @@ size_t GpioOr::getPinNumber() const
     return m_gpioOutput->getPinNumber();
 }
 
-} // gpio
+} // namespace gpio

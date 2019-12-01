@@ -35,4 +35,4 @@ void HumLimitController::recall()
         m_gpio->setValue(m_loggerId, gpio::Value::LOW);
     }
 }
-}
+} // namespace controller
