@@ -1,17 +1,17 @@
 From webseite https://www.digitalocean.com/community/tutorials/the-upstart-event-system-what-it-is-and-how-to-use-it
 
 # Create a new system job
-sudo nano /etc/init/testjob.conf
+sudo nano /etc/init/aircontroller.conf
 
 # Add the following to the conf file
-description "A test job file for experimenting with Upstart"
+description "Aircontroller starting with Upstart"
 author "Marcel"
 start on runlevel [2345]
 stop on shutdown
-exec echo Test Job ran at  `date` >> /var/log/testjob.log
+exec echo Test Job ran at  `date` >> /var/log/aircontroller.log
 
 # Test syntax
-init-checkconf /etc/init/testjob.conf
+init-checkconf /etc/init/aircontroller.conf
 
 # Start job manually (only if it is not running)
-sudo service testjob start
+sudo service aircontroller start

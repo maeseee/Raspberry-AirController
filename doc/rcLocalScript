@@ -1,7 +1,7 @@
 #!/bin/bash  
 
 #do not forget to add 
-#/home/marcel/AirControlling/doc/rcLocalScript &
+#/home/marcel/AirController/doc/rcLocalScript &
 #to the file /etc/rc.local
 
 while [ true ]

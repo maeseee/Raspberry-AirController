@@ -1,5 +1,8 @@
 cmake_minimum_required(VERSION 3.6)
 
+# Prerequirements:
+# sudo apt-get install libboost-all-dev clang cmake libcurl4-nss-dev
+
 # Compile a release version
 # mkdir build
 # cd build
@@ -44,10 +47,8 @@ set (CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -fno-omit-frame-pointer -fs
 set (CMAKE_LINKER_FLAGS_DEBUG "${CMAKE_LINKER_FLAGS_DEBUG} -fno-omit-frame-pointer -fsanitize=address")
 
 include_directories(src/)
-#add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/lib/Mosquitto)
 
 set(dir src/)
-# aux_source_directory(${dir} sources)
 file (GLOB sources "${dir}/*.cpp")
 file (GLOB sourcesSub "${dir}/*/*.cpp")
 
