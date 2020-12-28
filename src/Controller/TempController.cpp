@@ -43,7 +43,7 @@ void TempController::recall()
 
 bool TempController::shouldWarm()
 {
-    time_t t = time(NULL); // get time now
+    time_t t = time(nullptr); // get time now
     struct tm* now = localtime(&t);
 
     // Example of date of today
