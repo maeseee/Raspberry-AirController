@@ -23,20 +23,23 @@ set(CMAKE_CXX_COMPILER "/usr/bin/clang++")
 
 # set compile flags
 add_compile_options(
-  "-std=c++17" 
-  "-Wall"
-  "-Werror"
-  "-Wextra"
-  "-Wno-conversion"
-  "-Wnull-dereference"
-  "-Waddress"
-  "-Wfloat-equal"
-  "-Wfloat-conversion"
-  "-Wshadow"
-  "-Wpedantic"
-  "-Wunused-value"
-  "-Wold-style-cast"
-  "-Winit-self")
+  -std=c++17
+  -Wall
+  -Werror
+  -Wextra
+  -Waddress
+  -Wnull-dereference
+  -Waddress
+  -Wfloat-equal
+  -Wfloat-conversion
+  -Wshadow
+  -Wpedantic
+  -Wunused-value
+  -Wold-style-cast
+  -Woverloaded-virtual
+  -Winit-self
+  #-Wzero-as-null-pointer-constant
+  )
 
 set(CMAKE_CXX_FLAGS_RELEASE "-O2")
 set(CMAKE_CXX_FLAGS_DEBUG "-O0")
