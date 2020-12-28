@@ -1,8 +1,8 @@
 #!/bin/sh
 
 while true; do 
-/home/pi/AirControlling/build/lueftung | tee /home/pi/AirControlling/log.log
-cp /home/pi/AirControlling/log.log /home/pi/AirControlling/lastErrorLog.log
+/home/pi/Raspberry-AirController/build/lueftung | tee /home/pi/Raspberry-AirController/log.log
+cp /home/pi/Raspberry-AirController/log.log /home/pi/Raspberry-AirController/lastErrorLog.log
 echo "AirConditionor has been restarted"
 sleep 5s # just sleep a little
 done
