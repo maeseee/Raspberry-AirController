@@ -38,7 +38,7 @@ add_compile_options(
   -Wold-style-cast
   -Woverloaded-virtual
   -Winit-self
-  #-Wzero-as-null-pointer-constant
+  -Wzero-as-null-pointer-constant
   )
 
 set(CMAKE_CXX_FLAGS_RELEASE "-O2")

@@ -35,12 +35,12 @@ void busy_wait_milliseconds(uint32_t millis)
     deltatime.tv_usec = (millis % 1000) * 1000;
     struct timeval walltime;
     // Get current time and add delay to find end time.
-    gettimeofday(&walltime, NULL);
+    gettimeofday(&walltime, nullptr);
     struct timeval endtime;
     timeradd(&walltime, &deltatime, &endtime);
     // Tight loop to waste time (and CPU) until enough time as elapsed.
     while (timercmp(&walltime, &endtime, <)) {
-        gettimeofday(&walltime, NULL);
+        gettimeofday(&walltime, nullptr);
     }
 }
 

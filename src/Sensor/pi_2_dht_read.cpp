@@ -43,7 +43,7 @@
 DhtState pi_2_dht_read(size_t type, size_t pin, double* humidity, double* temperature)
 {
     // Validate humidity and temperature arguments and set them to zero.
-    if (humidity == NULL || temperature == NULL) {
+    if (humidity == nullptr || temperature == nullptr) {
         return DhtState::ARGUMENT_ERROR;
     }
     *temperature = 0.0f;
