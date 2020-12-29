@@ -33,7 +33,7 @@ void Am2302Sensor::recall()
     double humidity = 0.0;
     double temperature = 0.0;
 
-    const DhtState dhtState = pi_2_dht_read(DHT22, m_sensor->getPinNumber(), &humidity, &temperature);
+    const DhtState dhtState = pi_2_dht_read(SensorType::DHT22, m_sensor->getPinNumber(), &humidity, &temperature);
 
     if (DhtState::SUCCESS == dhtState) {
         m_data->m_temperature = temperature;

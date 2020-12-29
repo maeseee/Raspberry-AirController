@@ -30,8 +30,8 @@
 
 #include <Sensor/pi_2_mmio.hpp>
 
-#define GPIO_BASE_OFFSET 0x200000
-#define GPIO_LENGTH 4096
+static constexpr uint32_t GPIO_BASE_OFFSET = 0x200000;
+static constexpr uint32_t GPIO_LENGTH = 4096;
 
 volatile uint32_t* pi_2_mmio_gpio = nullptr;
 

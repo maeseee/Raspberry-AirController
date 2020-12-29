@@ -27,9 +27,7 @@
 enum class DhtState { SUCCESS, TIMEOUT_ERROR, CHECKSUM_ERROR, ARGUMENT_ERROR, GPIO_ERROR };
 
 // Define sensor types.
-#define DHT11 11
-#define DHT22 22
-#define AM2302 22
+enum class SensorType { DHT11, DHT22, AM2302 };
 
 // Busy wait delay for most accurate timing, but high CPU usage.
 // Only use this for short periods of time (a few hundred milliseconds at most)!

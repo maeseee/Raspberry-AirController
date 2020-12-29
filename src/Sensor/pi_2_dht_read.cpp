@@ -40,7 +40,7 @@
 // the data afterwards.
 #define DHT_PULSES 41
 
-DhtState pi_2_dht_read(size_t type, size_t pin, double* humidity, double* temperature)
+DhtState pi_2_dht_read(SensorType type, size_t pin, double* humidity, double* temperature)
 {
     // Validate humidity and temperature arguments and set them to zero.
     if (humidity == nullptr || temperature == nullptr) {
@@ -150,18 +150,27 @@ DhtState pi_2_dht_read(size_t type, size_t pin, double* humidity, double* temper
 
     // Verify checksum of received data.
     if (data[4] == ((data[0] + data[1] + data[2] + data[3]) & 0xFF)) {
-        if (type == DHT11) {
-            // Get humidity and temp for DHT11 sensor.
-            *humidity = static_cast<double>(data[0]);
-            *temperature = static_cast<double>(data[2]);
-        } else if (type == DHT22) {
-            // Calculate humidity and temp for DHT22 sensor.
-            *humidity = (data[0] * 256 + data[1]) / 10.0f;
-            *temperature = ((data[2] & 0x7F) * 256 + data[3]) / 10.0f;
-            if (data[2] & 0x80) {
-                *temperature *= -1.0f;
+        switch (type) {
+            case SensorType::DHT11:
+            {
+                // Get humidity and temp for DHT11 sensor.
+                *humidity = static_cast<double>(data[0]);
+                *temperature = static_cast<double>(data[2]);
+                break;
+            }
+            case SensorType::DHT22:
+            case SensorType::AM2302:
+            {
+                // Calculate humidity and temp for DHT22 sensor.
+                *humidity = (data[0] * 256 + data[1]) / 10.0f;
+                *temperature = ((data[2] & 0x7F) * 256 + data[3]) / 10.0f;
+                if (data[2] & 0x80) {
+                    *temperature *= -1.0f;
+                }
+                break;
             }
         }
+
         return DhtState::SUCCESS;
     } else {
         return DhtState::CHECKSUM_ERROR;

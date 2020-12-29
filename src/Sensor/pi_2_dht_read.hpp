@@ -23,6 +23,8 @@
 #include <Sensor/common_dht_read.hpp>
 #include <cstddef>
 
+enum class SensorType;
+
 // Read DHT sensor connected to GPIO pin (using BCM numbering).  Humidity and
 // temperature will be
 // returned in the provided parameters. If a successfull reading could be made a
@@ -31,4 +33,4 @@
 // negative value will
 // be returned.  Some errors can be ignored and retried, specifically
 // DHT_ERROR_TIMEOUT or DHT_ERROR_CHECKSUM.
-DhtState pi_2_dht_read(size_t sensor, size_t pin, double* humidity, double* temperature);
+DhtState pi_2_dht_read(SensorType sensor, size_t pin, double* humidity, double* temperature);
