@@ -32,13 +32,13 @@
 // be a high value, but if you're running on a much faster platform than a
 // Raspberry
 // Pi or Beaglebone Black then it might need to be increased.
-#define DHT_MAXCOUNT 32000
+static constexpr uint32_t DHT_MAXCOUNT = 32000;
 
 // Number of bit pulses to expect from the DHT.  Note that this is 41 because
 // the first pulse is a constant 50 microsecond pulse, with 40 pulses to
 // represent
 // the data afterwards.
-#define DHT_PULSES 41
+static constexpr uint32_t DHT_PULSES = 41;
 
 DhtState pi_2_dht_read(SensorType type, size_t pin, double* humidity, double* temperature)
 {
@@ -80,7 +80,7 @@ DhtState pi_2_dht_read(SensorType type, size_t pin, double* humidity, double* te
     pi_2_mmio_set_input(pin);
     // Need a very short delay before reading pins or else value is sometimes
     // still low.
-    for (volatile int i = 0; i < 50; ++i) {
+    for (volatile uint32_t i = 0; i < 50; ++i) {
     }
 
     // Wait for DHT to pull pin low.
@@ -94,7 +94,7 @@ DhtState pi_2_dht_read(SensorType type, size_t pin, double* humidity, double* te
     }
 
     // Record pulse widths for the expected result bits.
-    for (int i = 0; i < DHT_PULSES * 2; i += 2) {
+    for (uint32_t i = 0; i < DHT_PULSES * 2; i += 2) {
         // Count how long pin is low and store in pulseCounts[i]
         while (!pi_2_mmio_input(pin)) {
             if (++pulseCounts[i] >= DHT_MAXCOUNT) {
@@ -123,7 +123,7 @@ DhtState pi_2_dht_read(SensorType type, size_t pin, double* humidity, double* te
     // Ignore the first two readings because they are a constant 80 microsecond
     // pulse.
     size_t threshold = 0;
-    for (int i = 2; i < DHT_PULSES * 2; i += 2) {
+    for (uint32_t i = 2; i < DHT_PULSES * 2; i += 2) {
         threshold += pulseCounts[i];
     }
     threshold /= DHT_PULSES - 1;
@@ -134,8 +134,8 @@ DhtState pi_2_dht_read(SensorType type, size_t pin, double* humidity, double* te
     // higher
     // then it must be a ~70us 1 pulse.
     uint8_t data[5] = {0};
-    for (int i = 3; i < DHT_PULSES * 2; i += 2) {
-        int index = (i - 3) / 16;
+    for (uint32_t i = 3; i < DHT_PULSES * 2; i += 2) {
+        uint32_t index = (i - 3) / 16;
         data[index] <<= 1;
         if (pulseCounts[i] >= threshold) {
             // One bit for long pulse.
