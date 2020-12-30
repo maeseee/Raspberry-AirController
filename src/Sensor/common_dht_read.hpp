@@ -24,7 +24,7 @@
 #include <stdint.h>
 
 // Define errors and return values.
-enum class DhtState { SUCCESS, TIMEOUT_ERROR, CHECKSUM_ERROR, ARGUMENT_ERROR, GPIO_ERROR };
+enum class DhtState { SUCCESS, TIMEOUT_ERROR, CHECKSUM_ERROR, GPIO_ERROR, UNKNOWN };
 
 // Define sensor types.
 enum class SensorType { DHT11, DHT22, AM2302 };

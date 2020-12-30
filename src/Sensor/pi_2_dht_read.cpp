@@ -40,18 +40,14 @@ static constexpr uint32_t DHT_MAXCOUNT = 32000;
 // the data afterwards.
 static constexpr uint32_t DHT_PULSES = 41;
 
-DhtState pi_2_dht_read(SensorType type, size_t pin, double* humidity, double* temperature)
+SensorResult pi_2_dht_read(SensorType type, size_t pin)
 {
-    // Validate humidity and temperature arguments and set them to zero.
-    if (humidity == nullptr || temperature == nullptr) {
-        return DhtState::ARGUMENT_ERROR;
-    }
-    *temperature = 0.0f;
-    *humidity = 0.0f;
+    SensorResult sensorResult {DhtState::UNKNOWN, 0.0, 0.0};
 
     // Initialize GPIO library.
     if (pi_2_mmio_init() != MmioState::SUCCESS) {
-        return DhtState::GPIO_ERROR;
+        sensorResult.state = DhtState::GPIO_ERROR;
+        return sensorResult;
     }
 
     // Store the count that each DHT bit pulse is low and high.
@@ -89,7 +85,8 @@ DhtState pi_2_dht_read(SensorType type, size_t pin, double* humidity, double* te
         if (++count >= DHT_MAXCOUNT) {
             // Timeout waiting for response.
             set_default_priority();
-            return DhtState::TIMEOUT_ERROR;
+            sensorResult.state = DhtState::TIMEOUT_ERROR;
+            return sensorResult;
         }
     }
 
@@ -100,7 +97,8 @@ DhtState pi_2_dht_read(SensorType type, size_t pin, double* humidity, double* te
             if (++pulseCounts[i] >= DHT_MAXCOUNT) {
                 // Timeout waiting for response.
                 set_default_priority();
-                return DhtState::TIMEOUT_ERROR;
+                sensorResult.state = DhtState::TIMEOUT_ERROR;
+                return sensorResult;
             }
         }
         // Count how long pin is high and store in pulseCounts[i+1]
@@ -108,7 +106,8 @@ DhtState pi_2_dht_read(SensorType type, size_t pin, double* humidity, double* te
             if (++pulseCounts[i + 1] >= DHT_MAXCOUNT) {
                 // Timeout waiting for response.
                 set_default_priority();
-                return DhtState::TIMEOUT_ERROR;
+                sensorResult.state = DhtState::TIMEOUT_ERROR;
+                return sensorResult;
             }
         }
     }
@@ -154,25 +153,27 @@ DhtState pi_2_dht_read(SensorType type, size_t pin, double* humidity, double* te
             case SensorType::DHT11:
             {
                 // Get humidity and temp for DHT11 sensor.
-                *humidity = static_cast<double>(data[0]);
-                *temperature = static_cast<double>(data[2]);
+                sensorResult.humidity = static_cast<double>(data[0]);
+                sensorResult.temperature = static_cast<double>(data[2]);
                 break;
             }
             case SensorType::DHT22:
             case SensorType::AM2302:
             {
                 // Calculate humidity and temp for DHT22 sensor.
-                *humidity = (data[0] * 256 + data[1]) / 10.0f;
-                *temperature = ((data[2] & 0x7F) * 256 + data[3]) / 10.0f;
+                sensorResult.humidity = (data[0] * 256 + data[1]) / 10.0f;
+                sensorResult.temperature = ((data[2] & 0x7F) * 256 + data[3]) / 10.0f;
                 if (data[2] & 0x80) {
-                    *temperature *= -1.0f;
+                    sensorResult.temperature *= -1.0f;
                 }
                 break;
             }
         }
 
-        return DhtState::SUCCESS;
+        sensorResult.state = DhtState::SUCCESS;
+        return sensorResult;
     } else {
-        return DhtState::CHECKSUM_ERROR;
+        sensorResult.state = DhtState::CHECKSUM_ERROR;
+        return sensorResult;
     }
 }
