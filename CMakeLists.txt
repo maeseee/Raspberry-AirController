@@ -49,6 +49,7 @@ if(USE_CLANG)
         -Wold-style-cast
         -Woverloaded-virtual
         -Winit-self
+        -Wdouble-promotion
     )
 else()
     message(STATUS "Compiler set to gcc")

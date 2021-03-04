@@ -164,7 +164,7 @@ SensorResult pi_2_dht_read(SensorType type, size_t pin)
                 sensorResult.humidity = static_cast<double>(data[0] * 256 + data[1]) / 10.0;
                 sensorResult.temperature = static_cast<double>((data[2] & 0x7F) * 256 + data[3]) / 10.0;
                 if (data[2] & 0x80) {
-                    sensorResult.temperature *= -1.0f;
+                    sensorResult.temperature *= -1.0;
                 }
                 break;
             }
