@@ -3,23 +3,21 @@ cmake_minimum_required(VERSION 3.6)
 # Prerequirements:
 # sudo apt-get install libboost-all-dev clang cmake libcurl4-nss-dev
 
-# Compile a release version
+# Compile
 # mkdir build
 # cd build
-# cmake -DCMAKE_BUILD_TYPE=Release ..
-# make
+# cmake ..
+# make -j4
 
-# Compile a debug version
-# mkdir buildDebug
-# cd buildDebug
-# cmake -DCMAKE_BUILD_TYPE=Debug ..
-# make
+# run clang tidy python3 run-clang-tidy.py -fix -checks='-*,modernize-use-trailing-return-type' -header-filter="^include" -p ./build/ -j4
 
 project(lueftung)
 
 ### COMPILATION OPTIONS MANAGEMENT ###############################################################################################
 # See the error with options if they do not switch
 # https://stackoverflow.com/questions/22481647/cmake-if-else-with-option#22481880
+
+option(DO_RELEASE_BUILD            "Build release version instead of debug (default=OFF)"                                     OFF)
 
 # Clang is used for more analysis. More strict compiler flags are activated
 option(USE_CLANG                   "Build with clang instead of gcc (default=ON)"                                              ON)
@@ -31,6 +29,15 @@ option(USE_UNDEFINED_SANITIZER     "Enable undefined behavior sanitizer when ava
 
 option(RUN_CLANG_TIDY              "Enable undefined behavior sanitizer when available (default=ON)"                           ON)
 ##################################################################################################################################
+
+# Build type
+if(DO_RELEASE_BUILD)
+    message(STATUS "Build a release version")
+    set(CMAKE_BUILD_TYPE "Release")
+else()
+    message(STATUS "Build a debug version")
+    set(CMAKE_BUILD_TYPE "Debug")
+endif()
 
 # Compiler
 if(USE_CLANG)
@@ -59,6 +66,9 @@ endif()
 
 # Sanitizers
 if(USE_ADDRESS_SANITIZER)
+    if(DO_RELEASE_BUILD)
+        message(SEND_ERROR "To use sanitizers, a debug version has to be used")
+    endif()
     message(STATUS "Address sanitizer enabled")
     
     # fno-omit-frame-pointer: meaningful stack traces
@@ -66,8 +76,8 @@ if(USE_ADDRESS_SANITIZER)
     set (CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -fno-omit-frame-pointer -g -fsanitize=address")
     set (CMAKE_LINKER_FLAGS_DEBUG "${CMAKE_LINKER_FLAGS_DEBUG} -fno-omit-frame-pointer -g -fsanitize=address")
 elseif(USE_MEMORY_SANITIZER) 
-    if(NOT USE_CLANG)
-        message(SEND_ERROR "To use sanitizers, clang has to bee used")
+    if(NOT USE_CLANG OR DO_RELEASE_BUILD)
+        message(SEND_ERROR "To use sanitizers, clang has to be used on a debug version")
     endif()
     message(STATUS "Memory sanitizer enabled")
     
@@ -76,16 +86,16 @@ elseif(USE_MEMORY_SANITIZER)
     set (CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -fno-omit-frame-pointer -fno-optimize-sibling-calls -g -fsanitize=memory")
     set (CMAKE_LINKER_FLAGS_DEBUG "${CMAKE_LINKER_FLAGS_DEBUG} -fno-omit-frame-pointer -fno-optimize-sibling-calls -g -fsanitize=memory")
 elseif(USE_THREAD_SANITIZER)
-    if(NOT USE_CLANG)
-        message(SEND_ERROR "To use sanitizers, clang has to bee used")
+    if(NOT USE_CLANG OR DO_RELEASE_BUILD)
+        message(SEND_ERROR "To use sanitizers, clang has to be used on a debug version")
     endif()
     message(STATUS "Thread sanitizer enabled")
     
     set (CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g -fsanitize=thread")
     set (CMAKE_LINKER_FLAGS_DEBUG "${CMAKE_LINKER_FLAGS_DEBUG} -g -fsanitize=thread")
 elseif(USE_UNDEFINED_SANITIZER)
-    if(NOT USE_CLANG)
-        message(SEND_ERROR "To use sanitizers, clang has to bee used")
+    if(NOT USE_CLANG OR DO_RELEASE_BUILD)
+        message(SEND_ERROR "To use sanitizers, clang has to be used on a debug version")
     endif()
     message(STATUS "Undefined behavior sanitizer enabled")
     
@@ -96,7 +106,7 @@ endif()
 # Run clang-tidy and treat all errors as bugs
 if(RUN_CLANG_TIDY)
     if(NOT USE_CLANG)
-        message(SEND_ERROR "To use clang-tidy, clang has to bee used")
+        message(SEND_ERROR "To use clang-tidy, clang has to be used")
     endif()
     message(STATUS "Clang tidy enabled")
     
