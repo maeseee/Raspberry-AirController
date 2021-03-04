@@ -11,7 +11,7 @@
 namespace controller
 {
 
-RotiController::RotiController(const controller::SensorControllerPtr sensController,
+RotiController::RotiController(const controller::SensorControllerPtr& sensController,
                                const gpio::IGpioPtr& gpioRoti,
                                const logger::SysLoggerPtr& sysLogger)
     : threading::Threading(CALL_INTERVALL_ROTI)

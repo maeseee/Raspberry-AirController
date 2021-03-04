@@ -37,7 +37,7 @@ if(USE_CLANG)
     message(STATUS "Compiler set to clang")
     set(CMAKE_CXX_COMPILER "/usr/bin/clang++")
     
-        # set compile flags
+    # set compile flags
     add_compile_options(
         -Wnull-dereference
         -Waddress
@@ -50,6 +50,7 @@ if(USE_CLANG)
         -Woverloaded-virtual
         -Winit-self
         -Wdouble-promotion
+        -Wno-conversion
     )
 else()
     message(STATUS "Compiler set to gcc")
@@ -97,8 +98,9 @@ if(RUN_CLANG_TIDY)
     if(NOT USE_CLANG)
         message(SEND_ERROR "To use clang-tidy, clang has to bee used")
     endif()
+    message(STATUS "Clang tidy enabled")
     
-    set(CMAKE_CXX_CLANG_TIDY clang-tidy -warnings-as-errors=* -checks=-*,bugprone*)
+    set(CMAKE_CXX_CLANG_TIDY clang-tidy -warnings-as-errors=* -checks=-*,bugprone*,performance*)
 endif()
 
 # set compile independent flags

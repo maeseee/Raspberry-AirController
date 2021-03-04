@@ -39,7 +39,7 @@ public:
    * @param outdoorSensor sensor for outdoor humidity [%]
    * @param gpioRoti gpio for controlling the roti
    */
-    RotiController(const controller::SensorControllerPtr sensController,
+    RotiController(const controller::SensorControllerPtr& sensController,
                    const gpio::IGpioPtr& gpioRoti,
                    const logger::SysLoggerPtr& sysLogger);
 
