@@ -9,7 +9,7 @@ namespace logger
 {
 class SysLogger;
 using SysLoggerPtr = std::shared_ptr<SysLogger>;
-}
+} // namespace logger
 
 // Class
 namespace sensor
@@ -37,4 +37,4 @@ private:
     const size_t m_loggerIdTemp{0};
     const size_t m_loggerIdHum{0};
 };
-}
+} // namespace sensor

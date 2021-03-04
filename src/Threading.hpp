@@ -32,4 +32,4 @@ private:
     std::atomic_bool m_isInitialized{false};
     std::atomic_bool m_stopThread{false};
 };
-}
+} // namespace threading

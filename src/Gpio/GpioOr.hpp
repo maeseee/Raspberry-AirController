@@ -10,13 +10,13 @@ namespace controller
 {
 class SensorController;
 using SensorControllerPtr = std::shared_ptr<SensorController>;
-}
+} // namespace controller
 
 namespace logger
 {
 class SysLogger;
 using SysLoggerPtr = std::shared_ptr<SysLogger>;
-}
+} // namespace logger
 
 // class
 namespace gpio
@@ -53,4 +53,4 @@ private:
     const size_t m_loggerId;
 };
 using GpioOrPtr = std::shared_ptr<GpioOr>;
-}
+} // namespace gpio

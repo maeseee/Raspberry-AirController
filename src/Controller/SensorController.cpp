@@ -87,4 +87,4 @@ double SensorController::absHumidityToRel(const double tempC, const double humid
     const double absHumidity100 = relHumidityToAbs(tempC, 100);
     return humidityAbs / absHumidity100 * 100;
 }
-}
+} // namespace controller

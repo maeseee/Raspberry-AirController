@@ -172,4 +172,4 @@ IGpioPtr createGpio(const Function function,
     }
     return gpio;
 }
-} // gpio
+} // namespace gpio

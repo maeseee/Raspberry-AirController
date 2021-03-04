@@ -30,4 +30,4 @@ public:
     virtual SensorDataCPtr getData() const = 0;
 };
 using ISensorPtr = std::shared_ptr<ISensor>;
-}
+} // namespace sensor

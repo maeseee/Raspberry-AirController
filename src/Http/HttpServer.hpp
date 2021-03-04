@@ -8,7 +8,7 @@ namespace time_trigger
 {
 class OneTimeTrigger;
 using OneTimeTriggerPtr = std::shared_ptr<OneTimeTrigger>;
-}
+} // namespace time_trigger
 
 // Class
 
@@ -65,4 +65,4 @@ private:
 };
 
 size_t initHttpServer(const time_trigger::OneTimeTriggerPtr& oneTimeTrigger, const logger::SysLoggerPtr& sysLogger);
-}
+} // namespace http_server

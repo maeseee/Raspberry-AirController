@@ -7,13 +7,13 @@ namespace logger
 {
 class SysLogger;
 using SysLoggerPtr = std::shared_ptr<SysLogger>;
-}
+} // namespace logger
 
 namespace sensor
 {
 class SensorData;
 using SensorDataCPtr = std::shared_ptr<const SensorData>;
-}
+} // namespace sensor
 
 // Class
 namespace controller
@@ -68,4 +68,4 @@ private:
     const sensor::SensorDataCPtr m_outdoorSensor;
 };
 using SensorControllerPtr = std::shared_ptr<SensorController>;
-}
+} // namespace controller

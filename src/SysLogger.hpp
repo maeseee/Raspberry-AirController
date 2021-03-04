@@ -58,4 +58,4 @@ private:
     std::atomic<size_t> m_nextId{1};
 };
 using SysLoggerPtr = std::shared_ptr<SysLogger>;
-}
+} // namespace logger

@@ -60,4 +60,4 @@ void RotiController::recall()
         m_lastOutputValue = outputValue;
     }
 }
-}
+} // namespace controller

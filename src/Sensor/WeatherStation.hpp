@@ -10,7 +10,7 @@ namespace logger
 {
 class SysLogger;
 using SysLoggerPtr = std::shared_ptr<SysLogger>;
-}
+} // namespace logger
 
 // Class
 namespace sensor
@@ -39,4 +39,4 @@ private:
 static std::string m_receivedData; // will hold the url's contents
 
 size_t writeCallback(char* buf, size_t size, size_t nmemb, void* up);
-}
+} // namespace sensor

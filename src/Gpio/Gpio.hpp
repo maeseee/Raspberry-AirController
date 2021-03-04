@@ -8,7 +8,7 @@ namespace logger
 {
 class SysLogger;
 using SysLoggerPtr = std::shared_ptr<SysLogger>;
-}
+} // namespace logger
 
 // Class
 namespace gpio
@@ -50,4 +50,4 @@ private:
     const logger::SysLoggerPtr m_sysLogger;
     const size_t m_loggerId;
 };
-}
+} // namespace gpio

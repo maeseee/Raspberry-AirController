@@ -9,7 +9,7 @@ namespace logger
 {
 class SysLogger;
 using SysLoggerPtr = std::shared_ptr<SysLogger>;
-}
+} // namespace logger
 
 // Class
 namespace gpio
@@ -75,4 +75,4 @@ IGpioPtr createGpio(const Function function,
                     const Direction dir,
                     const Value val,
                     const logger::SysLoggerPtr& sysLogger);
-}
+} // namespace gpio

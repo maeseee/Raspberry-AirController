@@ -154,4 +154,4 @@ std::string SysLogger::getNameFromId(const size_t id) const
         return std::to_string(id);
     }
 }
-}
+} // namespace logger

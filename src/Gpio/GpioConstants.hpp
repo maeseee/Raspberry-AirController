@@ -25,4 +25,4 @@ enum class Function {
     Reserve = 13,  // Pin 33
     NightTime = 19 // Pin 35
 };
-}
+} // namespace gpio

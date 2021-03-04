@@ -9,13 +9,13 @@ namespace logger
 {
 class SysLogger;
 using SysLoggerPtr = std::shared_ptr<SysLogger>;
-}
+} // namespace logger
 
 namespace gpio
 {
 class IGpio;
 using IGpioPtr = std::shared_ptr<IGpio>;
-}
+} // namespace gpio
 
 // Class
 namespace time_trigger
@@ -50,4 +50,4 @@ private:
 };
 
 using TimeTriggerPtr = std::shared_ptr<TimeTrigger>;
-}
+} // namespace time_trigger

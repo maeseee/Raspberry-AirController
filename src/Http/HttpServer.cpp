@@ -128,4 +128,4 @@ size_t initHttpServer(const time_trigger::OneTimeTriggerPtr& oneTimeTrigger, con
 
     return 0;
 }
-}
+} // namespace http_server

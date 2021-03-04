@@ -64,4 +64,4 @@ void TimeTrigger::recall()
     }
     m_gpio->setValue(m_loggerId, value);
 }
-}
+} // namespace time_trigger

@@ -36,4 +36,4 @@ void NightAir::addTimer(size_t onTime)
         onTime, onTime + ON_TIME_DURATION, m_gpio, "Night hourly air", m_sysLogger);
     m_timers.push_back(timer);
 }
-}
+} // namespace controller

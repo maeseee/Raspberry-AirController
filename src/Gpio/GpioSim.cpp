@@ -47,4 +47,4 @@ size_t gpio::GpioSim::getPinNumber() const
     return 0U;
 }
 
-} // gpio
+} // namespace gpio

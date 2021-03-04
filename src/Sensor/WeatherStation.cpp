@@ -102,4 +102,4 @@ void WeatherStation::updateData()
         m_sysLogger->logError(m_loggerIdHum, "invalid new outdoor hum");
     }
 }
-}
+} // namespace sensor

@@ -41,4 +41,4 @@ void OneTimeTrigger::threadFn(size_t duration)
 
     m_gpio->setValue(loggerId, gpio::Value::LOW);
 }
-}
+} // namespace time_trigger
