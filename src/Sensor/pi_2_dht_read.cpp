@@ -161,8 +161,8 @@ SensorResult pi_2_dht_read(SensorType type, size_t pin)
             case SensorType::AM2302:
             {
                 // Calculate humidity and temp for DHT22 sensor.
-                sensorResult.humidity = (data[0] * 256 + data[1]) / 10.0f;
-                sensorResult.temperature = ((data[2] & 0x7F) * 256 + data[3]) / 10.0f;
+                sensorResult.humidity = static_cast<double>(data[0] * 256 + data[1]) / 10.0;
+                sensorResult.temperature = static_cast<double>((data[2] & 0x7F) * 256 + data[3]) / 10.0;
                 if (data[2] & 0x80) {
                     sensorResult.temperature *= -1.0f;
                 }

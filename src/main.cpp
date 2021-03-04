@@ -47,10 +47,7 @@ void sigHandler(int signo)
 {
     if (signo == SIGINT) {
         m_runProgram = false;
-    } else if (signo == SIGSEGV) {
-        printTrace();
-        m_runProgram = false;
-    } else if (signo == SIGABRT) {
+    } else if ((signo == SIGSEGV) || (signo == SIGABRT)) {
         printTrace();
         m_runProgram = false;
     }
